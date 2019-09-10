@@ -1,0 +1,21 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+  - name: Update pacman cache
+    pacman:
+      update_cache: yes
+
+  - name: Locate the .myConfigFiles and .myScripts directories
+    stat:
+      path: "{{ item }}"
+    register: p
+    loop:
+      - /home/calvin/.myConfigFiles
+      - /home/calvin/bin/.myScripts
+
+  - name: Verify whether the located directories exist
+    fail:
+      msg: "ERROR: {{ item.invocation.module_args.path }} doesen't exist"
+    when: not item.stat.exists
+    loop: "{{ p.results }}"
