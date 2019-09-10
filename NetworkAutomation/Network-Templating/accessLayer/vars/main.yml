@@ -1,0 +1,25 @@
+---
+# vars file for accessLayer
+
+switches: 
+  - hostname: SW1-B1
+    Mgmt-IP: 192.168.50.1
+    Interfaces: 
+      - name: Eth0/0
+        IP: 10.10.10.1
+        Netmask: 255.255.255.0
+        Description: 'Uplink to Distribution'
+  - hostname: SW2-B1
+    Mgmt-IP: 192.168.50.2
+    Interfaces: 
+      - Name: Eth0/0
+        IP: 10.10.10.2
+        Netmask: 255.255.255.0
+        Description: 'Uplink to Distribution'
+  - hostname: SW3-B1
+    Mgmt-IP: 192.168.50.3
+    Interfaces: 
+      - Name: Eth0/0
+        IP: 10.10.10.2
+        Netmask: 255.255.255.0
+        Description: 'Uplink to Distribution'
