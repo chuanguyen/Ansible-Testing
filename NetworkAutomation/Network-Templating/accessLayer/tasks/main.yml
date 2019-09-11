@@ -1,11 +1,10 @@
 ---
 # tasks file for accessLayer
 
-- hosts: localhost
-  become: yes
-  tasks: 
-  - name: "Generate network templates for {{ item.hostname }}"
-    template: 
-    src: "../templates/access.j2"
-    dest: "../../{{ item.hostname }}.config"
-  with_items: {{ switches }}
+
+- name: "Generate network templates for for access layer switches"
+  template:
+    src: "access.j2"
+    dest: "/home/chua_linux/{{ item.Hostname }}_config.txt"
+  with_items:
+    - "{{ switches }}"

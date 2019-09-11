@@ -1,25 +1,52 @@
 ---
 # vars file for accessLayer
 
-switches: 
-  - hostname: SW1-B1
-    Mgmt-IP: 192.168.50.1
-    Interfaces: 
-      - name: Eth0/0
-        IP: 10.10.10.1
+switches:
+  - Hostname: SW1-B1
+    Interfaces:
+      - Name: "vlan 99"
+        IP: 192.168.50.1
         Netmask: 255.255.255.0
-        Description: 'Uplink to Distribution'
-  - hostname: SW2-B1
-    Mgmt-IP: 192.168.50.2
-    Interfaces: 
-      - Name: Eth0/0
-        IP: 10.10.10.2
+        Description: "Management VLAN"
+    VLANS:
+      - ID: 99
+        Name: Mgmt
+        Description: 'Management access'
+      - ID: 10
+        Name: Data
+        Description: 'Used by users'
+      - ID: 30
+        Name: Data
+        Description: 'Used by users'
+  - Hostname: SW2-B1
+    Interfaces:
+      - Name: "vlan 99"
+        IP: 192.168.50.2
         Netmask: 255.255.255.0
-        Description: 'Uplink to Distribution'
-  - hostname: SW3-B1
-    Mgmt-IP: 192.168.50.3
-    Interfaces: 
-      - Name: Eth0/0
-        IP: 10.10.10.2
+        Description: "Management VLAN"
+    VLANS:
+      - ID: 99
+        Name: Mgmt
+        Description: 'Management access'
+      - ID: 20
+        Name: Apps
+        Description: 'Dedicated to app communication'
+      - ID: 40
+        Name: Data
+        Description: 'Used by users'
+  - Hostname: SW3-B1
+    Interfaces:
+      - Name: "vlan 99"
+        IP: 192.168.50.3
         Netmask: 255.255.255.0
-        Description: 'Uplink to Distribution'
+        Description: "Management VLAN"
+    VLANS:
+      - ID: 99
+        Name: Mgmt
+        Description: 'Management access'
+      - ID: 20
+        Name: Apps
+        Description: 'Dedicated to app communication'
+      - ID: 50
+        Name: Data
+        Description: 'Used by users'
