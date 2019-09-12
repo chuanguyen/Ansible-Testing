@@ -7,8 +7,20 @@
   name {{ vlan.Name }}
   {% endfor -%}
 
+  exit
+
   {% for interface in item.Interfaces -%}
   interface {{ interface.Name }}
     description {{ interface.Description }}
     ip address {{ interface.IP }} {{ interface.Netmask }}
+  {% endfor -%}
+
+  exit
+
+  {% for server in global.ntpServers -%}
+  ntp server {{ server }}
+  {% endfor -%}
+
+  {% for server in global.syslogServers -%}
+  logging host {{ server }}
   {% endfor -%}

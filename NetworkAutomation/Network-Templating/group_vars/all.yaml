@@ -1,0 +1,8 @@
+# Global Variables
+global:
+  ntpServers:
+    - 172.16.1.1
+    - 172.16.1.2
+    - 172.16.1.3
+  syslogServers:
+    - 10.1.1.254
