@@ -1,7 +1,5 @@
 # Generated Configuration
 
-  hostname {{ item.Hostname }}
-
   {% for vlan in item.VLANS -%}
   vlan {{ vlan.ID }}
   name {{ vlan.Name }}
