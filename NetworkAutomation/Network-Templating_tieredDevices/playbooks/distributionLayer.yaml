@@ -1,0 +1,7 @@
+---
+- name: "Generating configs for distribution layer devices"
+  hosts: distro
+  connection: local
+  gather_facts: no
+  roles:
+    - main_role

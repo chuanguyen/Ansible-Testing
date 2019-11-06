@@ -1,0 +1,23 @@
+---
+# tasks file for main_role
+
+- name: Create Template storage directory within the staging directory
+  file: path=../staging/{{ inventory_hostname }}/ state=directory
+
+- name: Generate baseline configuration
+  include_role:
+    name: baseline
+
+- name: "Generate {{ deviceRole }} configuration"
+  include_role:
+    name: "{{ deviceRole }}"
+
+- name: Append templates together to create final baseline configuration file
+  assemble:
+    src: ../staging/{{ inventory_hostname }}/
+    dest: ../complete/{{ inventory_hostname }}_FINAL.cfg
+
+- name: Delete Staging Directories
+  file:
+    path: ../staging/{{ inventory_hostname }}/
+    state: absent

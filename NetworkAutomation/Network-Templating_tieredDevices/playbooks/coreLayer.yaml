@@ -1,0 +1,8 @@
+---
+
+- name: "Generating configs for core layer devices"
+  hosts: core
+  connection: local
+  gather_facts: no
+  roles:
+    - main_role

@@ -1,0 +1,15 @@
+
+{% for vlan in item.VLANS -%}
+vlan {{ vlan.ID }}
+name {{ vlan.Name }}
+{% endfor -%}
+
+exit
+
+{% for interface in item.Interfaces -%}
+interface {{ interface.Name }}
+  description {{ interface.Description }}
+  ip address {{ interface.IP }} {{ interface.Netmask }}
+{% endfor -%}
+
+exit

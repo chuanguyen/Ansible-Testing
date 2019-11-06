@@ -1,0 +1,7 @@
+---
+- name: "Generating configs for access layer devices"
+  hosts: access
+  connection: local
+  gather_facts: no
+  roles:
+    - main_role
