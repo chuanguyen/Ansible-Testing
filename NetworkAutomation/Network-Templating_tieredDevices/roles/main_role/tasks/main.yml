@@ -17,7 +17,11 @@
     src: ../staging/{{ inventory_hostname }}/
     dest: ../complete/{{ inventory_hostname }}_FINAL.cfg
 
+- name: "Generate baseline configuration using Genie"
+
 - name: "Apply configuration to {{ inventory_hostname }}"
+
+- name: "Generate post-change configuration using Genie"
 
 - name: Delete Staging Directories
   file:
