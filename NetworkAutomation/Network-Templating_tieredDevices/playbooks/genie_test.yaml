@@ -1,8 +1,7 @@
 ---
 
 - name: "Genie test"
-  hosts: localhost
-  connection: local
+  hosts: access
   gather_facts: no
   vars:
     show_version_output: |
@@ -55,6 +54,12 @@
     include_role:
       name: clay584.parse_genie
 
-  - name: Debug Genie filter
+  - name: show version
+    ios_command:
+      commands:
+        - show version
+      register: version
+
+  - name: Debug version data
     debug:
-      msg: "{{ show_version_output | parse_genie(command='show version', os='iosxe') }}"
+      msg: "{{ version }}"

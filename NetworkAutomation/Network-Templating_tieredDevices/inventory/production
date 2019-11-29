@@ -1,6 +1,6 @@
 [access]
 R5
-R6
+R3
 
 [distro]
 R3
@@ -9,3 +9,7 @@ R4
 [core]
 R1
 R2
+
+[testDevices]
+R3
+R5
