@@ -18,8 +18,8 @@
 
   - name: Set facts for Genie Filter
     set_fact:
-      ios_version: "{{ version['stdout'][0] }}"
+      ios_version: "{{ version['stdout'][0] | parse_genie(command='show version', os=genie_os) }}"
 
-  - name: Debug version data
+  - name: Retrieve version data
     debug:
-      msg: "{{ ios_version | parse_genie(command='show version', os=genie_os) }}"
+      msg: "{{ ansible_facts }}"
