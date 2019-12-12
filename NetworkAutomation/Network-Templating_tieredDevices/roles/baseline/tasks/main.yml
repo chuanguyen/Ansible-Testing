@@ -3,4 +3,4 @@
 
 - template:
     src: "{{ baselines.baseline }}"
-    dest: ../staging/{{ inventory_hostname }}/000_{{ inventory_hostname }}_baseline.cfg
+    dest: "./staging/{{ inventory_hostname }}/000_{{ inventory_hostname }}_baseline.cfg"

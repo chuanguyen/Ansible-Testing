@@ -3,7 +3,6 @@
 
 - template:
     src: "{{ baselines.access }}"
-    dest: "../staging/{{ item.Hostname }}/001_{{ item.Hostname }}_access.cfg"
+    dest: "./staging/{{ inventory_hostname }}/001_{{ inventory_hostname }}_access.cfg"
   with_items:
-    - "{{ accessDevices }}"
-  when: (inventory_hostname == item.Hostname)
+    - "{{ hostvars[inventory_hostname] }}"
