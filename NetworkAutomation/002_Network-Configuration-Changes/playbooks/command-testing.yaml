@@ -1,0 +1,25 @@
+---
+
+- name: "Genie test"
+  hosts: access
+  connection: "{{ ansible_connection }}"
+  gather_facts: no
+
+  tasks:
+  - name: Read in parse_genie role
+    include_role:
+      name: clay584.parse_genie
+
+  - name: show version
+    ios_command:
+      commands:
+        - show version
+    register: version
+
+  - name: Set facts for Genie Filter
+    set_fact:
+      ios_version: "{{ version['stdout'][0] | parse_genie(command='show version', os=genie_os) }}"
+
+  - name: Retrieve version data
+    debug:
+      msg: "{{ ansible_facts }}"
