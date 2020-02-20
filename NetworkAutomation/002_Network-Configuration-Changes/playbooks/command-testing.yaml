@@ -1,25 +1,38 @@
 ---
 
 - name: "Genie test"
-  hosts: access
+  hosts: testDevices
   connection: "{{ ansible_connection }}"
   gather_facts: no
 
   tasks:
-  - name: Read in parse_genie role
-    include_role:
-      name: clay584.parse_genie
+    - name: get facts from device
+      napalm_get_facts:
+        hostname="{{ inventory_hostname }}"
+        username="{{ global.username }}"
+        password="{{ global.adminpass }}"
+        dev_os="{{ ansible_network_os }}"
+        filter='facts,interfaces'
+      register: result
 
-  - name: show version
-    ios_command:
-      commands:
-        - show version
-    register: version
+    - name: Print out gathered gather facts
+      debug:
+        msg: "{{ result }}"
 
-  - name: Set facts for Genie Filter
-    set_fact:
-      ios_version: "{{ version['stdout'][0] | parse_genie(command='show version', os=genie_os) }}"
-
-  - name: Retrieve version data
-    debug:
-      msg: "{{ ansible_facts }}"
+  # - name: Read in parse_genie role
+  #   include_role:
+  #     name: clay584.parse_genie
+  #
+  # - name: Retrieve interface information
+  #   ios_command:
+  #     commands:
+  #       - show ip interface brief
+  #   register: output
+  #
+  # - name: Set facts for Genie Filter
+  #   set_fact:
+  #     interfaces: "{{ output['stdout'][0] | parse_genie(command='show ip interface brief', os=ansible_network_os) }}"
+  #
+  # - name: Debug
+  #   debug:
+  #     msg: "{{ interfaces['interface']['FastEthernet1/0']['status'] }}"
