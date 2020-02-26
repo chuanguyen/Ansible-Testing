@@ -1,9 +1,0 @@
----
-
-- name: "Final Playbook"
-  hosts: all
-  connection: local
-  gather_facts: no
-- include: accessLayer.yaml
-- include: distributionLayer.yaml
-- include: coreLayer.yaml

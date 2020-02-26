@@ -8,31 +8,12 @@
   tasks:
     - name: get facts from device
       napalm_get_facts:
-        hostname="{{ inventory_hostname }}"
-        username="{{ global.username }}"
-        password="{{ global.adminpass }}"
-        dev_os="{{ ansible_network_os }}"
-        filter='facts,interfaces'
+        provider: "{{ napalm }}"
+        filter:
+          - "interfaces"
+          - "route_to"
       register: result
 
     - name: Print out gathered gather facts
       debug:
         msg: "{{ result }}"
-
-  # - name: Read in parse_genie role
-  #   include_role:
-  #     name: clay584.parse_genie
-  #
-  # - name: Retrieve interface information
-  #   ios_command:
-  #     commands:
-  #       - show ip interface brief
-  #   register: output
-  #
-  # - name: Set facts for Genie Filter
-  #   set_fact:
-  #     interfaces: "{{ output['stdout'][0] | parse_genie(command='show ip interface brief', os=ansible_network_os) }}"
-  #
-  # - name: Debug
-  #   debug:
-  #     msg: "{{ interfaces['interface']['FastEthernet1/0']['status'] }}"

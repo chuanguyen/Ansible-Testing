@@ -11,8 +11,17 @@ ansible_network_os: ios
 ansible_user: "{{ vault.username }}"
 ansible_password: "{{ vault.adminpass }}"
 
+napalm:
+  hostname="{{ inventory_hostname }}"
+  username="{{ global.username }}"
+  password="{{ global.adminpass }}"
+  dev_os="{{ ansible_network_os }}"
+
 global:
   hostname: "{{ inventory_hostname }}"
   enable: test
   username: "{{ vault.username }}"
   adminpass: "{{ vault.adminpass }}"
+  ntpserver:
+    - 192.168.2.1
+    - 192.168.2.2
