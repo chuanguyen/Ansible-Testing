@@ -1,0 +1,12 @@
+---
+# tasks file for directory_creation
+
+- name: Create Template storage directory within the staging directory
+  file:
+    path: "./staging/{{ inventory_hostname }}/"
+    state: directory
+
+- name: Create directory for final configuration
+  file:
+    path: "./complete/{{ inventory_hostname }}/"
+    state: directory

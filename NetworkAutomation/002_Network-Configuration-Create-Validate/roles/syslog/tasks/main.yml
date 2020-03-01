@@ -1,0 +1,6 @@
+---
+# tasks file for syslog
+
+- template:
+    src: "{{ ansible_network_os }}_syslog.j2"
+    dest: "./staging/{{ inventory_hostname }}/{{ inventory_hostname }}_syslog.cfg"

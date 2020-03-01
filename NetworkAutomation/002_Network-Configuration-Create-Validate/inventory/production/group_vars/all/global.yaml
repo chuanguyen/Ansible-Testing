@@ -1,0 +1,29 @@
+---
+
+# Ansible vault pass: abcd1234
+
+# Need to specify which python to use, otherwise, uses the one found in /usr/bin
+ansible_python_interpreter: /home/calvin/automation/venv/bin/python3
+
+# Variables as part of the network_cli connection type
+ansible_connection: network_cli
+ansible_network_os: ios
+ansible_user: "{{ vault.username }}"
+ansible_password: "{{ vault.adminpass }}"
+
+napalm:
+  hostname="{{ inventory_hostname }}"
+  username="{{ global.username }}"
+  password="{{ global.adminpass }}"
+  dev_os="{{ ansible_network_os }}"
+
+global:
+  enable: test
+  username: "{{ vault.username }}"
+  adminpass: "{{ vault.adminpass }}"
+  syslog:
+    - 192.168.1.1
+    - 192.168.1.2
+  ntpserver:
+    - 192.168.2.1
+    - 192.168.2.2

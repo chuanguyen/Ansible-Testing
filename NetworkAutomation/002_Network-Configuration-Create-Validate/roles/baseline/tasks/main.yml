@@ -1,0 +1,6 @@
+---
+# tasks file for baseline
+
+- template:
+    src: "{{ ansible_network_os }}_baseline.j2"
+    dest: "./staging/{{ inventory_hostname }}/000_{{ inventory_hostname }}_baseline.cfg"

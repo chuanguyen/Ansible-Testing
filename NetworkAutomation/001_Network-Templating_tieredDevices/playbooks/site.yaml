@@ -1,6 +1,6 @@
 ---
 
-- name: "Final Playbook"
+- name: "Master Playbook"
   hosts: all
   connection: local
   gather_facts: no

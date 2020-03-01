@@ -1,0 +1,13 @@
+---
+
+- name: "Build configuration for access devices"
+  hosts: access
+  connection: local
+  gather_facts: false
+
+  roles:
+    - directory_creation
+    - baseline
+    - ntp
+    - syslog
+    - directory_cleanup

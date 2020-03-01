@@ -1,0 +1,9 @@
+---
+# tasks file for ntp
+
+- template:
+    src: "{{ ansible_network_os }}_ntp.j2"
+    dest: "./staging/{{ inventory_hostname }}/{{ inventory_hostname }}_ntp.cfg"
+### May not need the following
+#  with_items:
+#    - "{{ hostvars[inventory_hostname] }}"
