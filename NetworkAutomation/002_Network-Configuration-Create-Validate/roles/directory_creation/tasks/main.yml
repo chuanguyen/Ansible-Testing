@@ -10,3 +10,8 @@
   file:
     path: "./complete/{{ inventory_hostname }}/"
     state: directory
+
+- name: Create directory for config validation
+  file:
+    path: "./validation/{{ inventory_hostname }}/"
+    state: directory

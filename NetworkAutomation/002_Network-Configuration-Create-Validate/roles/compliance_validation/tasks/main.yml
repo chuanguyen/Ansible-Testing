@@ -1,0 +1,6 @@
+---
+# tasks file for compliance_validation
+
+- template:
+    src: "validation.j2"
+    dest: "./validation/{{ inventory_hostname }}/validate.yaml"

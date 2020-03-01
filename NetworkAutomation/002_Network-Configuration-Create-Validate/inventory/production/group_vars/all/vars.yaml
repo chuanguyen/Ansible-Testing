@@ -12,13 +12,13 @@ ansible_user: "{{ vault.username }}"
 ansible_password: "{{ vault.adminpass }}"
 
 napalm:
-  hostname="{{ inventory_hostname }}"
-  username="{{ global.username }}"
-  password="{{ global.adminpass }}"
-  dev_os="{{ ansible_network_os }}"
+  hostname: "{{ inventory_hostname }}"
+  username: "{{ global.username }}"
+  password: "{{ global.adminpass }}"
+  dev_os: "{{ ansible_network_os }}"
 
 global:
-  enable: test
+  enable: "{{ vault.enable }}"
   username: "{{ vault.username }}"
   adminpass: "{{ vault.adminpass }}"
   syslog:
