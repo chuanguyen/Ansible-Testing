@@ -1,3 +1,3 @@
 [submodule "NetworkAutomation/002_Network-Configuration-Create-Validate/roles/network-backup"]
 	path = NetworkAutomation/002_Network-Configuration-Create-Validate/roles/network-backup
-	url = https://github.com/CalvinDawgz/Ansible-Testing.git
+	url = https://github.com/ciscops/ansible-network-backup.git
