@@ -5,6 +5,11 @@
 # Need to specify which python to use, otherwise, uses the one found in /usr/bin
 ansible_python_interpreter: /home/calvin/automation/venv/bin/python3
 
+# Config backup
+network_backup_repository: https://github.com/CalvinDawgz/Network-Config-Backup
+network_backup_dir: "{{ playbook_dir }}/backups"
+network_backup_file: "{{ network_backup_dir }}/{{ inventory_hostname }}.cfg"
+
 # Variables as part of the network_cli connection type
 ansible_connection: network_cli
 ansible_network_os: ios

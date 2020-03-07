@@ -3,15 +3,16 @@
 
 - name: Create Template storage directory within the staging directory
   file:
-    path: "./staging/{{ inventory_hostname }}/"
+    path: "{{ playbook_dir }}/staging/{{ inventory_hostname }}/"
     state: directory
 
 - name: Create directory for final configuration
   file:
-    path: "./complete/{{ inventory_hostname }}/"
+    path: "{{ playbook_dir }}/complete"
     state: directory
+  run_once: true
 
 - name: Create directory for config validation
   file:
-    path: "./validation/{{ inventory_hostname }}/"
+    path: "{{ playbook_dir }}/validation/{{ inventory_hostname }}/"
     state: directory

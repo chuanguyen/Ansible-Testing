@@ -5,5 +5,5 @@
   connection: "{{ ansible_connection }}"
   gather_facts: no
 
-  tasks:
-    - name: Config Backup
+  roles:
+    - network-backup
