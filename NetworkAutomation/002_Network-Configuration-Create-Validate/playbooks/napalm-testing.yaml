@@ -1,0 +1,28 @@
+---
+
+- name: "Napalm testing"
+  hosts: testDevices
+  connection: "{{ ansible_connection }}"
+  gather_facts: no
+
+  tasks:
+    - name: get facts from device
+      napalm_get_facts:
+        provider: "{{ napalm }}"
+        filter:
+          - "facts"
+      register: result
+
+    - name: Print out gathered gather facts
+      debug:
+        msg: "{{ result }}"
+
+    - name: Generate validation report
+      napalm_validate:
+        provider: "{{ napalm }}"
+        validation_file: "./validation/{{ inventory_hostname }}/validate.yaml"
+      register: validation
+
+    - name: Print compliance report
+      debug:
+        msg: "{{ validation }}"

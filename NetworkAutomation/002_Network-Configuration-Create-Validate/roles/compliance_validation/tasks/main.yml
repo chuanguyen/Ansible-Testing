@@ -4,3 +4,13 @@
 - template:
     src: "validation.j2"
     dest: "./validation/{{ inventory_hostname }}/validate.yaml"
+
+- name: Generate validation report
+  napalm_validate:
+    provider: "{{ napalm }}"
+    validation_file: "./validation/{{ inventory_hostname }}/validate.yaml"
+  register: validation
+
+- name: Print compliance report
+  debug:
+    msg: "{{ validation }}"
