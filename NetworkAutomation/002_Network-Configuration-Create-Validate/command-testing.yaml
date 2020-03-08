@@ -4,6 +4,15 @@
   hosts: testDevices
   connection: "{{ ansible_connection }}"
   gather_facts: no
+  vars:
+    - ipv4_addr: 192.168.0.17
+    - netmask: 28
+    - full_ip: "{{ ipv4_addr }}/{{ netmask }}"
 
-  roles:
-    - network-backup
+  tasks:
+    - name: Using ipaddr Ansible filter
+      debug:
+        msg: "{{ full_ip | ipaddr('host') }}"
+
+  # roles:
+  #   - compliance_validation

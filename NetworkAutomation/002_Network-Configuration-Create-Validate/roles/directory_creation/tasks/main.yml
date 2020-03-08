@@ -8,9 +8,8 @@
 
 - name: Create directory for final configuration
   file:
-    path: "{{ playbook_dir }}/complete"
+    path: "{{ playbook_dir }}/compiled/{{ inventory_hostname }}"
     state: directory
-  run_once: true
 
 - name: Create directory for config validation
   file:

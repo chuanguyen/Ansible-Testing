@@ -10,4 +10,4 @@
     - baseline
     - ntp
     - syslog
-    - directory_cleanup
+    - generate_configs

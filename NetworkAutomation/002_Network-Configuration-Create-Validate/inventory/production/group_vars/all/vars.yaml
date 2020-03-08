@@ -9,6 +9,8 @@ ansible_python_interpreter: /home/calvin/automation/venv/bin/python3
 network_backup_repository: "{{ vault.network_backup_repository }}"
 network_backup_dir: "{{ playbook_dir }}/backups"
 network_backup_file: "{{ network_backup_dir }}/{{ inventory_hostname }}.cfg"
+git_name: "{{ vault.git_name }}"
+git_email: "{{ vault.git_email }}"
 
 # Variables as part of the network_cli connection type
 ansible_connection: network_cli

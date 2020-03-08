@@ -1,0 +1,9 @@
+---
+
+- name: "Napalm testing"
+  hosts: testDevices
+  connection: "{{ ansible_connection }}"
+  gather_facts: no
+
+  roles:
+    - network-backup
