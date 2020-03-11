@@ -4,3 +4,6 @@
 [submodule "NetworkAutomation/002_Network-Configuration-Create-Validate/library/napalm-ansible"]
 	path = NetworkAutomation/002_Network-Configuration-Create-Validate/library/napalm-ansible
 	url = https://github.com/napalm-automation/napalm-ansible.git
+[submodule "NetworkAutomation/002_Network-Configuration-Create-Validate/backups"]
+	path = NetworkAutomation/002_Network-Configuration-Create-Validate/backups
+	url = https://github.com/CalvinDawgz/Network-Config-Backup.git
