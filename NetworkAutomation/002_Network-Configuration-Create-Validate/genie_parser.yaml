@@ -22,4 +22,4 @@
 
   - name: Debug
     debug:
-      msg: "{{ interfaces['interface']['FastEthernet1/0']['status'] }}"
+      msg: "{{ interfaces['interface']['FastEthernet0/0']['status'] }}"

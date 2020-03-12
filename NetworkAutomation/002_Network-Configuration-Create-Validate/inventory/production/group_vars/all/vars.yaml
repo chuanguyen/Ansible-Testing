@@ -3,7 +3,7 @@
 # Ansible vault pass: abcd1234
 
 # Need to specify which python to use, otherwise, uses the one found in /usr/bin
-ansible_python_interpreter: /home/calvin/automation/venv/bin/python3
+ansible_python_interpreter: "{{ lookup('env','HOME') }}/automation/venv/bin/python3"
 
 # Config backup
 network_backup_repository: "{{ vault.network_backup_repository }}"
