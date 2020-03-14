@@ -1,9 +1,16 @@
 ---
 
-- name: "Napalm testing"
+- name: "Configuration Backup"
   hosts: testDevices
   connection: "{{ ansible_connection }}"
   gather_facts: no
+
+  vars_prompt:
+    - name: "git_commit_msg"
+      prompt: "Specify a commit message"
+      default: "Changed"
+      unsafe: yes
+      private: no
 
   roles:
     - network-backup
