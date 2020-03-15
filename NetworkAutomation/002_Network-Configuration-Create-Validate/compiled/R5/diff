@@ -1,0 +1,9 @@
++# Generated Configuration
++service password-encryption
++enable secret test
++username admin privilege 15 secret admin
++ntp server 192.168.2.1
++ntp server 192.168.2.2
++logging trap informational
++logging host 192.168.1.1
++logging host 192.168.1.2

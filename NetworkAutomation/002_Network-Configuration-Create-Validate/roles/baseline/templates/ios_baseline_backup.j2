@@ -1,0 +1,6 @@
+# Generated Configuration
+
+service password-encryption
+hostname {{ inventory_hostname }}
+enable secret {{ global.enable }}
+username {{ global.username }} privilege 15 secret {{ global.adminpass }}

@@ -6,16 +6,22 @@
   gather_facts: no
 
   tasks:
-    - name: get facts from device
-      napalm_get_facts:
+    - name: Install config on device
+      napalm_install_config:
         provider: "{{ napalm }}"
-        filter:
-          - "interfaces_ip"
-      register: result
-
-    - name: Print out gathered gather facts
-      debug:
-        msg: "{{ result }}"
+        commit_changes: False
+        config_file: "{{ playbook_dir }}/compiled/{{ inventory_hostname }}/running_config.conf"
+        diff_file: "{{ playbook_dir }}/compiled/{{ inventory_hostname }}/diff"
+    # - name: get facts from device
+    #   napalm_get_facts:
+    #     provider: "{{ napalm }}"
+    #     filter:
+    #       - "interfaces_ip"
+    #   register: result
+    #
+    # - name: Print out gathered gather facts
+    #   debug:
+    #     msg: "{{ result }}"
 
     # - name: Generate validation report
     #   napalm_validate:
