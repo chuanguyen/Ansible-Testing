@@ -1,0 +1,27 @@
+---
+
+Interfaces:
+  - Name: "FastEthernet0/0"
+    Description: "Data Interface"
+    Duplex: auto
+    Speed: auto
+    ipv4:
+      - IP: 192.168.100.254/24
+  - Name: "FastEthernet0/1"
+    Description: "Management Interface to R5"
+    Duplex: auto
+    Speed: auto
+    ipv4:
+      - IP: 10.1.1.3/24
+  - Name: Loopback1
+    Description: "Virtual LAN 1"
+    Duplex: auto
+    Speed: auto
+    ipv4:
+      - IP: 192.168.3.1/24
+  - Name: Loopback2
+    Description: Virtual LAN 2
+    Duplex: auto
+    Speed: auto
+    ipv4:
+      - IP: 192.168.32.1/24

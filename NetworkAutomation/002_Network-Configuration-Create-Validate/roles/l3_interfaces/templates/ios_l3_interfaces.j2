@@ -1,0 +1,13 @@
+!
+!
+!
+{% for interface in Interfaces %}
+interface {{ interface.Name }}
+  description {{ interface.Description }}
+{% for ipv4_addr in interface.ipv4 %}
+  ip address {{ ipv4_addr.IP | ipaddr('address')}} {{ ipv4_addr.IP | ipaddr('netmask') }}
+{% endfor %}
+  duplex {{ interface.Duplex }}
+  speed {{ interface.Speed }}
+!
+{% endfor %}

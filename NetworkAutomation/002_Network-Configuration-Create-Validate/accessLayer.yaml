@@ -10,4 +10,5 @@
     - baseline
     - ntp
     - syslog
+    - l3_interfaces
     - generate_configs
