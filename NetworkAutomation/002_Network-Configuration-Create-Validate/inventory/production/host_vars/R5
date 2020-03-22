@@ -2,24 +2,28 @@
 
 Interfaces:
   - Name: FastEthernet0/0
+    Int_Type: Physical
     Description: Data interface
     Duplex: auto
     Speed: auto
     ipv4:
       - IP: 192.168.100.253/24
   - Name: FastEthernet0/1
+    Int_Type: Physical
     Description: Management interface to R3
     Duplex: auto
     Speed: auto
     ipv4:
       - IP: 10.1.1.5/24
   - Name: Loopback1
+    Int_Type: Loopback
     Description: Virtual LAN 1
-    Duplex: auto
-    Speed: auto
+    Duplex:
+    Speed:
     ipv4:
       - IP: 192.168.5.1/24
   - Name: Loopback2
+    Int_Type: Loopback
     Description: Virtual LAN 2
     Duplex: auto
     Speed: auto

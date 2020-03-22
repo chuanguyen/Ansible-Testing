@@ -1,4 +1,4 @@
-# Generated Configuration
+version 15.3
 !
 !
 !
@@ -7,5 +7,9 @@ hostname {{ inventory_hostname }}
 username {{ global.username }} privilege 15 secret {{ global.adminpass }}
 enable secret {{ global.enable }}
 !
-ip domain-name {{ global.domain }}
+ip domain name {{ global.domain }}
 ip cef
+!
+archive
+ path disk0:archive
+ write-memory

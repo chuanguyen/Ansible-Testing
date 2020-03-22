@@ -9,7 +9,8 @@
     - name: Install config on device
       napalm_install_config:
         provider: "{{ napalm }}"
-        commit_changes: False
+        commit_changes: TRUE
+        replace_config: TRUE
         config_file: "{{ playbook_dir }}/compiled/{{ inventory_hostname }}/running_config.conf"
         diff_file: "{{ playbook_dir }}/compiled/{{ inventory_hostname }}/diff"
     # - name: get facts from device
