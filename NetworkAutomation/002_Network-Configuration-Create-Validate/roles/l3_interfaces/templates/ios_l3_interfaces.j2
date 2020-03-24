@@ -3,13 +3,14 @@
 !
 {% for interface in Interfaces %}
 interface {{ interface.Name }}
+{% if interface.Int_Type == "Physical" %}
+ {{ interface.State }}
+ duplex {{ interface.Duplex }}
+ speed {{ interface.Speed }}
+{% endif %}
  description {{ interface.Description }}
 {% for ipv4_addr in interface.ipv4 %}
  ip address {{ ipv4_addr.IP | ipaddr('address')}} {{ ipv4_addr.IP | ipaddr('netmask') }}
 {% endfor %}
-{% if interface.Int_Type == "Physical"%}
- duplex {{ interface.Duplex }}
- speed {{ interface.Speed }}
-{% endif %}
 !
 {% endfor %}

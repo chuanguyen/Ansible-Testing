@@ -1,0 +1,6 @@
+---
+# tasks file for enabling_services
+
+- template:
+    src: "{{ ansible_network_os }}_enabling_services.j2"
+    dest: "./staging/{{ inventory_hostname }}/001_enabling_services.cfg"

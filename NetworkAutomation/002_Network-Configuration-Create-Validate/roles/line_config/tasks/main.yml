@@ -1,0 +1,6 @@
+---
+# tasks file for line_config
+
+- template:
+    src: "{{ ansible_network_os }}_line_config.j2"
+    dest: "./staging/{{ inventory_hostname }}/500_line_config.cfg"

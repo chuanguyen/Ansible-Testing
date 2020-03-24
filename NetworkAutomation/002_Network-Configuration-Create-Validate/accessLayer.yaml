@@ -11,4 +11,6 @@
     - ntp
     - syslog
     - l3_interfaces
+    - enabling_services
+    - line_config
     - generate_configs

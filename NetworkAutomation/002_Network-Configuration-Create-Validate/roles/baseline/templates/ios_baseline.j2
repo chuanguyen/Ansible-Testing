@@ -1,15 +1,18 @@
 version 15.3
-!
-!
-!
+service timestamps debug datetime msec
+service timestamps log datetime msec
 service password-encryption
+!
 hostname {{ inventory_hostname }}
 username {{ global.username }} privilege 15 secret {{ global.adminpass }}
 enable secret {{ global.enable }}
 !
 ip domain name {{ global.domain }}
 ip cef
+no ipv6 cef
 !
 archive
  path disk0:archive
  write-memory
+!
+redundancy

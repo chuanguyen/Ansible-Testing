@@ -3,4 +3,4 @@
 
 - template:
     src: "{{ ansible_network_os }}_l3_interfaces.j2"
-    dest: "./staging/{{ inventory_hostname }}/001_l2_inferfaces.cfg"
+    dest: "./staging/{{ inventory_hostname }}/001_l3_inferfaces.cfg"
