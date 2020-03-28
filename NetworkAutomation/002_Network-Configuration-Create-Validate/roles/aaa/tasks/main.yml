@@ -1,0 +1,6 @@
+---
+# tasks file for aaa
+
+- template:
+    src: "{{ ansible_network_os }}_aaa.j2"
+    dest: "./staging/{{ inventory_hostname }}/002_aaa.cfg"

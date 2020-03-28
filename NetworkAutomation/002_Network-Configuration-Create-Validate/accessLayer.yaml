@@ -8,8 +8,9 @@
   roles:
     - directory_creation
     - baseline
+    - aaa
     - ntp
-    - syslog
+    - logging
     - l3_interfaces
     - enabling_services
     - line_config

@@ -1,9 +1,16 @@
-+username admin privilege 15 secret admin
 +enable secret test
-+ip ssh source-interface Loopback1
-+interface FastEthernet0/0
-- no shutdown
-+interface FastEthernet0/1
-- no shutdown
-+line vty 0 4
-+ exec-timeout 0 0
++username admin privilege 15 secret admin
+interface FastEthernet0/0
+ +no shutdown
+interface FastEthernet0/1
+ +no shutdown
+-enable secret 5 $1$aIbA$.KL4ZskqCpeH4XzhkB4Sk0
+-username admin privilege 15 secret 5 $1$RN7B$4YxRcLp2CgzzLevRpemZS1
+-interface FastEthernet1/0
+ -no ip address
+ -duplex auto
+ -speed auto
+-interface FastEthernet1/1
+ -no ip address
+ -duplex auto
+ -speed auto

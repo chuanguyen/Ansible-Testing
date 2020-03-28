@@ -1,18 +1,31 @@
+no upgrade fpd auto
 version 15.3
 service timestamps debug datetime msec
 service timestamps log datetime msec
 service password-encryption
 !
 hostname {{ inventory_hostname }}
-username {{ global.username }} privilege 15 secret {{ global.adminpass }}
+!
+boot-start-marker
+boot-end-marker
+!
+aqm-register-fnf
+!
 enable secret {{ global.enable }}
 !
+no ip icmp rate-limit unreachable
+!
+no ip domain lookup
 ip domain name {{ global.domain }}
 ip cef
 no ipv6 cef
 !
+multilink bundle-name authenticated
+!
 archive
  path disk0:archive
  write-memory
+!
+username {{ global.username }} privilege 15 secret {{ global.adminpass }}
 !
 redundancy
