@@ -4,6 +4,8 @@
   hosts: testDevices
   connection: "{{ ansible_connection }}"
   gather_facts: no
+  vars:
+    genie_parse_command: "show ip interface brief"
 
   tasks:
   - name: Read in parse_genie role
@@ -13,12 +15,12 @@
   - name: Retrieve interface information
     ios_command:
       commands:
-        - show ip interface brief
+        - "{{ genie_parse_command }}"
     register: output
 
   - name: Set facts for Genie Filter
     set_fact:
-      interfaces: "{{ output['stdout'][0] | parse_genie(command='show ip interface brief', os=ansible_network_os) }}"
+      interfaces: "{{ output['stdout'][0] | parse_genie(command=genie_parse_command, os=ansible_network_os) }}"
 
   - name: Debug
     debug:
