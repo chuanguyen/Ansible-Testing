@@ -1,35 +1,35 @@
 ---
 
 Interfaces:
-  - Name: FastEthernet0/0
-    Int_Type: Physical
-    Description: Data interface
-    State: no shutdown
-    Duplex: auto
-    Speed: auto
-    ipv4:
-      - IP: 192.168.100.253/24
-  - Name: FastEthernet0/1
-    Int_Type: Physical
-    Description: Management interface to R3
-    State: no shutdown
-    Duplex: auto
-    Speed: auto
-    ipv4:
-      - IP: 10.1.1.5/24
-  - Name: Loopback1
-    Int_Type: Loopback
-    Description: Virtual LAN 1
-    State: no shutdown
-    Duplex:
-    Speed:
-    ipv4:
-      - IP: 192.168.5.1/24
-  - Name: Loopback2
-    Int_Type: Loopback
-    Description: Virtual LAN 2
-    State: no shutdown
-    Duplex: auto
-    Speed: auto
-    ipv4:
-      - IP: 192.168.52.1/24
+  - FastEthernet0/0:
+      Int_Type: Physical
+      Description: "Data Interface"
+      State: no shutdown
+      Duplex: auto
+      Speed: auto
+      ipv4:
+        - IP: 192.168.100.253/24
+  - FastEthernet0/1:
+      Int_Type: Physical
+      Description: "Management Interface to R3"
+      State: no shutdown
+      Duplex: auto
+      Speed: auto
+      ipv4:
+        - IP: 10.1.1.5/24
+  - Loopback1:
+      Int_Type: Loopback
+      Description: "Virtual LAN 1"
+      State: no shutdown
+      Duplex:
+      Speed:
+      ipv4:
+        - IP: 192.168.5.1/24
+  - Loopback2:
+      Int_Type: Loopback
+      Description: Virtual LAN 2
+      State: no shutdown
+      Duplex:
+      Speed:
+      ipv4:
+        - IP: 192.168.52.1/24
