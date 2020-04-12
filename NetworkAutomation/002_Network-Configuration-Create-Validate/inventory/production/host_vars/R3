@@ -4,7 +4,7 @@ Interfaces:
       Int_Type: Physical
       Description: "Data Interface"
       State: no shutdown
-      is_up: False
+      is_up: True
       Duplex: auto
       Speed: auto
       ipv4:

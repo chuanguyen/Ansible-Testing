@@ -4,8 +4,8 @@ interface FastEthernet0/0
  +no shutdown
 interface FastEthernet0/1
  +no shutdown
--enable secret 5 $1$aIbA$.KL4ZskqCpeH4XzhkB4Sk0
--username admin privilege 15 secret 5 $1$RN7B$4YxRcLp2CgzzLevRpemZS1
+-enable secret 5 $1$gq4e$JHLk2xbLkweH87HAfyQ.c/
+-username admin privilege 15 secret 5 $1$mAfq$uVoSc9TM8mTDh3L/xu2rq.
 -interface FastEthernet1/0
  -no ip address
  -duplex auto
@@ -14,3 +14,4 @@ interface FastEthernet0/1
  -no ip address
  -duplex auto
  -speed auto
+-ntp server 192.168.2.2

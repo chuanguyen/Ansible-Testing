@@ -2,6 +2,7 @@
 
 - name: "Napalm testing"
   hosts: testDevices
+  # connection: local
   connection: "{{ ansible_connection }}"
   gather_facts: no
   vars:
@@ -10,9 +11,14 @@
     - full_ip: "{{ ipv4_addr }}/{{ netmask }}"
 
   tasks:
-    - name: Using ipaddr Ansible filter
-      debug:
-        msg: "{{ full_ip | ipaddr('host') }}"
+    - name: l3 interfaces
+      include_role:
+        name: l3_interfaces
+    # - name: testing
+    #   debug:
+    #     msg: "{{ lookup('dict', item) }}"
+    #   with_items:
+    #     - "{{ Interfaces }}"
 
   # roles:
   #   - compliance_validation
