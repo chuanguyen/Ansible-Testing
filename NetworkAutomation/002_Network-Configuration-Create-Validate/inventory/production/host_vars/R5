@@ -5,6 +5,7 @@ Interfaces:
       Int_Type: Physical
       Description: "Data Interface"
       State: no shutdown
+      is_up: True
       Duplex: auto
       Speed: auto
       ipv4:
@@ -13,6 +14,7 @@ Interfaces:
       Int_Type: Physical
       Description: "Management Interface to R3"
       State: no shutdown
+      is_up: True
       Duplex: auto
       Speed: auto
       ipv4:
@@ -21,6 +23,7 @@ Interfaces:
       Int_Type: Loopback
       Description: "Virtual LAN 1"
       State: no shutdown
+      is_up: True
       Duplex:
       Speed:
       ipv4:
@@ -29,6 +32,7 @@ Interfaces:
       Int_Type: Loopback
       Description: Virtual LAN 2
       State: no shutdown
+      is_up: True
       Duplex:
       Speed:
       ipv4:

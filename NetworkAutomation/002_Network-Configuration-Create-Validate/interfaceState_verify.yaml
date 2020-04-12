@@ -1,0 +1,30 @@
+---
+
+- name: "Napalm testing"
+  hosts: testDevices
+  connection: "{{ ansible_connection }}"
+  gather_facts: no
+
+  tasks:
+
+    - name: get facts from device
+      napalm_get_facts:
+        provider: "{{ napalm }}"
+        filter:
+          - "interfaces"
+      register: result
+
+    - name: set interface information
+      set_fact:
+        napalm_learned_interfaces: "{{ result.ansible_facts.napalm_interfaces }}"
+
+    - name: debug interfaces
+      debug:
+        msg: "states don't match"
+      with_items:
+        - "{{ hostvars[inventory_hostname]['Interfaces'] }}"
+      vars:
+        expected_cur_interface: "{{ item | dict2items }}"
+        expected_int_state: "{{ expected_cur_interface[0].value.is_up }}"
+        napalm_int_state: "{{ napalm_learned_interfaces[expected_cur_interface[0].key]['is_up'] }}"
+      when: "napalm_int_state != expected_int_state"
