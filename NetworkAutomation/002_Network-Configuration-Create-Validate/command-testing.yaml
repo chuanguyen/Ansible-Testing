@@ -11,14 +11,11 @@
     - full_ip: "{{ ipv4_addr }}/{{ netmask }}"
 
   tasks:
-    - name: l3 interfaces
-      include_role:
-        name: l3_interfaces
-    # - name: testing
-    #   debug:
-    #     msg: "{{ lookup('dict', item) }}"
-    #   with_items:
-    #     - "{{ Interfaces }}"
+    - name: testing
+      debug:
+        msg: "{{ lookup('dict', item) }}"
+      with_items:
+        - "{{ Interfaces }}"
 
   # roles:
   #   - compliance_validation
