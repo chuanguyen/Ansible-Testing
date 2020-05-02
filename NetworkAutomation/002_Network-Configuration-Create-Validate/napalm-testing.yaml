@@ -13,6 +13,7 @@
         replace_config: TRUE
         config_file: "{{ playbook_dir }}/compiled/{{ inventory_hostname }}/running_config.conf"
         diff_file: "{{ playbook_dir }}/compiled/{{ inventory_hostname }}/diff"
+        # Default delay is too short, which causes task to error out 
         optional_args: {'global_delay_factor': 2}
     # - name: get facts from device
     #   napalm_get_facts:
