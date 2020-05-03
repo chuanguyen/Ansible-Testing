@@ -1,0 +1,19 @@
+---
+
+- name: save prior to config replacement (Napalm unable to handle 1st time saves)
+  ios_config:
+    save_when: modified
+
+- name: Install config on device
+  napalm_install_config:
+    provider: "{{ napalm }}"
+    commit_changes: TRUE
+    replace_config: TRUE
+    config_file: "{{ playbook_dir }}/compiled/{{ inventory_hostname }}/running_config.conf"
+    diff_file: "{{ playbook_dir }}/compiled/{{ inventory_hostname }}/diff"
+    # Default delay is too short, which causes task to error out
+    optional_args: {'global_delay_factor': 2}
+
+- name: save running to startup post-config application
+  ios_config:
+    save_when: modified

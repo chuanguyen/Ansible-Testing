@@ -2,19 +2,10 @@
 +username admin privilege 15 secret admin
 interface FastEthernet0/0
  +no shutdown
-interface FastEthernet0/1
- +shutdown
- +description Automation Shutdown
-interface FastEthernet1/0
- +shutdown
- +description Automation Shutdown
-interface FastEthernet1/1
- +shutdown
- +description Automation Shutdown
 line vty 0 4
  +exec-timeout 0 0
--enable secret 5 $1$Uu6H$P1IR76/hbOGjWEQVxZja91
--username admin privilege 15 secret 5 $1$Ai20$HztlH3LptRm07ny/QdPzJ1
+-enable secret 5 $1$QLxD$N3IT6hNxPQrp6gfxQqnyO/
+-username admin privilege 15 secret 5 $1$2lZe$WkfC26nJHznFxCLnk3plV/
 interface FastEthernet0/1
  -no ip address
 interface FastEthernet1/0
