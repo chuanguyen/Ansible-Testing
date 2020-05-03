@@ -1,0 +1,41 @@
+---
+Interfaces:
+  - FastEthernet0/0:
+      Int_Type: Physical
+      Description: "Data Interface"
+      State: no shutdown
+      is_up: True
+      Duplex: auto
+      Speed: auto
+      ipv4:
+        - IP: 192.168.100.251/24
+  - FastEthernet0/1:
+      Int_Type: Physical
+      Description: "Automation Shutdown"
+      State: shutdown
+      is_up: False
+      Duplex: auto
+      Speed: auto
+  - FastEthernet1/0:
+      Int_Type: Physical
+      Description: "Automation Shutdown"
+      State: shutdown
+      is_up: False
+      Duplex: auto
+      Speed: auto
+  - FastEthernet1/1:
+      Int_Type: Physical
+      Description: "Automation Shutdown"
+      State: shutdown
+      is_up: False
+      Duplex: auto
+      Speed: auto
+  - Loopback1:
+      Int_Type: Loopback
+      Description: "Virtual Internet"
+      State: no shutdown
+      is_up: True
+      Duplex:
+      Speed:
+      ipv4:
+        - IP: 8.8.8.8/24

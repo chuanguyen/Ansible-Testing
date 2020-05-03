@@ -10,9 +10,11 @@ interface {{ if_name }}
  speed {{ value.Speed }}
 {% endif %}
  description {{ value.Description }}
+{% if value.ipv4 is defined %}
 {% for ipv4_addr in value.ipv4 %}
  ip address {{ ipv4_addr.IP | ipaddr('address')}} {{ ipv4_addr.IP | ipaddr('netmask') }}
 {% endfor %}
+{% endif %}
 !
 {% endfor %}
 {% endfor %}
