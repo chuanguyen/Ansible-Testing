@@ -18,18 +18,22 @@ Interfaces:
       Speed: auto
   - FastEthernet1/0:
       Int_Type: Physical
-      Description: "Automation Shutdown"
-      State: shutdown
-      is_up: False
+      Description: "Management Interface to R3"
+      State: no shutdown
+      is_up: True
       Duplex: auto
       Speed: auto
+      ipv4:
+        - IP: 10.13.1.1/24
   - FastEthernet1/1:
       Int_Type: Physical
-      Description: "Automation Shutdown"
-      State: shutdown
-      is_up: False
+      Description: "Management Interface to R5"
+      State: no shutdown
+      is_up: True
       Duplex: auto
       Speed: auto
+      ipv4:
+        - IP: 10.15.1.1/24
   - Loopback1:
       Int_Type: Loopback
       Description: "Virtual Internet"

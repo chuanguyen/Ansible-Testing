@@ -2,13 +2,13 @@
 +username admin privilege 15 secret admin
 interface FastEthernet0/0
  +no shutdown
+interface FastEthernet1/0
+ +no shutdown
+interface FastEthernet1/1
+ +no shutdown
 line vty 0 4
  +exec-timeout 0 0
--enable secret 5 $1$QLxD$N3IT6hNxPQrp6gfxQqnyO/
--username admin privilege 15 secret 5 $1$2lZe$WkfC26nJHznFxCLnk3plV/
+-enable secret 5 $1$pnTV$8.xh9ZhVPieZlBszzSmHk/
+-username admin privilege 15 secret 5 $1$h75k$iHcD3Lpt6TULXtipOQ/461
 interface FastEthernet0/1
- -no ip address
-interface FastEthernet1/0
- -no ip address
-interface FastEthernet1/1
  -no ip address

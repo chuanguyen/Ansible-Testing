@@ -1,0 +1,17 @@
+---
+
+- name: Saving prior to replacing config
+  include_tasks: "{{ role_path }}/tasks/{{ ansible_network_os }}-saveConfig.yml"
+
+- name: Install config on device
+  napalm_install_config:
+    provider: "{{ napalm }}"
+    commit_changes: TRUE
+    replace_config: TRUE
+    config_file: "{{ playbook_dir }}/compiled/{{ inventory_hostname }}/running_config.conf"
+    diff_file: "{{ playbook_dir }}/compiled/{{ inventory_hostname }}/diff"
+    # Adjust delay from default of 1 when tasks error out
+    optional_args: {'global_delay_factor': 1}
+
+- name: Saving after replacing config
+  include_tasks: "{{ role_path }}/tasks/{{ ansible_network_os }}-saveConfig.yml"

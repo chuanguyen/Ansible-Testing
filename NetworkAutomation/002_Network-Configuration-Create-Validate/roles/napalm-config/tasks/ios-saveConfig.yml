@@ -1,0 +1,4 @@
+---
+
+- ios_config:
+    save_when: modified
