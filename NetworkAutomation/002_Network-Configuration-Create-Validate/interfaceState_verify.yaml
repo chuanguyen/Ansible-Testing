@@ -7,16 +7,16 @@
 
   tasks:
 
-    - name: get facts from device
+    - name: get napalm facts from device
       napalm_get_facts:
         provider: "{{ napalm }}"
         filter:
           - "interfaces"
-      register: result
+      register: napalm_result
 
     - name: set interface information
       set_fact:
-        napalm_learned_interfaces: "{{ result.ansible_facts.napalm_interfaces }}"
+        napalm_learned_interfaces: "{{ napalm_result.ansible_facts.napalm_interfaces }}"
 
     - name: debug interfaces
       debug:
