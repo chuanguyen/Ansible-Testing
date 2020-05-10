@@ -20,11 +20,12 @@
 
     - name: debug interfaces
       debug:
-        msg: "states don't match"
+        msg: "{{ expected_cur_int_name }} : Mismatch in Expected State"
       with_items:
         - "{{ hostvars[inventory_hostname]['Interfaces'] }}"
       vars:
         expected_cur_interface: "{{ item | dict2items }}"
+        expected_cur_int_name: "{{ expected_cur_interface[0].key }}"
         expected_int_state: "{{ expected_cur_interface[0].value.is_up }}"
-        napalm_int_state: "{{ napalm_learned_interfaces[expected_cur_interface[0].key]['is_up'] }}"
+        napalm_int_state: "{{ napalm_learned_interfaces[expected_cur_int_name]['is_up'] }}"
       when: "napalm_int_state != expected_int_state"
