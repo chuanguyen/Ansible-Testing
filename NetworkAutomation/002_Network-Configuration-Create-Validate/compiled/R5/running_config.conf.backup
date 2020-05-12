@@ -1,0 +1,144 @@
+Building configuration...
+
+Current configuration : 2056 bytes
+!
+! Last configuration change at 15:43:35 UTC Tue May 12 2020 by admin
+no upgrade fpd auto
+version 15.3
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+!
+hostname R5
+!
+boot-start-marker
+boot-end-marker
+!
+aqm-register-fnf
+!
+enable secret 5 $1$FWzC$3EaxcVs3b/tE8KMjDbRXU/
+!
+no aaa new-model
+no ip icmp rate-limit unreachable
+!
+!
+!
+!
+!
+!
+no ip domain lookup
+ip domain name automation.local
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+!
+archive
+ path disk0:archive
+ write-memory
+username admin privilege 15 secret 5 $1$iMRs$FJmn7aqcJviJ08lDby8f81
+!
+redundancy
+!
+!
+ip tcp synwait-time 5
+ip ssh version 2
+ip scp server enable
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Loopback1
+ description Virtual LAN 1
+ ip address 192.168.5.1 255.255.255.0
+!
+interface Loopback2
+ description Virtual LAN 2
+ ip address 192.168.52.1 255.255.255.0
+!
+interface FastEthernet0/0
+ description Data Interface
+ ip address 192.168.100.253 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/1
+ description Management Interface to R3
+ ip address 10.1.1.5 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface FastEthernet1/0
+ description Automation Shutdown
+ no ip address
+ shutdown
+ duplex auto
+ speed auto
+!
+interface FastEthernet1/1
+ description Management Interface to R1
+ ip address 10.15.1.5 255.255.255.0
+ duplex auto
+ speed auto
+!
+ip forward-protocol nd
+no ip http server
+no ip http secure-server
+!
+!
+!
+logging host 192.168.1.1
+logging host 192.168.1.2
+no cdp log mismatch duplex
+!
+!
+!
+control-plane
+!
+!
+mgcp behavior rsip-range tgcp-only
+mgcp behavior comedia-role none
+mgcp behavior comedia-check-media-src disable
+mgcp behavior comedia-sdp-force disable
+!
+mgcp profile default
+!
+!
+!
+gatekeeper
+ shutdown
+!
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+ stopbits 1
+line aux 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+ stopbits 1
+line vty 0 4
+ exec-timeout 0 0
+ login local
+ transport input all
+!
+ntp server 192.168.2.1
+ntp server 192.168.2.2
+!
+end
