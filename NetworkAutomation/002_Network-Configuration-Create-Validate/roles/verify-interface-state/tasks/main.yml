@@ -1,19 +1,19 @@
 ---
 
 ### Utilizing Genie parsers
-- name: Read in parse_genie role
-  include_role:
-    name: clay584.parse_genie
-
-- name: Retrieve interface information
-  ios_command:
-    commands:
-      - "{{ genie_parse_command }}"
-  register: output
-
-- name: Set facts for Genie Filter
-  set_fact:
-    genie_interfaces: "{{ output['stdout'][0] | parse_genie(command=genie_parse_command, os=ansible_network_os) }}"
+# - name: Read in parse_genie role
+#   include_role:
+#     name: clay584.parse_genie
+#
+# - name: Retrieve interface information
+#   ios_command:
+#     commands:
+#       - "{{ genie_parse_command }}"
+#   register: output
+#
+# - name: Set facts for Genie Filter
+#   set_fact:
+#     genie_interfaces: "{{ output['stdout'][0] | parse_genie(command=genie_parse_command, os=ansible_network_os) }}"
 
 ### Utilizing Napalm filters
 - name: get napalm facts from device
@@ -38,8 +38,8 @@
     expected_interface: "{{ item | dict2items }}"
     expected_int_name: "{{ expected_interface[0].key }}"
     expected_int_state: "{{ expected_interface[0].value.is_up }}"
-    current_int_state: "{{ genie_interfaces[expected_int_name]['enabled'] }}"
-    # current_int_state: "{{ napalm_learned_interfaces[expected_int_name]['is_up'] }}"
+    # current_int_state: "{{ genie_interfaces[expected_int_name]['enabled'] }}"
+    current_int_state: "{{ napalm_learned_interfaces[expected_int_name]['is_up'] }}"
   when: "current_int_state != expected_int_state"
 
 # - name: debug interfaces
