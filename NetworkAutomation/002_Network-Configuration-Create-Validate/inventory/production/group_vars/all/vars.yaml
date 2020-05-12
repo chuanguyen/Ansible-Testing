@@ -15,23 +15,24 @@ git_email: "{{ vault_git_email }}"
 # Variables as part of the network_cli connection type
 ansible_connection: network_cli
 ansible_network_os: ios
-ansible_user: "{{ vault_username }}"
-ansible_password: "{{ vault_adminpass }}"
+ansible_user: "{{ admin_username }}"
+ansible_password: "{{ admin_pass }}"
 
 napalm:
   hostname: "{{ inventory_hostname }}"
-  username: "{{ global.username }}"
-  password: "{{ global.adminpass }}"
+  username: "{{ admin_username }}"
+  password: "{{ admin_pass }}"
   dev_os: "{{ ansible_network_os }}"
 
-global:
-  enable: "{{ vault_enable }}"
-  username: "{{ vault_username }}"
-  adminpass: "{{ vault_adminpass }}"
-  domain: "automation.local"
-  syslog:
-    - 192.168.1.1
-    - 192.168.1.2
-  ntpserver:
-    - 192.168.2.1
-    - 192.168.2.2
+# Config on network devices
+enable: "{{ vault_enable }}"
+local_net_users: "{{ vault_local_net_users }}"
+admin_username: "{{ local_net_users[0].username }}"
+admin_pass: "{{ local_net_users[0].password }}"
+domain: "automation.local"
+syslog:
+  - 192.168.1.1
+  - 192.168.1.2
+ntpserver:
+  - 192.168.2.1
+  - 192.168.2.2

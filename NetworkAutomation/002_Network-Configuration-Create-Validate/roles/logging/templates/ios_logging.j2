@@ -2,6 +2,6 @@
 !
 !
 no cdp log mismatch duplex
-{% for server in global.syslog %}
+{% for server in syslog %}
 logging host {{ server }}
 {% endfor %}

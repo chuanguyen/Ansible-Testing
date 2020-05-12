@@ -11,12 +11,12 @@ boot-end-marker
 !
 aqm-register-fnf
 !
-enable secret {{ global.enable }}
+enable secret {{ enable }}
 !
 no ip icmp rate-limit unreachable
 !
 no ip domain lookup
-ip domain name {{ global.domain }}
+ip domain name {{ domain }}
 ip cef
 no ipv6 cef
 !
@@ -26,6 +26,6 @@ archive
  path disk0:archive
  write-memory
 !
-username {{ global.username }} privilege 15 secret {{ global.adminpass }}
+username {{ admin_username }} privilege 15 secret {{ admin_pass }}
 !
 redundancy
