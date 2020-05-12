@@ -4,59 +4,6 @@
   hosts: testDevices
   connection: "{{ ansible_connection }}"
   gather_facts: no
-  vars:
-    genie_parse_command: "show ip interface"
 
-  tasks:
-    # - name: Read in parse_genie role
-    #   include_role:
-    #     name: clay584.parse_genie
-    #
-    # - name: Retrieve interface information
-    #   ios_command:
-    #     commands:
-    #       - "{{ genie_parse_command }}"
-    #   register: output
-    #
-    # - name: Set facts for Genie Filter
-    #   set_fact:
-    #     genie_interfaces: "{{ output['stdout'][0] | parse_genie(command=genie_parse_command, os=ansible_network_os) }}"
-
-    - name: get napalm facts from device
-      napalm_get_facts:
-        provider: "{{ napalm }}"
-        filter:
-          - "interfaces"
-      register: napalm_result
-
-    - name: set interface information
-      set_fact:
-        napalm_learned_interfaces: "{{ napalm_result.ansible_facts.napalm_interfaces }}"
-
-    - name: Configure interface interfaces
-      ios_interfaces:
-        config:
-          - name: "{{ expected_int_name }}"
-            enabled: "{{ expected_int_state }}"
-      with_items:
-        - "{{ hostvars[inventory_hostname]['Interfaces'] }}"
-      vars:
-        expected_interface: "{{ item | dict2items }}"
-        expected_int_name: "{{ expected_interface[0].key }}"
-        expected_int_state: "{{ expected_interface[0].value.is_up }}"
-        # current_int_state: "{{ genie_interfaces[expected_int_name]['enabled'] }}"
-        current_int_state: "{{ napalm_learned_interfaces[expected_int_name]['is_up'] }}"
-      when: "current_int_state != expected_int_state"
-
-    # - name: debug interfaces
-    #   debug:
-    #     msg: "{{ expected_int_name }} : Mismatch in Expected State"
-    #   with_items:
-    #     - "{{ hostvars[inventory_hostname]['Interfaces'] }}"
-    #   vars:
-    #     expected_interface: "{{ item | dict2items }}"
-    #     expected_int_name: "{{ expected_interface[0].key }}"
-    #     expected_int_state: "{{ expected_interface[0].value.is_up }}"
-    #     current_int_state: "{{ genie_interfaces[expected_int_name]['enabled'] }}"
-    #     # current_int_state: "{{ napalm_learned_interfaces[expected_int_name]['is_up'] }}"
-    #   when: "current_int_state != expected_int_state"
+  roles:
+    - verify-interface-state
