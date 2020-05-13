@@ -6,6 +6,7 @@
   # connection: "{{ ansible_connection }}"
   gather_facts: no
   vars:
+    test_empty_list: ['test':'1']
     test_list:
       - test_item1: "1"
     test_item2: {'test_item2': '2'}
@@ -16,15 +17,19 @@
   tasks:
     - name: Debug
       debug:
-        msg: "{{ test_list }}"
+        msg: "{{ test_empty_list }}"
 
     - name: Append to list
       set_fact:
-        test_list: "{{ test_list + [ { test_item2_key: test_item2_value } ] }}"
+        test_empty_list: "{{ test_empty_list + [ { test_item2_key: test_item2_value } ] }}"
 
     - name: Debug
       debug:
-        msg: "{{ test_list }}"
+        msg: "{{ test_empty_list }}"
+
+    - name: Debug
+      debug:
+        msg: "{{ test_empty_list[1] }}"
 
   # roles:
   #   - compliance_validation
