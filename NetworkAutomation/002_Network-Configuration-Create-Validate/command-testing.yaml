@@ -2,20 +2,25 @@
 
 - name: "Napalm testing"
   hosts: testDevices
-  # connection: local
-  connection: "{{ ansible_connection }}"
+  connection: local
+  # connection: "{{ ansible_connection }}"
   gather_facts: no
   vars:
-    - ipv4_addr: 192.168.0.17
-    - netmask: 28
-    - full_ip: "{{ ipv4_addr }}/{{ netmask }}"
+    test_list:
+      - test_item1: "1"
 
   tasks:
-    - name: testing
+    - name: Debug
       debug:
-        msg: "{{ lookup('dict', item) }}"
-      with_items:
-        - "{{ Interfaces }}"
+        msg: "{{ test_list }}"
+
+    - name: Append to list
+      set_fact:
+        test_list: "{{ test_list + [ {'test_item2': '2'} ] }}"
+
+    - name: Debug
+      debug:
+        msg: "{{ test_list }}"
 
   # roles:
   #   - compliance_validation

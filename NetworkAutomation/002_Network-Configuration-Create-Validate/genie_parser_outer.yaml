@@ -1,0 +1,33 @@
+---
+
+- name: "Genie test"
+  hosts: testDevices
+  connection: "{{ ansible_connection }}"
+  gather_facts: no
+  vars:
+    genie_parse_commands:
+      - l3_interfaces_info: "show ip interface brief"
+      - nos_version_info: "show version"
+      - l2_interfaces_info: "show interfaces"
+    genie_parsed_data: "{{ default([]) }}"
+
+  tasks:
+
+  - name: Parse and store network information
+    include: genie_parser_inner.yaml
+    with_items:
+      - "{{ genie_parse_commands }}"
+    vars:
+      command_items: "{{ item | dict2items }}"
+      genie_command_key: "{{ command_items[0].key }}"
+      genie_command: "{{ command_items[0].value }}"
+
+  # - name: Debug
+  #   debug:
+  #     msg: "Command: {{ command }} ; var: {{ command_key }}"
+  #   with_items:
+  #     - "{{ genie_parse_commands }}"
+  #   vars:
+  #     command_items: "{{ item | dict2items }}"
+  #     command_key: "{{ command_items[0].key }}"
+  #     command: "{{ command_items[0].value }}"
