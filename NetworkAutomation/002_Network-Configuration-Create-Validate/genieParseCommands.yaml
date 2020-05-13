@@ -1,0 +1,9 @@
+---
+
+- name: "Genie test"
+  hosts: R1
+  connection: "{{ ansible_connection }}"
+  gather_facts: no
+
+  roles:
+    - genie_parse_commands
