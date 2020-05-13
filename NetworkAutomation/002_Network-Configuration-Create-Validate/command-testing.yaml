@@ -1,13 +1,17 @@
 ---
 
 - name: "Napalm testing"
-  hosts: testDevices
+  hosts: R1
   connection: local
   # connection: "{{ ansible_connection }}"
   gather_facts: no
   vars:
     test_list:
       - test_item1: "1"
+    test_item2: {'test_item2': '2'}
+    test_item2_items: "{{ test_item2 | dict2items }}"
+    test_item2_key: "{{ test_item2_items[0].key }}"
+    test_item2_value: "{{ test_item2_items[0].value }}"
 
   tasks:
     - name: Debug
@@ -16,7 +20,7 @@
 
     - name: Append to list
       set_fact:
-        test_list: "{{ test_list + [ {'test_item2': '2'} ] }}"
+        test_list: "{{ test_list + [ { test_item2_key: test_item2_value } ] }}"
 
     - name: Debug
       debug:
