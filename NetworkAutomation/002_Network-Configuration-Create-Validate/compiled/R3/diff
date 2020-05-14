@@ -1,12 +1,8 @@
 +enable secret test
 +username admin privilege 15 secret admin
-interface FastEthernet0/0
- +no shutdown
-interface FastEthernet0/1
- +no shutdown
-interface FastEthernet1/0
- +no shutdown
--enable secret 5 $1$/g1I$WDgqHyCGffTMxqpZeWAKY0
--username admin privilege 15 secret 5 $1$Zz/Q$QIb7ZP/aYdQVnWxVmgbQf.
-interface FastEthernet1/1
- -no ip address
++interface FastEthernet0/0
+- no shutdown
++interface FastEthernet0/1
+- no shutdown
++interface FastEthernet1/0
+- no shutdown
