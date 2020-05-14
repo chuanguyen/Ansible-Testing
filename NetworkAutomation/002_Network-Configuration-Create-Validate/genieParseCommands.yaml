@@ -1,6 +1,6 @@
 ---
 
-- name: "Genie test"
+- name: "Retrieve Genie parsed info"
   hosts: R1
   connection: "{{ ansible_connection }}"
   gather_facts: no

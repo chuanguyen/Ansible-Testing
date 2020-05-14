@@ -1,11 +1,8 @@
-
-- name: Show parsed data before
-  debug:
-    msg: "{{ genie_parsed_data }}"
-
+---
+  
 - name: Parse and store network information
   include: loop.yml
-  with_items:
+  with_dict:
     - "{{ genie_parse_commands }}"
   loop_control:
     loop_var: genie_parse_command

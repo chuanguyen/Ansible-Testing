@@ -1,12 +1,9 @@
 ---
 
-- set_fact:
-    command_item: "{{ genie_parse_command | dict2items }}"
-
 - name: Retrieving key and command
   set_fact:
-    genie_command_key: "{{ command_item[0].key }}"
-    genie_command: "{{ command_item[0].value }}"
+    genie_command_key: "{{ genie_parse_command.key }}"
+    genie_command: "{{ genie_parse_command.value }}"
 
 - name: Read in parse_genie role
   include_role:
@@ -18,7 +15,7 @@
       - "{{ genie_command }}"
   register: output
 
-- name: Set facts for Genie Filter
+- name: Set facts using Genie Filter
   set_fact:
     genie_parsed_output: "{{ output['stdout'][0] | parse_genie(command=genie_command, os=ansible_network_os) }}"
 

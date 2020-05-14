@@ -1,9 +1,9 @@
 ---
 
 genie_parse_commands:
-  - l3_interfaces_info: "show ip interface brief"
-  - nos_version_info: "show version"
-  - l2_interfaces_info: "show interfaces"
+  l3_interfaces_info: "show ip interface brief"
+  nos_version_info: "show version"
+  l2_interfaces_info: "show interfaces"
 
 # Contains all the data parsed by Genie
 genie_parsed_data: {}
