@@ -1,6 +1,8 @@
 ---
 
 genie_parse_commands:
+  # Keys are the same keys used to store the parsed output in the
+  # dict containing all the Genie parsed data
   l3_interfaces_info: "show ip interface brief"
   nos_version_info: "show version"
   l2_interfaces_info: "show interfaces"
