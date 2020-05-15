@@ -9,6 +9,8 @@ interface {{ if_name }}
 {% for ipv4_addr in value.ipv4 %}
  ip address {{ ipv4_addr.IP | ipaddr('address')}} {{ ipv4_addr.IP | ipaddr('netmask') }}
 {% endfor %}
+{% else %}
+ no ip address
 {% endif %}
 {% if value.hsrp is defined %}
 {% for hsrp_group in value.hsrp %}
@@ -24,7 +26,9 @@ interface {{ if_name }}
 {% endfor %}
 {% endif %}
 {% if value.Int_Type == "Physical" %}
+{% if not value.is_up %}
  {{ value.State }}
+{% endif %}
  duplex {{ value.Duplex }}
  speed {{ value.Speed }}
 {% endif %}

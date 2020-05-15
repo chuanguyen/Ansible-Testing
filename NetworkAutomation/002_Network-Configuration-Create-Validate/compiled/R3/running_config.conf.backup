@@ -1,8 +1,8 @@
 Building configuration...
 
-Current configuration : 2056 bytes
+Current configuration : 2144 bytes
 !
-! Last configuration change at 15:41:52 UTC Thu May 14 2020 by admin
+! Last configuration change at 14:09:14 UTC Fri May 15 2020 by admin
 no upgrade fpd auto
 version 15.3
 service timestamps debug datetime msec
@@ -16,7 +16,7 @@ boot-end-marker
 !
 aqm-register-fnf
 !
-enable secret 5 $1$o5W7$lC6BSyio8gPqY2Hf7CIzJ.
+enable secret 5 $1$z8ZM$sSEbA/1gwWR3qUYLe6wCQ1
 !
 no aaa new-model
 no ip icmp rate-limit unreachable
@@ -44,7 +44,7 @@ multilink bundle-name authenticated
 archive
  path disk0:archive
  write-memory
-username admin privilege 15 secret 5 $1$1ZO.$NUy5zzIkI8PdS0EAIa0EF.
+username admin privilege 15 secret 5 $1$P7HL$UmqEMrrNdQtHa97g965bP.
 !
 redundancy
 !
@@ -72,7 +72,10 @@ interface Loopback2
 !
 interface FastEthernet0/0
  description Data Interface
- ip address 192.168.100.254 255.255.255.0
+ ip address 192.168.100.203 255.255.255.0
+ standby version 2
+ standby 135 ip 192.168.100.254
+ standby 135 authentication cisco135
  duplex auto
  speed auto
 !
