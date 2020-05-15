@@ -9,7 +9,7 @@ Interfaces:
       Duplex: auto
       Speed: auto
       ipv4:
-        - IP: 192.168.100.253/24
+        - IP: 192.168.100.205/24
   - FastEthernet0/1:
       Int_Type: Physical
       Description: "Management Interface to R3"
