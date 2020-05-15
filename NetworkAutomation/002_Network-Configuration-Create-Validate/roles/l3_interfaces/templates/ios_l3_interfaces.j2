@@ -4,16 +4,29 @@
 {% for interface in Interfaces %}
 {% for if_name, value in interface.items() %}
 interface {{ if_name }}
-{% if value.Int_Type == "Physical" %}
- {{ value.State }}
- duplex {{ value.Duplex }}
- speed {{ value.Speed }}
-{% endif %}
  description {{ value.Description }}
 {% if value.ipv4 is defined %}
 {% for ipv4_addr in value.ipv4 %}
  ip address {{ ipv4_addr.IP | ipaddr('address')}} {{ ipv4_addr.IP | ipaddr('netmask') }}
 {% endfor %}
+{% endif %}
+{% if value.hsrp is defined %}
+{% for hsrp_group in value.hsrp %}
+ standby version {{ hsrp_group.version }}
+ standby {{ hsrp_group.group }} ip {{ hsrp_group.primary_ip }}
+{% if hsrp_group.priority != "100" %}
+ standby {{ hsrp_group.group }} priority {{ hsrp_group.priority }}
+{% endif %}
+{% if hsrp_group.preempt %}
+ standby {{ hsrp_group.group }} preempt
+{% endif %}
+ standby {{ hsrp_group.group }} authentication {{ hsrp_authentication }}
+{% endfor %}
+{% endif %}
+{% if value.Int_Type == "Physical" %}
+ {{ value.State }}
+ duplex {{ value.Duplex }}
+ speed {{ value.Speed }}
 {% endif %}
 !
 {% endfor %}

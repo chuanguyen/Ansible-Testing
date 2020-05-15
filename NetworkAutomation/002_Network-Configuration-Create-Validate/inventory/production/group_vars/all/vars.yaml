@@ -36,3 +36,4 @@ syslog:
 ntpserver:
   - 192.168.2.1
   - 192.168.2.2
+hsrp_authentication: "{{ vault_hsrp_authentication }}"

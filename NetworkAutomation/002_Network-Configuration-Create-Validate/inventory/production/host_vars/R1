@@ -9,6 +9,12 @@ Interfaces:
       Speed: auto
       ipv4:
         - IP: 192.168.100.201/24
+      hsrp:
+        - primary_ip: "192.168.100.254"
+          version: "2"
+          group: "135"
+          priority: "135"
+          preempt: True
   - FastEthernet0/1:
       Int_Type: Physical
       Description: "Automation Shutdown"
