@@ -1,6 +1,6 @@
 ---
 
-- name: "Importing config saving task for {{ ansible_network_os }} devices"
+- name: "Saving before config replacement"
   include_tasks: "{{ role_path }}/tasks/{{ ansible_network_os }}-saveConfig.yml"
 
 - name: Install config on device
@@ -14,5 +14,5 @@
     # Adjust delay from default of 1 when tasks error out
     optional_args: {'global_delay_factor': 2}
 
-- name: "Importing config saving task for {{ ansible_network_os }} devices"
+- name: "Saving after config replacement"
   include_tasks: "{{ role_path }}/tasks/{{ ansible_network_os }}-saveConfig.yml"
