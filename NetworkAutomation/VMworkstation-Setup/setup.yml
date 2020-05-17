@@ -1,0 +1,9 @@
+---
+
+- name: Setting up baseline for VM workstation
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+  roles:
+    - 

@@ -1,0 +1,11 @@
+---
+
+user_name: "calvin"
+
+my_git_repos: {{ vault_my_git_repos }}
+
+apt_packages:
+  - python3-pip
+
+system_pip_packages:
+  - virtualenv
