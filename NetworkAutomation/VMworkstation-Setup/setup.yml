@@ -1,9 +1,13 @@
 ---
 
-- name: Setting up baseline for VM workstation
+- name: Baseline setup
   hosts: localhost
+  become: false
   connection: local
-  gather_facts: no
+  gather_facts: true
 
   roles:
-    - 
+    - create-directories
+    - install-system-packages
+    - install-pip-packages
+    - install-docker-ce

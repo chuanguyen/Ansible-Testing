@@ -1,0 +1,26 @@
+- name: Ensure docker-ce prerequisite packages are installed
+  become: true
+  apt:
+    pkg:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+    update_cache: yes
+
+- name: Add Docker GPG key
+  become: true
+  apt_key:
+    url: "{{ docker.gpg_key }}"
+    state: present
+
+- name: Add Docker APT repository
+  become: true
+  apt_repository:
+    repo: "{{ docker.docker_ce_apt_repo }}"
+
+- name: Install docker-ce
+  become: true
+  apt:
+    name: docker-ce
+    update_cache: yes

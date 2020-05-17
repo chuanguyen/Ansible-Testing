@@ -2,5 +2,5 @@
 
 - name: Create automation folder
   file:
-    path: "{{ ansible_env.HOME }}/automation"
-    state: directory  
+    path: "{{ ansible_env.HOME }}/automation/"
+    state: directory

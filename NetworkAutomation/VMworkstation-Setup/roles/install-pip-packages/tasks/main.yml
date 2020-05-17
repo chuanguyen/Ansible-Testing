@@ -1,0 +1,13 @@
+---
+
+- name: Ensure virtualenv package is installed
+  become: true
+  apt:
+    pkg:
+      - virtualenv
+    update_cache: yes
+
+- name: Install required pip packages into virtualenv
+  pip:
+    name: "{{ system_pip_packages }}"
+    virtualenv: "{{ ansible_env.HOME }}/automation/venv"
