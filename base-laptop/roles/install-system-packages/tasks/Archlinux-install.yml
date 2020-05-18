@@ -1,8 +1,8 @@
-# - name: Install Pacman packages
-#   become: true
-#   pacman:
-#     name: "{{ pacman_packages }}"
-#     update_cache: yes
+- name: Install Pacman packages
+  become: true
+  pacman:
+    name: "{{ pacman_packages }}"
+    update_cache: yes
 
 - name: Create aur_builder user for password-less acccess with pacman
   become: true
