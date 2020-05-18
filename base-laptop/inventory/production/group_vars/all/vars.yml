@@ -1,8 +1,33 @@
 pacman_packages:
+  - albert
   - atom
-  - yay
+  - auracle
+  - bash-completion
+  - calibre
+  - discord
+  - dropbox
+  - flameshot
   - gnucash
+  - git
+  - gparted
+  - i7z
+  - kdenlive
+  - latte-dock
+  - okular
+  - peek
+  - spotify
+  - thunderbird
+  - veracrypt
+  - vim
+  - yay
 
 aur_packages:
-  - vivaldi-snapshot
+  - bluez-utils-compat
+  - gdrive
   - google-chrome
+  - gyazo
+  - iscan-plugin-ds-30
+  - kazam
+  - vivaldi-snapshot
+  - vmware-workstation
+  - xmind
