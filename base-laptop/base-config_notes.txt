@@ -19,6 +19,7 @@ System:
 - makepkg compression & multiprocessing
 - Scheduling monthly trim script
 - Bash autocomplete
+- sudoer file (Undervolting / AUR_Builder for Ansible)
 
 Media:
 - mpv config to control volume

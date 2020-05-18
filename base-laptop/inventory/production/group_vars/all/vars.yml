@@ -1,0 +1,8 @@
+pacman_packages:
+  - atom
+  - yay
+  - gnucash
+
+aur_packages:
+  - vivaldi-snapshot
+  - google-chrome

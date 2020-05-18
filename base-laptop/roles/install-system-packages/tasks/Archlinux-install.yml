@@ -1,0 +1,9 @@
+- name: Install Pacman packages
+  become: true
+  pacman:
+    name: "{{ pacman_packages }}"
+    update_cache: yes
+
+- name: Install AUR packages
+  aur:
+    name: "{{ aur_packages }}"
