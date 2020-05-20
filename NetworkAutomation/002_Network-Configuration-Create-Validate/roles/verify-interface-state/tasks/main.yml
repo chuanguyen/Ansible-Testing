@@ -42,4 +42,3 @@
     expected_int_state: "{{ expected_interface[0].value.is_up }}"
     # current_int_state: "{{ genie_interfaces[expected_int_name]['enabled'] }}"
     current_int_state: "{{ napalm_learned_interfaces[expected_int_name]['is_up'] }}"
-  when: "current_int_state != expected_int_state"
