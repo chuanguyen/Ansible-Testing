@@ -1,4 +1,8 @@
 +enable secret test
 +username admin privilege 15 secret admin
--enable secret 5 $1$z8ZM$sSEbA/1gwWR3qUYLe6wCQ1
--username admin privilege 15 secret 5 $1$P7HL$UmqEMrrNdQtHa97g965bP.
+interface FastEthernet0/0
+ +standby version 2
+ +standby 135 ip 192.168.100.254
+ +standby 135 authentication cisco135
+-enable secret 5 $1$hppc$tSSUNLMzO8aPQQb53RgnM1
+-username admin privilege 15 secret 5 $1$KFQ/$64b8V1u5oxVMF58JkFbbv0
