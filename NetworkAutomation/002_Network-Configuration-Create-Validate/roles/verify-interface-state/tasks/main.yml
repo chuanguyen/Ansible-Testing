@@ -37,9 +37,9 @@
   loop_control:
     label: "{{ expected_int_name }} : {{ expected_int_state }}"
   vars:
-    expected_interface: "{{ item | dict2items }}"
-    expected_int_name: "{{ expected_interface[0].key }}"
-    expected_int_state: "{{ expected_interface[0].value.is_up }}"
+    expected_interface: "{{ lookup('dict', item) }}"
+    expected_int_name: "{{ expected_interface.key }}"
+    expected_int_state: "{{ expected_interface.value.is_up }}"
     # current_int_state: "{{ genie_interfaces[expected_int_name]['enabled'] }}"
     current_int_state: "{{ napalm_learned_interfaces[expected_int_name]['is_up'] }}"
   changed_when:
