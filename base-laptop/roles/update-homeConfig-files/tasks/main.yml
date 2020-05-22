@@ -1,0 +1,17 @@
+---
+
+- name: Inserting after specific line
+  blockinfile:
+    path: "{{ ansible_env.HOME }}/test.txt"
+    block: "{{ lookup('file', 'test.txt') }}"
+    marker: "<!-- {mark} Test Marker -->"
+    insertafter: "^alias"
+    backup: yes
+
+
+# - name: Updating EOF test files
+#   blockinfile:
+#     path: "{{ ansible_env.HOME }}/test.txt"
+#     block: "{{ lookup('file', 'test.txt') }}"
+#     marker: "<!-- {mark} Test Marker -->"
+#     backup: yes
