@@ -1,0 +1,7 @@
+---
+
+- name: Create automation folder
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items: "{{ directories_to_create }}"
