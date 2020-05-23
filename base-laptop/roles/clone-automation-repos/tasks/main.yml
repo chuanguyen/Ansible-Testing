@@ -7,10 +7,11 @@
   file:
     path: "{{ ansible_env.HOME }}/GNS3/projects/GNS3-My-Projects"
 
-- name: Clone my project repos
+- name: Clone my project repos if they don't exist
   git:
     clone: yes
     repo: "{{ item.repo }}"
     dest: "{{ item.dest }}"
     recursive: yes
+    update: no
   with_items: "{{ automation_git_repos }}"
