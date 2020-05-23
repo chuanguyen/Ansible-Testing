@@ -6,4 +6,4 @@
   gather_facts: true
 
   roles:
-    - clone-automation-repos
+    - blacklist-kernel-modules 

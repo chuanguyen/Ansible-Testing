@@ -1,0 +1,7 @@
+---
+
+- name: Generate modprobe blacklist file
+  become: true
+  template:
+    src: "blacklist.j2"
+    dest: "/etc/modprobe.d/my_blacklist.conf"

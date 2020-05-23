@@ -1,0 +1,3 @@
+blacklist_modules:
+  - module: ideapad_laptop
+    description: "Blacklisted to ensure wifi works on Lenovo systems"

@@ -1,0 +1,6 @@
+### Ansible generated blacklist file
+
+{% for blacklist_module in blacklist_modules %}
+# {{ blacklist_module.description }}
+blacklist {{ blacklist_module.module }}
+{% endfor %}
