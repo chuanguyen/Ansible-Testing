@@ -1,6 +1,6 @@
 ---
 
-- name: Create automation folder
+- name: Create directories
   file:
     path: "{{ item }}"
     state: directory
