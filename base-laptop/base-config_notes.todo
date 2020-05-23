@@ -17,7 +17,7 @@ System:
   ✔ .bashrc & .profile @done(2020-05-23 14:36) @project(System)
   ☐ Add the usb wake disable service
   ☐ Kensington mouse scripts
-  ☐ SMB shares & configuration files
+  ✔ SMB shares & configuration files @done(2020-05-23 15:51) @project(System)
   ☐ UFW firewall
   ☐ sysctl sysrq, oom killer, swappiness
   ☐ wlan service file (Toggles wifi off when wired)
