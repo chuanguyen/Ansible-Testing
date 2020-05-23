@@ -1,0 +1,3 @@
+samba_share_folders:
+  - "{{ ansible_env.HOME }}/samba/Public"
+  - "{{ ansible_env.HOME }}/samba/myDir"

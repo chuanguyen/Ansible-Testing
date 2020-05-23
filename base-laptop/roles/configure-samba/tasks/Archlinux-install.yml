@@ -1,0 +1,6 @@
+- name: Verifies samba package exists
+  become: true
+  pacman:
+    name:
+      - samba
+    update_cache: yes
