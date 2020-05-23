@@ -6,7 +6,11 @@ automation_git_repos:
   - repo: https://github.com/chuanguyen/Python-Projects.git
     dest: "{{ ansible_env.HOME }}/automation/Python-Projects"
     base_folder: "{{ ansible_env.HOME }}/automation"
-    
+
   - repo: https://github.com/chuanguyen/GNS3-My-Projects.git
     dest: "{{ ansible_env.HOME }}/GNS3/projects/GNS3-My-Projects"
     base_folder: "{{ ansible_env.HOME }}/GNS3/projects"
+
+  - repo: https://github.com/chuanguyen/netbox-docker.git
+    dest: "{{ ansible_env.HOME }}/automation/netbox-docker"
+    base_folder: "{{ ansible_env.HOME }}/automation"

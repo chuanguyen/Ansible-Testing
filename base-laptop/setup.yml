@@ -6,4 +6,4 @@
   gather_facts: true
 
   roles:
-    - install-automation-pip-packages
+    - clone-automation-repos
