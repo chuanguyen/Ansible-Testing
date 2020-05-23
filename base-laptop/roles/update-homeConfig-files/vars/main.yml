@@ -1,0 +1,14 @@
+home_files:
+  BOF:
+    -
+  before:
+    -
+  after:
+    - src_file: ".bashrc-aliases"
+      marker: "### {mark} .bashrc Aliases ###"
+      path: "{{ ansible_env.HOME }}/.bashrc"
+      match_pattern: "^alias"
+  EOF:
+    - src_file: ".bashrc-EOF"
+      marker: "### {mark} .bashrc EOF ###"
+      path: "{{ ansible_env.HOME }}/.bashrc"

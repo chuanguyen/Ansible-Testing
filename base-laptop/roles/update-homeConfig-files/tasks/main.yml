@@ -1,17 +1,20 @@
 ---
 
-- name: Inserting after specific line
+- name: Inserting after patterns in home config files
   blockinfile:
-    path: "{{ ansible_env.HOME }}/test.txt"
-    block: "{{ lookup('file', 'test.txt') }}"
-    marker: "<!-- {mark} Test Marker -->"
-    insertafter: "^alias"
-    backup: yes
+    path: "{{ item.path }}"
+    block: "{{ lookup('file', item.src_file) }}"
+    marker: "{{ item.marker }}"
+    insertafter: "{{ item.match_pattern }}"
+  with_items: "{{ home_files.after }}"
+  loop_control:
+    label: "Updating {{ item.path }}"
 
-
-# - name: Updating EOF test files
-#   blockinfile:
-#     path: "{{ ansible_env.HOME }}/test.txt"
-#     block: "{{ lookup('file', 'test.txt') }}"
-#     marker: "<!-- {mark} Test Marker -->"
-#     backup: yes
+- name: Inserting EOF in home config files
+  blockinfile:
+    path: "{{ item.path }}"
+    block: "{{ lookup('file', item.src_file) }}"
+    marker: "{{ item.marker}}"
+  with_items: "{{ home_files.EOF }}"
+  loop_control:
+    label: "Updating {{ item.path }}"
