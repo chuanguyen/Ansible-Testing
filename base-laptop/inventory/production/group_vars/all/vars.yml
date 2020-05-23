@@ -15,6 +15,9 @@ pacman_packages:
   - latte-dock
   - okular
   - peek
+  - python-pip
+  - python-setuptools
+  - python-virtualenv
   - spotify
   - thunderbird
   - veracrypt
@@ -31,3 +34,7 @@ aur_packages:
   - vivaldi-snapshot
   - vmware-workstation
   - xmind
+
+automation_pip_packages:
+  - gns3-server
+  - gns3-gui

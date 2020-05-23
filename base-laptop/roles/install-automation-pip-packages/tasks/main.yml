@@ -1,0 +1,15 @@
+---
+
+- name: Ensure pip requirements are installed
+  become: true
+  pacman:
+    name:
+      - python-pip
+      - python-setuptools
+      - python-virtualenv
+    update_cache: yes
+
+- name: Install required pip packages into virtualenv
+  pip:
+    name: "{{ automation_pip_packages }}"
+    virtualenv: "{{ ansible_env.HOME }}/automation/venv"
