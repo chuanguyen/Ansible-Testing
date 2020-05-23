@@ -1,2 +1,0 @@
-directories_to_create:
-  - "{{ ansible_env.HOME }}/automation"
