@@ -1,13 +1,13 @@
-# - include: "{{ ansible_distribution }}-install.yml"
+- include: "{{ ansible_distribution }}-install.yml"
 
-# - name: Copy custom smb.conf and replace existing system version
-#   become: true
-#   copy:
-#     src: smb.conf
-#     dest: /etc/samba/smb.conf
-#     mode: '0644'
-#     backup: yes
-#     validate: testparm %s
+- name: Copy custom smb.conf and replace existing system version
+  become: true
+  copy:
+    src: smb.conf
+    dest: /etc/samba/smb.conf
+    mode: '0644'
+    backup: yes
+    validate: testparm %s
 
 - name: Verify samba share folders exist
   file:
@@ -22,4 +22,4 @@
     state: restarted
   with_items:
     - smb.service
-    - nmb.service 
+    - nmb.service
