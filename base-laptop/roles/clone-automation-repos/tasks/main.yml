@@ -1,0 +1,16 @@
+- name: Verify the automation folder exists
+  file:
+    path: "{{ ansible_env.HOME }}/automation"
+    state: directory
+
+- name: Verify the GNS3 project folder exists
+  file:
+    path: "{{ ansible_env.HOME }}/GNS3/projects/GNS3-My-Projects"
+
+- name: Clone my project repos
+  git:
+    clone: yes
+    repo: "{{ item.repo }}"
+    dest: "{{ item.dest }}"
+    recursive: yes
+  with_items: "{{ automation_git_repos }}"

@@ -6,4 +6,4 @@
   gather_facts: true
 
   roles:
-    - update-homeConfig-files
+    - clone-automation-repos
