@@ -3,34 +3,3 @@
   pacman:
     name: "{{ packages_to_install }}"
     update_cache: yes
-
-- name: Create aur_builder user for password-less acccess with pacman
-  become: true
-  user:
-    name: aur_builder
-
-- name: Copy sudoer file for aur_builder to /etc/sudoer.d
-  become: true
-  copy:
-    src: 20-install-aur_builder
-    mode: 0440
-    dest: "/etc/sudoers.d/"
-
-- name: Install AUR packages
-  become: yes
-  become_user: aur_builder
-  aur:
-    name: "{{ aur_packages }}"
-
-- name: Remove sudoer file for aur_builder in /etc/sudoers.d
-  become: true
-  file:
-    path: "/etc/sudoers.d/20-install-aur_builder"
-    state: absent
-
-- name: Deletes aur_builder user
-  become: true
-  user:
-    name: aur_builder
-    remove: yes
-    state: absent
