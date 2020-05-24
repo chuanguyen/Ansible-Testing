@@ -1,6 +1,0 @@
-- name: Verifies samba package exists
-  become: true
-  apt:
-    name:
-      - samba
-    update_cache: yes

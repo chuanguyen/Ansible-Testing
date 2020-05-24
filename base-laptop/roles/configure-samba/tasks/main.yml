@@ -1,4 +1,9 @@
-- include: "{{ ansible_distribution }}-install.yml"
+- name: Ensure samba is installed
+  include_role:
+    name: install-system-packages
+  vars:
+    packages_to_install:
+      - samba
 
 - name: Copy custom smb.conf and replace existing system version
   become: true
