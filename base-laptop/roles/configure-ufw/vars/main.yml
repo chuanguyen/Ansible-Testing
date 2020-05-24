@@ -1,0 +1,25 @@
+ufw_rules:
+  - comment: "Opens port 445 for Samba"
+    rule: allow
+    delete: false
+    from_ip: any
+    to_ip: any
+    from_port: null
+    to_port: '445'
+    proto: any
+  - comment: "Opens UDP ports for Samba"
+    rule: allow
+    delete: false
+    from_ip: any
+    to_ip: any
+    from_port: null
+    to_port: '135,137:139'
+    proto: udp
+  - comment: "Opens TCP ports for Samba"
+    rule: allow
+    delete: false
+    from_ip: any
+    to_ip: any
+    from_port: null
+    to_port: '135,137:139'
+    proto: tcp
