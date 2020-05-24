@@ -6,4 +6,4 @@
   gather_facts: true
 
   roles:
-    - configure-ufw
+    - configure-kernel-parameters
