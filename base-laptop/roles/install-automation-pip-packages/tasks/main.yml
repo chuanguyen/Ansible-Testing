@@ -1,13 +1,13 @@
 ---
 
 - name: Ensure pip requirements are installed
-  become: true
-  pacman:
-    name:
+  include_role:
+    name: install-system-packages
+  vars:
+    packages_to_install:
       - python-pip
       - python-setuptools
       - python-virtualenv
-    update_cache: yes
 
 - name: Install required pip packages into virtualenv
   pip:
