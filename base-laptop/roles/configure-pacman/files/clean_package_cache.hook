@@ -1,0 +1,19 @@
+###
+# paccache is a built-in script that clears out packages cached by Pacman
+# Cached packages are useful for downgrading to a particular version of a package
+# so it isn't recommended to clear the entire cache
+# However, w/ paccache, the 3 most recent versions of the packages are kept by default
+###
+# Place this script in: /etc/pacman.d/hooks/
+# It will execute after every pacman operation
+
+[Trigger]
+Operation = Upgrade
+Operation = Install
+Operation = Remove
+Type = Package
+Target = *
+[Action]
+Description = Cleaning pacman cache...
+When = PostTransaction
+Exec = /usr/bin/paccache -r
