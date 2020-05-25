@@ -21,6 +21,7 @@
   with_items: "{{ samba_share_folders }}"
 
 - name: Restart samba fileshare services
+  become: true
   service:
     name: "{{ item }}"
     enabled: yes
