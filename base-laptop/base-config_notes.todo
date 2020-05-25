@@ -20,10 +20,9 @@ System:
   ✔ SMB shares & configuration files @done(2020-05-23 15:51) @project(System)
   ✔ UFW firewall @done(2020-05-23 21:14) @project(System)
   ✔ sysctl sysrq, oom killer, swappiness @done(2020-05-24 10:47) @project(System)
-  ☐ wlan service file (Toggles wifi off when wired)
   ☐ makepkg compression & multiprocessing
-  ☐ Scheduling monthly trim script
-  ☐ Bash autocomplete
+  ✔ Scheduling monthly trim script @done(2020-05-24 19:31) @project(System)
+  ✔ Bash autocomplete @done(2020-05-24 19:05) @project(System)
   ☐ sudoer file (Undervolting / AUR_Builder for Ansible)
 
 Media:

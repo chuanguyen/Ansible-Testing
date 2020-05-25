@@ -35,3 +35,7 @@ aur_packages:
   - vivaldi-snapshot
   - vmware-workstation
   - xmind
+
+system_services:
+  - smb.service
+  - fstrim.timer # Enables weekly TRIM operation

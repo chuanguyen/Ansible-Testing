@@ -1,0 +1,7 @@
+- name: Enable systemd services
+  become: true
+  service:
+    name: "{{ item }}"
+    enabled: true
+    state: started
+  with_items: "{{ system_services }}"
