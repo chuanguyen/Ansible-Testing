@@ -16,7 +16,7 @@ KDE:
 System:
   ✔ .bashrc & .profile @done(2020-05-23 14:36) @project(System)
   ☐ Add the usb wake disable service
-  ☐ Kensington mouse scripts
+  ✔ Kensington mouse scripts @done(2020-05-25 21:20) @project(System)
   ✔ SMB shares & configuration files @done(2020-05-23 15:51) @project(System)
   ✔ UFW firewall @done(2020-05-23 21:14) @project(System)
   ✔ sysctl sysrq, oom killer, swappiness @done(2020-05-24 10:47) @project(System)
@@ -24,6 +24,8 @@ System:
   ✔ Scheduling monthly trim script @done(2020-05-24 19:31) @project(System)
   ✔ Bash autocomplete @done(2020-05-24 19:05) @project(System)
   ☐ sudoer file (Undervolting / AUR_Builder for Ansible)
+  ☐ TLP settings
+  ✔ Create symlink for all files in .myScripts @done(2020-05-25 22:04) @project(System)
 
 Media:
   ☐ mpv config to control volume

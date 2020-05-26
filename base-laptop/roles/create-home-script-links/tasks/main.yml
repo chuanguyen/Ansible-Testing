@@ -1,0 +1,21 @@
+---
+
+- name: Verify .myScript repo folders exist
+  file:
+    path: "{{ ansible_env.HOME }}/bin/.myScripts"
+    state: directory
+
+- name: Find all script files
+  find:
+    path: "{{ ansible_env.HOME }}/bin/.myScripts/scripts"
+    recurse: true
+  register: result
+
+- name: Create symlinks for scripts into ~/bin
+  file:
+    src: "{{ item.path }}"
+    dest: "{{ ansible_env.HOME }}/bin/{{ item.path | basename }}"
+    state: link
+  with_items: "{{ result.files }}"
+  loop_control:
+    label: "{{ item.path }}"
