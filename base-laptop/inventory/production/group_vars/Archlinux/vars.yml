@@ -23,6 +23,7 @@ system_packages:
   - thunderbird
   - veracrypt
   - vim
+  - yakuake
   - yay
 
 aur_packages:
