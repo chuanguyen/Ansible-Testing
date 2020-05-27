@@ -1,6 +1,9 @@
 - name: Copy sysctl config to /etc/sysctl.d
   become: true
   copy:
-    src: 99-sysctl.conf
+    src: "{{ item }}"
     dest: /etc/sysctl.d
     mode: '0644'
+  with_fileglob: "files/*"
+  loop_control:
+    label: "{{ item | basename }}"
