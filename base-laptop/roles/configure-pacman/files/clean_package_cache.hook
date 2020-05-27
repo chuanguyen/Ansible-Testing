@@ -1,4 +1,4 @@
-###
+### Ansible managed file
 # paccache is a built-in script that clears out packages cached by Pacman
 # Cached packages are useful for downgrading to a particular version of a package
 # so it isn't recommended to clear the entire cache
