@@ -13,7 +13,7 @@
     name: "tlp"
     enabled: yes
     state: started
-#
+
 - name: Enable TLP w/out rebooting system
   become: true
   shell:
