@@ -2,20 +2,11 @@ Completed:
 ✔ Git automation repo cloning @done(2020-05-23 12:46)
 ✔ Installing system, pip, and AUR packages  @done(2020-05-23 12:47)
 
-
-Prerequisites:
-  ☐ Must have already cloned the .myconfig & .myscripts repo
-
-Initial:
-  ☐ Update pacman cache
-  ☐ Verify .myconfig & .myscripts exist
-
 KDE:
   ☐ Copy konsole themes
 
 System:
   ✔ .bashrc & .profile @done(2020-05-23 14:36) @project(System)
-  ☐ Add the usb wake disable service
   ✔ Kensington mouse scripts @done(2020-05-25 21:20) @project(System)
   ✔ SMB shares & configuration files @done(2020-05-23 15:51) @project(System)
   ✔ UFW firewall @done(2020-05-23 21:14) @project(System)
@@ -23,18 +14,8 @@ System:
   ☐ makepkg compression & multiprocessing
   ✔ Scheduling monthly trim script @done(2020-05-24 19:31) @project(System)
   ✔ Bash autocomplete @done(2020-05-24 19:05) @project(System)
-  ☐ sudoer file (Undervolting / AUR_Builder for Ansible)
-  ☐ TLP settings
+  ✔ TLP settings @done(2020-05-26 22:22) @project(System)
   ✔ Create symlink for all files in .myScripts @done(2020-05-25 22:04) @project(System)
 
-Media:
-  ☐ mpv config to control volume
-  ☐ Thunderbird session json
-  ☐ Vivaldi libffmpeg.so & libwidevinecdm.so
-  ☐ xMind config.ini
-  ☐ Dropboxstarter script
-  ☐ PDF & PNG conversion script (Requires ImageMagick)
-
 Lenovo Yoga 920:
-  ☐ Undervolting scripts & services
   ✔ Blacklist file for wifi access @done(2020-05-23 14:26) @project(Lenovo Yoga 920)
