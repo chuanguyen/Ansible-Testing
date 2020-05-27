@@ -3,7 +3,7 @@ Completed:
 ✔ Installing system, pip, and AUR packages  @done(2020-05-23 12:47)
 
 KDE:
-  ☐ Copy konsole themes
+  ✔ Copy konsole themes @done(2020-05-27 07:37) @project(KDE)
 
 System:
   ✔ .bashrc & .profile @done(2020-05-23 14:36) @project(System)
@@ -11,7 +11,7 @@ System:
   ✔ SMB shares & configuration files @done(2020-05-23 15:51) @project(System)
   ✔ UFW firewall @done(2020-05-23 21:14) @project(System)
   ✔ sysctl sysrq, oom killer, swappiness @done(2020-05-24 10:47) @project(System)
-  ☐ makepkg compression & multiprocessing
+  ✔ makepkg compression & multiprocessing @done(2020-05-27 07:57) @project(System)
   ✔ Scheduling monthly trim script @done(2020-05-24 19:31) @project(System)
   ✔ Bash autocomplete @done(2020-05-24 19:05) @project(System)
   ✔ TLP settings @done(2020-05-26 22:22) @project(System)
