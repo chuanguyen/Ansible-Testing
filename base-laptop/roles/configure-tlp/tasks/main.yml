@@ -1,0 +1,28 @@
+---
+
+- name: Ensure tlp is installed
+  include_role:
+    name: install-system-packages
+  vars:
+    packages_to_install:
+      - tlp
+
+- name: Start tlp service
+  become: true
+  service:
+    name: "tlp"
+    enabled: yes
+    state: started
+#
+- name: Enable TLP w/out rebooting system
+  become: true
+  shell:
+    cmd: "tlp start"
+  register: output
+
+- name: Copy custom tlp configuration file to /etc/tlp.d
+  become: true
+  copy:
+    src: 10-my-tlp.conf
+    dest: /etc/tlp.d
+    mode: '0644'
