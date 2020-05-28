@@ -1,0 +1,9 @@
+---
+
+- name: Testing setup playbook
+  hosts: localhost
+  connection: local
+  gather_facts: true
+
+  roles:
+    - configure-systemd-services
