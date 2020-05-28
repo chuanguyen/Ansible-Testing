@@ -1,3 +1,5 @@
 automation_pip_packages:
   - gns3-server
   - gns3-gui
+
+system_users: "{{ vault_system_users }}"

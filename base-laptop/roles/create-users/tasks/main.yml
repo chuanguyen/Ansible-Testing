@@ -1,0 +1,10 @@
+---
+
+- name: Create users on system
+  become: true
+  user:
+    name: "{{ item.name }}"
+    password: "{{ item.password }}"
+    create_home: "{{ item.create_home }}"
+    comment: "{{ item.comment }}"
+  with_items: "{{ system_users }}"
