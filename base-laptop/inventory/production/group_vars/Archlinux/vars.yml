@@ -40,3 +40,4 @@ aur_packages:
 system_services:
   - smb.service
   - fstrim.timer # Enables weekly TRIM operation
+  - tlp.service

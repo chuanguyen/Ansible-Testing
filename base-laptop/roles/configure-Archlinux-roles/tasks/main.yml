@@ -1,6 +1,9 @@
 ---
 
 - include_role:
+    name: configure-makepkg
+
+- include_role:
     name: configure-pacman
 
 - include_role:
