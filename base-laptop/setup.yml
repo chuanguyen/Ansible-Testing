@@ -6,4 +6,20 @@
   gather_facts: true
 
   roles:
+    # System-related
+    - create-users
+    - blacklist-kernel-modules
     - configure-kernel-parameters
+    - install-system-packages
+    - configure-Archlinux-roles
+    - configure-systemd-services
+    - configure-samba
+    - configure-tlp
+    - configure-ufw
+    # User-related
+    - install-automation-pip-packages
+    - clone-my-repos
+    - create-home-script-links
+    - update-homeConfig-files
+    # KDE-related
+    - configure-konsole
