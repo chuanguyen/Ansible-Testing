@@ -21,7 +21,11 @@
 
 - name: Pause to ensure all proceses using aur_builder ends
   pause:
-    seconds: 15
+    seconds: 10
+
+- name: Kill all processes owned by the aur_builder
+  become: true
+  shell: "killall -u aur_builder"
 
 - name: Remove sudoer file for aur_builder in /etc/sudoers.d
   become: true
