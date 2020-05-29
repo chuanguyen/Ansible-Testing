@@ -6,6 +6,7 @@ KDE:
   ✔ Copy konsole themes @done(2020-05-27 07:37) @project(KDE)
 
 System:
+  ☐ Configure makepkg role to properly set the make parameters
   ✔ Create user accounts @done(2020-05-28 07:34) @project(System)
   ✔ .bashrc & .profile @done(2020-05-23 14:36) @project(System)
   ✔ Kensington mouse scripts @done(2020-05-25 21:20) @project(System)
