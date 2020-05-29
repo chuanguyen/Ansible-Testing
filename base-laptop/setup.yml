@@ -22,5 +22,6 @@
     - install-automation-pip-packages
     - create-home-script-links
     - update-homeConfig-files
+    - configure-atom
     # KDE-related
     - configure-konsole
