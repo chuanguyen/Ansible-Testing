@@ -21,6 +21,7 @@ system_packages:
   - thunderbird
   - veracrypt
   - vim
+  - ufw
   - yakuake
   - yay
 
