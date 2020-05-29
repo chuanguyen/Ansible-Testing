@@ -1,4 +1,7 @@
 - name: Copy user makepkg.conf to profile
+  become: true
   copy:
-    src: ".makepkg.conf"
-    dest: "{{ ansible_env.HOME }}/"
+    src: "makepkg.conf"
+    dest: "/etc/makepkg.conf"
+    mode: 0644
+    backup: yes
