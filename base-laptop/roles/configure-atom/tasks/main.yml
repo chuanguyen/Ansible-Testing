@@ -16,7 +16,7 @@
 - name: Copy atom packages list
   copy:
     src: packages.txt
-    dest: "{{ ansible_env.HOME }}/.atom"
+    dest: "{{ ansible_env.HOME }}/.atom/"
 
 - name: Install atom packages
   shell: "apm install --packages-file {{ ansible_env.HOME }}/.atom/packages.txt"
