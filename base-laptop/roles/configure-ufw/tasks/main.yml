@@ -1,4 +1,12 @@
 ---
+
+- name: Ensure ufw is installed
+  include_role:
+    name: install-system-packages
+  vars:
+    packages_to_install:
+      - ufw
+
 - name: Ensure UFW is enabled
   become: true
   ufw:
