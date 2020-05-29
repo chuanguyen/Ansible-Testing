@@ -1,0 +1,20 @@
+---
+
+- name: Ensure atom is installed
+  include_role:
+    name: install-system-packages
+  vars:
+    packages_to_install:
+      - atom
+
+- name: Copy atom configuration file
+  copy:
+    src: config.cson
+    dest: "{{ ansible_env.HOME}}/.atom/"
+
+- name: Install atom packages
+  shell: "apm install 'cat {{ packages.list }}'"
+  register: output
+
+- debug:
+    msg: "{{ output }}"

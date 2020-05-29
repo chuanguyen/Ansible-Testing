@@ -1,0 +1,16 @@
+"*":
+  core:
+    telemetryConsent: "no"
+  editor:
+    showInvisibles: true
+    softWrap: true
+  "exception-reporting":
+    userId: "0dd93988-6b08-4275-b185-474b9ab54c86"
+  "spell-check":
+    locales: [
+      "en-US"
+    ]
+  "tree-view":
+    hideVcsIgnoredFiles: true
+  welcome:
+    showOnStartup: false
