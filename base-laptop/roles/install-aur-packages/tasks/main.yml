@@ -19,6 +19,10 @@
     name: "{{ aur_packages }}"
     skip_pgp_check: true
 
+- name: Pause to ensure all proceses using aur_builder ends
+  pause:
+    seconds: 5
+
 - name: Remove sudoer file for aur_builder in /etc/sudoers.d
   become: true
   file:
