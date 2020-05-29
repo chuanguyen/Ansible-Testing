@@ -17,6 +17,7 @@
   become_user: aur_builder
   aur:
     name: "{{ aur_packages }}"
+    skip_pgp_check: true
 
 - name: Remove sudoer file for aur_builder in /etc/sudoers.d
   become: true
