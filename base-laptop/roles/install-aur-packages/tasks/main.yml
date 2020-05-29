@@ -23,9 +23,18 @@
   pause:
     seconds: 10
 
-- name: Kill all processes owned by the aur_builder
+- name: Find whether aur_builder has any processes running
+  shell: "ps -u aur_builder | awk '{if(NR>1)print $1 }'"
+  register: result
+
+- name: Set fact for aur_builder PIDs
+  set_fact:
+    aur_builder_pids: "{{ result.stdout_lines }}"
+
+- name: Kill all PIDs belonging to aur_builder if they exist
   become: true
   shell: "killall -u aur_builder"
+  when: aur_builder_pids | length>0
 
 - name: Remove sudoer file for aur_builder in /etc/sudoers.d
   become: true
