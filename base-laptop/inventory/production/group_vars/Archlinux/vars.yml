@@ -26,7 +26,6 @@ system_packages:
   - yay
 
 aur_packages:
-  - bluez-utils-compat
   - dropbox
   - gdrive
   - google-chrome
