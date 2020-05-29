@@ -6,6 +6,8 @@
   gather_facts: true
 
   roles:
+    # User-related
+    - clone-my-repos # Executed at the beginning as credential prompt for private repos
     # System-related
     - create-users
     - blacklist-kernel-modules
@@ -18,7 +20,6 @@
     - configure-ufw
     # User-related
     - install-automation-pip-packages
-    - clone-my-repos
     - create-home-script-links
     - update-homeConfig-files
     # KDE-related
