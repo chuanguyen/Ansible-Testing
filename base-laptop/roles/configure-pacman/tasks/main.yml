@@ -1,6 +1,11 @@
+- name: Verify pacman hook folder exists
+  file:
+    path: "/etc/pacman.d"
+    state: directory
+
 - name: Copy pacman hook file to clean up pacman cache after each run
   become: true
   copy:
     src: clean_package_cache.hook
-    dest: /etc/pacman.d/hooks
+    dest: /etc/pacman.d/hooks/
     mode: '0644'
