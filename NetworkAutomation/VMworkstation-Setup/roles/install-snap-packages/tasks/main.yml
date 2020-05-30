@@ -1,0 +1,13 @@
+---
+
+- name: Verify snap is installed
+  include_role:
+    name: install-system-packages
+  vars:
+    packages_to_install:
+      - snapd
+
+- name: Install snap packages
+  snap:
+    name: "{{ system_snap_packages }}"
+    state: present
