@@ -9,5 +9,6 @@
   roles:
     - create-directories
     - install-system-packages
+    - install-snap-packages
     - install-pip-packages
     - install-docker-ce
