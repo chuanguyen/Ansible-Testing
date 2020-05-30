@@ -13,6 +13,7 @@ system_packages:
   - snapd
   - software-properties-common
   - virtualenv
+  - xz-utils
 
 system_snap_packages:
   - postman
