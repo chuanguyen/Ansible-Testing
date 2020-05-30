@@ -1,5 +1,5 @@
 - name: Install system packages
   become: true
   apt:
-    name: "{{ apt_packages }}"
+    name: "{{ packages_to_install }}"
     update_cache: yes
