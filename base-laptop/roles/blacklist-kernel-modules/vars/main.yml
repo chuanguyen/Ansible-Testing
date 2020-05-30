@@ -1,3 +1,5 @@
 blacklist_modules:
   - module: ideapad_laptop
     description: "Blacklisted to ensure wifi works on Lenovo systems"
+  - module: kvm_intel
+    description: "Blacklisted to ensure no conflicting hypervisors for Vagrant"
