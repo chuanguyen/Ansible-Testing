@@ -1,5 +1,5 @@
 - name: Filter out latest Vagrant version
-  shell: curl https://releases.hashicorp.com/vagrant/ | grep href | grep -v '\.\.' | head -1 | grep -o "/[0-9]\..*.[0-9]/" | grep -o "[0-9]\..*.[0-9]"
+  shell: curl https://releases.hashicorp.com/vagrant/ | grep -o "/[0-9]\..*.[0-9]/" | grep -o "[0-9]\..*.[0-9]" | head -1
   register: result
   args:
     warn: false
