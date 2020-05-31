@@ -23,5 +23,6 @@
     - create-home-script-links
     - update-homeConfig-files
     - configure-atom
+    - configure-git
     # KDE-related
     - configure-konsole

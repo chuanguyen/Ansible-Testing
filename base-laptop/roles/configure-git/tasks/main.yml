@@ -1,0 +1,7 @@
+---
+
+- name: Copy user git configuration
+  copy:
+    src: .gitconfig
+    dest: "{{ ansible_env.HOME }}/"
+    backup: yes
