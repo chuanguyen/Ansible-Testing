@@ -12,8 +12,19 @@ system_packages:
   - python3-setuptools
   - snapd
   - software-properties-common
+  - virtualbox-guest-dkms
+  - virtualbox-guest-utils
+  - virtualbox-guest-x11"
   - virtualenv
   - xz-utils
+  # Ubuntu-desktop requirements
+  - firefox
+  - gdm3
+  - gnome-terminal
+  - menu
+  - ubuntu-desktop
+  - xorg
+  - xterm
 
 system_snap_packages:
   - postman
