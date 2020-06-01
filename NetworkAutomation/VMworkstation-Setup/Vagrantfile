@@ -88,7 +88,4 @@ Vagrant.configure("2") do |config|
     ansible.playbook = "testing.yml"
   end
 
-  # Install xfce and virtualbox additions
-  #config.vm.provision "shell", inline: "sudo apt-get update"
-  #config.vm.provision "shell", inline: "sudo apt-get install -y xorg xterm gdm3 ubuntu-desktop menu firefox --no-install-recommends"
 end
