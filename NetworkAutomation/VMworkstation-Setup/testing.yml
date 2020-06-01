@@ -1,9 +1,13 @@
 ---
 
 - name: Testing
-  hosts: localhost
-  connection: local
+  hosts: all
+  ### Executing locally for testing
+  # hosts: localhost
+  # connection: local
   gather_facts: true
 
   roles:
-    - install-snap-packages
+    - install-system-packages
+    - install-pip-packages
+    - create-directories

@@ -1,9 +1,10 @@
 ---
 
 - name: Baseline setup
-  hosts: localhost
-  become: false
-  connection: local
+  hosts: all
+  ### Executing locally for testing
+  # hosts: localhost
+  # connection: local
   gather_facts: true
 
   roles:
