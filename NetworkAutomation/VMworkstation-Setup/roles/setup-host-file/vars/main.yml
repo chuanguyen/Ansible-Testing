@@ -1,4 +1,4 @@
-home_files:
+host_file:
   BOF:
     -
   before:
@@ -6,9 +6,9 @@ home_files:
   after:
     -
   EOF:
-    - src_file: ".bashrc-EOF"
+    - src_file: "hosts-EOF"
       marker: "### {mark} .bashrc EOF ###"
-      path: "{{ ansible_env.HOME }}/.bashrc"
+      path: "/etc/hosts"
 
 custom_hosts:
   r1: "192.168.100.201"

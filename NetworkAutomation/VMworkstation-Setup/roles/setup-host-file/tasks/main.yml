@@ -1,12 +1,15 @@
 ---
 
 - name: Create template for /etc/hosts
+  template:
+    src: hosts.j2
+    dest: "{{ role_path }}/files/hosts-EOF"
 
 - name: Inserting EOF /etc/hosts
   blockinfile:
     path: "{{ item.path }}"
     block: "{{ lookup('file', item.src_file) }}"
     marker: "{{ item.marker}}"
-  with_items: "{{ home_files.EOF }}"
+  with_items: "{{ host_file.EOF }}"
   loop_control:
     label: "Updating {{ item.path }}"
