@@ -1,0 +1,11 @@
+home_files:
+  BOF:
+    -
+  before:
+    -
+  after:
+    - 
+  EOF:
+    - src_file: ".bashrc-EOF"
+      marker: "### {mark} .bashrc EOF ###"
+      path: "{{ ansible_env.HOME }}/.bashrc"

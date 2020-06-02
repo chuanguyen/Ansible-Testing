@@ -1,0 +1,5 @@
+# Arch clearing the lock on caps-lock
+xmodmap -e "clear Lock"
+
+# Modify XKB to remap keys
+xmodmap -e "keycode 22 = Caps_Lock"
