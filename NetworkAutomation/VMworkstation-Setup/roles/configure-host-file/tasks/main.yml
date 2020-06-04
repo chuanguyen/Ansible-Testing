@@ -6,6 +6,7 @@
     dest: "{{ role_path }}/files/hosts-EOF"
 
 - name: Inserting EOF /etc/hosts
+  become: true
   blockinfile:
     path: "{{ item.path }}"
     block: "{{ lookup('file', item.src_file) }}"
