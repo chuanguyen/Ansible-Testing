@@ -13,7 +13,9 @@
     - blacklist-kernel-modules
     - configure-kernel-parameters
     - install-system-packages
+    - install-vagrant
     - configure-Archlinux-roles
+    # Services
     - configure-systemd-services
     - configure-samba
     - configure-tlp
