@@ -1,0 +1,6 @@
+Post-install:
+  ☐ KDE
+    ☐ Configure keyboard layout
+    ☐ Import keyboard shortcut schemas
+  ☐ Install Thunderbird addons
+  ☐ Install & configure printer drivers
