@@ -1,3 +1,0 @@
-ansible
-pyats[full]
-napalm-ansible
