@@ -27,4 +27,4 @@
     - configure-atom
     - configure-git
     # KDE-related
-    - configure-konsole
+    - configure-konsole-yakuake
