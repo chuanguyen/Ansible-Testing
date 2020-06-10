@@ -1,0 +1,11 @@
+<gui name="konsole" version="1">
+  <ActionProperties>
+    <Action shortcut="Ctrl+W" name="close-session"/>
+    <Action shortcut="Ctrl+Shift+F" name="open-browser"/>
+    <Action shortcut="Ctrl+T" name="new-tab"/>
+    <Action shortcut="Ctrl+D" name="clone-tab"/>
+    <Action shortcut="Ctrl+N" name="new-window"/>
+    <Action shortcut="Ctrl+Tab" name="next-tab"/>
+    <Action shortcut="Ctrl+Shift+Tab" name="previous-tab"/>
+  </ActionProperties>
+</gui>

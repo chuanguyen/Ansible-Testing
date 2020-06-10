@@ -1,0 +1,14 @@
+[Desktop Entry]
+DefaultProfile=MyProfile.profile
+
+[Favorite Profiles]
+Favorites=MyProfile.profile
+
+[MainWindow]
+Height 1080=512
+State=AAAA/wAAAAD9AAAAAAAAA+MAAAHiAAAABAAAAAQAAAAIAAAACPwAAAAA
+ToolBarsMovable=Disabled
+Width 1920=995
+
+[Shortcut Schemes]
+Current Scheme=MyShortcut

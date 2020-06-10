@@ -1,0 +1,41 @@
+---
+
+- name: Verify the Konsole config folder exists
+  file:
+    path: "{{ ansible_env.HOME }}/.local/share/{{ item }}"
+    state: directory
+  with_items:
+    - konsole
+    - konsole/shortcuts
+
+- name: Copy Konsole themes and profile
+  copy:
+    src: "{{ item }}"
+    dest: "{{ ansible_env.HOME }}/.local/share/konsole"
+  with_fileglob: "files/konsole/root/*"
+  loop_control:
+    label: "{{ item | basename }}"
+
+- name: Copy Konsole shortcuts
+  copy:
+    src: "{{ item }}"
+    dest: "{{ ansible_env.HOME }}/.local/share/konsole/shortcuts"
+  with_fileglob: "files/konsole/shortcuts/*"
+  loop_control:
+    label: "{{ item | basename }}"
+
+- name: Copy konsolerc file
+  copy:
+    src: "{{ item }}"
+    dest: "{{ ansible_env.HOME }}/.config/"
+  with_fileglob: "files/konsole/config/*"
+  loop_control:
+    label: "{{ item | basename }}"
+
+- name: Copy yakuakerc file
+  copy:
+    src: "{{ item }}"
+    dest: "{{ ansible_env.HOME }}/.config/"
+  with_fileglob: "files/yakuake/*"
+  loop_control:
+    label: "{{ item | basename }}"
