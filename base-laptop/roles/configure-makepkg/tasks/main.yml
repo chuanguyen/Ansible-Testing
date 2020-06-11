@@ -1,4 +1,4 @@
-- name: Copy user makepkg.conf to profile
+- name: Copy system makepkg.conf
   become: true
   copy:
     src: "makepkg.conf"
