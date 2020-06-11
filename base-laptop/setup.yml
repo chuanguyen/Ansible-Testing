@@ -26,5 +26,6 @@
     - update-homeConfig-files
     - configure-atom
     - configure-git
+    - configure-latte-dock
     # KDE-related
     - configure-konsole-yakuake

@@ -1,0 +1,39 @@
+[ActionsWidget]
+ColumnState=AAAA/wAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAdAAAAACAQAAAQAAAAAAAAAAAAAAAGT/////AAAAgQAAAAAAAAACAAAA+gAAAAEAAAAAAAAA1gAAAAEAAAAAAAAD6AAAAABk
+
+[ConfigDialog]
+Height 1600=516
+Width 2560=595
+
+[General]
+Number of Actions=0
+
+[KFileDialog Settings]
+Recent Files[$e]=file:$HOME/.myConfigFiles/latte-dock/My-Latte-Layout.layout.latte
+Recent URLs[$e]=file:$HOME/.myConfigFiles/latte-dock/,file:$HOME/Downloads/
+listViewIconSize=22
+
+[PlasmaThemeExtended]
+outlineWidth=1
+
+[ScreenConnectors]
+10=eDP1
+11=DP1
+12=DP2
+
+[UniversalSettings]
+badges3DStyle=false
+canDisableBorders=false
+currentLayout=My-Latte-Layout
+downloadWindowSize=800,550
+lastNonAssignedLayout=My-Latte-Layout
+launchers=
+layoutsColumnWidths=83,193,49,0,49
+layoutsWindowSize=700,613
+memoryUsage=1
+metaPressAndHoldEnabled=true
+mouseSensitivity=2
+screenTrackerInterval=2500
+showInfoWindow=true
+unifiedGlobalShortcuts=true
+version=2

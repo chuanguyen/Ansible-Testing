@@ -1,0 +1,21 @@
+---
+
+- name: Verify the latte layout folder exists
+  file:
+    path: "{{ ansible_env.HOME }}/.config/latte"
+    state: directory
+
+- name: Copy lattedockrc file
+  copy:
+    src: "lattedockrc"
+    dest: "{{ ansible_env.HOME }}/.config/"
+    mode: 0600
+
+- name: Copy latte-dock layouts
+  copy:
+    src: "{{ item }}"
+    dest: "{{ ansible_env.HOME }}/.config/latte/"
+    mode: 0644
+  with_fileglob: "files/layouts/*"
+  loop_control:
+    label: "{{ item | basename }}"
