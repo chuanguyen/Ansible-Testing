@@ -2,5 +2,7 @@ Post-install:
   ☐ KDE
     ☐ Configure keyboard layout
     ☐ Import keyboard shortcut schemas
+  ☐ Kvantum:
+    ☐  Install theme via kvantum manager
   ☐ Install Thunderbird addons
   ☐ Install & configure printer drivers

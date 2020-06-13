@@ -11,6 +11,7 @@ system_packages:
   - gparted
   - i7z
   - kdenlive
+  - kvantum-manjaro
   - latte-dock
   - okular
   - peek

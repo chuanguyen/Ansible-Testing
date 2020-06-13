@@ -30,3 +30,4 @@
     - configure-latte-dock
     # KDE-related
     - configure-konsole-yakuake
+    - configure-kvantum
