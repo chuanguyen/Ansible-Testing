@@ -1,0 +1,21 @@
+---
+
+- name: Ensure kvantum-manjaro is installed
+  include_role:
+    name: install-system-packages
+  vars:
+    packages_to_install:
+      - kvantum-manjaro
+
+- name: Verify kvantum theme folder exists
+  file:
+    path: "{{ ansible_env.HOME }}/kvantum"
+    state: directory
+
+- name: Extract kvantum thmemes to theme folder
+  unarchive:
+    src: "{{ item }}"
+    dest: "{{ ansible_env.HOME }}/kvantum"
+  with_fileglob: "files/*"
+  loop_control:
+    label: "{{ item | basename }}"
