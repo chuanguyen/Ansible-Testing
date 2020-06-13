@@ -1,2 +1,3 @@
 alias auracle_update='auracle sync | cut -f1 -d " " | xargs -n 1 auracle clone'
 alias auracle_upgrade='ls | xargs -n 1 -I{} sh -c "cd {} && sudo pacman -U *.pkg.tar.xz --noconfirm && cd .."'
+alias yay='yay --aur'
