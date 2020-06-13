@@ -1,7 +1,7 @@
 ---
 
 - name: "Retrieve Genie parsed info"
-  hosts: R1
+  hosts: device_roles_network_access
   connection: "{{ ansible_connection }}"
   gather_facts: no
 
