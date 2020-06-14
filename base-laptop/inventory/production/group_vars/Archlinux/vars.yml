@@ -24,6 +24,7 @@ system_packages:
   - vim
   - ufw
   - unzip
+  - virtualbox
   - yakuake
   - yay
 
@@ -36,7 +37,6 @@ aur_packages:
   - kazam
   - spotify
   - vivaldi-snapshot
-  - vmware-workstation
   - xmind
 
 system_services:
