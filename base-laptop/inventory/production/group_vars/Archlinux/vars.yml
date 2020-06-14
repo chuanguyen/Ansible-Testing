@@ -23,6 +23,7 @@ system_packages:
   - veracrypt
   - vim
   - ufw
+  - unzip
   - yakuake
   - yay
 
