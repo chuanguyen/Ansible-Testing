@@ -8,6 +8,7 @@
       - snapd
 
 - name: Install snap packages
+  become: true
   snap:
     name: "{{ system_snap_packages }}"
     state: present
