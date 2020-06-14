@@ -1,13 +1,3 @@
-- name: Ensure xMind prerequisites are installed
-  include_role:
-    name: install-system-packages
-  vars:
-    packages_to_install:
-      - jre8-openjdk
+---
 
-- name: Verify current default java version used
-  shell: archlinux-java status
-  register: output
-
-- debug:
-    msg: "{{ output }}"
+- include: "{{ ansible_distribution }}-xmind.yml"

@@ -1,0 +1,23 @@
+---
+
+- name: Ensure xMind prerequisites are installed
+  include_role:
+    name: install-system-packages
+  vars:
+    packages_to_install:
+      - jre8-openjdk
+
+- name: Retrieve output of current default java version used
+  shell: archlinux-java status
+  register: output
+
+- name: Retrieve current default java version
+  set_fact:
+    java_default: "{{ item.split() }}"
+  with_items: "{{ output.stdout_lines }}"
+  when: "item | regex_search('(default)')"
+
+- name: Configure jre8-openjdk as default java version
+  become: True
+  shell: "archlinux-java set java-8-openjdk/jre"
+  changed_when: "java_default[0] != 'java-8-openjdk/jre'"

@@ -28,6 +28,7 @@
     - configure-atom
     - configure-git
     - configure-latte-dock
+    - configure-xmind
     # KDE-related
     - configure-konsole-yakuake
     - configure-kvantum
