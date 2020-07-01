@@ -12,6 +12,7 @@ system_packages:
   - i7z
   - jre8-openjdk
   - kdenlive
+  - kid3
   - kvantum-manjaro
   - latte-dock
   - okular
@@ -36,10 +37,11 @@ aur_packages:
   - gyazo
   - iscan-plugin-ds-30
   - kazam
-  - postman
+  - postman # May error out due to problems w/ package
   - spotify
   - vivaldi-snapshot
   - xmind
+  - xnviewmp
 
 system_services:
   - fstrim.timer # Enables weekly TRIM operation
