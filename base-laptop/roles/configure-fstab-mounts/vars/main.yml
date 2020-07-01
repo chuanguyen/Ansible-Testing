@@ -1,0 +1,8 @@
+---
+
+# Defines network share and associated mount point
+fstab_mount_dirs:
+  home: "/mnt/{{ family_nas_hostname }}/home"
+  Multimedia: "/mnt/{{ family_nas_hostname }}/Multimedia"
+  Download: "/mnt/{{ family_nas_hostname }}/Download"
+  Public: "/mnt/{{ family_nas_hostname }}/Public"

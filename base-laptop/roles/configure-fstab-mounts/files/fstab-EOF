@@ -1,3 +1,0 @@
-//family-nas-001.local/home               /mnt/family-nas-001/home              cifs    defaults,username=calvin,uid=1000,gid=1000 0 0
-//family-nas-001.local/Multimedia         /mnt/family-nas-001/Multimedia        cifs    defaults,username=calvin,uid=1000,gid=1000 0 0
-//family-nas-001.local/Download           /mnt/family-nas-001/Download          cifs    defaults,username=calvin,uid=1000,gid=1000 0 0
