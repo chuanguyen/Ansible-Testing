@@ -1,0 +1,8 @@
+---
+
+- name: Inserting EOF in /etc/fstab
+  become: True
+  blockinfile:
+    path: "/etc/fstab"
+    block: "{{ lookup('file', 'fstab-EOF') }}"
+    marker: "### {mark} /etc/fstab EOF ###"
