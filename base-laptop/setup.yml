@@ -17,7 +17,6 @@
     - configure-Archlinux-roles
     # Services
     - configure-systemd-services
-    - configure-samba
     - configure-tlp
     - configure-ufw
     # User-related
