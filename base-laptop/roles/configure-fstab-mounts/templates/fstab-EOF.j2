@@ -1,3 +1,3 @@
 {% for net_share,mount in fstab_mount_dirs.items() %}
-//{{ family_nas_FQDN }}/{{ net_share }}               {{ mount }}              cifs    defaults,username={{ ansible_user_id }},uid={{ ansible_user_uid }},gid={{ ansible_user_gid }},credentials={{ ansible_env.HOME }}/.smbcredentials 0 0
+//{{ family_nas_FQDN }}/{{ net_share }}               {{ mount }}              cifs    defaults,username={{ ansible_user_id }},uid={{ ansible_user_uid }},gid={{ ansible_user_gid }},credentials={{ ansible_env.HOME }}/.smbcredentials,noauto,x-systemd.automount,x-systemd.idle-timeout=1min,_netdev 0 0
 {% endfor %}
