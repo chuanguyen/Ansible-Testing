@@ -1,0 +1,50 @@
+[$Version]
+update_info=smb4k_3_0_0.upd:Smb4K_3.0.0
+
+[Authentication]
+UseDefaultLogin=false
+UseWallet=false
+
+[BookmarkDialog]
+GroupCompletion=
+Height 1600=384
+LabelCompletion=home,Multimedia,Download,Public
+Width 2560=400
+
+[BookmarkEditor]
+GroupCompletion=
+Height 1600=381
+IPCompletion=
+LabelCompletion=
+LoginCompletion=
+Width 2560=274
+
+[ConfigDialog]
+Height 1600=600
+Width 2560=813
+
+[MainWindow]
+State=AAAA/wAAAAD9AAAAAQAAAAAAAAMgAAAB8fwCAAAAAfwAAABQAAAB8QAAAI4BAAAd+gAAAAECAAAAAvsAAAAwAE4AZQB0AHcAbwByAGsAQgByAG8AdwBzAGUAcgBEAG8AYwBrAFcAaQBkAGcAZQB0AQAAAAD/////AAAAcAD////7AAAAKABTAGgAYQByAGUAcwBWAGkAZQB3AEQAbwBjAGsAVwBpAGQAZwBlAHQBAAAAAP////8AAABwAP///wAAAAAAAAHxAAAABAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAWAG0AYQBpAG4AVABvAG8AbABCAGEAcgEAAAAA/////wAAAAAAAAAA
+ToolBarsMovable=Disabled
+
+[MountDialog]
+Height 1600=291
+IPAddressCompletion=
+ShareNameCompletion=
+Width 2560=421
+WorkgroupCompletion=WORKGROUP
+
+[Mounting]
+ForceLowerCaseSubdirs=true
+ForceUnmountInaccessible=true
+UnmountSharesOnExit=true
+
+[NetworkBrowserPart]
+ColumnPositionComment=3
+ColumnPositionIP=2
+ColumnPositionNetwork=0
+ColumnPositionType=1
+SearchItemCompletion=
+
+[Notification Messages]
+DockToSystemTrayInfo=false

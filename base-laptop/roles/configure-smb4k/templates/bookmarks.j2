@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bookmarks version="2.0">
+{% for share in network_shares %}
+    <bookmark profile="" group="{{ family_nas_hostname }}">
+        <workgroup>{{ smb_domain }}</workgroup>
+        <url>smb://{{ family_nas_FQDN }}/{{ share }}</url>
+        <login>{{ smb_username }}</login>
+        <ip></ip>
+        <label>{{ share }}</label>
+    </bookmark>
+{% endfor %}
+</bookmarks>

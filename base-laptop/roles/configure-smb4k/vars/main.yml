@@ -1,0 +1,8 @@
+---
+
+# Defines network share
+network_shares:
+  - "Multimedia"
+  - "Download"
+  - "Public"
+  - "home"

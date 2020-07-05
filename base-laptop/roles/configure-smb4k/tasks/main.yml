@@ -1,0 +1,21 @@
+---
+
+- name: Generate smb4k bookmarks comtent
+  template:
+    src: bookmarks.j2
+    dest: "{{ role_path }}/files/bookmarks.xml"
+
+- name: Copy bookmarks.xml to smb4k config location
+  copy:
+    src: bookmarks.xml
+    dest: "{{ ansible_env.HOME }}/.local/share/smb4k/"
+
+- name: Remove the generated bookmarks.xml file
+  file:
+    path: "{{ role_path }}/files/bookmarks.xml"
+    state: absent
+
+- name: Copy smb4krc configuration file
+  copy:
+    src: smb4krc
+    dest: "{{ ansible_env.HOME }}/.config/"
