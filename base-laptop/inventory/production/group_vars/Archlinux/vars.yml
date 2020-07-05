@@ -21,6 +21,7 @@ system_packages:
   - python-setuptools
   - python-virtualenv
   - samba
+  - smb4k
   - thunderbird
   - veracrypt
   - vim
