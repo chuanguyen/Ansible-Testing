@@ -13,7 +13,6 @@
     - create-users
     - blacklist-kernel-modules
     - configure-kernel-parameters
-    - configure-fstab-mounts
     - install-system-packages
     - configure-Archlinux-roles
     # Services
@@ -29,6 +28,7 @@
     - configure-git
     - configure-latte-dock
     - configure-xmind
+    - configure-smb4k
     # KDE-related
     - configure-konsole-yakuake
     - configure-kvantum
