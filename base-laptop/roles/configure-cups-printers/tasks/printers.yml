@@ -1,0 +1,5 @@
+---
+
+- name: Installs printer via CUPS CLI
+  shell: "lpadmin -p {{ item.queue_name }} -D '{{ item.description }}' -L '{{ item.location }}' -v {{ item.URI }} -P /usr/share/ppd/{{ item.manufacturer }}/{{ item.PPD | basename }} -E"
+  with_items: "{{ openPrinting_printers }}"

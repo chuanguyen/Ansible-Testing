@@ -24,6 +24,7 @@
     - install-vagrant
     - create-home-script-links
     - update-homeConfig-files
+    - configure-cups-printers
     - configure-atom
     - configure-git
     - configure-latte-dock

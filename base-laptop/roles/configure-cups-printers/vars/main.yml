@@ -1,0 +1,11 @@
+openPrinting_printers:
+  - printer_name: "Lexmark x464"
+    queue_name: "lexmark-x464"
+    description: "Lexmark X464de"
+    location: "Living Room"
+    manufacturer: "Lexmark"
+    URI: "socket://192.168.1.68:9100"
+    PPD: "http://www.openprinting.org/download/PPD/Lexmark/Lexmark_X464de.ppd"
+
+printer_manufacturers:
+  - "Lexmark"

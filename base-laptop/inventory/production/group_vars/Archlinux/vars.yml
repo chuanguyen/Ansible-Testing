@@ -30,6 +30,15 @@ system_packages:
   - virtualbox
   - yakuake
   - yay
+  # CUPS packages
+  - cups
+  - cups-filters
+  - cups-pdf
+  - cups-pk-helper
+  - libcups
+  - python-pycups
+  - system-config-printer
+  - lib32-libcups
 
 aur_packages:
   - dropbox

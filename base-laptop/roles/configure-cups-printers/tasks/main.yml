@@ -1,0 +1,39 @@
+- name: Ensure CUPS packages are installed
+  include_role:
+    name: install-system-packages
+  vars:
+    packages_to_install:
+      - cups
+      - cups-filters
+      - cups-pdf
+      - cups-pk-helper
+      - libcups
+      - python-pycups
+      - system-config-printer
+      - lib32-libcups
+
+- name: Start the CUPS service
+  become: true
+  service:
+    name: "org.cups.cupsd.socket"
+    enabled: yes
+    state: started
+
+- name: Create manufacturer folders in CUPS PPD location
+  become: true
+  file:
+    path: "/usr/share/ppd/{{ item }}"
+    state: directory
+  with_items: "{{ printer_manufacturers }}"
+
+- name: Retrieve printer PPDs from OpenPrinting
+  become: true
+  get_url:
+    url: "{{ item.PPD }}"
+    dest: "/usr/share/ppd/{{ item.manufacturer }}/"
+    owner: root
+    group: root
+    mode: 0644
+  with_items: "{{ openPrinting_printers }}"
+
+- include: "printers.yml"
