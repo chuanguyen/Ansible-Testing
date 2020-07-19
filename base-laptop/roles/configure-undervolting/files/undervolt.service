@@ -1,0 +1,9 @@
+[Unit]
+Description=Undervolt the CPU Core and Cache, and iGPU
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/undervolt.sh
+
+[Install]
+WantedBy=default.target

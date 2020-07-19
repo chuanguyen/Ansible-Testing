@@ -1,0 +1,9 @@
+- name: Configuring undervolting for laptop
+  hosts: localhost
+  connection: local
+  gather_facts: true
+  ignore_errors: false
+
+  roles:
+    # Before running, should test manually the proper undervolt value for stability
+    - configure-undervolting

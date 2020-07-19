@@ -15,6 +15,7 @@ system_packages:
   - kid3
   - kvantum-manjaro
   - latte-dock
+  - msr-tools
   - okular
   - peek
   - python-pip

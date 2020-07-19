@@ -1,0 +1,50 @@
+---
+
+- name: Ensure msr-tools is installed
+  include_role:
+    name: install-system-packages
+  vars:
+    packages_to_install:
+      - msr-tools
+
+- name: Create sudoer file to provide rights to run undervolt script w/out prompt at startup
+  become: True
+  template:
+    src: 20-undervolt.j2
+    dest: "/etc/sudoers.d/20-undervolt_ansible"
+    owner: root
+    group: root
+    mode: 0440
+
+- name: Copy the undervolt Systemd service file
+  become: True
+  copy:
+    src: undervolt.service
+    dest: /etc/systemd/system/
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Enable undervolt service
+  become: True
+  service:
+    name: undervolt
+    enabled: True
+
+- name: Loading MSR module at boot to enable tool to undervolt
+  become: True
+  copy:
+    src: undervolt.conf
+    dest: /etc/modules-load.d/
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Copy undervolt script to proper location
+  become: True
+  copy:
+    src: undervolt.sh
+    dest: "/etc/usr/local/bin/"
+    owner: root
+    group: root
+    mode: 0766
