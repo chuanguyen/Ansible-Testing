@@ -44,7 +44,7 @@
   become: True
   copy:
     src: undervolt.sh
-    dest: "/etc/usr/local/bin/"
+    dest: "/usr/local/bin/"
     owner: root
     group: root
     mode: 0766
