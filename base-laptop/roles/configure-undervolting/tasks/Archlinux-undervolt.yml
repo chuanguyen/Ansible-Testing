@@ -43,7 +43,7 @@
 - name: Copy undervolt script to proper location
   become: True
   copy:
-    src: undervolt.sh
+    src: "{{ role_path }}/files/{{ ansible_product_version }}/undervolt.sh"
     dest: "/usr/local/bin/"
     owner: root
     group: root
