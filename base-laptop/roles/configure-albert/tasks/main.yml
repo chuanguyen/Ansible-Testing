@@ -1,0 +1,24 @@
+---
+
+- name: Ensure albert is installed
+  include_role:
+    name: install-system-packages
+  vars:
+    packages_to_install:
+      - albert
+
+- name: Verify albert folders exist
+  file:
+    path: "{{ ansible_env.HOME }}/.config/albert"
+    state: directory
+
+- name: Copy main Albert configuration file
+  copy:
+    src: "{{ role_path }}/files/albert.conf"
+    dest: "{{ ansible_env.HOME }}/.config/albert"
+
+- name: Copy Albert search engine configuration
+  copy:
+    src: "{{ role_path }}/files/engines.json"
+    dest: "{{ ansible_env.HOME }}/.config/albert/org.albert.extension.websearch/"
+    mode: 0644
