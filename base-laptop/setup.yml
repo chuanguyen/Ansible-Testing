@@ -25,6 +25,7 @@
     - create-home-script-links
     - update-homeConfig-files
     - configure-cups-printers
+    - configure-albert
     - configure-atom
     - configure-git
     - configure-latte-dock
