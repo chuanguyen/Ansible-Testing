@@ -44,7 +44,6 @@ system_packages:
 
 aur_packages:
   - dropbox
-  - gdrive
   - google-chrome
   - gyazo
   - kazam
