@@ -9,3 +9,7 @@
     group: root
     mode: 0644
     backup: yes
+
+- name: Update grub
+  become: True
+  shell: update-grub
