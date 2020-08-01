@@ -20,6 +20,7 @@
     - configure-systemd-services
     - configure-tlp
     - configure-ufw
+    - configure-samba
     # User-related
     - install-automation-pip-packages
     - install-vagrant
