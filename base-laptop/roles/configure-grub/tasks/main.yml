@@ -1,0 +1,11 @@
+---
+
+- name: Replace grub config file
+  become: True
+  copy:
+    src: grub
+    dest: /etc/default/grub
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes

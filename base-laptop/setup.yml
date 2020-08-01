@@ -15,6 +15,7 @@
     - configure-kernel-parameters
     - install-system-packages
     - configure-Archlinux-roles
+    - configure-grub
     # Services
     - configure-systemd-services
     - configure-tlp
