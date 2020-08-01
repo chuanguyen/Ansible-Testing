@@ -12,6 +12,9 @@
     mode: 0440
     dest: "/etc/sudoers.d/"
 
+### Never check this into the repo; always leave commented and enable when there are errors
+# - include: gpg_import.yml
+
 - name: Install AUR packages
   become: yes
   become_user: aur_builder

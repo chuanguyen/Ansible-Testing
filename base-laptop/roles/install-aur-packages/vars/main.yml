@@ -1,0 +1,8 @@
+direct_app_gpg_keys: 
+  - https://linux.dropbox.com/fedora/rpm-public-key.asc
+  - https://download.spotify.com/debian/pubkey.gpg
+  
+key_server_gpg_keys: 
+  - name: Spotify
+    server:  "hkp://keyserver.ubuntu.com:80"
+    key: "931FF8E79F0876134EDDBDCCA87FF9DF48BF1C90"
