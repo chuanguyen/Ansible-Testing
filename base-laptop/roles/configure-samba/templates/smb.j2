@@ -244,22 +244,22 @@
 ;   writable = no
 
 
-# Public directory that is viewable by everyone, but only writable by the user calvin
-[public]
-  comment = Public stuff
-  path = /home/calvin/samba/Public
-  public = yes
-  writable = no
-  printable = no
-  write list = calvin
+# Public directory that is viewable by everyone, but only writable by the user {{ ansible_user_id }}
+;[public]
+;  comment = Public stuff
+;  path = /home/{{ ansible_user_id }}/samba/Public
+;  public = yes
+;  writable = no
+;  printable = no
+;  write list = {{ ansible_user_id }}
 
-; Calvin: Shared directory w/ encryption enabled. To be used w/ non-Android devices (Don't support encryption)
-[myDir]
-  comment = Calvin's shared directory
-  path = /home/calvin/samba/myDir
-  valid users = calvin
-  public = no
-  writable = yes
-  smb encrypt = required
+# Shared directory w/ encryption enabled. To be used w/ non-Android devices (Don't support encryption)
+;[myDir]
+;  comment = {{ ansible_user_id }}'s shared directory
+;  path = /home/{{ ansible_user_id }}/samba/myDir
+;  valid users = {{ ansible_user_id }}
+;  public = no
+;  writable = yes
+;  smb encrypt = required
 
 #====================== My changes ======================
