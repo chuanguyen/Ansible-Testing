@@ -46,7 +46,6 @@ aur_packages:
   - gdrive
   - google-chrome
   - gyazo
-  - iscan-plugin-ds-30
   - kazam
   - postman # May error out due to problems w/ package
   - spotify
