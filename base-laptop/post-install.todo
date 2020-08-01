@@ -1,11 +1,23 @@
 Post-install:
   ☐ KDE
     ☐ Configure keyboard layout
-    ☐ Import keyboard shortcut schemas
+    ☐ Shortcuts
+      ☐ Import keyboard shortcut schemas
+      ☐ Import Custom Shortcuts
+    ☐ Configure autostart apps
+      ☐ Latte
+      ☐ Albert
+      ☐ Flameshot
+    ☐ Theme configuration
+      ☐ Check theme notes in my config repo
   ☐ Kvantum
     ☐  Install theme via kvantum manager
   ☐ Install Thunderbird addons
   ☐ Latte-dock
     ☐  Install Event-Calendar KDE widget
-  ☐ Theme configuration
-    ☐ Check theme notes in my config repo
+  ☐ Retrieve my compiled version of gdrive
+  ☐ Sign into services
+    ☐ Dropbox
+    ☐ Vivaldi
+    ☐ Thunderbird
+    ☐ Gdrive
