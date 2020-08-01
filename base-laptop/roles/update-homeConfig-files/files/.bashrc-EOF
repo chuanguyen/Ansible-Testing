@@ -12,3 +12,6 @@ export PS1="\[\033[38;5;50m\]\u\[\033[38;5;245m\]@\[\033[38;5;253m\]\H \[\033[38
 
 # Modify XKB to remap keys
 xmodmap -e "keycode 22 = Caps_Lock"
+
+# Ensure ~/bin is in PATH
+export PATH="$HOME/bin:$PATH"
