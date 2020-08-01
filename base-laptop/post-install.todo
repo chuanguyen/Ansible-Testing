@@ -2,6 +2,10 @@ Post-install:
   ☐ KDE
     ☐ Configure keyboard layout
     ☐ Import keyboard shortcut schemas
-  ☐ Kvantum:
+  ☐ Kvantum
     ☐  Install theme via kvantum manager
   ☐ Install Thunderbird addons
+  ☐ Latte-dock
+    ☐  Install Event-Calendar KDE widget
+  ☐ Theme configuration
+    ☐ Check theme notes in my config repo
