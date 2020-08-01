@@ -29,6 +29,7 @@ system_packages:
   - ufw
   - unzip
   - virtualbox
+  - xorg-xinput
   - yakuake
   - yay
   # CUPS packages
