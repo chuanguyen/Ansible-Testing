@@ -1,0 +1,17 @@
+---
+
+- name: Retrieve currently installed kernel version
+  set_fact:
+    my_kernel_version: "{{ ansible_kernel | regex_search('^[0-9].[0-9]') }}"
+
+- name: Combine string of major and minor versions of the kernel
+  set_fact:
+    vbox_host_modules_version: "linux{{ my_kernel_version.split('.') | join() }}-virtualbox-host-modules"
+
+- name: Ensure VirtualBox & kernel modules are installed
+  include_role:
+    name: install-system-packages
+  vars:
+    packages_to_install:
+      - virtualbox
+      - "{{ vbox_host_modules_version }}"

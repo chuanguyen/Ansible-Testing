@@ -16,6 +16,7 @@
     - install-system-packages
     - configure-Archlinux-roles
     - configure-grub
+    - configure-virtualbox
     # Services
     - configure-systemd-services
     - configure-tlp
