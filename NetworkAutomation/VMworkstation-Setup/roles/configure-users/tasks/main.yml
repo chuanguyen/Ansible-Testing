@@ -1,0 +1,6 @@
+- name: Add vagrant user to VirtualBox group
+  become: True
+  user:
+    name: vagrant
+    groups: vboxsf
+    append: yes

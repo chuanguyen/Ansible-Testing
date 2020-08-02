@@ -14,5 +14,6 @@
     - install-snap-packages
     - install-pip-packages
     - install-docker-ce
+    - configure-users
     - create-symlinks
     - update-homeConfig-files
