@@ -1,0 +1,7 @@
+project_symlinks:
+  - src: /mnt/Ansible-Testing
+    dest: "{{ ansible_env.HOME }}/automation/Ansible-Testing"
+  - src: /mnt/netbox-docker
+    dest: "{{ ansible_env.HOME }}/automation/netbox-docker"
+  - src: /mnt/Python-Projects
+    dest: "{{ ansible_env.HOME }}/automation/Python-Projects"
