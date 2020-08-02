@@ -11,9 +11,10 @@
     - create-directories
     - install-system-packages
     - configure-host-file
+    - configure-users
+    - configure-ssh
     - install-snap-packages
     - install-pip-packages
     - install-docker-ce
-    - configure-users
     - create-symlinks
     - update-homeConfig-files
