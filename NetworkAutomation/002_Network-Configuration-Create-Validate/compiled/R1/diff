@@ -1,12 +1,37 @@
++no upgrade fpd auto
++service password-encryption
 +enable secret test
 +username admin privilege 15 secret admin
 interface FastEthernet0/0
+ +description Data Interface
  +standby version 2
  +standby 135 ip 192.168.100.254
  +standby 135 priority 135
  +standby 135 preempt
  +standby 135 authentication cisco135
+interface FastEthernet0/1
+ +description Automation Shutdown
+interface FastEthernet1/0
+ +description Management Interface to R3
+ +ip address 10.13.1.1 255.255.255.0
+interface FastEthernet1/1
+ +description Management Interface to R5
+ +ip address 10.15.1.1 255.255.255.0
++interface Loopback1
+ +description Virtual Internet
+ +ip address 8.8.8.8 255.255.255.0
 line vty 0 4
  +exec-timeout 0 0
--enable secret 5 $1$WnI.$2BIzFBhRXDHo5DlGWwIJa.
--username admin privilege 15 secret 5 $1$OtzW$sx0.jHbI7Up1Rv5aGqPBB/
++logging host 192.168.1.1
++logging host 192.168.1.2
++ntp server 192.168.2.1
++ntp server 192.168.2.2
+-upgrade fpd auto
+-no service password-encryption
+-username admin privilege 15 secret 5 $1$/POu$VJ1KvWPyetwSNI1JVdHiP1
+interface FastEthernet1/0
+ -no ip address
+ -shutdown
+interface FastEthernet1/1
+ -no ip address
+ -shutdown

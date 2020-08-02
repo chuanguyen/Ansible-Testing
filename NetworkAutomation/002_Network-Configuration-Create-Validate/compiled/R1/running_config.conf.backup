@@ -1,12 +1,10 @@
-Building configuration...
-
-Current configuration : 1881 bytes
 !
-no upgrade fpd auto
+
+upgrade fpd auto
 version 15.3
 service timestamps debug datetime msec
 service timestamps log datetime msec
-service password-encryption
+no service password-encryption
 !
 hostname R1
 !
@@ -15,7 +13,6 @@ boot-end-marker
 !
 aqm-register-fnf
 !
-enable secret 5 $1$WnI.$2BIzFBhRXDHo5DlGWwIJa.
 !
 no aaa new-model
 no ip icmp rate-limit unreachable
@@ -43,7 +40,7 @@ multilink bundle-name authenticated
 archive
  path disk0:archive
  write-memory
-username admin privilege 15 secret 5 $1$OtzW$sx0.jHbI7Up1Rv5aGqPBB/
+username admin privilege 15 secret 5 $1$/POu$VJ1KvWPyetwSNI1JVdHiP1
 !
 redundancy
 !
@@ -61,32 +58,26 @@ ip scp server enable
 !
 !
 !
-interface Loopback1
- description Virtual Internet
- ip address 8.8.8.8 255.255.255.0
-!
 interface FastEthernet0/0
- description Data Interface
  ip address 192.168.100.201 255.255.255.0
  duplex auto
  speed auto
 !
 interface FastEthernet0/1
- description Automation Shutdown
  no ip address
  shutdown
  duplex auto
  speed auto
 !
 interface FastEthernet1/0
- description Management Interface to R3
- ip address 10.13.1.1 255.255.255.0
+ no ip address
+ shutdown
  duplex auto
  speed auto
 !
 interface FastEthernet1/1
- description Management Interface to R5
- ip address 10.15.1.1 255.255.255.0
+ no ip address
+ shutdown
  duplex auto
  speed auto
 !
@@ -96,8 +87,6 @@ no ip http secure-server
 !
 !
 !
-logging host 192.168.1.1
-logging host 192.168.1.2
 no cdp log mismatch duplex
 !
 !
@@ -132,7 +121,5 @@ line vty 0 4
  login local
  transport input all
 !
-ntp server 192.168.2.1
-ntp server 192.168.2.2
 !
 end
