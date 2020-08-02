@@ -17,6 +17,8 @@ system_packages:
   - virtualbox-guest-x11
   - virtualenv
   - xz-utils
+  # pyATS - Required for psutil package building
+  - python3.6-dev
   # Ubuntu-desktop requirements
   - firefox
   - gdm3
