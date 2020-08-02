@@ -24,3 +24,9 @@
   apt:
     name: docker-ce
     update_cache: yes
+
+- name: Enable and start docker service
+  service:
+    name: docker
+    state: started
+    enabled: True

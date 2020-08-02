@@ -2,5 +2,5 @@
   become: True
   user:
     name: vagrant
-    groups: vboxsf
+    groups: vboxsf,docker
     append: yes
