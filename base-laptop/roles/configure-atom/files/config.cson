@@ -6,6 +6,8 @@
     softWrap: true
   "exception-reporting":
     userId: "0dd93988-6b08-4275-b185-474b9ab54c86"
+  fonts:
+    fontFamily: "Roboto Mono"
   "spell-check":
     locales: [
       "en-US"
