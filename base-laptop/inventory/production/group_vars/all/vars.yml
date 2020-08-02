@@ -1,6 +1,7 @@
 automation_pip_packages:
   - gns3-server
   - gns3-gui
+  - pyqt5
 
 system_users: "{{ vault_system_users }}"
 
