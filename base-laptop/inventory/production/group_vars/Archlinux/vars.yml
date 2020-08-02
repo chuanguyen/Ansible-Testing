@@ -22,6 +22,7 @@ system_packages:
   - python-setuptools
   - python-virtualenv
   - samba
+  - speedcrunch
   - smb4k
   - thunderbird
   - veracrypt
