@@ -2,7 +2,7 @@
 
 - name: Retrieve currently installed kernel version
   set_fact:
-    my_kernel_version: "{{ ansible_kernel | regex_search('^[0-9].[0-9]') }}"
+    my_kernel_version: "{{ ansible_kernel | regex_search('^[0-9]+.[0-9]+') }}"
 
 - name: Combine string of major and minor versions of the kernel
   set_fact:
