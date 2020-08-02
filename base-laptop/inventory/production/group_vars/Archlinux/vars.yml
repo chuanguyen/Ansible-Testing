@@ -55,6 +55,7 @@ aur_packages:
   - xnviewmp
   # GNS3
   - dynamips
+  - ubridge
 
 system_services:
   - fstrim.timer # Enables weekly TRIM operation
