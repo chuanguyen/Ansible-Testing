@@ -53,6 +53,8 @@ aur_packages:
   - vivaldi-snapshot
   - xmind
   - xnviewmp
+  # GNS3
+  - dynamips
 
 system_services:
   - fstrim.timer # Enables weekly TRIM operation
