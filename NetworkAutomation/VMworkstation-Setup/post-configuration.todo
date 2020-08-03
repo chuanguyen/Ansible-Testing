@@ -1,0 +1,10 @@
+Process
+☐ VirtualBox
+  ☐ Shutdown the Vagrant VM
+  ☐ Set the host-only interface to not attached (Allow GNS3 to control)
+  ☐ Configure shared folders to auto-mount
+☐ GNS3
+  ☐ Add VM to GNS3
+  ☐ Add the necessary number of interfaces (x2)
+  ☐ Attach cable to host-only interface
+  ☐ Power on VM from GNS3
