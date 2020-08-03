@@ -34,6 +34,7 @@
     - configure-latte-dock
     - configure-xmind
     - configure-smb4k
+    - configure-SpeedCrunch
     # KDE-related
     - configure-konsole-yakuake
     - configure-kvantum

@@ -1,0 +1,6 @@
+- name: Copy SpeedCrunch configuration
+  copy:
+    src: SpeedCrunch.ini
+    dest: "{{ ansible_env.HOME }}/.config/SpeedCrunch"
+    mode: '0644'
+    backup: yes
