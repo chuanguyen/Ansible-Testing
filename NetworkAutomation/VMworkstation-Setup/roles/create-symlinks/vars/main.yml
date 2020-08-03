@@ -1,7 +1,7 @@
 project_symlinks:
-  - src: /media/sf_mnt_Ansible-Testing
+  - src: /media/sf_media_Ansible-Testing
     dest: "{{ ansible_env.HOME }}/automation/Ansible-Testing"
-  - src: /media/sf_mnt_netbox-docker
+  - src: /media/sf_media_netbox-docker
     dest: "{{ ansible_env.HOME }}/automation/netbox-docker"
-  - src: /media/sf_mnt_Python-Projects
+  - src: /media/sf_media_Python-Projects
     dest: "{{ ansible_env.HOME }}/automation/Python-Projects"
