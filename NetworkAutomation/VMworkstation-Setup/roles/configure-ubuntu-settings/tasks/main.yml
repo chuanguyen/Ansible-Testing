@@ -1,0 +1,8 @@
+- name: Copy Ubuntu settings files
+  copy:
+    src: "{{ item.config_file }}"
+    dest: "{{ item.config_location }}"
+    mode: "{{ item.mode }}"
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+  with_items: "{{ ubuntu_settings_files }}"

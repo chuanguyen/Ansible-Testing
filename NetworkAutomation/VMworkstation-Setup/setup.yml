@@ -13,6 +13,7 @@
     - configure-host-file
     - configure-users
     - configure-ssh
+    - configure-ubuntu-settings
     - install-snap-packages
     - install-pip-packages
     - install-docker-ce

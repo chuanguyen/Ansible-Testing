@@ -1,0 +1,6 @@
+ubuntu_settings_files:
+  - config_file: keyboard
+    config_location: /etc/default/keyboard
+    mode: 0644
+    owner: root
+    group: root
