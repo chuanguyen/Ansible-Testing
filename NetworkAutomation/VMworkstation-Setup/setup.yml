@@ -11,7 +11,6 @@
     - create-directories
     - install-system-packages
     - configure-host-file
-    - configure-users
     - configure-ssh
     - configure-ubuntu-settings
     - install-snap-packages
@@ -19,3 +18,4 @@
     - install-docker-ce
     - create-symlinks
     - update-homeConfig-files
+    - configure-users
