@@ -36,5 +36,6 @@
     - configure-smb4k
     - configure-SpeedCrunch
     # KDE-related
+    - configure-kde
     - configure-konsole-yakuake
     - configure-kvantum
