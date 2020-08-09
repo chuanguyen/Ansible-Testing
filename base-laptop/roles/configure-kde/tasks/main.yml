@@ -1,0 +1,23 @@
+- name: Copy KWin configuration
+  copy:
+    src: kwinrc
+    dest: "{{ ansible_env.HOME }}/.config/"
+    backup: yes
+    mode: 0600
+
+- name: Copy global and custom shortcut configuration
+  copy:
+    src: "{{ item }}"
+    dest: "{{ ansible_env.HOME }}/.config/"
+    backup: yes
+    mode: 0600
+  with_items:
+    - kglobalshortcutsrc
+    - khotkeysrc
+
+- name: Copy KWallet configuration
+  copy:
+    src: kwalletrc
+    dest: "{{ ansible_env.HOME }}/.config"
+    backup: yes
+    mode: 0600
