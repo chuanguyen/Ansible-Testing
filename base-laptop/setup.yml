@@ -7,8 +7,6 @@
   ignore_errors: false
 
   roles:
-    # User-related
-    - clone-my-repos # Executed at the beginning as credential prompt for private repos
     # System-related
     - create-users
     - blacklist-kernel-modules
@@ -23,6 +21,7 @@
     - configure-ufw
     - configure-samba
     # User-related
+    - clone-my-repos
     - install-automation-pip-packages
     - install-vagrant
     - create-home-script-links

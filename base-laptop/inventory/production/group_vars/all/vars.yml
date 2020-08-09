@@ -11,3 +11,6 @@ smb_password: "{{ vault_smb_password }}"
 smb_domain: "{{ vault_smb_domain }}"
 family_nas_hostname: "{{ vault_family_nas_hostname }}"
 family_nas_FQDN: "{{ vault_family_nas_FQDN }}"
+
+# Github
+github_access_token: "{{ vault_github_access_token }}"

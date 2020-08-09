@@ -15,10 +15,10 @@ automation_git_repos:
     dest: "{{ ansible_env.HOME }}/automation/netbox-docker"
     base_folder: "{{ ansible_env.HOME }}/automation"
 
-  - repo: https://github.com/chuanguyen/.myScripts.git
+  - repo: https://{{ github_access_token }}@github.com/chuanguyen/.myScripts.git
     dest: "{{ ansible_env.HOME }}/bin/.myScripts"
     base_folder: "{{ ansible_env.HOME }}/bin"
 
-  - repo: https://github.com/chuanguyen/.myConfigFiles.git
+  - repo: "https://{{ github_access_token }}@github.com/chuanguyen/.myConfigFiles.git"
     dest: "{{ ansible_env.HOME }}/.myConfigFiles"
     base_folder: "{{ ansible_env.HOME }}"
