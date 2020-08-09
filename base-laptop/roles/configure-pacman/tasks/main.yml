@@ -9,3 +9,8 @@
     src: clean_package_cache.hook
     dest: /etc/pacman.d/hooks/
     mode: '0644'
+
+# Retrieves the 5 fastest HTTPS mirrors
+- name: Retrieve the 5 fastest HTTPS mirrors
+  become: True
+  shell: "pacman-mirrors --api --protocol https --fasttrack 5 && pacman -Syy"
