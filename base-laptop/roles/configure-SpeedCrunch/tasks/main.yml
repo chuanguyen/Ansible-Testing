@@ -4,3 +4,9 @@
     dest: "{{ ansible_env.HOME }}/.config/SpeedCrunch"
     mode: '0644'
     backup: yes
+
+- name: Copy SpeedCrunch desktop app (Renamed to be searchable as "calculator")
+  copy:
+    src: speedcrunch.desktop
+    dest: "{{ ansible_env.HOME }}/.local/share/applications"
+    mode: 0744
