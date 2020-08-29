@@ -1,0 +1,7 @@
+- include: scripts.yml
+
+- name: Create link for desktop wallpapers
+  file:
+    src: "{{ ansible_env.HOME }}/Dropbox/Personal/Backup/Computer/Computer Themes/Desktop Backgrounds/Collection"
+    dest: "{{ ansible_env.HOME }}/Pictures/Desktop-Backgrounds"
+    state: link
