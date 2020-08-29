@@ -30,10 +30,12 @@ local_net_users: "{{ vault_local_net_users }}"
 admin_username: "{{ local_net_users[0].username }}"
 admin_pass: "{{ local_net_users[0].password }}"
 domain: "automation.local"
-syslog:
-  - 192.168.1.1
-  - 192.168.1.2
-ntpserver:
-  - 192.168.2.1
-  - 192.168.2.2
 hsrp_authentication: "{{ vault_hsrp_authentication }}"
+
+### Replaced in Netbox
+# syslog:
+#   - 192.168.1.1
+#   - 192.168.1.2
+# ntpserver:
+#   - 192.168.2.1
+#   - 192.168.2.2

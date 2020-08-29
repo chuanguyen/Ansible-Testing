@@ -2,6 +2,6 @@
 !
 !
 no cdp log mismatch duplex
-{% for server in syslog %}
+{% for server in config_context[0].syslog_servers %}
 logging host {{ server }}
 {% endfor %}

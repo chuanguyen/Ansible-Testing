@@ -1,6 +1,6 @@
 !
 !
 !
-{% for server in ntpserver %}
+{% for server in config_context[0].ntp_servers %}
 ntp server {{ server }}
 {% endfor %}
