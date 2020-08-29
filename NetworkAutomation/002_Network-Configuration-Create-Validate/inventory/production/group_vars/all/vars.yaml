@@ -31,6 +31,8 @@ admin_username: "{{ local_net_users[0].username }}"
 admin_pass: "{{ local_net_users[0].password }}"
 domain: "automation.local"
 hsrp_authentication: "{{ vault_hsrp_authentication }}"
+netbox_url: "{{ vault_netbox_url }}"
+netbox_token: "{{ vault_netbox_token }}"
 
 ### Replaced in Netbox
 # syslog:
