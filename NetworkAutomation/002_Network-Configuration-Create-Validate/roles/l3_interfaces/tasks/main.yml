@@ -1,6 +1,37 @@
 ---
 # tasks file for l3_interfaces
 
+- name: Retrieve current device interfaces from NetBox
+  uri:
+    url: "{{ netbox_url }}/api/dcim/interfaces/?device={{ inventory_hostname }}"
+    method: GET
+    return_content: yes
+    body_format: "json"
+    headers:
+      Authorization: "Token {{ netbox_token }}"
+  register: nb_output
+
+- name: Sets fact for device interfaces
+  set_fact:
+    nb_device_interfaces: "{{ nb_output.json.results }}"
+
+- name: Retrieve current device interface IPs from NetBox
+  uri:
+    url: "{{ netbox_url }}/api/ipam/ip-addresses/?device={{ inventory_hostname }}"
+    method: GET
+    return_content: yes
+    body_format: "json"
+    headers:
+      Authorization: "Token {{ netbox_token }}"
+  register: nb_output
+
+- name: Sets fact for device interface IPs
+  set_fact:
+    interface_ip_dict: "{{ interface_ip_dict | combine({ item.interface.name: item }) }}"
+  with_items: "{{ nb_output.json.results }}"
+  loop_control:
+    label: "{{ item.interface.name }}"
+
 - template:
     src: "{{ ansible_network_os }}_l3_interfaces.j2"
     dest: "./staging/{{ inventory_hostname }}/003_l3_inferfaces.cfg"

@@ -1,2 +1,5 @@
 ---
 # vars file for l3_interfaces
+
+# Stores interface name as key and IP address info from NetBox as values
+interface_ip_dict: {}

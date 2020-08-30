@@ -1,19 +1,20 @@
 !
 !
 !
-{% for interface in Interfaces %}
-{% for if_name, value in interface.items() %}
-interface {{ if_name }}
- description {{ value.Description }}
-{% if value.ipv4 is defined %}
-{% for ipv4_addr in value.ipv4 %}
- ip address {{ ipv4_addr.IP | ipaddr('address')}} {{ ipv4_addr.IP | ipaddr('netmask') }}
-{% endfor %}
+{% for interface in nb_device_interfaces %}
+interface {{ interface.name }}
+ description {{ interface.description }}
+{% if interface_ip_dict[interface.name] is defined %}
+{% if interface_ip_dict[interface.name].family.value == 4 %}
+ ip address {{ interface_ip_dict[interface.name].address | ipaddr('address') }} {{ interface_ip_dict[interface.name].address | ipaddr('netmask') }}
+{% elif interface_ip_dict[interface.name].family.value == 6 %}
+ ipv6 address {{ interface_ip_dict[interface.name].address }}
+{% endif %}
 {% else %}
  no ip address
 {% endif %}
-{% if value.hsrp is defined %}
-{% for hsrp_group in value.hsrp %}
+{% if interface.name == "FastEthernet0/0" %}
+{% for hsrp_group in ansible_Interfaces[interface.name].hsrp %}
  standby version {{ hsrp_group.version }}
  standby {{ hsrp_group.group }} ip {{ hsrp_group.primary_ip }}
 {% if hsrp_group.priority != "100" %}
@@ -25,13 +26,10 @@ interface {{ if_name }}
  standby {{ hsrp_group.group }} authentication {{ hsrp_authentication }}
 {% endfor %}
 {% endif %}
-{% if value.Int_Type == "Physical" %}
-{% if not value.is_up %}
- {{ value.State }}
+{% if not interface.enabled %}
+ shutdown
 {% endif %}
- duplex {{ value.Duplex }}
- speed {{ value.Speed }}
-{% endif %}
+ duplex auto
+ speed auto
 !
-{% endfor %}
 {% endfor %}
