@@ -8,33 +8,58 @@
 
   roles:
     # System-related
-    - create-users
-    - blacklist-kernel-modules
-    - configure-kernel-parameters
-    - install-system-packages
-    - configure-Archlinux-roles
-    - configure-grub
-    - configure-virtualbox
+    - role: create-users
+      tags: [ system ]
+    - role: blacklist-kernel-modules
+      tags: [ system, refresh ]
+    - role: configure-kernel-parameters
+      tags: [ system, refresh ]
+    - role: install-system-packages
+      tags: [ system, packages ]
+    - role: configure-Archlinux-roles
+      tags: [ system, packages ]
+    - role: configure-grub
+      tags: [ system, refresh ]
+    - role: configure-virtualbox
+      tags: [ system ]
     # Services
-    - configure-systemd-services
-    - configure-tlp
-    - configure-ufw
-    - configure-samba
+    - role: configure-systemd-services
+      tags: [ services, refresh ]
+    - role: configure-tlp
+      tags: [ services, refresh ]
+    - role: configure-ufw
+      tags: [ services, refresh ]
     # User-related
-    - clone-my-repos
-    - install-automation-pip-packages
-    - install-vagrant
-    - create-home-script-links
-    - update-homeConfig-files
-    - configure-cups-printers
-    - configure-albert
-    - configure-atom
-    - configure-git
-    - configure-latte-dock
-    - configure-xmind
-    - configure-smb4k
-    - configure-SpeedCrunch
+    - role: clone-my-repos
+      tags: [ users, refresh ]
+    - role: install-automation-pip-packages
+      tags: [ users, refresh ]
+    - role: install-vagrant
+      tags: [ users, refresh ]
+    - role: create-home-links
+      tags: [ users, refresh ]
+    - role: update-homeConfig-files
+      tags: [ users, refresh ]
+    - role: configure-cups-printers
+      tags: [ users, refresh ]
+    - role: configure-albert
+      tags: [ users, refresh ]
+    - role: configure-atom
+      tags: [ users, refresh ]
+    - role: configure-git
+      tags: [ users, refresh ]
+    - role: configure-latte-dock
+      tags: [ users, refresh ]
+    - role: configure-xmind
+      tags: [ users, refresh ]
+    - role: configure-smb4k
+      tags: [ users, refresh ]
+    - role: configure-SpeedCrunch
+      tags: [ users, refresh ]
     # KDE-related
-    - configure-kde
-    - configure-konsole-yakuake
-    - configure-kvantum
+    - role: configure-kde
+      tags: [ kde, users, refresh ]
+    - role: configure-konsole-yakuake
+      tags: [ kde, users, refresh ]
+    - role: configure-kvantum
+      tags: [ kde, users, refresh ]
