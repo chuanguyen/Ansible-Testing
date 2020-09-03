@@ -39,6 +39,11 @@ increase_volume=Meta+F3\tVolume Up,Volume Up,Increase Volume
 mic_mute=Microphone Mute,Microphone Mute,Mute Microphone
 mute=Meta+F1,Volume Mute,Mute
 
+[konversation]
+_k_friendly_name=Konversation
+next_active_tab=none,none,Next Active Tab
+toggle_mainwindow_visibility=none,none,Show/Hide Konversation
+
 [krunner.desktop]
 RunClipboard=Alt+Shift+F2,Alt+Shift+F2,Run command on clipboard contents
 _k_friendly_name=KRunner
@@ -149,12 +154,12 @@ Window Pack Left=,none,Pack Window to the Left
 Window Pack Right=,none,Pack Window to the Right
 Window Pack Up=,none,Pack Window Up
 Window Quick Tile Bottom=,Meta+Down,Quick Tile Window to the Bottom
-Window Quick Tile Bottom Left=Meta+Del,none,Quick Tile Window to the Bottom Left
+Window Quick Tile Bottom Left=Meta+End,none,Quick Tile Window to the Bottom Left
 Window Quick Tile Bottom Right=Meta+PgDown,none,Quick Tile Window to the Bottom Right
 Window Quick Tile Left=Meta+Left,Meta+Left,Quick Tile Window to the Left
 Window Quick Tile Right=Meta+Right,Meta+Right,Quick Tile Window to the Right
-Window Quick Tile Top=Meta+Home,Meta+Up,Quick Tile Window to the Top
-Window Quick Tile Top Left=Meta+Ins,none,Quick Tile Window to the Top Left
+Window Quick Tile Top=none,Meta+Up,Quick Tile Window to the Top
+Window Quick Tile Top Left=Meta+Home,none,Quick Tile Window to the Top Left
 Window Quick Tile Top Right=Meta+PgUp,none,Quick Tile Window to the Top Right
 Window Raise=,none,Raise Window
 Window Resize=Meta+R,none,Resize Window
@@ -219,7 +224,7 @@ activate entry 6=,Meta+6,Activate Entry 6
 activate entry 7=,Meta+7,Activate Entry 7
 activate entry 8=,Meta+8,Activate Entry 8
 activate entry 9=,Meta+9,Activate Entry 9
-activate widget 40=Meta+Space,none,Activate Application Menu Widget
+activate widget 54=Meta+Space,none,Activate Application Menu Widget
 clear-history=none,none,Clear Clipboard History
 clipboard_action=,Ctrl+Alt+X,Enable Clipboard Actions
 cycleNextAction=none,none,Next History Item
