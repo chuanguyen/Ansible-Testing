@@ -3,6 +3,10 @@ automation_pip_packages:
   - gns3-gui
   - pyqt5
 
+system_pip_packages:
+  # ProtonVPN
+  - protonvpn-cli
+
 system_users: "{{ vault_system_users }}"
 
 # Family NAS
