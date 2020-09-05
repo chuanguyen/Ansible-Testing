@@ -1,3 +1,4 @@
 ---
 
 packages_to_install: "{{ system_packages }}"
+pip_packages_to_install: "{{ system_pip_packages }}"

@@ -1,1 +1,6 @@
 - include: "{{ ansible_distribution }}-install.yml"
+
+- name: Install system pip packages
+  become: true
+  pip:
+    name: "{{ pip_packages_to_install }}"
