@@ -1,0 +1,4 @@
+- name: Generate baseline pyATS testbed file
+  template:
+    src: testbed.yml.j2
+    dest: testbed.yml
