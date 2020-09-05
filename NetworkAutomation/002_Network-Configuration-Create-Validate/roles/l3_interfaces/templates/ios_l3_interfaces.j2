@@ -29,7 +29,9 @@ interface {{ interface.name }}
 {% if not interface.enabled %}
  shutdown
 {% endif %}
+{% if interface.type.value != "virtual" %}
  duplex auto
  speed auto
+{% endif %}
 !
 {% endfor %}
