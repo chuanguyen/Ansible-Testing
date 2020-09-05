@@ -1,0 +1,3 @@
+# Ignore scratch directories for network testing
+compiled
+staging
