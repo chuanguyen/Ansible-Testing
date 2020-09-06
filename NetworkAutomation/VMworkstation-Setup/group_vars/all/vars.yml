@@ -35,6 +35,7 @@ system_pip_packages:
   - ansible
   - ansible-lint
   - docker-compose
+  - ipython
   - napalm-ansible
   - pyats[full]
   - pynetbox
