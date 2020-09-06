@@ -1,0 +1,5 @@
+# Vault pass; abcd1234
+
+# Config on network devices
+netbox_url: "{{ vault_netbox_url }}"
+netbox_token: "{{ vault_netbox_token }}"
