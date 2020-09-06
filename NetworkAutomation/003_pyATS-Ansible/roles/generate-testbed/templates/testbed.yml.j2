@@ -1,65 +1,20 @@
 testbed:
   name: {{ testbed_name }}
+  credentials:
+    default:
+      username: "%ENV{PYATS_USERNAME}"
+      password: "%ENV{PYATS_PASSWORD}"
+    enable:
+      password: '%ENV{PYATS_PASSWORD}'
+
 devices:
-  DEVICE_A:
-    os:
-    platform:
-    type:
+{% for device in nb_devices %}
+  {{ device.name }}:
+    os: {{ device.platform.slug }}
+    platform: {{ device.device_type.model  }}
+    type: {{ pyats_device_types[device.device_type.slug]['custom_fields']['pyats_device_type'] }}
     connections:
-    credentials:
-      default:
-        username:
-        password:
-      enable:
-        password:
-  # R1:
-  #   os: ios
-  #   platform: 7206VXR
-  #   type: router
-  #   connections:
-  #     mgmt:
-  #       ip: 192.168.100.251
-  #       protocol: ssh
-  #     backup:
-  #       ip: 192.168.100.251
-  #       protocol: telnet
-  #   credentials:
-  #     default:
-  #       password: '%ENV{PYATS_PASSWORD}'
-  #       username: '%ENV{PYATS_USERNAME}'
-  #     enable:
-  #       password: '%ENV{PYATS_PASSWORD}'
-  # R3:
-  #   os: ios
-  #   platform: 7206VXR
-  #   type: router
-  #   connections:
-  #     mgmt:
-  #       ip: 192.168.100.254
-  #       protocol: ssh
-  #     backup:
-  #       ip: 192.168.100.254
-  #       protocol: telnet
-  #   credentials:
-  #     default:
-  #       password: '%ENV{PYATS_PASSWORD}'
-  #       username: '%ENV{PYATS_USERNAME}'
-  #     enable:
-  #       password: '%ENV{PYATS_PASSWORD}'
-  # R5:
-  #   os: ios
-  #   platform: 7206VXR
-  #   type: router
-  #   connections:
-  #     mgmt:
-  #       ip: 192.168.100.253
-  #       protocol: ssh
-  #     backup:
-  #       ip: 192.168.100.253
-  #       protocol: telnet
-  #   credentials:
-  #     default:
-  #       password: '%ENV{PYATS_PASSWORD}'
-  #       username: '%ENV{PYATS_USERNAME}'
-  #     enable:
-  #       password: '%ENV{PYATS_PASSWORD}'
+      mgmt:
+        ip: {{ device.primary_ip4.address | ipaddr('address') }}
+        protocol: ssh
+{% endfor %}
