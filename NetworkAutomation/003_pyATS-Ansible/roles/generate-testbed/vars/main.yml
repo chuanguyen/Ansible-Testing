@@ -1,1 +1,4 @@
 pyats_device_types: {}
+
+# Stores interface name as key and IP address info from NetBox as values
+interface_ip_dict: {}
