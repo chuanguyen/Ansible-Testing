@@ -58,8 +58,8 @@
       tags: [ users, refresh ]
     # KDE-related
     - role: configure-kde
-      tags: [ kde, users, refresh ]
+      tags: [ users, refresh, kde ]
     - role: configure-konsole-yakuake
-      tags: [ kde, users, refresh ]
+      tags: [ users, refresh, kde ]
     - role: configure-kvantum
-      tags: [ kde, users, refresh ]
+      tags: [ users, refresh, kde ]
