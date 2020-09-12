@@ -1,0 +1,38 @@
+- name: Retrieve device types from NetBox
+  delegate_to: localhost
+  run_once: true
+  uri:
+    url: "{{ netbox_url }}/api/dcim/device-types"
+    method: GET
+    return_content: yes
+    body_format: "json"
+    headers:
+      Authorization: "Token {{ netbox_token }}"
+  register: nb_output
+
+- name: Sets fact for device types
+  delegate_to: localhost
+  run_once: true
+  set_fact:
+    pyats_device_types: "{{ pyats_device_types | combine({ item.slug: item }) }}"
+  with_items: "{{ nb_output.json.results }}"
+  loop_control:
+    label: "{{ item.slug }}"
+
+- name: Retrieve network device from NetBox
+  delegate_to: localhost
+  run_once: true
+  uri:
+    url: "{{ netbox_url }}/api/dcim/devices/?device_role=network_access"
+    method: GET
+    return_content: yes
+    body_format: "json"
+    headers:
+      Authorization: "Token {{ netbox_token }}"
+  register: nb_output
+
+- name: Sets fact for devices
+  delegate_to: localhost
+  run_once: true
+  set_fact:
+    nb_devices: "{{ nb_output.json.results }}"
