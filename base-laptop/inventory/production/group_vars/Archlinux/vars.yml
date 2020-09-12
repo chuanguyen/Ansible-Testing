@@ -24,7 +24,6 @@ system_packages:
   - samba
   - speedcrunch
   - smb4k
-  - thunderbird
   - veracrypt
   - vim
   - ufw
@@ -49,7 +48,6 @@ system_packages:
 aur_packages:
   - dropbox
   - google-chrome
-  - gyazo
   - kazam
   - postman # May error out due to problems w/ package
   - spotify
