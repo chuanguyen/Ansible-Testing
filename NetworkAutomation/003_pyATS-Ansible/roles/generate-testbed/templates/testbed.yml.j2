@@ -6,15 +6,24 @@ testbed:
       password: "%ENV{PYATS_PASSWORD}"
     enable:
       password: '%ENV{PYATS_PASSWORD}'
-
 devices:
 {% for device in nb_devices %}
   {{ device.name }}:
     os: {{ device.platform.slug }}
     platform: {{ device.device_type.model  }}
     type: {{ pyats_device_types[device.device_type.slug]['custom_fields']['pyats_device_type'] }}
+    role: {{ device.device_role.slug }}
     connections:
       mgmt:
         ip: {{ device.primary_ip4.address | ipaddr('address') }}
         protocol: ssh
+{% endfor %}
+topology:
+{% for device in nb_devices %}
+  {{ device.name }}:
+    interfaces:
+{% for interface in nb_device_interfaces %}
+      {{ interface.name }}:
+        TEST
+{% endfor %}
 {% endfor %}
