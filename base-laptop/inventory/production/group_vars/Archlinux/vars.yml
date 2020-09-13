@@ -10,12 +10,12 @@ system_packages:
   - git
   - gparted
   - i7z
+  - intel-undervolt
   - jre8-openjdk
   - kdenlive
   - kid3
   - kvantum-manjaro
   - latte-dock
-  - msr-tools
   - okular
   - peek
   - python-pip
