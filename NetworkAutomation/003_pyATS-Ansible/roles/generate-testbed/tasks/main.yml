@@ -1,8 +1,21 @@
+- name: Create directory containing device data fragments
+  run_once: true
+  file:
+    path: "{{ playbook_dir }}/staging/devices"
+    state: directory
+
+- name: Create directory containing testbed fragments
+  run_once: true
+  file:
+    path: "{{ playbook_dir }}/staging/testbed_fragments"
+    state: directory
+
 - include: retrieve_devices.yml
 - include: retrieve_interfaces.yml
+- include: combine_testbed_objects.yml
 
-- name: Generate baseline pyATS testbed file
-  delegate_to: localhost
-  template:
-    src: testbed.yml.j2
-    dest: testbed.yml
+- name: Delete staging directory
+  run_once: true
+  file:
+    path: "{{ playbook_dir }}/staging"
+    state: absent

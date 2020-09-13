@@ -1,0 +1,17 @@
+- name: Generate baseline pyATS testbed file
+  run_once: true
+  template:
+    src: testbed.yml.j2
+    dest: "{{ playbook_dir }}/staging/testbed_fragments/000_testbed.yml"
+
+- name: Append topology templates together
+  run_once: true
+  assemble:
+    src: "{{ playbook_dir }}/staging/devices"
+    dest: "{{ playbook_dir }}/staging/testbed_fragments/001_topology.yml"
+
+- name: Combine testbed fragments into final testbed configuration
+  run_once: true
+  assemble:
+    src: "{{ playbook_dir }}/staging/testbed_fragments"
+    dest: testbed.yml

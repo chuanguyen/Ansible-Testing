@@ -1,7 +1,7 @@
 ---
 
 - name: pyATS testbed setup
-  hosts: localhost
+  hosts: device_roles_network_access
   gather_facts: false
   connection: local
 

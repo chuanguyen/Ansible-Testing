@@ -8,9 +8,10 @@
       Authorization: "Token {{ netbox_token }}"
   register: nb_output
 
+
 - name: Sets fact for device interfaces
   set_fact:
-    nb_device_interfaces: "{{ nb_output.json.results }}"
+    nb_interfaces: "{{ nb_output.json.results }}"
 
 - name: Retrieve current device interface IPs from NetBox
   uri:
@@ -28,3 +29,8 @@
   with_items: "{{ nb_output.json.results }}"
   loop_control:
     label: "{{ item.interface.name }}"
+
+- name: Create topology entries
+  template:
+    src: topology.yml.j2
+    dest: "{{ playbook_dir }}/staging/devices/{{ inventory_hostname }}.yml"
