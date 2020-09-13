@@ -1,0 +1,8 @@
+  {{ inventory_hostname }}:
+    interfaces:
+{% for interface in nb_interfaces %}
+{% if interface_ip_dict[interface.name] is defined %}
+      {{ interface.name }}:
+        {{ interface_ip_dict[interface.name]['address'] }}
+{% endif %}
+{% endfor %}

@@ -19,11 +19,3 @@ devices:
         protocol: ssh
 {% endfor %}
 topology:
-{% for device in nb_devices %}
-  {{ device.name }}:
-    interfaces:
-{% for interface in nb_device_interfaces %}
-      {{ interface.name }}:
-        TEST
-{% endfor %}
-{% endfor %}
