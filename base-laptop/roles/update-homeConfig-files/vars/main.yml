@@ -4,11 +4,11 @@ home_files:
   before:
     -
   after:
-    - src_file: ".bashrc-aliases"
+    - src_file: "{{ ansible_product_version }}/.bashrc-aliases"
       marker: "### {mark} .bashrc Aliases ###"
       path: "{{ ansible_env.HOME }}/.bashrc"
       match_pattern: "^alias"
   EOF:
-    - src_file: ".bashrc-EOF"
+    - src_file: "{{ ansible_product_version }}/.bashrc-EOF"
       marker: "### {mark} .bashrc EOF ###"
       path: "{{ ansible_env.HOME }}/.bashrc"
