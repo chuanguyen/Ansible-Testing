@@ -19,7 +19,7 @@
 - name: Copy the intel-undervolt configuration file
   become: True
   copy:
-    src: "{{ role_path }}/files/{{ ansible_product_version }}/intel-undervolt.conf"
+    src: "{{ ansible_product_version }}/intel-undervolt.conf"
     dest: /etc/intel-undervolt.conf
     owner: root
     group: root
