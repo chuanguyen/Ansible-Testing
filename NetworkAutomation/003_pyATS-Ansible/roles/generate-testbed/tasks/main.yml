@@ -12,6 +12,7 @@
 
 - include: retrieve_devices.yml
 - include: retrieve_interfaces.yml
+- include: retrieve_cables.yml
 - include: combine_testbed_objects.yml
 
 - name: Delete staging directory

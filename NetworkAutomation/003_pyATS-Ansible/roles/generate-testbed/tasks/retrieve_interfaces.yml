@@ -29,8 +29,3 @@
   with_items: "{{ nb_output.json.results }}"
   loop_control:
     label: "{{ item.interface.name }}"
-
-- name: Create topology entries
-  template:
-    src: topology.yml.j2
-    dest: "{{ playbook_dir }}/staging/devices/{{ inventory_hostname }}.yml"

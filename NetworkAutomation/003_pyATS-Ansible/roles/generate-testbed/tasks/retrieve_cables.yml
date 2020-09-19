@@ -1,0 +1,31 @@
+- name: Retrieve all cables from NetBox
+  delegate_to: localhost
+  run_once: true
+  uri:
+    url: "{{ netbox_url }}/api/dcim/cables"
+    method: GET
+    return_content: yes
+    body_format: "json"
+    headers:
+      Authorization: "Token {{ netbox_token }}"
+  register: nb_output
+
+- name: Sets fact for cables
+  delegate_to: localhost
+  run_once: true
+  set_fact:
+    nb_cables_all: "{{ nb_output.json.results }}"
+
+- name: Retrieve cables for specific device from NetBox
+  uri:
+    url: "{{ netbox_url }}/api/dcim/cables?device={{ inventory_hostname }}"
+    method: GET
+    return_content: yes
+    body_format: "json"
+    headers:
+      Authorization: "Token {{ netbox_token }}"
+  register: nb_output
+
+- name: Sets fact for device cables
+  set_fact:
+    nb_cables_device: "{{ nb_output.json.results }}"

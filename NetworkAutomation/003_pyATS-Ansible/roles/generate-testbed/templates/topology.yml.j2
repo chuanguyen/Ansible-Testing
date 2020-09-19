@@ -3,6 +3,12 @@
 {% for interface in nb_interfaces %}
 {% if interface_ip_dict[interface.name] is defined %}
       {{ interface.name }}:
-        {{ interface_ip_dict[interface.name]['address'] }}
+        ipv4: {{ interface_ip_dict[interface.name]['address'] }}
+        type: {{ interface.type.value }}
+{% for cable in nb_cables_device %}
+{% if ( ( cable.termination_a.device.name == inventory_hostname ) and ( cable.termination_a.name == interface.name ) ) or ( ( cable.termination_b.device.name == inventory_hostname ) and ( cable.termination_b.name == interface.name ) ) %}
+        link: {{ cable.termination_a.device.name }}-to-{{ cable.termination_b.device.name }}
+{% endif %}
+{% endfor %}
 {% endif %}
 {% endfor %}

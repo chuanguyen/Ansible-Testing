@@ -1,3 +1,8 @@
+- name: Create topology entries
+  template:
+    src: topology.yml.j2
+    dest: "{{ playbook_dir }}/staging/devices/{{ inventory_hostname }}.yml"
+
 - name: Generate baseline pyATS testbed file
   run_once: true
   template:
