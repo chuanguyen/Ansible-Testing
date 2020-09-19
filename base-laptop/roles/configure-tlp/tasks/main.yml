@@ -23,6 +23,6 @@
 - name: Copy custom tlp configuration file to /etc/tlp.d
   become: true
   copy:
-    src: 10-my-tlp.conf
+    src: "{{ ansible_product_version }}/10-my-tlp.conf"
     dest: /etc/tlp.d
     mode: '0644'
