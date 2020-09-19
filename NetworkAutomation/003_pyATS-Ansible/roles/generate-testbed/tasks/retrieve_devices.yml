@@ -19,11 +19,19 @@
   loop_control:
     label: "{{ item.slug }}"
 
-- name: Retrieve network device from NetBox
+# Retrieves based on device_roles, which Ansible uses for device groups
+# Only 1-1 mapping for device and device roles
+- name: Retrieve device role of current device, which is the same for all hosts
+  run_once: true
+  delegate_to: localhost
+  set_fact:
+    nb_device_role: "{{ group_names[0].split('_') }}"
+
+- name: Retrieve network device from NetBox based on device role
   delegate_to: localhost
   run_once: true
   uri:
-    url: "{{ netbox_url }}/api/dcim/devices/?device_role=network_access"
+    url: "{{ netbox_url }}/api/dcim/devices/?device_role={{ nb_device_role[2:] | join('_') }}"
     method: GET
     return_content: yes
     body_format: "json"
