@@ -22,6 +22,9 @@
       tags: [ system, refresh ]
     - role: configure-virtualbox
       tags: [ system ]
+    # Before running, should test manually the proper undervolt value for stability
+    - role: configure-undervolting
+      tags: [ never, undervolt ]
     # Services
     - role: configure-systemd-services
       tags: [ services, refresh ]
