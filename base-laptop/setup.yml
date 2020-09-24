@@ -7,7 +7,7 @@
   ignore_errors: false
 
   roles:
-    # System-related
+    ### System-related
     - role: create-users
       tags: [ system ]
     - role: blacklist-kernel-modules
@@ -22,17 +22,19 @@
       tags: [ system, refresh ]
     - role: configure-virtualbox
       tags: [ system ]
+    - role: configure-cups-printers
+      tags: [ system ]
     # Before running, should test manually the proper undervolt value for stability
     - role: configure-undervolting
       tags: [ never, undervolt ]
-    # Services
+    ### Services
     - role: configure-systemd-services
       tags: [ services, refresh ]
     - role: configure-tlp
       tags: [ services, refresh ]
     - role: configure-ufw
       tags: [ services, refresh ]
-    # User-related
+    ### User-related
     - role: clone-my-repos
       tags: [ users, refresh ]
     - role: install-automation-pip-packages
@@ -42,8 +44,6 @@
     - role: create-home-links
       tags: [ users, refresh ]
     - role: update-homeConfig-files
-      tags: [ users, refresh ]
-    - role: configure-cups-printers
       tags: [ users, refresh ]
     - role: configure-albert
       tags: [ users, refresh ]
@@ -59,7 +59,7 @@
       tags: [ users, refresh ]
     - role: configure-SpeedCrunch
       tags: [ users, refresh ]
-    # KDE-related
+    ### KDE-related
     - role: configure-kde
       tags: [ users, refresh, kde ]
     - role: configure-konsole-yakuake
