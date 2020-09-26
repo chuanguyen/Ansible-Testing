@@ -14,15 +14,10 @@
     enabled: yes
     state: started
 
-- name: Enable TLP w/out rebooting system
-  become: true
-  shell:
-    cmd: "tlp start"
-  register: output
-
 - name: Copy custom tlp configuration file to /etc/tlp.d
   become: true
   copy:
     src: "{{ ansible_product_version }}/10-my-tlp.conf"
     dest: /etc/tlp.d
     mode: '0644'
+  notify: Enable TLP

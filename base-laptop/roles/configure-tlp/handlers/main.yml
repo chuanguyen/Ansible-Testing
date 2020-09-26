@@ -1,0 +1,6 @@
+# Enables TLP w/out rebooting
+- name: Enable TLP
+  become: true
+  shell:
+    cmd: "tlp start"
+  register: output
