@@ -12,11 +12,9 @@ devices:
     os: {{ device.platform.slug }}
     platform: {{ device.device_type.model  }}
     type: {{ pyats_device_types[device.device_type.slug]['custom_fields']['pyats_device_type'] }}
-    role: {{ device.device_role.slug }}
     connections:
       mgmt:
         ip: {{ device.primary_ip4.address | ipaddr('address') }}
         protocol: ssh
 {% endfor %}
 topology:
-  links:
