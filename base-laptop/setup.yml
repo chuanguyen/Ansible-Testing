@@ -39,8 +39,6 @@
       tags: [ users, refresh ]
     - role: install-automation-pip-packages
       tags: [ users, refresh ]
-    - role: install-vagrant
-      tags: [ users, refresh ]
     - role: create-home-links
       tags: [ users, refresh ]
     - role: update-homeConfig-files

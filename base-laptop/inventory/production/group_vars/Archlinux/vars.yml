@@ -28,6 +28,7 @@ system_packages:
   - vim
   - ufw
   - unzip
+  - vagrant
   - virtualbox
   - xorg-xinput
   - yakuake

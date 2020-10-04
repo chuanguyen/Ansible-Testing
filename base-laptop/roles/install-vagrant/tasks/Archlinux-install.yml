@@ -1,5 +1,7 @@
 ---
 
+# No longer used due to issues relating to this post: https://github.com/hashicorp/vagrant/issues/9908
+# Instead, will install from Arch community packages
 - name: Download latest Vagrant version into /usr/local/bin
   become: true
   unarchive:
