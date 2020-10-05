@@ -1,4 +1,4 @@
---- 
+---
 
 - name: Import public keys for AUR packages with problematic installs
   become: yes
@@ -7,14 +7,14 @@
   args:
     warn: False
   with_items: "{{ direct_app_gpg_keys }}"
-    
 
-- name: Import public keys from key server, rather then app website
-  become: yes
-  become_user: aur_builder
-  shell: "gpg --keyserver {{ item.server }} --recv-keys {{ item.key }}"
-  args: 
-    warn: False
-  with_items: "{{ key_server_gpg_keys }}"
-  loop_control: 
-    label: "{{ item.name }}"
+
+# - name: Import public keys from key server, rather then app website
+#   become: yes
+#   become_user: aur_builder
+#   shell: "gpg --keyserver {{ item.server }} --recv-keys {{ item.key }}"
+#   args:
+#     warn: False
+#   with_items: "{{ key_server_gpg_keys }}"
+#   loop_control:
+#     label: "{{ item.name }}"
