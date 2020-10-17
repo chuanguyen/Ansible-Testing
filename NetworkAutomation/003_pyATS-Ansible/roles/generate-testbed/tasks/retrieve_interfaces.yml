@@ -8,7 +8,6 @@
       Authorization: "Token {{ netbox_token }}"
   register: nb_output
 
-
 - name: Sets fact for device interfaces
   set_fact:
     nb_interfaces: "{{ nb_output.json.results }}"
