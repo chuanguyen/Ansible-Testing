@@ -2,6 +2,7 @@
   <ActionProperties>
     <Action shortcut="Ctrl+W" name="close-session"/>
     <Action shortcut="Ctrl+Shift+F" name="open-browser"/>
+    <Action shortcut="Ctrl+Shift+V" name="edit_paste"/>
     <Action shortcut="Ctrl+T" name="new-tab"/>
     <Action shortcut="Ctrl+D" name="clone-tab"/>
     <Action shortcut="Ctrl+N" name="new-window"/>
