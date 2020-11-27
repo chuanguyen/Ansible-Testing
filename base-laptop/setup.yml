@@ -22,6 +22,8 @@
       tags: [ system, refresh ]
     - role: configure-virtualbox
       tags: [ system ]
+    - role: configure-u2f
+      tags: [ system refresh ]
     - role: configure-cups-printers
       tags: [ system ]
     # Before running, should test manually the proper undervolt value for stability

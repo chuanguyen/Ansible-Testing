@@ -1,5 +1,12 @@
 ---
 
+- name: Ensure U2F prerequisites are installed
+  include_role:
+    name: install-system-packages
+  vars:
+    packages_to_install:
+      - pam-u2f
+
 - name: Add Ansible marker to services being configured
   become: True
   lineinfile:
@@ -7,7 +14,6 @@
     line: "### This file is managed by Ansible. Avoid making manual changes"
     insertbefore: "BOF"
     state: present
-    backup: yes
   with_items: "{{ u2f_pam_files }}"
   loop_control:
     label: "{{ item.path }}"

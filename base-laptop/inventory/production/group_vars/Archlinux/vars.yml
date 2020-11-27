@@ -17,6 +17,7 @@ system_packages:
   - kvantum-manjaro
   - latte-dock
   - okular
+  - pam-u2f
   - peek
   - python-pip
   - python-setuptools
