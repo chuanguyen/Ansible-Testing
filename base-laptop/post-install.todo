@@ -21,3 +21,4 @@ Post-install:
     ☐ Vivaldi
     ☐ Thunderbird
     ☐ Gdrive
+  ☐ Add Yubikeys via pam_u2f
