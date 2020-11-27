@@ -1,0 +1,26 @@
+---
+
+- name: Add Ansible marker to services being configured
+  become: True
+  lineinfile:
+    path: "{{ item.path }}"
+    line: "### This file is managed by Ansible. Avoid making manual changes"
+    insertbefore: "BOF"
+    state: present
+    backup: yes
+  with_items: "{{ u2f_pam_files }}"
+  loop_control:
+    label: "{{ item.path }}"
+
+- name: Modify pam to use u2f for various services with password as fallback
+  become: True
+  lineinfile:
+    path: "{{ item.path }}"
+    line: "{{ item.line }}"
+    insertafter: "{{ item.insertafter }}"
+    state: present
+    firstmatch: yes
+    backup: yes
+  with_items: "{{ u2f_pam_files }}"
+  loop_control:
+    label: "{{ item.path }}"
