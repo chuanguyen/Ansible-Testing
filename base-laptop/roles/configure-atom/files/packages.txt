@@ -1,2 +1,7 @@
-tasks
 fonts
+language-ansible
+linter
+linter-ansible-linting
+linter-ansible-syntax
+linter-pylint
+tasks

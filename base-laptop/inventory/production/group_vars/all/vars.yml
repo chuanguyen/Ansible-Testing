@@ -4,6 +4,9 @@ automation_pip_packages:
   - pyqt5
 
 system_pip_packages:
+  # Language linting
+  - ansible-lint
+  - pylint
   # ProtonVPN
   - protonvpn-cli
 
