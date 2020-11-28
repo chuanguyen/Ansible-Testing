@@ -2,3 +2,6 @@ u2f_pam_files:
   - path: "/etc/pam.d/sudo"
     line: "auth            sufficient      pam_u2f.so origin=pam://{{ ansible_hostname }} appid=pam://{{ ansible_hostname }} cue [cue_prompt=Touch your U2F device...]"
     insertafter: "^#%PAM-1.0"
+  - path: "/etc/pam.d/system-auth"
+    line: "auth       sufficient      pam_u2f.so origin=pam://{{ ansible_hostname }} appid=pam://{{ ansible_hostname }}"
+    insertafter: "^# on locked accounts."
