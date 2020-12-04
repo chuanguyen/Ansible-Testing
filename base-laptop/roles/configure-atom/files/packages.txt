@@ -1,3 +1,4 @@
+python-black
 fonts
 language-ansible
 linter
