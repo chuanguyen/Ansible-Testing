@@ -5,3 +5,6 @@
   template:
     src: "blacklist.j2"
     dest: "/etc/modprobe.d/my_blacklist.conf"
+    owner: root
+    group: root
+    mode: 0644

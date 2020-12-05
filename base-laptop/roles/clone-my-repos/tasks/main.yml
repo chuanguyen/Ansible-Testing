@@ -2,6 +2,7 @@
   file:
     path: "{{ item.base_folder }}"
     state: directory
+    mode: 0755
   with_items: "{{ automation_git_repos }}"
 
 - name: Clone my project repos

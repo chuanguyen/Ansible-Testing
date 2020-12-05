@@ -11,6 +11,7 @@
   file:
     path: "{{ ansible_env.HOME }}/kvantum"
     state: directory
+    mode: 0755
 
 - name: Extract kvantum thmemes to theme folder
   unarchive:

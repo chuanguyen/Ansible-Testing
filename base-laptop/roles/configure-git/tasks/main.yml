@@ -5,3 +5,4 @@
     src: .gitconfig
     dest: "{{ ansible_env.HOME }}/"
     backup: yes
+    mode: 0644

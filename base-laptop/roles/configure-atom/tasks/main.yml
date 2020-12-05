@@ -12,11 +12,13 @@
     src: config.cson
     dest: "{{ ansible_env.HOME}}/.atom/"
     backup: true
+    mode: 0644
 
 - name: Copy atom packages list
   copy:
     src: packages.txt
     dest: "{{ ansible_env.HOME }}/.atom/"
+    mode: 0644
 
 - name: Install atom packages
   shell: "apm install --packages-file {{ ansible_env.HOME }}/.atom/packages.txt"

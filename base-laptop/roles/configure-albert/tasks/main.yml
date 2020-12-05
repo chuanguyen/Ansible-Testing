@@ -11,11 +11,13 @@
   file:
     path: "{{ ansible_env.HOME }}/.config/albert"
     state: directory
+    mode: 0755
 
 - name: Copy main Albert configuration file
   copy:
     src: "{{ role_path }}/files/albert.conf"
     dest: "{{ ansible_env.HOME }}/.config/albert"
+    mode: 0644
 
 - name: Copy Albert search engine configuration
   copy:

@@ -4,11 +4,13 @@
   template:
     src: bookmarks.j2
     dest: "{{ role_path }}/files/bookmarks.xml"
+    mode: 0666
 
 - name: Copy bookmarks.xml to smb4k config location
   copy:
     src: bookmarks.xml
     dest: "{{ ansible_env.HOME }}/.local/share/smb4k/"
+    mode: 0644
 
 - name: Remove the generated bookmarks.xml file
   file:
@@ -19,3 +21,4 @@
   copy:
     src: smb4krc
     dest: "{{ ansible_env.HOME }}/.config/"
+    mode: 0644

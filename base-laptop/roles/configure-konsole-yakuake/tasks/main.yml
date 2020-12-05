@@ -4,6 +4,7 @@
   file:
     path: "{{ ansible_env.HOME }}/.local/share/{{ item }}"
     state: directory
+    mode: 0755
   with_items:
     - konsole
     - konsole/shortcuts
@@ -12,6 +13,7 @@
   copy:
     src: "{{ item }}"
     dest: "{{ ansible_env.HOME }}/.local/share/konsole"
+    mode: 0644
   with_fileglob: "files/konsole/root/*"
   loop_control:
     label: "{{ item | basename }}"
@@ -20,6 +22,7 @@
   copy:
     src: "{{ item }}"
     dest: "{{ ansible_env.HOME }}/.local/share/konsole/shortcuts"
+    mode: 0644
   with_fileglob: "files/konsole/shortcuts/*"
   loop_control:
     label: "{{ item | basename }}"
@@ -28,6 +31,7 @@
   copy:
     src: "{{ item }}"
     dest: "{{ ansible_env.HOME }}/.config/"
+    mode: 0644
   with_fileglob: "files/konsole/config/*"
   loop_control:
     label: "{{ item | basename }}"
@@ -36,6 +40,7 @@
   copy:
     src: "{{ item }}"
     dest: "{{ ansible_env.HOME }}/.config/"
+    mode: 0644
   with_fileglob: "files/yakuake/*"
   loop_control:
     label: "{{ item | basename }}"
