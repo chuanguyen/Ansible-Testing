@@ -12,4 +12,5 @@
     dest: "{{ item.dest }}"
     recursive: yes
     update: no
+    version: "master"
   with_items: "{{ automation_git_repos }}"
