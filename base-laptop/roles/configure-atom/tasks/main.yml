@@ -10,7 +10,7 @@
 - name: Copy atom configuration file
   copy:
     src: config.cson
-    dest: "{{ ansible_env.HOME}}/.atom/"
+    dest: "{{ ansible_env.HOME }}/.atom/"
     backup: true
     mode: 0644
 

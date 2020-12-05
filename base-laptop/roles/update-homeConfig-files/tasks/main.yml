@@ -14,7 +14,7 @@
   blockinfile:
     path: "{{ item.path }}"
     block: "{{ lookup('file', item.src_file) }}"
-    marker: "{{ item.marker}}"
+    marker: "{{ item.marker }}"
   with_items: "{{ home_files.EOF }}"
   loop_control:
     label: "Updating {{ item.path }}"
