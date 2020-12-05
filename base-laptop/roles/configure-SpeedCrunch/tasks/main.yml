@@ -1,3 +1,10 @@
+- name: Ensure SpeedCrunch is installed
+  include_role:
+    name: install-system-packages
+  vars:
+    packages_to_install:
+      - speedcrunch
+
 - name: Copy SpeedCrunch configuration
   copy:
     src: SpeedCrunch.ini

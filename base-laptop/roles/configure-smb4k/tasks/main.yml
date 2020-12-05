@@ -1,5 +1,12 @@
 ---
 
+- name: Ensure smb4k is installed
+  include_role:
+    name: install-system-packages
+  vars:
+    packages_to_install:
+      - smb4k
+
 - name: Generate smb4k bookmarks comtent
   template:
     src: bookmarks.j2
