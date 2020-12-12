@@ -4,6 +4,7 @@ system_packages:
   - auracle
   - bash-completion
   - calibre
+  - darktable
   - discord
   - flameshot
   - gnucash
