@@ -2,6 +2,7 @@
   file:
     path: "/etc/pacman.d"
     state: directory
+    mode: 0755
 
 - name: Copy pacman hook file to clean up pacman cache after each run
   become: true
@@ -14,3 +15,4 @@
 - name: Retrieve the 5 fastest HTTPS mirrors
   become: True
   shell: "pacman-mirrors --api --protocol https --fasttrack 5 && pacman -Syy"
+  changed_when: false

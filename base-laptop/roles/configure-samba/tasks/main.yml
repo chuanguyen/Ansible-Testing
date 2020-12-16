@@ -9,6 +9,7 @@
   template:
     src: smb.j2
     dest: "{{ role_path }}/files/smb.conf"
+    mode: 0644
 
 - name: Copy custom smb.conf and replace existing system version
   become: true
@@ -28,6 +29,7 @@
   file:
     path: "{{ item }}"
     state: directory
+    mode: 0755
   with_items: "{{ samba_share_folders }}"
   when: "not samba_share_folders"
 

@@ -3,10 +3,11 @@
 - name: Import public keys for AUR packages with problematic installs
   become: yes
   become_user: aur_builder
-  shell: "curl {{ item }} | gpg --import"
+  shell: "set -o pipefail && curl {{ item }} | gpg --import"
   args:
     warn: False
   with_items: "{{ direct_app_gpg_keys }}"
+  changed_when: true
 
 
 # - name: Import public keys from key server, rather then app website

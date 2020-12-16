@@ -27,8 +27,9 @@
     seconds: 10
 
 - name: Find whether aur_builder has any processes running
-  shell: "ps -u aur_builder | awk '{if(NR>1)print $1 }'"
+  shell: "set -o pipefail && ps -u aur_builder | awk '{if(NR>1)print $1 }'"
   register: result
+  changed_when: true
 
 - name: Set fact for aur_builder PIDs
   set_fact:

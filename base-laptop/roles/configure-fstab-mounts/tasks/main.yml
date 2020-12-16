@@ -5,6 +5,9 @@
   file:
     path: "{{ item.value }}"
     state: directory
+    mode: 0755
+    owner: root
+    group: root
   with_dict: "{{ fstab_mount_dirs }}"
   loop_control:
     label: "{{ item.value }}"
@@ -19,6 +22,7 @@
   template:
     src: fstab-EOF.j2
     dest: "{{ role_path }}/files/fstab-EOF"
+    mode: 0644
 
 - name: Inserting EOF in /etc/fstab
   become: True
