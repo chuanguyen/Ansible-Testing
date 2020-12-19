@@ -24,7 +24,7 @@
   file:
     path: "/usr/share/ppd/{{ item }}"
     state: directory
-    mode: 0755s
+    mode: 0755
   with_items: "{{ printer_manufacturers }}"
 
 - name: Retrieve printer PPDs from OpenPrinting
