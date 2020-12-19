@@ -1,0 +1,44 @@
+---
+- name: "Mock running VLANs from parser"
+  set_fact:
+    run_vlans:
+      - 10
+      - 11
+      - 12
+      - 20
+      - 30
+      - 40
+      - 50
+      - 60
+
+- name: "Mock intended VLANs from vars file"
+  set_fact:
+    int_vlans:
+      - 10
+      - 11
+      - 12
+      - 25
+      - 35
+      - 40
+      - 45
+      - 50
+      - 60
+
+- name: "Find VLAN differences between intended and running state"
+  set_fact:
+    vlan_updates: "{{ int_vlans | interface_vlan_diff(run_vlans) }}"
+
+- name: "Print VLAN comparison data"
+  debug:
+    msg: "{{ vlan_updates }}"
+
+- name: "ASSERT >> Ensure VLAN difference succeeded"
+  assert:
+    that:
+      - "vlan_updates['vlans_added'] | length == 3"
+      - "vlan_updates['vlans_kept'] | length == 6"
+      - "vlan_updates['vlans_removed'] | length == 2"
+      # Netcommon vlan_parser ran to order VLANs in ascending order and parse VLANs into ranges
+      - "vlan_updates['vlans_added'] | ansible.netcommon.vlan_parser == ['25,35,45']"
+      - "vlan_updates['vlans_kept'] | ansible.netcommon.vlan_parser == ['10-12,40,50,60']"
+      - "vlan_updates['vlans_removed'] | ansible.netcommon.vlan_parser == ['20,30']"
