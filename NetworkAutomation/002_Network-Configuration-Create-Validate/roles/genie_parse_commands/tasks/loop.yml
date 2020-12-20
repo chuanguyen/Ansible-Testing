@@ -5,10 +5,6 @@
     genie_command_key: "{{ genie_parse_command.key }}"
     genie_command: "{{ genie_parse_command.value }}"
 
-- name: Read in parse_genie role
-  include_role:
-    name: clay584.parse_genie
-
 - name: Retrieve interface information
   ios_command:
     commands:
@@ -17,7 +13,7 @@
 
 - name: Set facts using Genie Filter
   set_fact:
-    genie_parsed_output: "{{ output['stdout'][0] | parse_genie(command=genie_command, os=ansible_network_os) }}"
+    genie_parsed_output: "{{ output['stdout'][0] | clay584.genie.parse_genie(command=genie_command, os=ansible_network_os) }}"
 
 ### Note down the combine plugin to merge hashes / dictionaries
 - name: Append parsed data to list
