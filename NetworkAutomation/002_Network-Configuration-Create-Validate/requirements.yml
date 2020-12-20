@@ -1,3 +1,4 @@
 # Defines required Ansible Collections
 collections:
   - name: cisco.ios
+  - name: clay584.genie
