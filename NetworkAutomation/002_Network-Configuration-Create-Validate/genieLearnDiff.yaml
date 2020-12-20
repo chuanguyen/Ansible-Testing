@@ -1,0 +1,32 @@
+---
+
+- name: "PLAY: Genie Learn Collection Testing"
+  hosts: r1
+  connection: "{{ ansible_connection }}"
+  gather_facts: no
+
+  tasks:
+    - name: "ROLE: Baseline config with Genie"
+      include_role:
+        name: genie-learn-diff
+      vars:
+        genie_learn_feature: "interface"
+
+    - name: "Enable FastEthernet 0/1"
+      cisco.ios.ios_interface:
+        name: "FastEthernet0/1"
+        enabled: yes
+        state: present
+
+    - name: "ROLE: Capture diff with Genie"
+      include_role:
+        name: genie-learn-diff
+      vars:
+        genie_learn_feature: "interface"
+        genie_can_diff: true
+
+    - name: "Enable FastEthernet 0/1"
+      cisco.ios.ios_interface:
+        name: "FastEthernet0/1"
+        enabled: no
+        state: present

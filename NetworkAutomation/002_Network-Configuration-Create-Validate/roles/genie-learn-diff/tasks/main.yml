@@ -1,0 +1,41 @@
+---
+
+- name: "Input data validation"
+  assert:
+    that:
+      - "genie_learn_feature is defined"
+    msg: "genie_learn_feature isn't defined; specify Genie feature to learn"
+  delegate_to: localhost
+
+- name: Create diff directory structure
+  file:
+    path: "{{ genie_diff_dir }}/{{ inventory_hostname }}"
+    state: directory
+
+- block:
+  - name: "Learn baseline of the {{ genie_learn_feature }} Genie feature"
+    clay584.genie.learn_genie:
+      host: "{{ ansible_host }}"
+      username: "{{ ansible_user }}"
+      password: "{{ ansible_password }}"
+      os: "{{ ansible_network_os }}"
+      feature: interface
+    register: genie_learn_baseline
+
+  - name: Create baseline data to file
+    copy:
+      content: "{{ genie_learn_baseline }}"
+      dest: "{{ genie_diff_dir }}/{{ inventory_hostname }}/genie_{{ genie_learn_feature }}_baseline"
+    delegate_to: localhost
+  when: not genie_can_diff
+
+- name: "Diff the {{ genie_learn_feature }} Genie feature"
+  clay584.genie.learn_genie:
+    host: "{{ ansible_host }}"
+    username: "{{ ansible_user }}"
+    password: "{{ ansible_password }}"
+    os: "{{ ansible_network_os }}"
+    feature: interface
+    compare_to: "{{ lookup('file', '{{ genie_diff_dir }}/{{ inventory_hostname }}/genie_{{ genie_learn_feature }}_baseline') }}"
+  diff: true
+  when: genie_can_diff | bool
