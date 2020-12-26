@@ -1,0 +1,27 @@
+---
+
+# Bug: Setting state to absent will only remove the SSH keys if defined and leave username entry
+# Resolving involves running a purge after to clear all usernames
+- name: Remove network users defined as absent
+  block:
+    - name: "TASK: Clear network user pubkey entries"
+      cisco.ios.ios_user:
+        aggregate: "{{ absent_network_ssh_users }}"
+        state: "absent"
+      notify:
+        - "TASK: Purge network username entries"
+
+    - name: "TASK: Flush Handlers"
+      meta: flush_handlers
+  when:
+    - "absent_network_ssh_users is defined"
+    - "absent_network_ssh_users is iterable"
+
+- name: "TASK: Create network users"
+  cisco.ios.ios_user:
+    aggregate: "{{ network_ssh_users }}"
+    state: "present"
+    purge: "yes"
+    update_password: "on_create"
+  when:
+    - "network_ssh_users[0].name is defined"

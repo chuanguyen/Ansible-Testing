@@ -1,0 +1,6 @@
+---
+
+network_ssh_users:
+
+# List storing SSH users to remove from network devices
+absent_network_ssh_users:
