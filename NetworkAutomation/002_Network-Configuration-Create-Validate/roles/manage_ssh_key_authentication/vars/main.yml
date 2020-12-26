@@ -3,4 +3,5 @@
 network_ssh_users:
 
 # List storing SSH users to remove from network devices
+# Users must be added to list to ensure pubkey entries are removed
 absent_network_ssh_users:
