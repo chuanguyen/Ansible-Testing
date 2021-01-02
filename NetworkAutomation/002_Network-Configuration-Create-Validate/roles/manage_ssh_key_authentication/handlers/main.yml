@@ -1,4 +1,0 @@
----
-- name: "TASK: Purge network username entries"
-  cisco.ios.ios_user:
-    purge: "yes"

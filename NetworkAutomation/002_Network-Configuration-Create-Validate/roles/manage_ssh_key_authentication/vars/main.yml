@@ -1,7 +1,12 @@
 ---
 
 network_ssh_users:
+  # - name: "test1"
+  #   nopassword: "no"
+  #   password_type: "password"
+  #   sshkey: "{{ lookup('file', 'id_rsa.pub') }}"
+  #   privilege: 15
 
 # List storing SSH users to remove from network devices
-# Users must be added to list to ensure pubkey entries are removed
 absent_network_ssh_users:
+  - name: "test1"
