@@ -22,3 +22,4 @@ Post-install:
     ☐ Thunderbird
     ☐ Gdrive
   ☐ Add Yubikeys via pam_u2f
+  ☐ Retrieve darktable config backup
