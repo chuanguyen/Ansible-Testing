@@ -59,6 +59,8 @@
       tags: [ users, refresh ]
     - role: configure-SpeedCrunch
       tags: [ users, refresh ]
+    - role: configure-signal-desktop
+      tags: [ users, refresh ]
     ### KDE-related
     - role: configure-kde
       tags: [ users, refresh, kde ]
