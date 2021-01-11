@@ -1,0 +1,12 @@
+---
+- name: Create signal-desktop entry to start in tray
+  copy:
+    src: signal-desktop.desktop
+    dest: "{{ ansible_env.HOME }}/.local/share/applications/"
+    mode: 0744
+
+- name: Create auto-start signal-desktop entry
+  copy:
+    src: signal-desktop.desktop
+    dest: "{{ ansible_env.HOME }}/.config/autostart/"
+    mode: 0644

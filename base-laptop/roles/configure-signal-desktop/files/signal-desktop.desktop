@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Signal
+Comment=Signal Private Messenger for Linux
+Icon=signal-desktop
+Exec=signal-desktop --start-in-tray
+Terminal=false
+Categories=Network;InstantMessaging;
+StartupWMClass=Signal

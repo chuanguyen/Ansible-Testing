@@ -24,6 +24,7 @@ system_packages:
   - python-setuptools
   - python-virtualenv
   - samba
+  - signal-desktop
   - speedcrunch
   - smb4k
   - veracrypt
