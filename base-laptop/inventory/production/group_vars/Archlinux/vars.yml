@@ -20,6 +20,7 @@ system_packages:
   - okular
   - pam-u2f
   - peek
+  - pyenv
   - python-pip
   - python-setuptools
   - python-virtualenv
