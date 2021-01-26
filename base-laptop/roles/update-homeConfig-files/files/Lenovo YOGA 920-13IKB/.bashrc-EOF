@@ -16,9 +16,6 @@ xmodmap -e "keycode 22 = Caps_Lock"
 # Ensure ~/bin is in PATH
 export PATH="$HOME/bin:$PATH"
 
-# Load pyenv automatically by adding
-# the following to ~/.bashrc:
-
+# Load pyenv automatically
 export PATH="$HOME/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
