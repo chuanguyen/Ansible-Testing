@@ -26,6 +26,9 @@
       tags: [ system refresh ]
     - role: configure-cups-printers
       tags: [ system ]
+    ### Remove if pulse audio fixes detecting microphone
+    - role: configure-pulse-audio
+      tags: [ system, refresh ]
     # Before running, should test manually the proper undervolt value for stability
     - role: configure-undervolting
       tags: [ never, undervolt ]

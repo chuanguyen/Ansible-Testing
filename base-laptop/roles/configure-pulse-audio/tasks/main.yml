@@ -1,0 +1,10 @@
+---
+
+- name: Inserting before patterns in /etc/pulse/default.pa
+  become: true
+  blockinfile:
+    path: "/etc/pulse/default.pa"
+    block: "{{ lookup('file', '{{ ansible_product_version }}/load_hw_device_manual.txt') }}"
+    marker: "### {mark} Ansible PulseAudio config ###"
+    insertbefore: "^### Automatically load driver modules depending on the hardware available"
+    backup: yes
