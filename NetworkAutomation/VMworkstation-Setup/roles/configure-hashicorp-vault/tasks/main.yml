@@ -1,0 +1,17 @@
+- name: "TASK: Ensures vault data folder exists"
+  become: true
+  file:
+    path: "/vault/data"
+    state: directory
+    owner: vault
+    group: vagrant
+    mode: 0774
+
+- name: "TASK: Copies the HashiCorp Vault config file"
+  become: true
+  copy:
+    src: config.hcl
+    dest: /etc/vault.d
+    owner: vault
+    group: vagrant
+    mode: 0644
