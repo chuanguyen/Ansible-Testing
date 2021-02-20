@@ -16,6 +16,7 @@
     - install-snap-packages
     - install-pip-packages
     - install-docker-ce
+    - install-hashicorp-vault
     - create-symlinks
     - update-homeConfig-files
     - configure-users

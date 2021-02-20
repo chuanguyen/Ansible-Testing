@@ -1,0 +1,17 @@
+---
+- name: "TASK: Add Hashicorp Vault GPG key"
+  become: true
+  apt_key:
+    url: "{{ hashicorp_vault.gpg_key }}"
+    state: present
+
+- name: "TASK: Add Hashicorp Vault APT repository"
+  become: true
+  apt_repository:
+    repo: "{{ hashicorp_vault.apt_repo }}"
+
+- include_role:
+    name: install-system-packages
+  vars:
+    packages_to_install:
+      - vault

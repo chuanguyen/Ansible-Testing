@@ -4,10 +4,15 @@ docker:
   gpg_key: "https://download.docker.com/linux/ubuntu/gpg"
   docker_ce_apt_repo: "deb [arch=amd64] https://download.docker.com/linux/{{ansible_distribution|lower}} {{ansible_distribution_release}} stable"
 
+hashicorp_vault:
+  gpg_key: "https://apt.releases.hashicorp.com/gpg"
+  apt_repo: "deb [arch=amd64] https://apt.releases.hashicorp.com {{ ansible_facts.lsb.codename }} main"
+
 system_packages:
   - apt-transport-https
   - ca-certificates
   - curl
+  - vault
   - python3-pip
   - python3-setuptools
   - snapd
