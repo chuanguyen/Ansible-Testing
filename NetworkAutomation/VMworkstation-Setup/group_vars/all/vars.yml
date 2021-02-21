@@ -12,7 +12,6 @@ system_packages:
   - apt-transport-https
   - ca-certificates
   - curl
-  - vault
   - python3-pip
   - python3-setuptools
   - snapd
