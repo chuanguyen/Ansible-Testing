@@ -1,0 +1,19 @@
+aaa new-model
+ip radius source-interface FastEthernet0/0
+{% for radius_group,radius_servers in radius_groups.items() %}
+{% for radius_server in radius_servers %}
+radius server {{ radius_server.name }}
+  address ipv4 {{ radius_server.fqdn }} auth-port {{ radius_server.authentication_port }} acct-port {{ radius_server.accounting_port }}
+  key 0 {{ radius_server.key }}
+exit
+{% endfor %}
+{% endfor %}
+{% for radius_group,radius_servers in radius_groups.items() %}
+aaa group server radius {{ radius_group }}
+{% for radius_server in radius_servers %}
+  server name {{ radius_server.name }}
+{% endfor %}
+exit
+{% endfor %}
+aaa authentication login default group {{ radius_group_network_authentication }} local
+aaa authorization exec default group {{ radius_group_network_authentication }} local

@@ -1,0 +1,5 @@
+---
+- name: "TASK: Configure AAA RADIUS Authentication"
+  ios_config:
+    src: "ios_aaa.j2"
+  changed_when: false

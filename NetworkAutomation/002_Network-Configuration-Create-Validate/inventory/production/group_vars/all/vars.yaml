@@ -34,6 +34,15 @@ hsrp_authentication: "{{ vault_hsrp_authentication }}"
 netbox_url: "{{ vault_netbox_url }}"
 netbox_token: "{{ vault_netbox_token }}"
 
+radius_groups:
+  RadiusServers:
+    - fqdn: "192.168.100.100"
+      name: "freeRad1"
+      authentication_port: 1812
+      accounting_port: 1813
+      key: "labNetwork123"
+
+radius_group_network_authentication: "RadiusServers"
 ### Replaced in Netbox
 # syslog:
 #   - 192.168.1.1
