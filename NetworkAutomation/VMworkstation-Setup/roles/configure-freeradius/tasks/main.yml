@@ -1,0 +1,19 @@
+---
+- include_role:
+    name: install-system-packages
+  vars:
+    packages_to_install:
+      - freeradius
+
+- name: "TASK: Add RADIUS clients"
+  become: true
+  blockinfile:
+    path: "{{ item.path }}"
+    block: "{{ lookup('file', item.src_file) }}"
+    marker: "{{ item.marker}}"
+    validate: /usr/sbin/freeradius -CX %s
+  with_items: "{{ freeradius_files.EOF }}"
+  loop_control:
+    label: "Updating {{ item.path }}"
+  notify:
+    - Restart freeradius

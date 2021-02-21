@@ -1,0 +1,8 @@
+freeradius_files:
+  EOF:
+    - src_file: "clients.conf"
+      marker: "### {mark} FreeRadius clients.conf EOF ###"
+      path: "{{ freeradius_base_path }}/clients.conf"
+    - src_file: "users"
+      marker: "### {mark} FreeRadius users EOF ###"
+      path: "{{ freeradius_base_path }}/users"
