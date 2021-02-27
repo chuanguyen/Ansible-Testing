@@ -1,0 +1,12 @@
+---
+- name: "TASK: Retrieve iPXE chainload file"
+  become: true
+  get_url:
+    url: "{{ item }}"
+    dest: "/var/lib/tftpboot"
+    owner: tftp
+    group: tftp
+    mode: 0664
+  with_items:
+    - "http://boot.ipxe.org/undionly.kpxe"
+    - "https://boot.ipxe.org/ipxe.efi"
