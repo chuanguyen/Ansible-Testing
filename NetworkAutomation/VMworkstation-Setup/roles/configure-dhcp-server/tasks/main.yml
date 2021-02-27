@@ -1,0 +1,21 @@
+---
+- include_role:
+    name: install-system-packages
+  vars:
+    packages_to_install:
+      - isc-dhcp-server
+
+- name: "TASK: Configure DHCP server"
+  become: true
+  template:
+    src: "{{ item | basename }}.j2"
+    dest: "{{ item }}"
+    backup: yes
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - "Restart isc-dhcp-server"
+  with_items:
+    - "/etc/dhcp/dhcpd.conf"
+    - "/etc/default/isc-dhcp-server"

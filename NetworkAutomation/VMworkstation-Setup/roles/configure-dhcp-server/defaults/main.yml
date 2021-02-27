@@ -1,0 +1,16 @@
+---
+dhcp_interfacesv4: "eth1"
+
+dhcp_default_lease_time: 600
+dhcp_max_lease_time: 7200
+
+dhcp_pools:
+  - subnet: "192.168.100.0"
+    netmask: "255.255.255.0"
+    range: "192.168.100.50 192.168.100.55"
+    options:
+      # IPs can't be enclosed in quotes
+      # Only hostnames can be
+      routers: "192.168.100.254"
+      # Domain must be enclosed in quotes
+      "domain-name": '"test.domain"'
