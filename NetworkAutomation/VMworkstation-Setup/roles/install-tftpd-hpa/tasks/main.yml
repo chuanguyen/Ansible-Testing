@@ -1,0 +1,31 @@
+---
+- include_role:
+    name: install-system-packages
+  vars:
+    packages_to_install:
+      - tftp-hpa
+
+- name: "TASK: Enable and start TFTP service"
+  service:
+    name: tftpd-hpa
+    state: started
+    enabled: True
+
+- name: "TASK: Configure tftpd-hpa"
+  become: true
+  copy:
+    src: "tftpd-hpa"
+    dest: "/etc/default/tftpd-hpa"
+    backup: yes
+    owner: root
+    group: root
+    mode: 0644
+  notify: "Restart tftpd-hpa"
+
+- name: "TASK: Configure permissions for tftp directory"
+  become: true
+  file:
+    path: /var/lib/tftpboot
+    state: directory
+    owner: tftp
+    mode: 0755
