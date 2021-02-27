@@ -1,3 +1,5 @@
+# Ansible managed
+
 radiusTester Cleartext-Password := "radiusTester"
              Service-Type        = NAS-Prompt-User,
              cisco-avpair        = "shell:priv-lvl=15"
