@@ -8,7 +8,7 @@
 
 - name: Copy lattedockrc file
   copy:
-    src: "{{ ansible_product_version }}/lattedockrc"
+    src: "lattedockrc"
     dest: "{{ ansible_env.HOME }}/.config/"
     mode: 0600
 
@@ -17,6 +17,6 @@
     src: "{{ item }}"
     dest: "{{ ansible_env.HOME }}/.config/latte/"
     mode: 0644
-  with_fileglob: "{{ ansible_product_version }}/layouts/*"
+  with_fileglob: "layouts/*"
   loop_control:
     label: "{{ item | basename }}"
