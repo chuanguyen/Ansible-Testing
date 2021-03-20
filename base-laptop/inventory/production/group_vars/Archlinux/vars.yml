@@ -1,12 +1,10 @@
 system_packages:
-  - albert
   - atom
   - auracle
   - bash-completion
   - calibre
   - darktable
   - discord
-  - flameshot
   - gnucash
   - git
   - gparted
@@ -51,6 +49,7 @@ system_packages:
   - dialog
 
 aur_packages:
+  - albert
   - dropbox
   - google-chrome
   - kazam
