@@ -1,2 +1,2 @@
 sudo pacman -Syu --noconfirm
-sudo pacman -S --noconfirm --needed ansible
+sudo pacman -S --noconfirm --needed ansible base-devel
