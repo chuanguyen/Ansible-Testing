@@ -18,6 +18,7 @@ system_packages:
   - okular
   - pam-u2f
   - peek
+  - perl-image-exiftool
   - pyenv
   - python-pip
   - python-setuptools
@@ -52,6 +53,7 @@ aur_packages:
   - albert
   - dropbox
   - google-chrome
+  - jexiftoolgui
   - kazam
   - otpclient
   - postman # May error out due to problems w/ package
