@@ -22,3 +22,7 @@ automation_git_repos:
   - repo: "https://{{ github_access_token }}@github.com/chuanguyen/.myConfigFiles.git"
     dest: "{{ ansible_env.HOME }}/.myConfigFiles"
     base_folder: "{{ ansible_env.HOME }}"
+
+  - repo: "https://{{ github_access_token }}@github.com/chuanguyen/Docker-Testing.git"
+    dest: "{{ ansible_env.HOME }}/Docker-Testing"
+    base_folder: "{{ ansible_env.HOME }}"
