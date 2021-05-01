@@ -5,6 +5,7 @@ system_packages:
   - calibre
   - darktable
   - discord
+  - docker
   - gnucash
   - git
   - gparted
