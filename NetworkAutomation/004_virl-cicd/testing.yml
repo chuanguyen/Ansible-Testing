@@ -1,0 +1,10 @@
+---
+
+- name: "Test"
+  hosts: "iosv"
+  connection: network_cli
+  gather_facts: false
+
+  tasks:
+    - wait_for:
+        commands: "show version"
