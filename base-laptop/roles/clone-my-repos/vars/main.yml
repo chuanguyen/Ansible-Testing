@@ -1,28 +1,28 @@
 automation_git_repos:
-  - repo: https://github.com/chuanguyen/Ansible-Testing.git
+  - repo: git@github.com:chuanguyen/Ansible-Testing.git
     dest: "{{ ansible_env.HOME }}/automation/Ansible-Testing"
     base_folder: "{{ ansible_env.HOME }}/automation"
 
-  - repo: https://github.com/chuanguyen/Python-Projects.git
+  - repo: git@github.com:chuanguyen/Python-Projects.git
     dest: "{{ ansible_env.HOME }}/automation/Python-Projects"
     base_folder: "{{ ansible_env.HOME }}/automation"
 
-  - repo: https://github.com/chuanguyen/GNS3-My-Projects.git
+  - repo: git@github.com:chuanguyen/GNS3-My-Projects.git
     dest: "{{ ansible_env.HOME }}/GNS3/projects/GNS3-My-Projects"
     base_folder: "{{ ansible_env.HOME }}/GNS3/projects"
 
-  - repo: https://github.com/chuanguyen/netbox-docker.git
+  - repo: git@github.com:chuanguyen/netbox-docker.git
     dest: "{{ ansible_env.HOME }}/automation/netbox-docker"
     base_folder: "{{ ansible_env.HOME }}/automation"
 
-  - repo: https://{{ github_access_token }}@github.com/chuanguyen/.myScripts.git
+  - repo: git@github.com:chuanguyen/.myScripts.git
     dest: "{{ ansible_env.HOME }}/bin/.myScripts"
     base_folder: "{{ ansible_env.HOME }}/bin"
 
-  - repo: "https://{{ github_access_token }}@github.com/chuanguyen/.myConfigFiles.git"
+  - repo: "git@github.com:chuanguyen/.myConfigFiles.git"
     dest: "{{ ansible_env.HOME }}/.myConfigFiles"
     base_folder: "{{ ansible_env.HOME }}"
 
-  - repo: "https://{{ github_access_token }}@github.com/chuanguyen/Docker-Testing.git"
+  - repo: "git@github.com:chuanguyen/Docker-Testing.git"
     dest: "{{ ansible_env.HOME }}/Docker-Testing"
     base_folder: "{{ ansible_env.HOME }}"
