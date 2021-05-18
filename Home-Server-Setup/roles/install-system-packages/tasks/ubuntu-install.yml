@@ -1,0 +1,11 @@
+- name: "TASK: Install system packages"
+  become: true
+  apt:
+    name: "{{ packages_to_install }}"
+    update_cache: yes
+    state: "present"
+
+- name: "TASK: Upgrade system"
+  become: true
+  apt:
+    upgrade: "{{ upgrade_system_packages }}"
