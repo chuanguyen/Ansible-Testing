@@ -1,0 +1,26 @@
+---
+
+- name: Ensure ufw is installed
+  include_role:
+    name: install-system-packages
+  vars:
+    packages_to_install:
+      - ufw
+
+- name: Ensure UFW is enabled
+  become: true
+  ufw:
+    state: enabled
+
+- name: Configure UFW rules
+  become: true
+  ufw:
+    comment: "{{ item.comment }}"
+    rule: "{{ item.rule }}"
+    delete: "{{ item.delete }}"
+    from_ip: "{{ item.from_ip }}"
+    from_port: "{{ item.from_port }}"
+    to_ip: "{{ item.to_ip }}"
+    to_port: "{{ item.to_port }}"
+    proto: "{{ item.proto }}"
+  with_items: "{{ ufw_rules }}"
