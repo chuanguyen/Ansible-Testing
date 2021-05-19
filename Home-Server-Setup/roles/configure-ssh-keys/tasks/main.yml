@@ -1,0 +1,11 @@
+---
+
+- name: "TASK: Install authorized SSH keys"
+  authorized_key:
+    exclusive: yes
+    comment: "Ansible managed key"
+    user: "{{ ansible_user }}"
+    state: "present"
+    key: "{{ lookup('file', item) }}"
+  with_fileglob:
+    - "ssh_keys/*"
