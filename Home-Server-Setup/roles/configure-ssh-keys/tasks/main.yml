@@ -1,7 +1,7 @@
 ---
 
 - name: "TASK: Install authorized SSH keys"
-  authorized_key:
+  ansible.posix.authorized_key:
     exclusive: yes
     comment: "Ansible managed key"
     user: "{{ ansible_user }}"

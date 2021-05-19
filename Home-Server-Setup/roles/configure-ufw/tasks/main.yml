@@ -9,12 +9,12 @@
 
 - name: Ensure UFW is enabled
   become: true
-  ufw:
+  community.general.ufw:
     state: enabled
 
 - name: Configure UFW rules
   become: true
-  ufw:
+  community.general.ufw:
     comment: "{{ item.comment }}"
     rule: "{{ item.rule }}"
     delete: "{{ item.delete }}"
