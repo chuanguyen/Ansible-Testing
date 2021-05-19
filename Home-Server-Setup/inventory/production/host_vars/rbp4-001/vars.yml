@@ -1,0 +1,12 @@
+system_packges:
+- net-tools
+
+ufw_rules:
+- comment: "Permits incoming SSH connections"
+  rule: allow
+  delete: no
+  from_ip: any
+  to_ip: any
+  from_port: null
+  to_port: '22'
+  proto: tcp
