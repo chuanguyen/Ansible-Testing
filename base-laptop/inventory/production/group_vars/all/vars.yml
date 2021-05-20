@@ -22,3 +22,5 @@ family_nas_FQDN: "{{ vault_family_nas_FQDN }}"
 
 # Github
 github_access_token: "{{ vault_github_access_token }}"
+
+ssh_config_hosts: "{{ vault_ssh_config_hosts }}"
