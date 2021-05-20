@@ -9,3 +9,15 @@
     key: "{{ lookup('file', item) }}"
   with_fileglob:
     - "ssh_keys/*"
+
+- name: "TASK: Configure SSHD"
+  become: true
+  template:
+    src: sshd.conf.j2
+    dest: /etc/ssh/sshd_config.d/10-ansible-sshd.conf
+    owner: root
+    group: root
+    mode: 0644
+    validate: '/usr/sbin/sshd -T -f %s'
+  notify:
+  - "restart sshd"
