@@ -1,0 +1,17 @@
+---
+
+- name: "PLAY: Baselining servers"
+  hosts: rbp4-001
+  gather_facts: true
+
+  roles:
+    - role: install-system-packages
+      tags: [ baseline ]
+    - role: configure-hostname
+      tags: [ baseline ]
+    - role: configure-ssh-server
+      tags: [ baseline, refresh ]
+    - role: configure-ufw
+      tags: [ baseline, refresh, security ]
+    - role: configure-fail2ban
+      tags: [ baseline, refresh, security ]
