@@ -17,6 +17,15 @@
 - name: "TASK: Create fail2ban configuration file"
   become: true
   template:
+    src: "fail2ban.local.j2"
+    dest: /etc/fail2ban/fail2ban.local
+    mode: 0644
+  notify:
+  - "restart fail2ban"
+
+- name: "TASK: Create fail2ban jail file"
+  become: true
+  template:
     src: "jail.local.j2"
     dest: /etc/fail2ban/jail.local
     mode: 0644
