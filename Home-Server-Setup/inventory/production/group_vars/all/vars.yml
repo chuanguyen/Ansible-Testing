@@ -1,0 +1,3 @@
+---
+
+autofs_nfs_shares: "{{ vault_autofs_nfs_shares }}"
