@@ -1,0 +1,13 @@
+---
+
+- name: "TASK: Configure local users"
+  become: true
+  user:
+    name: "{{ item.name }}"
+    password: "{{ item.password }}"
+    append: "{{ item.append }}"
+    create_home: "{{ item.create_home }}"
+    groups: "{{ item.groups }}"
+    shell: "{{ item.shell }}"
+    state: "{{ item.state }}"
+  with_items: "{{ local_users}}"
