@@ -40,3 +40,5 @@
     name: "docker"
     enabled: "yes"
     state: "started"
+
+- include: "docker_users.yml"
