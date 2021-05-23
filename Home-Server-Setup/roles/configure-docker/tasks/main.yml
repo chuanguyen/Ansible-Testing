@@ -33,19 +33,6 @@
       - docker-ce-cli
       - containerd.io
 
-- name: "TASK: Install docker-compose dependencies"
-  include_role:
-    name: install-system-packages
-  vars:
-    packages_to_install:
-      - python3-pip
-      - python3-setuptools
-      - virtualenv
-
-- name: "TASK: Install docker-compose"
-  pip:
-    name: "docker-compose"
-
 - name: "TASK: Enable docker service"
   become: true
   service:
