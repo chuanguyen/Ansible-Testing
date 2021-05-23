@@ -32,6 +32,7 @@
       - docker-ce
       - docker-ce-cli
       - containerd.io
+      - docker-compose
 
 - name: "TASK: Enable docker service"
   become: true
