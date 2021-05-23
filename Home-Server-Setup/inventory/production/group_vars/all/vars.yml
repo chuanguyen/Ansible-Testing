@@ -2,4 +2,5 @@
 
 autofs_nfs_shares: "{{ vault_autofs_nfs_shares }}"
 
+ansible_user: "{{ vault_ansible_user }}"
 local_users: "{{ vault_local_users }}"
