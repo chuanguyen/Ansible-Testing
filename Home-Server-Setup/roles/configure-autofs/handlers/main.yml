@@ -1,0 +1,5 @@
+- name: "restart autofs"
+  become: true
+  service:
+    name: "autofs"
+    state: "reloaded"

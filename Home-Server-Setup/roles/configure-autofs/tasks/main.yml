@@ -1,0 +1,47 @@
+---
+
+- name: "TASK: Ensure fail2fan is installed"
+  include_role:
+    name: install-system-packages
+  vars:
+    packages_to_install:
+      - autofs
+
+- name: "TASK: Enable autofs"
+  become: true
+  service:
+    name: "autofs"
+    enabled: "yes"
+    state: "started"
+
+- name: "TASK: Set NFS settings"
+  become: true
+  ansible.builtin.copy:
+    src: "nfs-common"
+    dest: "/etc/default/nfs-common"
+    owner: root
+    group: root
+    mode: '0644'
+    backup: yes
+
+- name: "TASK: Define autofs mount point settings"
+  become: true
+  ansible.builtin.copy:
+    src: "nfs.autofs"
+    dest: "/etc/auto.master.d/nfs.autofs"
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+  - "restart autofs"
+
+- name: "TASK: Creates autofs mappings"
+  become: true
+  template:
+    src: "auto.nfs.j2"
+    dest: /etc/auto.nfs
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+  - "restart autofs"

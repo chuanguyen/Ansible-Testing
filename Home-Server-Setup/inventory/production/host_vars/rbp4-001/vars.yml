@@ -1,6 +1,7 @@
 ansible_user: "ubuntu"
 
 system_packages:
+- autofs
 - fail2ban
 - net-tools
 
