@@ -1,0 +1,12 @@
+---
+
+- name: "TASK: Configure static IP"
+  become: true
+  template:
+    src: "60-netcfg.yml"
+    dest: "/etc/netplan/"
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - "apply netplan"
