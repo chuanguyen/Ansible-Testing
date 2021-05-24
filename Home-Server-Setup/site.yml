@@ -9,8 +9,10 @@
       tags: [ baseline ]
     - role: configure-hostname
       tags: [ baseline ]
-    - role: configure-ssh-server
+    - role: configure-systemd-resolved
       tags: [ baseline, refresh ]
+    - role: configure-ssh-server
+      tags: [ baseline, refresh, security ]
     - role: configure-ufw
       tags: [ baseline, refresh, security ]
     - role: configure-fail2ban
