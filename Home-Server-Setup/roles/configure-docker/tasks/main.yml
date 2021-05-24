@@ -42,3 +42,4 @@
     state: "started"
 
 - include: "docker_users.yml"
+- include: "docker_networks.yml"
