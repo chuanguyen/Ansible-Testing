@@ -6,6 +6,18 @@ system_packages:
 fail2ban_ignoreip:
 - "192.168.1.0/24"
 
+docker_networks:
+  proxy:
+    name: "proxy"
+    driver: "bridge"
+    enable_ipv6: "false"
+    scope: "local"
+    internal: "false"
+    external: "true"
+    state: "present"
+
+docker_user_root_dir: "/home/{{ ansible_user }}/docker"
+
 ufw_rules:
 - comment: "Permits incoming SSH connections"
   rule: allow
