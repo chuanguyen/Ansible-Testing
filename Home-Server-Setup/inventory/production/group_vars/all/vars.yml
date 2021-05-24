@@ -4,3 +4,7 @@ autofs_nfs_shares: "{{ vault_autofs_nfs_shares }}"
 
 ansible_user: "{{ vault_ansible_user }}"
 local_users: "{{ vault_local_users }}"
+
+# Used for any admin console on deployed Docker services
+docker_services_admin_username: "{{ vault_docker_services_admin_username }}"
+docker_services_admin_password: "{{ vault_docker_services_admin_password }}"
