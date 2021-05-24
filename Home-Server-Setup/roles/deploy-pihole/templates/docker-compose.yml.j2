@@ -10,7 +10,7 @@ services:
     build:
       context: build/
     container_name: "{{ pihole_container_name }}"
-    image: "{{ ansible_user }}:pihole"
+    image: "{{ pihole_image_custom }}:{{ pihole_image_base_tag }}"
     ports:
       - "8080:80/tcp"
       - "53:53/tcp"
