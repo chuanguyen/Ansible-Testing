@@ -1,0 +1,29 @@
+---
+
+# Resolves the following issue w/ pihole and systemd-resolvd
+# https://github.com/pi-hole/docker-pi-hole/#installing-on-ubuntu
+- name: "TASK: Modify systemd-resolvd for pihole setup"
+  become: true
+  replace:
+    path: "/etc/systemd/resolved.conf"
+    regexp: '#?DNSStubListener.*'
+    replace: 'DNSStubListener=no'
+    backup: yes
+  notify:
+    - "restart systemd-resolved"
+
+- name: "TASK: Copy systemd-resolvd resolv.conf symlink"
+  become: true
+  copy:
+    src: /etc/resolv.conf
+    dest: /etc/resolv.conf.systemd-resolved
+  notify:
+    - "restart systemd-resolved"
+
+- name: "TASK: Use resolv.conf managed by netplan"
+  become: true
+  file:
+    src: "/run/systemd/resolve/resolv.conf"
+    dest: "/etc/resolv.conf"
+  notify:
+    - "restart systemd-resolved"
