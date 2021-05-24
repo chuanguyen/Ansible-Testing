@@ -4,7 +4,7 @@ system_packages:
 - net-tools
 
 fail2ban_ignoreip:
-- "192.168.1.0/24"
+- "{{ home_lan_cidr }}"
 
 docker_networks:
   proxy:
@@ -43,3 +43,19 @@ ufw_rules:
   from_port: null
   to_port: '443'
   proto: tcp
+- comment: "Permits incoming connections to PiHole management interface"
+  rule: allow
+  delete: no
+  from_ip: "{{ home_lan_cidr }}"
+  to_ip: any
+  from_port: null
+  to_port: '8080'
+  proto: tcp
+- comment: "Permits incoming DHCP connections"
+  rule: allow
+  delete: no
+  from_ip: any
+  from_port: null
+  to_ip: any
+  to_port: '67'
+  proto: udp

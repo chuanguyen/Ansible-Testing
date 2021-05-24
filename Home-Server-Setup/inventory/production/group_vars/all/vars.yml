@@ -8,3 +8,6 @@ local_users: "{{ vault_local_users }}"
 # Used for any admin console on deployed Docker services
 docker_services_admin_username: "{{ vault_docker_services_admin_username }}"
 docker_services_admin_password: "{{ vault_docker_services_admin_password }}"
+
+home_lan_cidr: "{{ vault_home_lan_cidr }}"
+home_lan_gateway: "{{ vault_home_lan_gateway }}"
