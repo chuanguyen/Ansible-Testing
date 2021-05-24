@@ -1,0 +1,10 @@
+---
+
+- name: "TASK: Disable cloud-init"
+  become: true
+  copy:
+    src: "500-disable-cloud-init.cfg"
+    dest: "/etc/cloud/cloud.cfg.d/"
+    owner: root
+    group: root
+    mode: 0644
