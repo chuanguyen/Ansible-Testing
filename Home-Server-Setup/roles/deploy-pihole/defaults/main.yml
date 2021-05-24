@@ -1,12 +1,17 @@
 docker_data_dir: "{{ docker_user_root_dir }}/pihole"
 
 pihole_image_base: "pihole/pihole"
-pihole_image_base_tag: "v5.8"
+pihole_image_base_tag: "v5.8.1"
 pihole_container_name: "pihole"
+pihole_image_custom: "{{ ansible_user }}/pihole"
 
 pihole_envs:
-  TZ: "America/Vancouver"
-  WEBPASSWORD: "{{ docker_services_admin_password }}"
+  kv:
+    TZ: "America/Vancouver"
+    WEBPASSWORD: "{{ docker_services_admin_password }}"
+  PIHOLE_DNS_:
+    - 1.1.1.1
+    - 8.8.8.8
 
 pihole_networks:
   - "{{ docker_networks.proxy.name }}"
