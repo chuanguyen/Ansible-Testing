@@ -1,0 +1,4 @@
+---
+
+- include: "pihole_setup.yml"
+- include: "pihole_deploy.yml"

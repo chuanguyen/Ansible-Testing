@@ -1,0 +1,17 @@
+docker_data_dir: "{{ docker_user_root_dir }}/pihole"
+
+pihole_image_base: "pihole/pihole"
+pihole_image_base_tag: "v5.8"
+pihole_container_name: "pihole"
+
+pihole_envs:
+  TZ: "America/Vancouver"
+  WEBPASSWORD: "{{ docker_services_admin_password }}"
+
+pihole_networks:
+  - "{{ docker_networks.proxy.name }}"
+
+pihole_container_volumes:
+  - './etc-pihole/:/etc/pihole/'
+  - './etc-dnsmasq.d/:/etc/dnsmasq.d/'
+  - './etc-pihole-updatelists/:/etc/pihole-updatelists/'

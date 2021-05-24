@@ -1,0 +1,36 @@
+---
+
+# {{ ansible_managed }}
+
+version: "3"
+
+# More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
+services:
+  pihole:
+    build:
+      context: build/
+    container_name: "{{ pihole_container_name }}"
+    image: "{{ ansible_user }}:pihole"
+    ports:
+      - "8080:80/tcp"
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "67:67/udp"
+    env_file: pi-hole.env
+    # Volumes store your data between container upgrades
+    networks:
+      - {{ docker_networks.proxy.name }}
+    volumes:
+{% for volume in pihole_container_volumes %}
+      - {{ volume }}
+{% endfor %}
+    # Recommended but not required (DHCP needs NET_ADMIN)
+    #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
+    cap_add:
+      - NET_ADMIN
+    restart: unless-stopped
+networks:
+{% for network in pihole_networks %}
+  {{ network }}:
+    external: "{{ docker_networks[network]['external'] }}"
+{% endfor %}
