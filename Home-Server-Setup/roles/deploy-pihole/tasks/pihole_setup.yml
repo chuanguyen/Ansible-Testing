@@ -14,7 +14,7 @@
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
     group: "docker"
-    mode: 0664
+    mode: 0660
   with_items:
     - src: "docker-compose.yml.j2"
       dest: "{{ docker_data_dir }}/docker-compose.yml"
