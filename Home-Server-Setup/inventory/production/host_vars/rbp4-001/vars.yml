@@ -59,3 +59,19 @@ ufw_rules:
   to_ip: any
   to_port: '67'
   proto: udp
+- comment: "Permits incoming UDP DNS connections"
+  rule: allow
+  delete: no
+  from_ip: "{{ home_lan_cidr }}"
+  to_ip: any
+  from_port: null
+  to_port: '53'
+  proto: udp
+- comment: "Permits incoming TCP DNS connections"
+  rule: allow
+  delete: no
+  from_ip: "{{ home_lan_cidr }}"
+  to_ip: any
+  from_port: null
+  to_port: '53'
+  proto: tcp
