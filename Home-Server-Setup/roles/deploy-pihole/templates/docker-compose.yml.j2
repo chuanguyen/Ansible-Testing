@@ -25,13 +25,13 @@ services:
     #   - {{ docker_networks.proxy.name }}
     # Volumes store your data between container upgrades
     volumes:
-{% for volume in pihole_container_volumes.bind %}
+{% for volume in pihole_container_volumes.binds %}
       - {{ volume }}
 {% endfor %}
 {% for volume in pihole_container_volumes.volumes %}
-{% for key,value in volume.items() %}
-      - {{ key }}: "{{ value }}"
-{% endfor %}
+      - type: "{{ volume.type }}"
+        source: "{{ volume.source }}"
+        target: "{{ volume.target }}"
 {% endfor %}
     # Recommended but not required (DHCP needs NET_ADMIN)
     #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
@@ -39,7 +39,7 @@ services:
       - NET_ADMIN
     restart: unless-stopped
 volumes:
-  {{ pihole_volumes.nfs_vol.name }}
+  {{ pihole_volumes.nfs_vol.name }}:
     name: "{{ pihole_volumes.nfs_vol.name }}"
     driver_opts:
 {% for key,value in pihole_volumes.nfs_vol.driver_opts.items() %}
