@@ -19,6 +19,19 @@ pihole_networks:
   - "{{ docker_networks.proxy.name }}"
 
 pihole_container_volumes:
-  - './etc-pihole/:/etc/pihole/'
-  - './etc-dnsmasq.d/:/etc/dnsmasq.d/'
-  - './etc-pihole-updatelists/:/etc/pihole-updatelists/'
+  binds:
+    - './etc-pihole/:/etc/pihole/'
+    - './etc-dnsmasq.d/:/etc/dnsmasq.d/'
+    - './etc-pihole-updatelists/:/etc/pihole-updatelists/'
+  volumes:
+    - type: "volume"
+      source: "{{ pihole_volumes.nfs_vol.name }}"
+      target: "/nfs/backup"
+
+pihole_volumes:
+  nfs_vol:
+    name: "nfs_vol"
+    driver_opts:
+      type: "nfs"
+      o: "nfsvers=4,addr={{ nfs_server_ipv4_address }},rw,nolock,soft"
+      device: ":/Container-Data/docker/pihole"
