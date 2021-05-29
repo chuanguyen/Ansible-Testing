@@ -1,5 +1,5 @@
 ---
-
+nfs_server_ipv4_address: "{{ vault_nfs_server_ipv4_address }}"
 autofs_nfs_shares: "{{ vault_autofs_nfs_shares }}"
 
 ansible_user: "{{ vault_ansible_user }}"
