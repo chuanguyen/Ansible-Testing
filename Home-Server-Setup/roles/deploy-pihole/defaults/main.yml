@@ -1,4 +1,8 @@
-docker_data_dir: "{{ docker_user_root_dir }}/pihole"
+docker_data_dir: "{{ docker_user_root_dir }}/pihole/"
+docker_data_dir_sub_folders:
+  - "etc-pihole/"
+  - "etc-dnsmasq.d/"
+  - "etc-pihole-updatelists/"
 
 pihole_image_base: "pihole/pihole"
 pihole_image_base_tag: "v5.8.1"
@@ -20,9 +24,12 @@ pihole_networks:
 
 pihole_container_volumes:
   binds:
-    - './etc-pihole/:/etc/pihole/'
-    - './etc-dnsmasq.d/:/etc/dnsmasq.d/'
-    - './etc-pihole-updatelists/:/etc/pihole-updatelists/'
+    - source: "./etc-pihole/"
+      target: "/etc/pihole/"
+    - source: "./etc-dnsmasq.d/"
+      target: "/etc/dnsmasq.d/"
+    - source: "./etc-pihole-updatelists/"
+      target: "/etc/pihole-updatelists/"
   volumes:
     - type: "volume"
       source: "{{ pihole_volumes.nfs_vol.name }}"

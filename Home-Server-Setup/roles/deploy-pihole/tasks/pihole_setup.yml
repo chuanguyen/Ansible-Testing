@@ -2,12 +2,8 @@
 
 - name: "Create folders for pihole build and container data"
   file:
-    path: "{{ item }}"
-  with_items:
-    - "{{ docker_data_dir }}/build"
-    - "{{ docker_data_dir }}/etc-dnsmasq.d"
-    - "{{ docker_data_dir }}/etc-pihole"
-    - "{{ docker_data_dir }}/etc-pihole-updatelists"
+    path: "{{ docker_data_dir }}{{ item }}"
+  with_items: "{{ docker_data_dir_sub_folders }}"
 
 - name: "Template files for building and running PiHole"
   template:

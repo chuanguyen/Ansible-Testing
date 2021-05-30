@@ -26,7 +26,7 @@ services:
     # Volumes store your data between container upgrades
     volumes:
 {% for volume in pihole_container_volumes.binds %}
-      - {{ volume }}
+      - {{ volume.source }}:{{ volume.target }}
 {% endfor %}
 {% for volume in pihole_container_volumes.volumes %}
       - type: "{{ volume.type }}"
