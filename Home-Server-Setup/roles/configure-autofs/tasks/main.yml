@@ -1,6 +1,6 @@
 ---
 
-- name: "TASK: Ensure fail2fan is installed"
+- name: "TASK: Ensure autofs is installed"
   include_role:
     name: install-system-packages
   vars:
