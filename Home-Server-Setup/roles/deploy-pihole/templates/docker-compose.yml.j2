@@ -15,11 +15,6 @@ services:
     # Disabled network definitions and port mappings as well
     # https://docs.pi-hole.net/docker/DHCP/
     network_mode: "host"
-    # ports:
-      # - "8080:80/tcp"
-      # - "53:53/tcp"
-      # - "53:53/udp"
-      # - "67:67/udp"
     env_file: pi-hole.env
     # networks:
     #   - {{ docker_networks.proxy.name }}
@@ -28,25 +23,8 @@ services:
 {% for volume in pihole_container_volumes.binds %}
       - {{ volume.source }}:{{ volume.target }}
 {% endfor %}
-{% for volume in pihole_container_volumes.volumes %}
-      - type: "{{ volume.type }}"
-        source: "{{ volume.source }}"
-        target: "{{ volume.target }}"
-{% endfor %}
     # Recommended but not required (DHCP needs NET_ADMIN)
     #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
     cap_add:
       - NET_ADMIN
     restart: "always"
-volumes:
-  {{ pihole_volumes.nfs_vol.name }}:
-    name: "{{ pihole_volumes.nfs_vol.name }}"
-    driver_opts:
-{% for key,value in pihole_volumes.nfs_vol.driver_opts.items() %}
-      {{ key }}: "{{ value }}"
-{% endfor %}
-# networks:
-# {% for network in pihole_networks %}
-#   {{ network }}:
-#     external: "{{ docker_networks[network]['external'] }}"
-# {% endfor %}

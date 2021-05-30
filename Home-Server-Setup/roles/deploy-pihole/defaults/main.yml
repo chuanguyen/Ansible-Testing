@@ -3,6 +3,7 @@ docker_data_dir_sub_folders:
   - "etc-pihole/"
   - "etc-dnsmasq.d/"
   - "etc-pihole-updatelists/"
+  - "mnt-backup/"
 
 pihole_image_base: "pihole/pihole"
 pihole_image_base_tag: "v5.8.1"
@@ -30,15 +31,5 @@ pihole_container_volumes:
       target: "/etc/dnsmasq.d/"
     - source: "./etc-pihole-updatelists/"
       target: "/etc/pihole-updatelists/"
-  volumes:
-    - type: "volume"
-      source: "{{ pihole_volumes.nfs_vol.name }}"
-      target: "/nfs/backup"
-
-pihole_volumes:
-  nfs_vol:
-    name: "nfs_vol"
-    driver_opts:
-      type: "nfs"
-      o: "nfsvers=4,addr={{ nfs_server_ipv4_address }},rw,nolock,soft"
-      device: ":/Container-Data/docker/pihole"
+    - source: "./mnt-backup/"
+      target: "/mnt/backup/"
