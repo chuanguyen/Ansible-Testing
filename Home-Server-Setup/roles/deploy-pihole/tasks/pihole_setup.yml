@@ -3,6 +3,7 @@
 - name: "Create folders for pihole build and container data"
   file:
     path: "{{ docker_data_dir }}{{ item }}"
+    state: "directory"
   with_items: "{{ docker_data_dir_sub_folders }}"
 
 - name: "Template files for building and running PiHole"
