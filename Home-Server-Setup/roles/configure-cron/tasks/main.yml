@@ -1,0 +1,15 @@
+---
+
+- name: "TASK: Ensure cron is installed"
+  include_role:
+    name: install-system-packages
+  vars:
+    packages_to_install:
+      - cron
+
+- name: "TASK: Enable cron"
+  become: true
+  service:
+    name: "cron"
+    enabled: "yes"
+    state: "started"

@@ -1,5 +1,6 @@
 system_packages:
 - autofs
+- cron
 - fail2ban
 - net-tools
 
