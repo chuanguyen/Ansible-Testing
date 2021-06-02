@@ -1,0 +1,7 @@
+# {{ ansible_managed }}
+# pihole backup cron job
+
+SHELL=/bin/bash
+PATH=/usr/bin
+
+* * * * *   root  {{ docker_data_dir }}/scripts/pihole-backup.sh

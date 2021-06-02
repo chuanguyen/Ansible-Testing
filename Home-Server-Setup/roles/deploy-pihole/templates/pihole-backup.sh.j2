@@ -1,0 +1,7 @@
+#!/bin/bash
+
+### {{ ansible_managed }}
+
+docker exec -d -w "/mnt/backup" pihole pihole -a -t
+rsync --remove-source-files -zv {{ docker_data_dir }}/mnt-backup/* {{ pihole_nfs_backup_directory }}
+find {{ pihole_nfs_backup_directory }} -min +15 -exec rm {} \;

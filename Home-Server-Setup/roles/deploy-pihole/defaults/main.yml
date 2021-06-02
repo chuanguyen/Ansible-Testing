@@ -1,14 +1,18 @@
-docker_data_dir: "{{ docker_user_root_dir }}/pihole/"
+docker_data_dir: "{{ docker_user_root_dir }}/pihole"
 docker_data_dir_sub_folders:
   - "etc-pihole/"
   - "etc-dnsmasq.d/"
   - "etc-pihole-updatelists/"
   - "mnt-backup/"
+  - "scripts"
 
 pihole_image_base: "pihole/pihole"
 pihole_image_base_tag: "v5.8.1"
 pihole_container_name: "pihole"
 pihole_image_custom: "{{ ansible_user }}/pihole"
+
+pihole_backup_directory: "/mnt/backup/"
+pihole_nfs_backup_directory: "/nfs/Container-Data/docker/pihole/teleport"
 
 pihole_envs:
   kv:
