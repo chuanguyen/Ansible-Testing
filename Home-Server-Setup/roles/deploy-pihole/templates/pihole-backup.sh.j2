@@ -2,5 +2,8 @@
 
 ### {{ ansible_managed }}
 
-docker exec -d -w "{{ pihole_backup_directory }}" pihole pihole -a -t && rsync --remove-source-files -zv {{ docker_data_dir }}/mnt-backup/* {{ pihole_nfs_backup_directory }}
+docker exec -d -w "{{ pihole_backup_directory }}" pihole pihole -a -t
+
+sleep 5s && rsync --remove-source-files -zv {{ docker_data_dir }}/mnt-backup/* {{ pihole_nfs_backup_directory }}
+
 find {{ pihole_nfs_backup_directory }} -mtime +{{ pihole_nfs_backup_cleanup_period }} -exec rm {} \;
