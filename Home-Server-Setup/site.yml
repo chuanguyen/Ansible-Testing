@@ -13,12 +13,16 @@
       tags: [ baseline, refresh, network ]
     - role: configure-cloud-init
       tags: [ baseline, refresh, network ]
+    - role: configure-netplan
+      tags: [ baseline, refresh ]
     - role: configure-ssh-server
       tags: [ baseline, refresh, security ]
     - role: configure-ufw
       tags: [ baseline, refresh, security ]
     - role: configure-fail2ban
       tags: [ baseline, refresh, security ]
+    - role: configure-cron
+      tags: [ baseline, refresh ]
     - role: configure-autofs
       tags: [ baseline, refresh ]
     - role: configure-docker
@@ -30,4 +34,4 @@
 
   roles:
     - role: deploy-pihole
-      tags: [ services ]
+      tags: [ services, pihole ]
