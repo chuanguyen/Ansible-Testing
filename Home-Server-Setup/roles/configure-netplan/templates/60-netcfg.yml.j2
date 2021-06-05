@@ -4,9 +4,8 @@ network:
   ethernets:
     eth0:
       dhcp4: no
-      addresses:
-        - {{ ansible_default_ipv4.address }}/{{ home_lan_cidr | ansible.netcommon.ipaddr('prefix') }}
-      gateway4: {{ home_lan_gateway }}
+      dhcp4-overrides:
+        use-dns: no
       nameservers:
         addresses:
           - 1.1.1.1
