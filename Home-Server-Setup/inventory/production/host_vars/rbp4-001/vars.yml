@@ -21,75 +21,78 @@ docker_networks:
 docker_user_root_dir: "/home/{{ ansible_user }}/docker"
 
 ufw_rules:
-- comment: "Permits incoming SSH connections"
-  rule: allow
-  delete: no
-  from_ip: any
-  to_ip: any
-  from_port: null
-  to_port: '22'
-  proto: tcp
-- comment: "Permits incoming HTTP connections"
-  rule: allow
-  delete: no
-  from_ip: any
-  to_ip: any
-  from_port: null
-  to_port: '80'
-  proto: tcp
-- comment: "Permits incoming HTTPS connections"
-  rule: allow
-  delete: no
-  from_ip: any
-  to_ip: any
-  from_port: null
-  to_port: '443'
-  proto: tcp
-- comment: "Permits incoming connections to PiHole management interface"
-  rule: allow
-  delete: no
-  from_ip: "{{ home_lan_cidr }}"
-  to_ip: any
-  from_port: null
-  to_port: '8080'
-  proto: tcp
-- comment: "Permits incoming DHCP connections"
-  rule: allow
-  delete: no
-  from_ip: any
-  from_port: null
-  to_ip: any
-  to_port: '67'
-  proto: udp
-- comment: "Permits incoming UDP DNS connections"
-  rule: allow
-  delete: no
-  from_ip: "{{ home_lan_cidr }}"
-  to_ip: any
-  from_port: null
-  to_port: '53'
-  proto: udp
-- comment: "Permits incoming TCP DNS connections"
-  rule: allow
-  delete: no
-  from_ip: "{{ home_lan_cidr }}"
-  to_ip: any
-  from_port: null
-  to_port: '53'
-  proto: tcp
-- comment: "Permits incoming TCP connections to iperf3"
-  rule: allow
-  delete: no
-  from_ip: "{{ home_lan_cidr }}"
-  to_ip: any
-  from_port: null
-  to_port: '5201'
-  proto: tcp
-- comment: "Permits incoming UDP connections to iperf3"
-  rule: allow
-  delete: no
-  from_ip: "{{ home_lan_cidr }}"
-  to_ip: any
-  from_port: null
-  to_port: '5201'
-  proto: udp
+  add:
+    - comment: "Permits incoming SSH connections"
+      rule: allow
+      delete: no
+      from_ip: any
+      to_ip: any
+      from_port: null
+      to_port: '22'
+      proto: tcp
+    - comment: "Permits incoming HTTP connections"
+      rule: allow
+      delete: no
+      from_ip: any
+      to_ip: any
+      from_port: null
+      to_port: '80'
+      proto: tcp
+    - comment: "Permits incoming HTTPS connections"
+      rule: allow
+      delete: no
+      from_ip: any
+      to_ip: any
+      from_port: null
+      to_port: '443'
+      proto: tcp
+    - comment: "Permits incoming connections to PiHole management interface"
+      rule: allow
+      delete: no
+      from_ip: "{{ home_lan_cidr }}"
+      to_ip: any
+      from_port: null
+      to_port: '8080'
+      proto: tcp
+    - comment: "Permits incoming DHCP connections"
+      rule: allow
+      delete: no
+      from_ip: any
+      from_port: null
+      to_ip: any
+      to_port: '67'
+      proto: udp
+    - comment: "Permits incoming UDP DNS connections"
+      rule: allow
+      delete: no
+      from_ip: "{{ home_lan_cidr }}"
+      to_ip: any
+      from_port: null
+      to_port: '53'
+      proto: udp
+    - comment: "Permits incoming TCP DNS connections"
+      rule: allow
+      delete: no
+      from_ip: "{{ home_lan_cidr }}"
+      to_ip: any
+      from_port: null
+      to_port: '53'
+      proto: tcp
+    - comment: "Permits incoming TCP connections to iperf3"
+      rule: allow
+      delete: no
+      from_ip: "{{ home_lan_cidr }}"
+      to_ip: any
+      from_port: null
+      to_port: '5201'
+      proto: tcp
+    - comment: "Permits incoming UDP connections to iperf3"
+      rule: allow
+      delete: no
+      from_ip: "{{ home_lan_cidr }}"
+      to_ip: any
+      from_port: null
+      to_port: '5201'
+      proto: udp
+  remove:
+    - 
