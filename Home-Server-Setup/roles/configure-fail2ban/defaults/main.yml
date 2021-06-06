@@ -6,5 +6,9 @@ fail2ban_maxretry: "5"
 fail2ban_findtime: "10m"
 
 fail2ban_recidive_enabled: "true"
+# Ban repeated banned hosts for this amount of time
 fail2ban_recidive_bantime: "1w"
+# Threshold for recidive bans
+fail2ban_recidive_maxretry: "5"
+# Search period for max retries
 fail2ban_recidive_findtime: "1d"

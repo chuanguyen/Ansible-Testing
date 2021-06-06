@@ -819,6 +819,7 @@ logpath  = /var/log/fail2ban.log
 banaction = %(banaction_allports)s
 bantime  = {{ fail2ban_recidive_bantime }}
 findtime = {{ fail2ban_recidive_findtime }}
+maxretry = {{ fail2ban_recidive_maxretry }}
 
 
 # Generic filter for PAM. Has to be used with action which bans all
