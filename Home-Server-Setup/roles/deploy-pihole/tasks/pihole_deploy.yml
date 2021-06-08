@@ -15,11 +15,7 @@
     pihole_container_image_tag: "{{ pihole_container_image.split(':') }}"
 
 - block:
-    - name: "TASK: Prune Docker images"
-      community.docker.docker_prune:
-        images: "yes"
-        images_filters:
-          dangling: false
+    - include: "pihole_image_cleanup.yml"
 
     - name: "TASK: Pull base pihole image"
       community.docker.docker_image:
