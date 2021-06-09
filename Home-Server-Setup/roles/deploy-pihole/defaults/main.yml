@@ -1,17 +1,6 @@
 docker_data_dir: "{{ docker_user_root_dir }}/pihole"
-docker_data_dir_sub_folders:
-  - "build/"
-  - "etc-pihole/"
-  - "etc-dnsmasq.d/"
-  - "etc-pihole-updatelists/"
-  - "mnt-backup/"
-  - "scripts"
 
 pihole_image_base: "pihole/pihole"
-pihole_image_base_tag: "v5.8.1"
-# Ensures previous version of working
-# pihole image is available for failback
-pihole_image_base_tag_old: ""
 pihole_container_name: "pihole"
 pihole_image_custom: "{{ ansible_user }}/pihole"
 
@@ -31,17 +20,3 @@ pihole_envs:
     - 192.168.1.201
     - 1.1.1.1
     - 8.8.8.8
-
-pihole_networks:
-  - "{{ docker_networks.proxy.name }}"
-
-pihole_container_volumes:
-  binds:
-    - source: "./etc-pihole/"
-      target: "/etc/pihole/"
-    - source: "./etc-dnsmasq.d/"
-      target: "/etc/dnsmasq.d/"
-    - source: "./etc-pihole-updatelists/"
-      target: "/etc/pihole-updatelists/"
-    - source: "./mnt-backup/"
-      target: "/mnt/backup/"
