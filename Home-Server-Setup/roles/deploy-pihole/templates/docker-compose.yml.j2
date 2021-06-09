@@ -16,8 +16,6 @@ services:
     # https://docs.pi-hole.net/docker/DHCP/
     network_mode: "host"
     env_file: pi-hole.env
-    # networks:
-    #   - {{ docker_networks.proxy.name }}
     # Volumes store your data between container upgrades
     volumes:
 {% for volume in pihole_container_volumes.binds %}
