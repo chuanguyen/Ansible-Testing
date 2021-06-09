@@ -17,7 +17,7 @@
 - block:
     - include: "pihole_image_cleanup.yml"
 
-    - name: "TASK: Pull base pihole image"
+    - name: "TASK: Pull base image"
       community.docker.docker_image:
         name: "{{ pihole_image_base }}"
         tag: "{{ pihole_image_base_tag }}"
@@ -33,7 +33,7 @@
       when: pihole_container_state.exists and pihole_image_base_pull.changed
   when: pihole_container_image_tag[1] != pihole_image_base_tag
 
-- name: "TASK: Deploy pihole"
+- name: "TASK: Deploy {{ pihole_container_name }}"
   community.docker.docker_compose:
     project_src: "{{ docker_data_dir }}"
     build: "{{ 'yes' if pihole_image_base_pull.changed else 'no' }}"
