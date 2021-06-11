@@ -95,4 +95,4 @@ ufw_rules:
       to_port: '5201'
       proto: udp
   remove:
-    - 
+    -

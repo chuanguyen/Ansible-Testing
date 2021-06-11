@@ -1,0 +1,23 @@
+docker_data_dir_sub_folders:
+  - "build/"
+  - "etc-pihole/"
+  - "etc-dnsmasq.d/"
+  - "etc-pihole-updatelists/"
+  - "mnt-backup/"
+  - "scripts"
+
+pihole_image_base_tag: "v5.8.1"
+# Ensures previous version of working
+# pihole image is available for failback
+pihole_image_base_tag_old: ""
+
+pihole_container_volumes:
+  binds:
+    - source: "./etc-pihole/"
+      target: "/etc/pihole/"
+    - source: "./etc-dnsmasq.d/"
+      target: "/etc/dnsmasq.d/"
+    - source: "./etc-pihole-updatelists/"
+      target: "/etc/pihole-updatelists/"
+    - source: "./mnt-backup/"
+      target: "/mnt/backup/"

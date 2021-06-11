@@ -3,13 +3,13 @@
 # Copies cron to host to execute teleport -a -t in container
 # Will also create cron job that rsyncs backup data to autofs NFS server location
 
-- name: "TASK: Create pihole teleport backup directory"
+- name: "TASK: Create {{ pihole_container_name }} teleport backup directory"
   become: true
   file:
     path: "{{ pihole_nfs_backup_directory }}"
     state: "directory"
 
-- name: "TASK: Create pihole backup cron job"
+- name: "TASK: Create {{ pihole_container_name }} backup cron job"
   become: true
   template:
     src: pihole-backup.j2
@@ -18,7 +18,7 @@
     group: root
     mode: 0644
 
-- name: "TASK: Create pihole backup script"
+- name: "TASK: Create {{ pihole_container_name }} backup script"
   become: true
   template:
     src: "pihole-backup.sh.j2"
