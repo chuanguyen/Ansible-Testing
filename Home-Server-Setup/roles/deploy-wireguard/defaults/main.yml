@@ -1,0 +1,14 @@
+docker_data_dir: "{{ docker_user_root_dir }}/wireguard"
+
+wireguard_image_base: "wireguard/wireguard"
+wireguard_container_name: "wireguard"
+wireguard_image_custom: "{{ ansible_user }}/wireguard"
+
+wireguard_backup_directory: "/mnt/backup/"
+wireguard_nfs_backup_directory: "/nfs/Container-Data/docker/wireguard/teleport"
+# Defines in days age of backups to remove
+wireguard_nfs_backup_cleanup_period: "60"
+# Defines via cron syntax how often to run backup
+wireguard_nfs_backup_frequency: "0 1 */15 * *"
+
+wireguard_envs:

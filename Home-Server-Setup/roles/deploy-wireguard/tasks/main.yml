@@ -1,0 +1,6 @@
+---
+
+- include: "wireguard_setup.yml"
+- include: "wireguard_deploy.yml"
+### TODO: May not be necessary depending on content needing backup
+# - include: "wireguard-host-cron-backup.yml"

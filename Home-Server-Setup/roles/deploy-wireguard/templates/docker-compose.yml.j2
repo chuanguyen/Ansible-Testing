@@ -1,0 +1,20 @@
+---
+
+# {{ ansible_managed }}
+
+version: "3"
+
+services:
+  wireguard:
+    build:
+      context: build/
+    container_name: "{{ wireguard_container_name }}"
+    image: "{{ wireguard_image_custom }}:{{ wireguard_image_base_tag }}"
+    network_mode: "host"
+    env_file: wireguard.env
+    # Volumes store your data between container upgrades
+    volumes:
+{% for volume in wireguard_container_volumes.binds %}
+      - {{ volume.source }}:{{ volume.target }}
+{% endfor %}
+    restart: "always"
