@@ -4,6 +4,8 @@ pihole_image_base: "pihole/pihole"
 pihole_container_name: "pihole"
 pihole_image_custom: "{{ ansible_user }}/pihole"
 
+pihole_external_ip_mapping: "{{ home_lan_dns_servers[0] }}"
+
 pihole_backup_directory: "/mnt/backup/"
 pihole_nfs_backup_directory: "/nfs/Container-Data/docker/pihole/teleport"
 # Defines in days age of backups to remove

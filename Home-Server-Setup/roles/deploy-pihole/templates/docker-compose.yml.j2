@@ -16,8 +16,8 @@ services:
     # https://docs.pi-hole.net/docker/DHCP/
     env_file: pi-hole.env
     ports:
-      - "53:53/tcp"
-      - "53:53/udp"
+      - "{{ pihole_external_ip_mapping }}:53:53/tcp"
+      - "{{ pihole_external_ip_mapping }}:53:53/udp"
       - "8080:80/tcp"
     networks:
       - {{ docker_networks.proxy.name }}
