@@ -15,7 +15,7 @@ pihole_envs:
   kv:
     TZ: "America/Vancouver"
     WEBPASSWORD: "{{ docker_services_admin_password }}"
-    WEB_PORT: "8080"
+    WEB_PORT: "80"
   PIHOLE_DNS_:
     - 192.168.1.201
     - 1.1.1.1

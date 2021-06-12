@@ -14,15 +14,19 @@ services:
     # Set to host mode as per documentation for Docker & PiHole DHCP
     # Disabled network definitions and port mappings as well
     # https://docs.pi-hole.net/docker/DHCP/
-    network_mode: "host"
     env_file: pi-hole.env
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "8080:80/tcp"
+    networks:
+      - {{ docker_networks.proxy.name }}
     # Volumes store your data between container upgrades
     volumes:
 {% for volume in pihole_container_volumes.binds %}
       - {{ volume.source }}:{{ volume.target }}
 {% endfor %}
-    # Recommended but not required (DHCP needs NET_ADMIN)
-    #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
-    cap_add:
-      - NET_ADMIN
     restart: "always"
+networks:
+  {{ docker_networks.proxy.name }}:
+    external: true
