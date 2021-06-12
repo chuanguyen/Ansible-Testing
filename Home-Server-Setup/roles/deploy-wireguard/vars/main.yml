@@ -1,23 +1,18 @@
 docker_data_dir_sub_folders:
-  - "build/"
-  - "etc-pihole/"
-  - "etc-dnsmasq.d/"
-  - "etc-pihole-updatelists/"
+  - "wireguard_config"
   - "mnt-backup/"
   - "scripts"
 
-pihole_image_base_tag: "v5.8.1"
+wireguard_image_base_tag: "arm64v8-version-v1.0.20210424"
 # Ensures previous version of working
-# pihole image is available for failback
-pihole_image_base_tag_old: ""
+# wireguard image is available for failback
+wireguard_image_base_tag_old: ""
 
-pihole_container_volumes:
+wireguard_container_volumes:
   binds:
-    - source: "./etc-pihole/"
-      target: "/etc/pihole/"
-    - source: "./etc-dnsmasq.d/"
-      target: "/etc/dnsmasq.d/"
-    - source: "./etc-pihole-updatelists/"
-      target: "/etc/pihole-updatelists/"
+    - source: "./wireguard_config/"
+      target: "/config"
     - source: "./mnt-backup/"
       target: "/mnt/backup/"
+    - source: "/lib/modules"
+      target: "/lib/modules"

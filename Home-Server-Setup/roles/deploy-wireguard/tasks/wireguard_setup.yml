@@ -17,7 +17,5 @@
       dest: "{{ docker_data_dir }}/docker-compose.yml"
     - src: "wireguard.env.j2"
       dest: "{{ docker_data_dir }}/wireguard.env"
-    - src: "Dockerfile.j2"
-      dest: "{{ docker_data_dir }}/build/Dockerfile"
   loop_control:
     label: "{{ item.src }}"

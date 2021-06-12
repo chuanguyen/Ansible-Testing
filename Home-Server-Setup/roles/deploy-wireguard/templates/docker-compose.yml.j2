@@ -6,15 +6,24 @@ version: "3"
 
 services:
   wireguard:
-    build:
-      context: build/
     container_name: "{{ wireguard_container_name }}"
-    image: "{{ wireguard_image_custom }}:{{ wireguard_image_base_tag }}"
-    network_mode: "host"
+    image: "{{ wireguard_image_base }}:{{ wireguard_image_base_tag }}"
     env_file: wireguard.env
+    ports:
+      - 51820:51820/udp
+    networks:
+      - {{ docker_networks.proxy.name }}
     # Volumes store your data between container upgrades
     volumes:
 {% for volume in wireguard_container_volumes.binds %}
       - {{ volume.source }}:{{ volume.target }}
 {% endfor %}
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    sysctls:
+      - "net.ipv4.conf.all.src_valid_mark=1"
     restart: "always"
+networks:
+  {{ docker_networks.proxy.name }}:
+    external: true
