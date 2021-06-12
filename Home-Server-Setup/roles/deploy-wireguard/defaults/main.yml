@@ -4,7 +4,7 @@ wireguard_image_base: "linuxserver/wireguard"
 wireguard_container_name: "wireguard"
 
 wireguard_backup_directory: "/mnt/backup/"
-wireguard_nfs_backup_directory: "/nfs/Container-Data/docker/wireguard/teleport"
+wireguard_nfs_backup_directory: "/nfs/Container-Data/docker/wireguard/"
 # Defines in days age of backups to remove
 wireguard_nfs_backup_cleanup_period: "60"
 # Defines via cron syntax how often to run backup
@@ -16,6 +16,7 @@ wireguard_envs:
     PGID: "1000"
     SERVERPORT: "51820"
     TZ: "America/Vancouver"
-    SERVERURL: ""
+    SERVERURL: "{{ home_vpn_server_external_url }}"
+    INTERNAL_SUBNET: "{{ home_vpn_cidr |  ipaddr('network') }}"
     PEERS: "test_device"
-    PEERDNS: "8.8.8.8"
+    PEERDNS: "{{ home_lan_dns_servers | join(',') }}"
