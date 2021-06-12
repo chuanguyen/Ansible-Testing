@@ -1,3 +1,5 @@
 #!/bin/bash
 
 ### {{ ansible_managed }}
+
+rsync -zr {{ docker_data_dir }}/wireguard_config/peer_* {{ wireguard_nfs_backup_directory }}

@@ -1,8 +1,5 @@
 ---
 
-# Copies cron to host to execute teleport -a -t in container
-# Will also create cron job that rsyncs backup data to autofs NFS server location
-
 - name: "TASK: Create {{ wireguard_container_name }} backup directory"
   become: true
   file:
