@@ -65,7 +65,7 @@ ufw_rules:
     - comment: "Permits incoming UDP DNS connections"
       rule: allow
       delete: no
-      from_ip: "{{ home_lan_cidr }}"
+      from_ip: any
       to_ip: any
       from_port: null
       to_port: '53'
@@ -73,7 +73,7 @@ ufw_rules:
     - comment: "Permits incoming TCP DNS connections"
       rule: allow
       delete: no
-      from_ip: "{{ home_lan_cidr }}"
+      from_ip: any
       to_ip: any
       from_port: null
       to_port: '53'
@@ -94,5 +94,13 @@ ufw_rules:
       from_port: null
       to_port: '5201'
       proto: udp
+    - comment: "Permits incoming UDP Wireguard connections"
+      rule: allow
+      delete: no
+      from_ip: any
+      to_ip: any
+      from_port: null
+      to_port: '51820'
+      proto: udp
   remove:
-    -
+    - 
