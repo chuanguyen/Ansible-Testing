@@ -31,7 +31,7 @@
     community.general.ufw:
       comment: "{{ item.comment }}"
       rule: "{{ item.rule }}"
-      delete: "{{ item.delete | default('no') }}"
+      delete: "yes"
       from_ip: "{{ item.from_ip | default('any') }}"
       from_port: "{{ item.from_port | default(null) }}"
       to_ip: "{{ item.to_ip | default('any') }}"
