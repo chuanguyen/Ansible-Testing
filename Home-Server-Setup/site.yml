@@ -35,3 +35,7 @@
   roles:
     - role: deploy-pihole
       tags: [ services, pihole ]
+    - role: configure-ddclient
+      tags: [ services, vpn, ddclient ]
+    - role: deploy-wireguard
+      role: [ services, vpn, wireguard ]
