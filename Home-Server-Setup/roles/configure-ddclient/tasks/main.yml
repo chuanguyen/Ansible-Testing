@@ -17,6 +17,7 @@
     group: "root"
     mode: "0755"
     remote_src: yes
+  changed_when: false
 
 - name: "TASK: Make ddclient config directory"
   become: true
