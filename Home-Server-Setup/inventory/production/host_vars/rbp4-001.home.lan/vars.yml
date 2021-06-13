@@ -1,8 +1,11 @@
 system_packages:
 - autofs
 - cron
+- ddclient
 - fail2ban
 - iperf3
+# ddclient 
+- libdata-validate-ip-perl
 - net-tools
 
 fail2ban_ignoreip:
@@ -103,4 +106,4 @@ ufw_rules:
       to_port: '51820'
       proto: udp
   remove:
-    - 
+    -

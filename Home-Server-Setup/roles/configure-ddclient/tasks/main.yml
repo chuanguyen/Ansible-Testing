@@ -1,0 +1,59 @@
+---
+
+# - name: "TASK: Ensure ddclient is installed"
+#   include_role:
+#     name: install-system-packages
+#   vars:
+#     packages_to_install:
+#       - ddclient
+#       - libdata-validate-ip-perl
+
+- name: "TASK: Retrieve latest version of ddclient"
+  become: true
+  unarchive:
+    src: "{{ ddclient_url }}"
+    dest: "/tmp"
+    owner: "root"
+    group: "root"
+    mode: "0755"
+    remote_src: yes
+
+- name: "TASK: Replace ddclient binary with newer one"
+  become: true
+  copy:
+    src: "/tmp/ddclient-{{ ddclient_version }}/ddclient"
+    remote_src: true
+    dest: "/usr/sbin/ddclient"
+    owner: "root"
+    group: "root"
+    mode: "0755"
+
+- name: "TASK: Remove ddclient archive"
+  become: true
+  file:
+    path: "/tmp/ddclient-{{ddclient_version }}"
+    state: "absent"
+
+- name: "TASK: Make ddclient config directory"
+  become: true
+  file:
+    path: "/etc/ddclient"
+    owner: "root"
+    group: "root"
+    mode: 0755
+    state: "directory"
+
+- name: "TASK: Remove default ddclient conf file"
+  become: true
+  file:
+    path: "/etc/ddclient.conf"
+    state: "absent"
+
+- name: "TASK: Generate ddclient config file"
+  become: true
+  template:
+   src: "ddclient.conf.j2"
+   dest: "/etc/ddclient/ddclient.conf"
+   owner: "root"
+   group: "root"
+   mode: 0600
