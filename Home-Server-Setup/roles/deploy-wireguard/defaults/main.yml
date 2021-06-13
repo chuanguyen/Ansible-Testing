@@ -16,5 +16,5 @@ wireguard_envs:
     TZ: "America/Vancouver"
     SERVERURL: "{{ home_vpn_server_external_url }}"
     INTERNAL_SUBNET: "{{ home_vpn_cidr |  ipaddr('network') }}"
-    PEERS: "{{home_vpn_peers | join(',') }}"
+    PEERS: "{{ home_vpn_peers | join(',') }}"
     PEERDNS: "{{ home_lan_dns_servers | join(',') }}"
