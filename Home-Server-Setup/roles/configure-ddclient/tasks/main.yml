@@ -1,12 +1,12 @@
 ---
 
-# - name: "TASK: Ensure ddclient is installed"
-#   include_role:
-#     name: install-system-packages
-#   vars:
-#     packages_to_install:
-#       - ddclient
-#       - libdata-validate-ip-perl
+- name: "TASK: Ensure ddclient is installed"
+  include_role:
+    name: install-system-packages
+  vars:
+    packages_to_install:
+      - ddclient
+      - libdata-validate-ip-perl
 
 - name: "TASK: Retrieve latest version of ddclient"
   become: true
