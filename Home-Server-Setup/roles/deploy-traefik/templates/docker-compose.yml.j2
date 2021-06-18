@@ -1,0 +1,24 @@
+---
+
+# {{ ansible_managed }}
+
+version: "3"
+
+services:
+  traefik:
+    container_name: "{{ traefik_container_name }}"
+    image: "{{ traefik_image_base }}:{{ traefik_image_base_tag }}"
+    env_file: traefik.env
+    ports:
+      -
+    networks:
+      - {{ docker_networks.proxy.name }}
+    # Volumes store your data between container upgrades
+    volumes:
+{% for volume in traefik_container_volumes.binds %}
+      - {{ volume.source }}:{{ volume.target }}
+{% endfor %}
+    restart: "always"
+networks:
+  {{ docker_networks.proxy.name }}:
+    external: true

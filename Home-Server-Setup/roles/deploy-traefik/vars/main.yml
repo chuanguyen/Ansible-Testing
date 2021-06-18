@@ -1,0 +1,14 @@
+docker_data_dir_sub_folders:
+  - "traefik_config"
+  - "mnt-backup/"
+  - "scripts"
+
+traefik_image_base_tag: "v2.4.8"
+# Ensures previous version of working
+# traefik image is available for failback
+traefik_image_base_tag_old: ""
+
+traefik_container_volumes:
+  binds:
+    - source: ""
+      target: ""
