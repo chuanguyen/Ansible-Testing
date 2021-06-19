@@ -9,8 +9,6 @@ services:
     container_name: "{{ wireguard_container_name }}"
     image: "{{ wireguard_image_base }}:{{ wireguard_image_base_tag }}"
     env_file: wireguard.env
-    ports:
-      - 51820:51820/udp
     networks:
       - {{ docker_networks.proxy.name }}
     # Volumes store your data between container upgrades
@@ -23,6 +21,12 @@ services:
       - SYS_MODULE
     sysctls:
       - "net.ipv4.conf.all.src_valid_mark=1"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network={{ docker_networks.proxy.name }}"
+      - "traefik.udp.routers.wireguard1.entrypoints=wireguard"
+      - "traefik.udp.routers.wireguard1.service=wireguard-svc"
+      - "traefik.udp.services.wireguard-svc.loadbalancer.server.port=51820"
     restart: "always"
 networks:
   {{ docker_networks.proxy.name }}:
