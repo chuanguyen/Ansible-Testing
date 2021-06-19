@@ -5,3 +5,4 @@ traefik_container_name: "traefik"
 
 traefik_envs:
   kv:
+    CF_DNS_API_TOKEN: "{{ dns_provider_api_token }}"

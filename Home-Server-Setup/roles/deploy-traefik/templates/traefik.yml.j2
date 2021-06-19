@@ -23,3 +23,11 @@ providers:
     exposedByDefault: false
   file:
     filename: /configurations/traefik-dynamic.yml
+
+certificatesResolvers:
+  letsEncrypt:
+    acme:
+      email: services+letsencrypt@chuanguyen.ca
+      storage: /letsEncrypt/acme.json
+      dnsChallenge:
+        provider: "cloudflare"

@@ -1,5 +1,6 @@
 docker_data_dir_sub_folders:
   - "configurations"
+  - "letsEncrypt"
 
 traefik_image_base_tag: "v2.4.8"
 # Ensures previous version of working
@@ -14,3 +15,5 @@ traefik_container_volumes:
       target: "/traefik.yml:ro"
     - source: "./configurations"
       target: "/configurations"
+    - source: "./letsEncrypt"
+      target: "/letsEncrypt/"

@@ -25,10 +25,10 @@ services:
       - "traefik.enable=true"
       - "traefik.docker.network={{ docker_networks.proxy.name }}"
       - "traefik.http.routers.traefik1.rule=Host(`traefik.{{ home_lan_domain }}`) || Host(`{{ ansible_default_ipv4.address }}`)"
-      - "traefik.http.routers.traefik1.tls=true"
       - "traefik.http.routers.traefik1.entrypoints=websecure"
       - "traefik.http.routers.traefik1.middlewares=lanWhitelist@file,secureHeaders@file"
       - "traefik.http.routers.traefik1.service=api@internal"
+      - "traefik.http.routers.traefik1.tls=true"
     restart: "always"
 networks:
   {{ docker_networks.proxy.name }}:
