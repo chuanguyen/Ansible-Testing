@@ -2,15 +2,18 @@
 
 # {{ ansible_managed }}
 
-version: "3"
+version: "3.8"
 
 services:
   traefik:
     container_name: "{{ traefik_container_name }}"
     image: "{{ traefik_image_base }}:{{ traefik_image_base_tag }}"
     env_file: traefik.env
+    security_opt:
+      - no-new-privileges:true
     ports:
-      -
+      - 80:80
+      - 443:443
     networks:
       - {{ docker_networks.proxy.name }}
     # Volumes store your data between container upgrades
@@ -18,6 +21,12 @@ services:
 {% for volume in traefik_container_volumes.binds %}
       - {{ volume.source }}:{{ volume.target }}
 {% endfor %}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network={{ docker_networks.proxy.name }}"
+      - "traefik.http.routers.traefik1.rule=Host(`traefik.{{ home_lan_domain }}`)"
+      - "traefik.http.routers.traefik1.tls=true"
+      - "traefik.http.routers.traefik1.entrypoints=websecure"
     restart: "always"
 networks:
   {{ docker_networks.proxy.name }}:

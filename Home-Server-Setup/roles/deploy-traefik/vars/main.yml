@@ -1,6 +1,5 @@
 docker_data_dir_sub_folders:
-  - "traefik_config"
-  - "scripts"
+  - "configurations"
 
 traefik_image_base_tag: "v2.4.8"
 # Ensures previous version of working
@@ -9,5 +8,9 @@ traefik_image_base_tag_old: ""
 
 traefik_container_volumes:
   binds:
-    - source: ""
-      target: ""
+    - source: "/var/run/docker.sock"
+      target: "/var/run/docker.sock:ro"
+    - source: "./traefik.yml"
+      target: "/traefik.yml:ro"
+    - source: "./configurations"
+      target: "/configurations"
