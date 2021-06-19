@@ -1,5 +1,0 @@
-#!/bin/bash
-
-### {{ ansible_managed }}
-
-rsync -zr {{ docker_data_dir }}/traefik_config/peer_* {{ traefik_nfs_backup_directory }}

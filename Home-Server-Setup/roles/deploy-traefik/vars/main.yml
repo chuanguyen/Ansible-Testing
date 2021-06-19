@@ -1,6 +1,5 @@
 docker_data_dir_sub_folders:
   - "traefik_config"
-  - "mnt-backup/"
   - "scripts"
 
 traefik_image_base_tag: "v2.4.8"

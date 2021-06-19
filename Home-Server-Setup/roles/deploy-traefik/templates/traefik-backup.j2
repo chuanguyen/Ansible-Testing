@@ -1,7 +1,0 @@
-# {{ ansible_managed }}
-# traefik backup cron job
-
-SHELL=/bin/bash
-PATH=/usr/bin
-
-{{ traefik_nfs_backup_frequency }}   root  {{ docker_data_dir }}/scripts/traefik-backup.sh
