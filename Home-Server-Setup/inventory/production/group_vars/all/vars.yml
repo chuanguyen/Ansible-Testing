@@ -9,6 +9,7 @@ local_users: "{{ vault_local_users }}"
 docker_services_admin_username: "{{ vault_docker_services_admin_username }}"
 docker_services_admin_password: "{{ vault_docker_services_admin_password }}"
 
+home_lan_domain: "{{ vault_home_lan_domain }}"
 home_lan_cidr: "{{ vault_home_lan_cidr }}"
 home_lan_gateway: "{{ vault_home_lan_gateway }}"
 home_lan_dns_servers: "{{ vault_home_lan_dns_servers }}"
