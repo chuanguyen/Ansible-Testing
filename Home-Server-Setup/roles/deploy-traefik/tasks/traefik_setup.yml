@@ -17,5 +17,9 @@
       dest: "{{ docker_data_dir }}/docker-compose.yml"
     - src: "traefik.env.j2"
       dest: "{{ docker_data_dir }}/traefik.env"
+    - src: "traefik.yml.j2"
+      dest: "{{ docker_data_dir }}/traefik.yml"
+    - src: "traefik-dynamic.yml.j2"
+      dest: "{{ docker_data_dir }}/configurations/traefik-dynamic.yml"
   loop_control:
     label: "{{ item.src }}"
