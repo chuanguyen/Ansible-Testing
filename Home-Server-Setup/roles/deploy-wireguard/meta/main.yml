@@ -3,3 +3,4 @@
 dependencies:
   - configure-ufw
   - configure-docker
+  - deploy-traefik
