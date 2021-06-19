@@ -20,3 +20,4 @@ home_vpn_server_external_url: "{{ vault_home_vpn_server_external_url }}"
 home_vpn_peers: "{{ vault_home_vpn_peers }}"
 
 dns_provider_ddns_domains_to_update: "{{ vault_dns_provider_ddns_domains_to_update }}"
+dns_provider_api_token:  "{{ vault_dns_provider_api_token }}"
