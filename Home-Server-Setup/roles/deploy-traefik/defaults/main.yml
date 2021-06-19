@@ -1,7 +1,7 @@
 docker_data_dir: "{{ docker_user_root_dir }}/traefik"
 
-wireguard_image_base: "traefik"
-wireguard_container_name: "traefik"
+traefik_image_base: "traefik"
+traefik_container_name: "traefik"
 
 traefik_envs:
   kv:
