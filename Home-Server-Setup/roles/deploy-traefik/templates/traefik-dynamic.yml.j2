@@ -9,6 +9,10 @@ http:
        stsIncludeSubdomains: true
        stsPreload: true
        stsSeconds: 31536000
+   lanWhitelist:
+     ipWhiteList:
+       sourceRange:
+         - "{{ home_lan_cidr }}"
 
 tls:
  options:
