@@ -9,13 +9,14 @@ local_users: "{{ vault_local_users }}"
 docker_services_admin_username: "{{ vault_docker_services_admin_username }}"
 docker_services_admin_password: "{{ vault_docker_services_admin_password }}"
 
+home_lan_domain_public: "{{ vault_home_lan_domain_public }}"
 home_lan_domain: "{{ vault_home_lan_domain }}"
 home_lan_cidr: "{{ vault_home_lan_cidr }}"
 home_lan_gateway: "{{ vault_home_lan_gateway }}"
 home_lan_dns_servers: "{{ vault_home_lan_dns_servers }}"
 
 home_vpn_cidr: "{{ vault_home_vpn_cidr }}"
-home_vpn_server_external_url: "{{ vault_home_vpn_server_external_url }}"
+home_vpn_server_external_url: "wg.{{ home_lan_domain_public }}"
 # List of Wireguard peers to create
 home_vpn_peers: "{{ vault_home_vpn_peers }}"
 
