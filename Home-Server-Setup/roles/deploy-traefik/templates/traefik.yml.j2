@@ -29,7 +29,7 @@ providers:
 certificatesResolvers:
   letsEncrypt:
     acme:
-      email: services+letsencrypt@chuanguyen.ca
+      email: services+letsencrypt@{{ home_lan_domain_public }}
       storage: /letsEncrypt/acme.json
       dnsChallenge:
         provider: "cloudflare"
