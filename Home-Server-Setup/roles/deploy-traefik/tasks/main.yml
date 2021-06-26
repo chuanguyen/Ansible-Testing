@@ -2,3 +2,4 @@
 
 - include: "traefik_setup.yml"
 - include: "traefik_deploy.yml"
+- include: "traefik_logging.yml"
