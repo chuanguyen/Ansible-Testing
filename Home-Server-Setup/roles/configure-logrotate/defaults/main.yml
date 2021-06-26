@@ -2,11 +2,13 @@ logrotate_rotation_interval: "weekly"
 # How many rotations before oldest log file is removed-
 logrotate_rotation_retention: "4"
 
-logrotate_custom_apps:
-  - path:
-    rotate: ""
-    missingok: "missingok"
-    noifempty: "noifempty"
-    delaycompress: "delaycompress"
-    compress: "compress"
-    postrotate: ""
+logrotate_custom_app:
+  name:
+  path:
+  compress: "compress"
+  delaycompress: "delaycompress"
+  missingok: "missingok"
+  notifempty: "notifempty"
+  rotate: ""
+  size: ""
+  postrotate: ""

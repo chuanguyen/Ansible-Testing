@@ -1,0 +1,15 @@
+### {{ ansible_managed }}
+
+{{ logrotate_custom_app.path }} {
+  {{ logrotate_custom_app.compress | default('') }}
+  {{ logrotate_custom_app.delaycompress | default('') }}
+  {{ logrotate_custom_app.missingok | default('') }}
+  {{ logrotate_custom_app.notifempty | default('') }}
+  rotate {{ logrotate_custom_app.rotate | default('4') }}
+  size {{ logrotate_custom_app.size | default('1M') }}
+{% if (logrotate_custom_app.postrotate is not none ) and (logrotate_custom_app.postrotate != "") %}
+  postrotate
+    {{ logrotate_custom_app.postrotate }}
+  endscript
+{% endif %}
+}
