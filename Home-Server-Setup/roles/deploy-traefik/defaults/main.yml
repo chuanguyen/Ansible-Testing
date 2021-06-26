@@ -3,6 +3,8 @@ docker_data_dir: "{{ docker_user_root_dir }}/traefik"
 traefik_image_base: "traefik"
 traefik_container_name: "traefik"
 
+traefik_logging_directory: "/var/log/traefik"
+
 traefik_envs:
   kv:
     CF_DNS_API_TOKEN: "{{ dns_provider_api_token }}"

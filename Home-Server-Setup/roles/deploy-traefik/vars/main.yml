@@ -17,3 +17,5 @@ traefik_container_volumes:
       target: "/configurations"
     - source: "./letsEncrypt"
       target: "/letsEncrypt/"
+    - source: "{{ traefik_logging_directory }}"
+      target: "{{ traefik_logging_directory }}"

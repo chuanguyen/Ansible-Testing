@@ -3,6 +3,16 @@
 api:
   dashboard: true
 
+log:
+  filePath: "{{ traefik_logging_directory }}/traefik.log"
+  # format: "common"
+  # level: "ERROR"
+
+accessLog:
+  filePath: "{{ traefik_logging_directory }}/access.log"
+  # bufferingSize: 100
+  # filters: 
+
 entryPoints:
   web:
     address: :80
