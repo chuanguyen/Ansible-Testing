@@ -39,3 +39,5 @@
       tags: [ services, vpn, ddclient ]
     - role: deploy-wireguard
       tags: [ services, vpn, wireguard ]
+    - role: deploy-traefik
+      tags: [ services, proxy, traefik ]
