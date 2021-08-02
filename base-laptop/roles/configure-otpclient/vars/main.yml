@@ -1,0 +1,4 @@
+---
+
+otpclient_db_path: "{{ ansible_env.HOME }}/.config/otpclient"
+otpclient_db_name: "personal_OTPClient_DB.enc"
