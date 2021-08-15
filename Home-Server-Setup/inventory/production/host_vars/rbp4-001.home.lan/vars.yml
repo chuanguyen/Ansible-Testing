@@ -4,7 +4,6 @@ system_packages:
 - ddclient
 - fail2ban
 - iperf3
-# ddclient 
 - libdata-validate-ip-perl
 - net-tools
 
@@ -14,6 +13,14 @@ fail2ban_ignoreip:
 docker_networks:
   proxy:
     name: "proxy"
+    driver: "bridge"
+    enable_ipv6: "false"
+    scope: "local"
+    internal: "false"
+    external: "true"
+    state: "present"
+  proxy:
+    name: "grafana"
     driver: "bridge"
     enable_ipv6: "false"
     scope: "local"
