@@ -1,0 +1,17 @@
+docker_data_dir_sub_folders:
+  - "build/"
+  - "var-lib-grafana/"
+  - "mnt-backup/"
+  - "scripts"
+
+grafana_image_base_tag: "8.1.1-ubuntu"
+# Ensures previous version of working
+# grafana image is available for failback
+grafana_image_base_tag_old: ""
+
+grafana_container_volumes:
+  binds:
+    - source: "./var-lib-grafana/"
+      target: "/var/lib/grafana/"
+    - source: "./mnt-backup/"
+      target: "/mnt/backup/"

@@ -1,0 +1,25 @@
+---
+
+# {{ ansible_managed }}
+
+version: "3"
+
+# More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
+grafanas:
+  grafana:
+    container_name: "{{ grafana_container_name }}"
+    image: "{{ grafana_image_base }}:{{ grafana_image_base_tag }}"
+    env_file: grafana.env
+    ports:
+      - "3000:3000"
+    networks:
+      - {{ docker_networks.grafana.name }}
+    # Volumes store your data between container upgrades
+    volumes:
+{% for volume in grafana_container_volumes.binds %}
+      - {{ volume.source }}:{{ volume.target }}
+{% endfor %}
+    restart: "always"
+networks:
+  {{ docker_networks.grafana.name }}:
+    external: true
