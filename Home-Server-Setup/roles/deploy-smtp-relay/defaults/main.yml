@@ -1,6 +1,6 @@
 docker_data_dir: "{{ docker_user_root_dir }}/smtp_relay"
 
-smtp_relay_image_base: "smtp_relay/smtp_relay"
+smtp_relay_image_base: "juanluisbaptiste/postfix"
 smtp_relay_container_name: "smtp_relay"
 pihole_image_custom: "{{ ansible_user }}/smtp_relay"
 
@@ -8,3 +8,9 @@ smtp_relay_external_ip_mapping: "{{ home_lan_dns_servers[0] }}"
 
 smtp_relay_envs:
   kv:
+    SMTP_SERVER: "{{ home_smtp_relay_server }}"
+    SMTP_USERNAME: "{{ home_smtp_relay_server_username }}"
+    SMTP_PASSWORD: "{{ home_smtp_relay_server_api_key }}"
+    SERVER_HOSTNAME: "{{ home_smtp_relay_server_hostname }}"
+    ALWAYS_ADD_MISSING_HEADERS: "yes"
+    OVERWRITE_FROM: "{{ home_smtp_relay_server_authenticated_sender }}"
