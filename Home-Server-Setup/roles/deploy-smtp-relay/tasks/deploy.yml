@@ -36,6 +36,5 @@
 - name: "TASK: Deploy {{ smtp_relay_container_name }}"
   community.docker.docker_compose:
     project_src: "{{ docker_data_dir }}"
-    build: "{{ 'yes' if smtp_relay_image_base_pull.changed else 'no' }}"
     nocache: "no"
     state: "present"
