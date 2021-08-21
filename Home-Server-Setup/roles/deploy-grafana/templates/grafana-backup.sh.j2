@@ -4,6 +4,9 @@
 
 docker exec -d -w "{{ grafana_backup_directory }}" grafana
 
+# Make directory of the current backup date
+# Files are being tarred and rsynced
+
 sleep 5s && rsync --remove-source-files -zv {{ docker_data_dir }}/mnt-backup/* {{ grafana_nfs_backup_directory }}
 
 find {{ grafana_nfs_backup_directory }} -mtime +{{ grafana_nfs_backup_cleanup_period }} -exec rm {} \;
