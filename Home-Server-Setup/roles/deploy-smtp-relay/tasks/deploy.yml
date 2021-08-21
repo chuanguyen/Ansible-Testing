@@ -1,0 +1,40 @@
+---
+
+- name: "TASK: Retrieve container info"
+  community.docker.docker_container_info:
+    name: "{{ smtp_relay_container_name }}"
+  register: smtp_relay_container_state
+
+- name: "TASK: Set container facts"
+  set_fact:
+    smtp_relay_container_exists: "{{ smtp_relay_container_state.exists }}"
+    smtp_relay_container_image: "{{ smtp_relay_container_state.container.Config.Image | default('tag:n/a') }}"
+
+- name: "TASK: Set container image tag"
+  set_fact:
+    smtp_relay_container_image_tag: "{{ smtp_relay_container_image.split(':') }}"
+
+- block:
+    - include: "image_cleanup.yml"
+
+    - name: "TASK: Pull base image"
+      community.docker.docker_image:
+        name: "{{ smtp_relay_image_base }}"
+        tag: "{{ smtp_relay_image_base_tag }}"
+        source: "pull"
+        state: "present"
+      register: "smtp_relay_image_base_pull"
+
+    - name: "TASK: Remove container for updates"
+      community.docker.docker_container:
+        name: "{{ smtp_relay_container_name }}"
+        container_default_behavior: "no_defaults"
+        state: "absent"
+      when: smtp_relay_container_state.exists and smtp_relay_image_base_pull.changed
+  when: smtp_relay_container_image_tag[1] != smtp_relay_image_base_tag
+
+- name: "TASK: Deploy {{ smtp_relay_container_name }}"
+  community.docker.docker_compose:
+    project_src: "{{ docker_data_dir }}"
+    nocache: "no"
+    state: "present"

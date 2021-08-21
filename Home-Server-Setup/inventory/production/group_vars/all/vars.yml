@@ -20,5 +20,11 @@ home_vpn_server_external_url: "wg.{{ home_lan_domain_public }}"
 # List of Wireguard peers to create
 home_vpn_peers: "{{ vault_home_vpn_peers }}"
 
+home_smtp_relay_server: "smtp.sendgrid.net"
+home_smtp_relay_server_username: "apikey"
+home_smtp_relay_server_api_key: "{{ vault_home_smtp_relay_server_api_key }}"
+home_smtp_relay_server_hostname: "{{ home_lan_domain_public }}"
+home_smtp_relay_server_authenticated_sender: "{{ vault_home_smtp_relay_server_authenticated_sender }}"
+
 dns_provider_ddns_domains_to_update: "{{ vault_dns_provider_ddns_domains_to_update }}"
 dns_provider_api_token:  "{{ vault_dns_provider_api_token }}"
