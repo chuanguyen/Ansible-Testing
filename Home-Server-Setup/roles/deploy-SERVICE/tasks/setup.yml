@@ -11,7 +11,7 @@
     state: "directory"
   with_items: "{{ docker_data_dir_sub_folders }}"
 
-- name: "Template files for building and running {{ pihole_container_name }}"
+- name: "Template files for building and running {{ SERVICE_container_name }}"
   template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
