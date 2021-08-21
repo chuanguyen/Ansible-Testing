@@ -1,16 +1,4 @@
-docker_data_dir_sub_folders:
-  - "etc-smtp_relay/"
-  - "mnt-backup/"
-  - "scripts"
-
 smtp_relay_image_base_tag: ""
 # Ensures previous version of working
 # smtp_relay image is available for failback
 smtp_relay_image_base_tag_old: ""
-
-smtp_relay_container_volumes:
-  binds:
-    - source: "./etc-smtp_relay/"
-      target: "/etc/smtp_relay/"
-    - source: "./mnt-backup/"
-      target: "/mnt/backup/"
