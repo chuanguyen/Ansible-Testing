@@ -19,7 +19,7 @@ docker_networks:
     internal: "false"
     external: "true"
     state: "present"
-  proxy:
+  grafana:
     name: "grafana"
     driver: "bridge"
     enable_ipv6: "false"
