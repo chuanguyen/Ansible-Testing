@@ -1,0 +1,9 @@
+#!/bin/bash
+
+### {{ ansible_managed }}
+
+docker exec -d -w "{{ smtp_relay_backup_directory }}" smtp_relay
+
+sleep 5s && rsync --remove-source-files -zv {{ docker_data_dir }}/mnt-backup/* {{ smtp_relay_nfs_backup_directory }}
+
+find {{ smtp_relay_nfs_backup_directory }} -mtime +{{ smtp_relay_nfs_backup_cleanup_period }} -exec rm {} \;

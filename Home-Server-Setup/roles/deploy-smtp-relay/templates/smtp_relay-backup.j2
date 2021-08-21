@@ -1,0 +1,7 @@
+# {{ ansible_managed }}
+# smtp_relay backup cron job
+
+SHELL=/bin/bash
+PATH=/usr/bin
+
+{{ smtp_relay_nfs_backup_frequency }}   root  {{ docker_data_dir }}/scripts/smtp_relay-backup.sh

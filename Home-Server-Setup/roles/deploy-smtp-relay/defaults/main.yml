@@ -1,17 +1,17 @@
-docker_data_dir: "{{ docker_user_root_dir }}/SERVICE"
+docker_data_dir: "{{ docker_user_root_dir }}/smtp_relay"
 
-SERVICE_image_base: "SERVICE/SERVICE"
-SERVICE_container_name: "SERVICE"
-pihole_image_custom: "{{ ansible_user }}/SERVICE"
+smtp_relay_image_base: "smtp_relay/smtp_relay"
+smtp_relay_container_name: "smtp_relay"
+pihole_image_custom: "{{ ansible_user }}/smtp_relay"
 
-SERVICE_external_ip_mapping: "{{ home_lan_dns_servers[0] }}"
+smtp_relay_external_ip_mapping: "{{ home_lan_dns_servers[0] }}"
 
-SERVICE_backup_directory: "/mnt/backup/"
-SERVICE_nfs_backup_directory: "/nfs/Container-Data/docker/SERVICE/"
+smtp_relay_backup_directory: "/mnt/backup/"
+smtp_relay_nfs_backup_directory: "/nfs/Container-Data/docker/smtp_relay/"
 # Defines in days age of backups to remove
-SERVICE_nfs_backup_cleanup_period: "60"
+smtp_relay_nfs_backup_cleanup_period: "60"
 # Defines via cron syntax how often to run backup
-SERVICE_nfs_backup_frequency: "0 1 */15 * *"
+smtp_relay_nfs_backup_frequency: "0 1 */15 * *"
 
-SERVICE_envs:
+smtp_relay_envs:
   kv:

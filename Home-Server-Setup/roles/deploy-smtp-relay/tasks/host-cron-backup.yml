@@ -3,26 +3,26 @@
 # Copies cron to host to execute teleport -a -t in container
 # Will also create cron job that rsyncs backup data to autofs NFS server location
 
-- name: "TASK: Create {{ SERVICE_container_name }} teleport backup directory"
+- name: "TASK: Create {{ smtp_relay_container_name }} teleport backup directory"
   become: true
   file:
-    path: "{{ SERVICE_nfs_backup_directory }}"
+    path: "{{ smtp_relay_nfs_backup_directory }}"
     state: "directory"
 
-- name: "TASK: Create {{ SERVICE_container_name }} backup cron job"
+- name: "TASK: Create {{ smtp_relay_container_name }} backup cron job"
   become: true
   template:
-    src: SERVICE-backup.j2
-    dest: "/etc/cron.d/SERVICE-backup"
+    src: smtp_relay-backup.j2
+    dest: "/etc/cron.d/smtp_relay-backup"
     owner: root
     group: root
     mode: 0644
 
-- name: "TASK: Create {{ SERVICE_container_name }} backup script"
+- name: "TASK: Create {{ smtp_relay_container_name }} backup script"
   become: true
   template:
-    src: "SERVICE-backup.sh.j2"
-    dest: "{{ docker_data_dir }}/scripts/SERVICE-backup.sh"
+    src: "smtp_relay-backup.sh.j2"
+    dest: "{{ docker_data_dir }}/scripts/smtp_relay-backup.sh"
     owner: root
     group: root
     mode: 0755
