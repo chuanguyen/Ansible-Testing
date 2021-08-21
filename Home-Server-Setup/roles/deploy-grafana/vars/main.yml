@@ -1,5 +1,4 @@
 docker_data_dir_sub_folders:
-  - "build/"
   - "var-lib-grafana/"
   - "mnt-backup/"
   - "scripts"
