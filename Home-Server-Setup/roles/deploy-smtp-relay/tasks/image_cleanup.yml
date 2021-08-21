@@ -14,11 +14,3 @@
     state: "absent"
   with_items: "{{ docker_image_filtered_tags }}"
   when: "item != smtp_relay_image_base_tag and item != smtp_relay_image_base_tag_old"
-
-- name: "TASK: Remove custom docker images filtered by tags"
-  community.docker.docker_image:
-    name: "{{ smtp_relay_image_custom }}"
-    tag: "{{ item }}"
-    state: "absent"
-  with_items: "{{ docker_image_filtered_tags }}"
-  when: "item != smtp_relay_image_base_tag and item != smtp_relay_image_base_tag_old"
