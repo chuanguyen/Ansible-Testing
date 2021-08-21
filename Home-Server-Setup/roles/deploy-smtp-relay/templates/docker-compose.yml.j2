@@ -5,21 +5,16 @@
 version: "3"
 
 # More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
-smtp_relays:
+services:
   smtp_relay:
-    build:
-      context: build/
     container_name: "{{ smtp_relay_container_name }}"
     image: "{{ smtp_relay_image_base }}:{{ smtp_relay_image_base_tag }}"
     env_file: smtp_relay.env
     ports:
-      - ""
+      - "25:25"
     networks:
-      - ""
-    # Volumes store your data between container upgrades
-    volumes:
-{% for volume in smtp_relay_container_volumes.binds %}
-      - {{ volume.source }}:{{ volume.target }}
-{% endfor %}
+      - {{ docker_networks.proxy.name }}
     restart: "always"
 networks:
+  {{ docker_networks.proxy.name }}:
+    external: true
