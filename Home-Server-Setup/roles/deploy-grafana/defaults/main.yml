@@ -12,3 +12,5 @@ grafana_nfs_backup_frequency: "0 1 */15 * *"
 
 grafana_envs:
   kv:
+    GF_LOG_MODE: "console file"
+    GF_LOG_LEVEL: "warn"
