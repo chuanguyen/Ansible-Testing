@@ -105,5 +105,13 @@ ufw_rules:
       from_port: null
       to_port: '51820'
       proto: udp
+    - comment: "Permits incoming SMTP connections"
+      rule: allow
+      delete: no
+      from_ip: "{{ home_lan_cidr }}"
+      to_ip: any
+      from_port: null
+      to_port: '25'
+      proto: any
   remove:
     -
