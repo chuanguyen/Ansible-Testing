@@ -3,8 +3,6 @@ docker_data_dir: "{{ docker_user_root_dir }}/smtp_relay"
 smtp_relay_image_base: "juanluisbaptiste/postfix"
 smtp_relay_container_name: "smtp_relay"
 
-smtp_relay_external_ip_mapping: "{{ home_lan_dns_servers[0] }}"
-
 smtp_relay_envs:
   kv:
     SMTP_SERVER: "{{ home_smtp_relay_server }}"
