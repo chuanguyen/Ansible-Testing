@@ -1,4 +1,5 @@
 ---
 
 dependencies:
-  - "ROLE"
+  - role: "configure-ufw"
+  - role: "configure-docker"
