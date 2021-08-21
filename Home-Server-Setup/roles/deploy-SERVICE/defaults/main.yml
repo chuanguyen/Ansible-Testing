@@ -2,9 +2,7 @@ docker_data_dir: "{{ docker_user_root_dir }}/SERVICE"
 
 SERVICE_image_base: "SERVICE/SERVICE"
 SERVICE_container_name: "SERVICE"
-pihole_image_custom: "{{ ansible_user }}/SERVICE"
-
-SERVICE_external_ip_mapping: "{{ home_lan_dns_servers[0] }}"
+SERVICE_image_custom: "{{ ansible_user }}/SERVICE"
 
 SERVICE_backup_directory: "/mnt/backup/"
 SERVICE_nfs_backup_directory: "/nfs/Container-Data/docker/SERVICE/"
