@@ -1,5 +1,10 @@
 ---
 
+- name: "Create root folder for container"
+  file:
+    path: "{{ docker_data_dir }}"
+    state: "directory"
+
 - name: "Create folders for build and container data"
   file:
     path: "{{ docker_data_dir }}/{{ item }}"
