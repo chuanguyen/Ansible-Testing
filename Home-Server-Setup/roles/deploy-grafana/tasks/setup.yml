@@ -6,6 +6,15 @@
     state: "directory"
   with_items: "{{ docker_data_dir_sub_folders }}"
 
+- name: "Get UID of Ansible user"
+  getent:
+    database: "passwd"
+    key: "{{ ansible_user }}"
+  register: grafana_getent_output
+
+- set_fact:
+    grafana_container_uid: "{{ grafana_getent_output['ansible_facts']['getent_passwd'][ansible_user][1] }}"
+
 - name: "Template files for building and running {{ grafana_container_name }}"
   template:
     src: "{{ item.src }}"
