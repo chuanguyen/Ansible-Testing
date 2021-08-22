@@ -10,6 +10,8 @@ services:
     container_name: "{{ grafana_container_name }}"
     image: "{{ grafana_image_base }}:{{ grafana_image_base_tag }}"
     env_file: grafana.env
+    # Grabs UID of Ansible user to ensure container has RW to folders
+    user: "{{ lookup('pipe', 'id -u') }}"
     ports:
       - "3000:3000"
     networks:
