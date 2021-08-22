@@ -3,7 +3,7 @@
 # Copies cron to host to execute teleport -a -t in container
 # Will also create cron job that rsyncs backup data to autofs NFS server location
 
-- name: "TASK: Create {{ grafana_container_name }} teleport backup directory"
+- name: "TASK: Create {{ grafana_container_name }} backup directory"
   become: true
   file:
     path: "{{ grafana_nfs_backup_directory }}"
