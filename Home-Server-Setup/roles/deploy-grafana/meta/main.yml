@@ -4,3 +4,4 @@ dependencies:
   - role: "configure-docker"
   - role: "configure-cron"
   - role: "configure-autofs"
+  - role: "configure-ufw"
