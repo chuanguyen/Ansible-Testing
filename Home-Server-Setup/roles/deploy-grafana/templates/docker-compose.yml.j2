@@ -12,16 +12,24 @@ services:
     env_file: grafana.env
     # Grabs UID of Ansible user to ensure container has RW to folders
     user: "{{ grafana_container_uid }}"
-    ports:
-      - "3000:3000"
     networks:
       - {{ docker_networks.grafana.name }}
+      - {{ docker_networks.proxy.name }}
     # Volumes store your data between container upgrades
     volumes:
 {% for volume in grafana_container_volumes.binds %}
       - {{ volume.source }}:{{ volume.target }}
 {% endfor %}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network={{ docker_networks.proxy.name }}"
+      - "traefik.http.routers.grafana1.rule=Host(`grafana.{{ home_lan_domain }}`)"
+      - "traefik.http.routers.grafana1.entrypoints=websecure"
+      - "traefik.http.routers.grafana1.middlewares=secureHeaders@file"
+      - "traefik.http.routers.grafana1.tls=true"
     restart: "always"
 networks:
   {{ docker_networks.grafana.name }}:
+    external: true
+  {{ docker_networks.proxy.name }}:
     external: true
