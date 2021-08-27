@@ -1,0 +1,5 @@
+---
+
+- include: "setup.yml"
+- include: "deploy.yml"
+- include: "host-cron-backup.yml"

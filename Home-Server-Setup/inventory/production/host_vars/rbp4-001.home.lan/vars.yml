@@ -4,7 +4,6 @@ system_packages:
 - ddclient
 - fail2ban
 - iperf3
-# ddclient 
 - libdata-validate-ip-perl
 - net-tools
 
@@ -14,6 +13,14 @@ fail2ban_ignoreip:
 docker_networks:
   proxy:
     name: "proxy"
+    driver: "bridge"
+    enable_ipv6: "false"
+    scope: "local"
+    internal: "false"
+    external: "true"
+    state: "present"
+  grafana:
+    name: "grafana"
     driver: "bridge"
     enable_ipv6: "false"
     scope: "local"
@@ -112,6 +119,14 @@ ufw_rules:
       to_ip: any
       from_port: null
       to_port: '25'
+      proto: any
+    - comment: "Permits incoming Grafana connections"
+      rule: allow
+      delete: no
+      from_ip: any
+      to_ip: any
+      from_port: null
+      to_port: '3000'
       proto: any
   remove:
     -

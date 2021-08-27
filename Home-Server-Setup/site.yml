@@ -43,3 +43,5 @@
       tags: [ services, proxy, traefik ]
     - role: deploy-smtp-relay
       tags: [ services, smtp_relay ]
+    - role: deploy-grafana
+      tags: [ services, grafana]
