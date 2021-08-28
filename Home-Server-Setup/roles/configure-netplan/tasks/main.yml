@@ -1,9 +1,9 @@
 ---
 
-- name: "TASK: Configure static IP"
+- name: "TASK: Template netplan config"
   become: true
   template:
-    src: "60-netcfg.yml"
+    src: "60-netcfg.yml.j2"
     dest: "/etc/netplan/"
     owner: root
     group: root
