@@ -3,7 +3,7 @@ docker_data_dir_sub_folders:
   - "mnt-backup/"
   - "scripts"
 
-image_base_tag: ""
+image_base_tag: "v2.29.2"
 # Ensures previous version of working
 # prometheus image is available for failback
 image_base_tag_old: ""
