@@ -19,8 +19,8 @@ docker_networks:
     internal: "false"
     external: "true"
     state: "present"
-  grafana:
-    name: "grafana"
+  monitoring:
+    name: "monitoring"
     driver: "bridge"
     enable_ipv6: "false"
     scope: "local"
@@ -129,4 +129,4 @@ ufw_rules:
       to_port: '3000'
       proto: any
   remove:
-    - 
+    -
