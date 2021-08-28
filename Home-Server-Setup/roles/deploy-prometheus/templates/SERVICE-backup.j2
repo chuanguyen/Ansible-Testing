@@ -1,0 +1,7 @@
+# {{ ansible_managed }}
+# SERVICE backup cron job
+
+SHELL=/bin/bash
+PATH=/usr/bin
+
+{{ nfs_backup_frequency }}   root  {{ docker_data_dir }}/scripts/SERVICE-backup.sh

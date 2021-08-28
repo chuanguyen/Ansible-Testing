@@ -1,0 +1,25 @@
+---
+
+# {{ ansible_managed }}
+
+version: "3"
+
+# More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
+services:
+  SERVICE:
+    build:
+      context: build/
+    container_name: "{{ container_name }}"
+    image: "{{ image_base }}:{{ image_base_tag }}"
+    env_file: SERVICE.env
+    ports:
+      - ""
+    networks:
+      - ""
+    # Volumes store your data between container upgrades
+    volumes:
+{% for volume in container_volumes.binds %}
+      - {{ volume.source }}:{{ volume.target }}
+{% endfor %}
+    restart: "always"
+networks:
