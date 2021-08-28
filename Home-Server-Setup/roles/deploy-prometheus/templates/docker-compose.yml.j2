@@ -6,12 +6,12 @@ version: "3"
 
 # More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
 services:
-  SERVICE:
+  prometheus:
     build:
       context: build/
     container_name: "{{ container_name }}"
     image: "{{ image_base }}:{{ image_base_tag }}"
-    env_file: SERVICE.env
+    env_file: prometheus.env
     ports:
       - ""
     networks:

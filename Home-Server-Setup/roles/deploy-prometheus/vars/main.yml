@@ -1,16 +1,16 @@
 docker_data_dir_sub_folders:
-  - "etc-SERVICE/"
+  - "etc-prometheus/"
   - "mnt-backup/"
   - "scripts"
 
 image_base_tag: ""
 # Ensures previous version of working
-# SERVICE image is available for failback
+# prometheus image is available for failback
 image_base_tag_old: ""
 
 container_volumes:
   binds:
-    - source: "./etc-SERVICE/"
-      target: "/etc/SERVICE/"
+    - source: "./etc-prometheus/"
+      target: "/etc/prometheus/"
     - source: "./mnt-backup/"
       target: "/mnt/backup/"

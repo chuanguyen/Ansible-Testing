@@ -16,8 +16,8 @@
 - name: "TASK: Create {{ container_name }} backup cron job"
   become: true
   template:
-    src: SERVICE-backup.j2
-    dest: "/etc/cron.d/SERVICE-backup"
+    src: prometheus-backup.j2
+    dest: "/etc/cron.d/prometheus-backup"
     owner: root
     group: root
     mode: 0644
@@ -25,8 +25,8 @@
 - name: "TASK: Create {{ container_name }} backup script"
   become: true
   template:
-    src: "SERVICE-backup.sh.j2"
-    dest: "{{ docker_data_dir }}/scripts/SERVICE-backup.sh"
+    src: "prometheus-backup.sh.j2"
+    dest: "{{ docker_data_dir }}/scripts/prometheus-backup.sh"
     owner: root
     group: root
     mode: 0755

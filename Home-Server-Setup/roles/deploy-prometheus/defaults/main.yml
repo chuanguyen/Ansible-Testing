@@ -1,11 +1,11 @@
-docker_data_dir: "{{ docker_user_root_dir }}/SERVICE"
+docker_data_dir: "{{ docker_user_root_dir }}/prometheus"
 
-image_base: "SERVICE/SERVICE"
-container_name: "SERVICE"
-image_custom: "{{ ansible_user }}/SERVICE"
+image_base: "prom/prometheus"
+container_name: "prometheus"
+image_custom: "{{ ansible_user }}/prometheus"
 
 backup_directory: "/mnt/backup/"
-nfs_backup_directory: "/nfs/Container-Data/docker/SERVICE/"
+nfs_backup_directory: "/nfs/Container-Data/docker/prometheus/"
 # Defines in days age of backups to remove
 nfs_backup_cleanup_period: "60"
 # Defines via cron syntax how often to run backup

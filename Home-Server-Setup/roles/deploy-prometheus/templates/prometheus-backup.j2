@@ -1,0 +1,7 @@
+# {{ ansible_managed }}
+# prometheus backup cron job
+
+SHELL=/bin/bash
+PATH=/usr/bin
+
+{{ nfs_backup_frequency }}   root  {{ docker_data_dir }}/scripts/prometheus-backup.sh

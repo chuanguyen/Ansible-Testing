@@ -20,8 +20,8 @@
   with_items:
     - src: "docker-compose.yml.j2"
       dest: "{{ docker_data_dir }}/docker-compose.yml"
-    - src: "SERVICE.env.j2"
-      dest: "{{ docker_data_dir }}/SERVICE.env"
+    - src: "prometheus.env.j2"
+      dest: "{{ docker_data_dir }}/prometheus.env"
     - src: "Dockerfile.j2"
       dest: "{{ docker_data_dir }}/build/Dockerfile"
   loop_control:
