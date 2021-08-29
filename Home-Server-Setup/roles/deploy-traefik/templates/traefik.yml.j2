@@ -6,7 +6,7 @@ api:
 log:
   filePath: "{{ traefik_logging_directory }}/traefik.log"
   # format: "common"
-  # level: "ERROR"
+  # level: "DEBUG"
 
 accessLog:
   filePath: "{{ traefik_logging_directory }}/access.log"
@@ -44,4 +44,4 @@ certificatesResolvers:
       dnsChallenge:
         provider: "cloudflare"
         # Appears to be required before cert is issued
-        delayBeforeCheck: "60"
+        delayBeforeCheck: "120"
