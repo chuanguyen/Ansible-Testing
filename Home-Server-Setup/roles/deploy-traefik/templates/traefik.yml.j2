@@ -6,12 +6,12 @@ api:
 log:
   filePath: "{{ traefik_logging_directory }}/traefik.log"
   # format: "common"
-  # level: "ERROR"
+  # level: "DEBUG"
 
 accessLog:
   filePath: "{{ traefik_logging_directory }}/access.log"
   # bufferingSize: 100
-  # filters: 
+  # filters:
 
 entryPoints:
   web:
@@ -43,3 +43,5 @@ certificatesResolvers:
       storage: /letsEncrypt/acme.json
       dnsChallenge:
         provider: "cloudflare"
+        # Appears to be required before cert is issued
+        delayBeforeCheck: "120"
