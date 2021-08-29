@@ -30,6 +30,8 @@ services:
       - "traefik.http.routers.traefik1.middlewares=lanWhitelist@file,secureHeaders@file"
       - "traefik.http.routers.traefik1.service=api@internal"
       - "traefik.http.routers.traefik1.tls=true"
+      - "traefik.http.routers.traefik1.tls.certresolver=letsEncrypt"
+      - "traefik.http.routers.traefik1.tls.domains[0].main={{ home_lan_domain }}"
     restart: "always"
 networks:
   {{ docker_networks.proxy.name }}:
