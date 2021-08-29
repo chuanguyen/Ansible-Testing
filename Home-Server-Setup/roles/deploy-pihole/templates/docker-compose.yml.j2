@@ -18,7 +18,6 @@ services:
     ports:
       - "{{ pihole_external_ip_mapping }}:53:53/tcp"
       - "{{ pihole_external_ip_mapping }}:53:53/udp"
-      # - "8080:80/tcp"
     networks:
       - {{ docker_networks.proxy.name }}
     # Volumes store your data between container upgrades
