@@ -21,5 +21,13 @@ services:
 {% for volume in container_volumes.binds %}
       - {{ volume.source }}:{{ volume.target }}
 {% endfor %}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network={{ docker_networks.proxy.name }}"
+      - "traefik.http.routers.SERVICE.rule=Host(`SERVICE.{{ home_lan_domain }}`)"
+      - "traefik.http.routers.SERVICE.entrypoints=websecure"
+      - "traefik.http.routers.SERVICE.middlewares=lanWhitelist@file,secureHeaders@file"
+      - "traefik.http.routers.SERVICE.tls=true"
+      - "traefik.http.routers.SERVICE.tls.certresolver=letsEncrypt"
     restart: "always"
 networks:
