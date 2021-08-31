@@ -2,4 +2,4 @@ all:
   children:
     raspberry_pi_servers:
       hosts:
-        "rbp4-001.home.lan":
+        "rbp4-001":
