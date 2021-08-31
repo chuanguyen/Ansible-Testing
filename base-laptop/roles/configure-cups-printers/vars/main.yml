@@ -4,7 +4,7 @@ openPrinting_printers:
     description: "Lexmark X464de"
     location: "Living Room"
     manufacturer: "Lexmark"
-    URI: "socket://192.168.1.68:9100"
+    URI: "socket://{{ home_printer_fqdn }}:9100"
     PPD: "http://www.openprinting.org/download/PPD/Lexmark/Lexmark_X464de.ppd"
 
 printer_manufacturers:
