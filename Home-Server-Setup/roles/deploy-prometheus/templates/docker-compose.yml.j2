@@ -10,15 +10,24 @@ services:
     container_name: "{{ container_name }}"
     image: "{{ image_base }}:{{ image_base_tag }}"
     env_file: prometheus.env
-    ports:
-      - "9090:9090"
     networks:
       - {{ docker_networks.monitoring.name }}
+      - {{ docker_networks.proxy.name }}
     # Volumes store your data between container upgrades
     volumes:
 {% for volume in container_volumes.binds %}
       - {{ volume.source }}:{{ volume.target }}
 {% endfor %}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network={{ docker_networks.proxy.name }}"
+      - "traefik.http.routers.prometheus1.rule=Host(`prometheus.{{ home_lan_domain }}`)"
+      - "traefik.http.routers.prometheus1.entrypoints=websecure"
+      - "traefik.http.routers.prometheus1.middlewares=secureHeaders@file"
+      - "traefik.http.routers.prometheus1.tls=true"
+      - "traefik.http.routers.prometheus1.tls.certresolver=letsEncrypt"
     restart: "always"
 networks:
   {{ docker_networks.monitoring.name }}:
+  {{ docker_networks.proxy.name }}:
+    external: true
