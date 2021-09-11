@@ -1,9 +1,0 @@
-#!/bin/bash
-
-### {{ ansible_managed }}
-
-docker exec -d -w "{{ backup_directory }}" prometheus
-
-sleep 5s && rsync --remove-source-files -zv {{ docker_data_dir }}/mnt-backup/* {{ nfs_backup_directory }}
-
-find {{ nfs_backup_directory }} -mtime +{{ nfs_backup_cleanup_period }} -exec rm {} \;
