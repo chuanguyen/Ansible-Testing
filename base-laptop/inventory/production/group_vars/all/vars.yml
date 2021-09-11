@@ -17,8 +17,11 @@ system_users: "{{ vault_system_users }}"
 smb_username: "{{ vault_smb_username }}"
 smb_password: "{{ vault_smb_password }}"
 smb_domain: "{{ vault_smb_domain }}"
+home_domain: "{{ vault_home_domain }}"
 family_nas_hostname: "{{ vault_family_nas_hostname }}"
-family_nas_FQDN: "{{ vault_family_nas_FQDN }}"
+family_nas_FQDN: "{{ family_nas_hostname }}.{{ home_domain }}"
+
+home_printer_fqdn: "printer.{{ home_domain }}"
 
 # Github
 github_access_token: "{{ vault_github_access_token }}"

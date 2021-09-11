@@ -1,7 +1,7 @@
 ---
 
 - name: "PLAY: Baselining servers"
-  hosts: rbp4-001.home.lan
+  hosts: rbp4-001
   gather_facts: true
 
   roles:
@@ -29,7 +29,7 @@
       tags: [ baseline, refresh ]
 
 - name: "PLAY: Deploy services"
-  hosts: rbp4-001.home.lan
+  hosts: rbp4-001
   gather_facts: true
 
   roles:

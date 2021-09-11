@@ -1,0 +1,7 @@
+# configure-qnap-le-ssl
+
+- name: "HANDLER: Refresh crontab"
+  shell: "crontab /etc/config/crontab"
+
+- name: "HANDLER: Restart crond"
+  shell: "/etc/init.d/crond.sh restart"

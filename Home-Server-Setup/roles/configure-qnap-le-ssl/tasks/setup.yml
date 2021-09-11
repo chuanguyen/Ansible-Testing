@@ -1,0 +1,62 @@
+---
+# configure-qnap-le-ssl
+
+- name: "TASK: Verify LEGO is installed"
+  stat:
+    path: "/share/CACHEDEV1_DATA/.qpkg/LEgo/"
+  register: stat_lego_dir
+
+- name: "TASK: Assert LEGO directory exists"
+  assert:
+    that:
+      - stat_lego_dir.stat.isdir is defined
+      - stat_lego_dir.stat.isdir
+    fail_msg: "Ensure LEGO is installed"
+    success_msg: "LEGO installation found"
+
+- name: "TASK: Verify SSL share exists on NAS"
+  stat:
+    path: "{{ ssl_path }}"
+  register: stat_ssl_dir
+
+- name: "TASK: Assert SSL share exists"
+  assert:
+    that:
+      - stat_ssl_dir.stat.isdir is defined
+      - stat_ssl_dir.stat.isdir
+    fail_msg: "{{ stat_ssl_dir }} share doesn't exist"
+    success_msg: "{{ stat_ssl_dir }} exists"
+
+- name: "TASK: Look for backup certificate file"
+  stat:
+    path: "/etc/stunnel/stunnel.pem.backup"
+  register: stat_backup_cert
+
+- name: "TASK: Backup the current certificate file"
+  copy:
+    src: "/etc/stunnel/stunnel.pem"
+    dest: /etc/stunnel/stunnel.pem.backup"
+    remote_src: yes
+  when: not stat_backup_cert.stat.exists
+
+- name: "TASK: Create folder to store lego scripts"
+  file:
+    path: "{{ ssl_path }}/scripts"
+    state: directory
+    mode: 0700
+
+- name: "TASK: Symlink LE cert file"
+  file:
+    src: "{{ cert_path }}/{{ lego_domains[0] }}.pem"
+    dest: "/etc/stunnel/stunnel.pem"
+    force: yes
+    state: link
+
+- name: "TASK: Template Lego script"
+  template:
+    src: "{{ item.key }}"
+    dest: "{{ ssl_path }}/scripts/{{ item.value }}"
+    mode: 0700
+  with_dict:
+    "lego_renew.sh.j2": "lego_renew.sh"
+    "lego_request.sh.j2": "lego_request.sh"

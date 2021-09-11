@@ -27,6 +27,7 @@ services:
       - "traefik.http.routers.grafana1.entrypoints=websecure"
       - "traefik.http.routers.grafana1.middlewares=secureHeaders@file"
       - "traefik.http.routers.grafana1.tls=true"
+      - "traefik.http.routers.grafana1.tls.certresolver=letsEncrypt"
     restart: "always"
 networks:
   {{ docker_networks.monitoring.name }}:

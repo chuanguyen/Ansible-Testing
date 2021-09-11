@@ -1,0 +1,2 @@
+ansible_python_interpreter: "/opt/QPython3/bin/python3"
+ansible_user: "admin"
