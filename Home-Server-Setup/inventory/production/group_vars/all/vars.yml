@@ -1,4 +1,6 @@
 ---
+ansible_host: "{{ inventory_hostname }}.{{ home_lan_domain }}"
+
 nfs_server_ipv4_address: "{{ vault_nfs_server_ipv4_address }}"
 autofs_nfs_shares: "{{ vault_autofs_nfs_shares }}"
 
