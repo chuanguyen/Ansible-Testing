@@ -1,17 +1,17 @@
 ---
 
-- name: "Create root folder for container"
+- name: "TASK: Create root folder for container"
   file:
     path: "{{ docker_data_dir }}"
     state: "directory"
 
-- name: "Create folders for build and container data"
+- name: "TASK: Create folders for build and container data"
   file:
     path: "{{ docker_data_dir }}/{{ item }}"
     state: "directory"
   with_items: "{{ docker_data_dir_sub_folders }}"
 
-- name: "Template files for building and running {{ container_name }}"
+- name: "TASK: Template files for building and running {{ container_name }}"
   template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
@@ -25,7 +25,7 @@
   loop_control:
     label: "{{ item.src }}"
 
-- name: "Template {{ container_name }} config files"
+- name: "TASK: Template {{ container_name }} config files"
   become: true
   template:
     src: "{{ item.src }}"
