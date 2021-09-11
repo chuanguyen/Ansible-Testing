@@ -25,7 +25,7 @@ docker_networks:
     enable_ipv6: "false"
     scope: "local"
     internal: "false"
-    external: "true"
+    external: "false"
     state: "present"
 
 docker_user_root_dir: "/home/{{ ansible_user }}/docker"
@@ -119,14 +119,6 @@ ufw_rules:
       to_ip: any
       from_port: null
       to_port: '25'
-      proto: any
-    - comment: "Permits incoming Grafana connections"
-      rule: allow
-      delete: no
-      from_ip: any
-      to_ip: any
-      from_port: null
-      to_port: '3000'
       proto: any
   remove:
     -
