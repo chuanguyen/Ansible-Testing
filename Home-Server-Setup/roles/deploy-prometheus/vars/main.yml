@@ -10,7 +10,7 @@ image_base_tag_old: ""
 
 container_volumes:
   binds:
-    - source: "./etc-prometheus/"
-      target: "/etc/prometheus/"
+    - source: "./etc-prometheus/prometheus.yml"
+      target: "/etc/prometheus/prometheus.yml"
     - source: "./mnt-backup/"
       target: "/mnt/backup/"

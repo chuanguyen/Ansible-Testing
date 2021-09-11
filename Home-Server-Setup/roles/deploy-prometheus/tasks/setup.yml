@@ -22,7 +22,20 @@
       dest: "{{ docker_data_dir }}/docker-compose.yml"
     - src: "prometheus.env.j2"
       dest: "{{ docker_data_dir }}/prometheus.env"
-    - src: "Dockerfile.j2"
-      dest: "{{ docker_data_dir }}/build/Dockerfile"
+  loop_control:
+    label: "{{ item.src }}"
+
+- name: "Template {{ container_name }} config files"
+  become: true
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    # Maps to UID that's in Prometheus container
+    owner: "65534"
+    group: "docker"
+    mode: 0660
+  with_items:
+    - src: "prometheus.yml.j2"
+      dest: "{{ docker_data_dir }}/etc-prometheus/prometheus.yml"
   loop_control:
     label: "{{ item.src }}"
