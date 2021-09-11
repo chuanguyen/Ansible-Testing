@@ -45,3 +45,5 @@
       tags: [ services, smtp_relay ]
     - role: deploy-grafana
       tags: [ services, grafana]
+    - role: deploy-prometheus
+      tags: [ services, prometheus ]
