@@ -1,4 +1,5 @@
 automation_pip_packages:
+  - ansible
   - gns3-server
   - gns3-gui
   - pyqt5
