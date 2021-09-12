@@ -1,12 +1,12 @@
 # {{ ansible_managed }}
 
-CPATH='{{ cert_path }}'
-CNAME='{{ lego_domains[0] }}'
-CURRENT=$(cat "$CPATH"/"$CNAME".crt)
-CF_API_EMAIL={{ cf_api_email }} \
-CF_DNS_API_TOKEN={{ cf_dns_api_token }} \
+export CPATH='{{ cert_path }}'
+export CNAME='{{ lego_domains[0] }}'
+export CURRENT=$(cat "$CPATH"/"$CNAME".crt)
+export CF_API_EMAIL={{ cf_api_email }} \
+export CF_DNS_API_TOKEN={{ cf_dns_api_token }} \
 
-lego  --dns cloudflare {% for domain in lego_domains %} --domains {{ domain }} {% endfor %} --key-type=rsa2048 --email $CF_API_EMAIL --path {{ ssl_path }} --days {{ lego_cert_renewal_period }} -a renew
+lego  --dns cloudflare {% for domain in lego_domains %} --domains {{ domain }} {% endfor %} --key-type=rsa2048 --email $CF_API_EMAIL --path {{ ssl_path }} -a renew --days {{ lego_cert_renewal_period }}
 
 if [[ $CURRENT != $(cat "$CPATH"/"$CNAME".crt) ]]
 then
