@@ -47,3 +47,10 @@
       tags: [ services, grafana]
     - role: deploy-prometheus
       tags: [ services, prometheus ]
+
+- name: "PLAY: Configure NAS"
+  hosts: nas
+
+  roles:
+    - role: configure-qnap-le-ssl
+      tags: [ nas, certificate ]
