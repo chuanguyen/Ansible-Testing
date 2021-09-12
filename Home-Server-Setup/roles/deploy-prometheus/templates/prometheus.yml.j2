@@ -1,15 +1,17 @@
 ### {{ ansible_managed }}
 
 global:
-  scrape_interval:     15s # By default, scrape targets every 15 seconds.
+  # How frequently to scrape targets by default.
+  scrape_interval:     {{ prometheus_global_scrape_interval }}
 
-  # Attach these labels to any time series or alerts when communicating with
-  # external systems (federation, remote storage, Alertmanager).
-  external_labels:
-    monitor: 'codelab-monitor'
+  # How long until a scrape request times out.
+  scrape_timeout: {{ prometheus_global_scrape_timeout }}
 
+  # How frequently to evaluate rules.
+  evaluation_interval: {{ prometheus_global_evaluation_interval }}
+
+# A list of scrape configurations.
 # A scrape configuration containing exactly one endpoint to scrape:
-# Here it's Prometheus itself.
 scrape_configs:
   # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
   - job_name: 'prometheus'
@@ -19,3 +21,8 @@ scrape_configs:
 
     static_configs:
       - targets: ['localhost:9090']
+
+# Alerting specifies settings related to the Alertmanager.
+alerting:
+  alert_relabel_configs:
+  alertmanagers:
