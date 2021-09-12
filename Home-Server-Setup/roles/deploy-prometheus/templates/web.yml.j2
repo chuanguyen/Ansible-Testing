@@ -1,0 +1,3 @@
+### {{ ansible_managed }}
+basic_auth_users:
+  {{ docker_services_admin_username }}: "{{ docker_services_admin_password | password_hash('bcrypt') }}"

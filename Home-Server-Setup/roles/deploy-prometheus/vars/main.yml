@@ -12,5 +12,7 @@ container_volumes:
   binds:
     - source: "./etc-prometheus/prometheus.yml"
       target: "/etc/prometheus/prometheus.yml"
+    - source: "./etc-prometheus/web.yml"
+      target: "/etc/prometheus/web.yml"
     - source: "./mnt-backup/"
       target: "/mnt/backup/"
