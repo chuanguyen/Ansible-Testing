@@ -20,9 +20,7 @@
   with_items:
     - src: "docker-compose.yml.j2"
       dest: "{{ docker_data_dir }}/docker-compose.yml"
-    - src: "SERVICE.env.j2"
-      dest: "{{ docker_data_dir }}/SERVICE.env"
-    - src: "Dockerfile.j2"
-      dest: "{{ docker_data_dir }}/build/Dockerfile"
+    - src: "snmp_exporter.env.j2"
+      dest: "{{ docker_data_dir }}/snmp_exporter.env"
   loop_control:
     label: "{{ item.src }}"

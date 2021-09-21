@@ -6,12 +6,12 @@ version: "3"
 
 # More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
 services:
-  SERVICE:
+  snmp_exporter:
     build:
       context: build/
     container_name: "{{ container_name }}"
     image: "{{ image_base }}:{{ image_base_tag }}"
-    env_file: SERVICE.env
+    env_file: snmp_exporter.env
     ports:
       - ""
     networks:
@@ -24,10 +24,10 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network={{ docker_networks.proxy.name }}"
-      - "traefik.http.routers.SERVICE.rule=Host(`SERVICE.{{ home_lan_domain }}`)"
-      - "traefik.http.routers.SERVICE.entrypoints=websecure"
-      - "traefik.http.routers.SERVICE.middlewares=lanWhitelist@file,secureHeaders@file"
-      - "traefik.http.routers.SERVICE.tls=true"
-      - "traefik.http.routers.SERVICE.tls.certresolver=letsEncrypt"
+      - "traefik.http.routers.snmp_exporter.rule=Host(`snmp_exporter.{{ home_lan_domain }}`)"
+      - "traefik.http.routers.snmp_exporter.entrypoints=websecure"
+      - "traefik.http.routers.snmp_exporter.middlewares=lanWhitelist@file,secureHeaders@file"
+      - "traefik.http.routers.snmp_exporter.tls=true"
+      - "traefik.http.routers.snmp_exporter.tls.certresolver=letsEncrypt"
     restart: "always"
 networks:
