@@ -1,0 +1,3 @@
+# configure-joplin tasks
+
+- include: "install.yml"

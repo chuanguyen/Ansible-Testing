@@ -1,0 +1,59 @@
+# configure-joplin tasks
+
+- name: "TASK: Scrape Joplin version from Github"
+  uri:
+    url: https://api.github.com/repos/laurent22/joplin/releases/latest
+    return_content: true
+  register: latest
+
+- name: "TASK: Retrieve latest Joplin version"
+  set_fact:
+    latest_version: "{{ latest.json.tag_name | regex_replace('v') }}"
+
+- name: "TASK: Check for Joplin version file"
+  stat:
+    path: "{{ ansible_env.HOME }}/.joplin/VERSION"
+  register: VERSION_file
+
+- name: "TASK: Retrieve currently installed Joplin version"
+  set_fact:
+    VERSION_contents: "{{ lookup('file', '{{ ansible_env.HOME }}/.joplin/VERSION') }}"
+  when: VERSION_file.stat.exists
+
+- name: "TASK: Install latest version of Joplin"
+  block:
+    - name: "TASK: Remove existing Joplin install"
+      file:
+        name: "{{ item }}"
+        state: absent
+      with_items:
+        - "{{ ansible_env.HOME }}/.local/share/applications/appimagekit-joplin.desktop"
+        - "{{ ansible_env.HOME }}/Applications/Joplin.AppImage"
+        - "{{ ansible_env.HOME }}/.joplin/VERSION"
+
+    - name: "TASK: Create Joplin directory"
+      file:
+        name: "{{ ansible_env.HOME }}/.joplin"
+        state: directory
+
+    - name: "TASK: Retrieve latest Joplin appimage"
+      get_url:
+        url: "https://github.com/laurent22/joplin/releases/download/v{{ latest_version }}/Joplin-{{ latest_version }}.AppImage"
+        dest: "{{ ansible_env.HOME }}/Applications/Joplin.AppImage"
+        mode: 0755
+
+    - name: "TASK: Retrieve Joplin icon"
+      get_url:
+        url: "https://joplinapp.org/images/Icon512.png"
+        dest: "{{ ansible_env.HOME }}/.joplin/Icon512.png"
+
+    - name: "TASK: Template Joplin desktop file"
+      template:
+        src: joplin_desktop.j2
+        dest: "{{ ansible_env.HOME }}/.local/share/applications/appimagekit-joplin.desktop"
+
+    - name: "TASK: Output Joplin installed version"
+      copy:
+        content: "{{ latest_version }}"
+        dest: "{{ ansible_env.HOME }}/.joplin/VERSION"
+  when: (not VERSION_file.stat.exists) or (VERSION_contents != latest_version)
