@@ -1,0 +1,8 @@
+---
+# configure-joplin tasks
+
+- name: "TASK: Download plugin {{ joplin_plugin.name }} {{ joplin_plugin.version }}"
+  get_url:
+    url: "{{ joplin_plugin.url }}"
+    dest: "{{ ansible_env.HOME }}/.config/joplin-desktop/plugins"
+    mode: 0644
