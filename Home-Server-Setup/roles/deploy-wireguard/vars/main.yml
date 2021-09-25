@@ -3,10 +3,10 @@ docker_data_dir_sub_folders:
   - "mnt-backup/"
   - "scripts"
 
-wireguard_image_base_tag: "arm64v8-version-v1.0.20210424"
+wireguard_image_base_tag: "arm64v8-version-v1.0.20210914"
 # Ensures previous version of working
 # wireguard image is available for failback
-wireguard_image_base_tag_old: ""
+wireguard_image_base_tag_old: "arm64v8-version-v1.0.20210424"
 
 wireguard_container_volumes:
   binds:
