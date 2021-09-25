@@ -15,19 +15,12 @@ services:
     ports:
       - ""
     networks:
-      - ""
+      - {{ docker_networks.monitoring.name }}
     # Volumes store your data between container upgrades
     volumes:
 {% for volume in container_volumes.binds %}
       - {{ volume.source }}:{{ volume.target }}
 {% endfor %}
-    labels:
-      - "traefik.enable=true"
-      - "traefik.docker.network={{ docker_networks.proxy.name }}"
-      - "traefik.http.routers.snmp_exporter.rule=Host(`snmp_exporter.{{ home_lan_domain }}`)"
-      - "traefik.http.routers.snmp_exporter.entrypoints=websecure"
-      - "traefik.http.routers.snmp_exporter.middlewares=lanWhitelist@file,secureHeaders@file"
-      - "traefik.http.routers.snmp_exporter.tls=true"
-      - "traefik.http.routers.snmp_exporter.tls.certresolver=letsEncrypt"
     restart: "always"
 networks:
+  {{ docker_networks.monitoring.name }}:
