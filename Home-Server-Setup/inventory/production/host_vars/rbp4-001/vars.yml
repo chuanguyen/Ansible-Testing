@@ -1,11 +1,16 @@
 system_packages:
 - autofs
+- build-essential
 - cron
 - ddclient
 - fail2ban
+- golang-go
 - iperf3
 - libdata-validate-ip-perl
+- libsnmp
 - net-tools
+- p7zip-full
+- unzip
 
 fail2ban_ignoreip:
 - "{{ home_lan_cidr }}"
