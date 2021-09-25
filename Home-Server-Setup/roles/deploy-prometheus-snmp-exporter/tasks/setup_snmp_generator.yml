@@ -1,0 +1,43 @@
+---
+
+### Issue #675
+# One of the MIBS aren't being downloaded
+# Fixed in Commit 4307bba
+# Not included in v0.20.0 tag
+# Switch to version tag when included
+- name: "TASK: Clone SNMP exporter repo"
+  git:
+    repo: "https://github.com/prometheus/snmp_exporter.git"
+    dest: "{{ docker_data_dir }}/temp"
+    single_branch: yes
+    # version: "{{ image_base_tag }}"
+    version: "main"
+
+- name: "TASK: Make SNMP Generator MIBS"
+  community.general.make:
+    chdir: "{{ docker_data_dir }}/temp/generator"
+    target: "mibs"
+
+- name: "TASK: Add custom MIBS to mibs directory"
+  copy:
+    src: "{{ item }}"
+    dest: "{{ docker_data_dir }}/temp/generator/mibs"
+    mode: 0664
+  with_fileglob:
+    - "mibs/*"
+  loop_control:
+    label: "{{ item | basename }}"
+
+- name: "TASK: Build snmp-generator binary"
+  shell:
+    cmd: "go build"
+  args:
+      chdir: "{{ docker_data_dir }}/temp/generator"
+
+- name: "TASK: Generate snmp.yml"
+  shell:
+    cmd: "./generator generate"
+  args:
+      chdir: "{{ docker_data_dir }}/temp/generator"
+  environment:
+    MIBDIRS: "mibs"
