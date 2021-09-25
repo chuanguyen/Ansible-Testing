@@ -1,0 +1,26 @@
+[
+  {
+    "command": "newTodo",
+    "accelerator": null
+  },
+  {
+    "command": "setTags",
+    "accelerator": "Ctrl+Alt+Shift+T"
+  },
+  {
+    "command": "favsAddFolder",
+    "accelerator": null
+  },
+  {
+    "command": "favsAddTag",
+    "accelerator": null
+  },
+  {
+    "command": "favsAddNote",
+    "accelerator": "Ctrl+Shift+F"
+  },
+  {
+    "command": "tabsPinNote",
+    "accelerator": "Ctrl+T"
+  }
+]
