@@ -1,1 +1,18 @@
 # configure-joplin defaults
+
+# Refers to sync method
+# '6' refers to WebDAV
+joplin_setting_sync: "6"
+
+joplin_setting_webdav_port: 8081
+joplin_setting_webdav_path: "{{ family_nas_FQDN }}:{{ joplin_setting_webdav_port }}/home/Documents/Notes/Joplin"\
+joplin_setting_webdav_user: "{{ family_nas_username }}"
+
+joplin_setting_locale: "en_US"
+joplin_setting_api_token: ""
+joplin_setting_spellChecker_language: "en-US"
+joplin_setting_trackLocation: "false"
+joplin_setting_showTrayIcon: "true"
+joplin_setting_clipperServer_autoStart: "true"
+joplin_setting_notes_sortOrder_field: "title"
+joplin_setting_style_editor_contentMaxWidth: "0"

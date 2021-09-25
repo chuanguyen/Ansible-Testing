@@ -20,6 +20,7 @@ smb_password: "{{ vault_smb_password }}"
 smb_domain: "{{ vault_smb_domain }}"
 home_domain: "{{ vault_home_domain }}"
 family_nas_hostname: "{{ vault_family_nas_hostname }}"
+family_nas_username: "{{ vault_family_nas_username }}"
 family_nas_FQDN: "{{ family_nas_hostname }}.{{ home_domain }}"
 
 home_printer_fqdn: "printer.{{ home_domain }}"
@@ -28,3 +29,6 @@ home_printer_fqdn: "printer.{{ home_domain }}"
 github_access_token: "{{ vault_github_access_token }}"
 
 ssh_config_hosts: "{{ vault_ssh_config_hosts }}"
+
+# Joplin
+joplin_setting_api_token: "{{ vault_joplin_setting_api_token }}"
