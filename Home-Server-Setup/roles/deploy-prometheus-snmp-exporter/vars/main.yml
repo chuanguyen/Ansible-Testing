@@ -1,7 +1,8 @@
 docker_data_dir_sub_folders:
-  - ""
+  - "temp"
+  - "snmp_generator"
 
-image_base_tag: ""
+image_base_tag: "v0.20.0"
 # Ensures previous version of working
 # snmp_exporter image is available for failback
 image_base_tag_old: ""
