@@ -1,6 +1,6 @@
 # configure-joplin tasks
 
-# - include: "install.yml"
+- include: "install.yml"
 - include: "configure.yml"
 
 - name: "TASK: Loop through plugins to install"
