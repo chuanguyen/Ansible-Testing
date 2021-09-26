@@ -140,3 +140,6 @@ prometheus_mib_modules:
     auth:
       community: "{{ snmp_community_strings.printer }}"
     lookups:
+      - source_indexes: [hrDeviceIndex]
+        lookup: hrDeviceDescr
+        drop_source_indexes: true
