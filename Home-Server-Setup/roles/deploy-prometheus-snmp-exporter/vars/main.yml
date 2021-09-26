@@ -9,5 +9,5 @@ image_base_tag_old: ""
 
 container_volumes:
   binds:
-    - source: ""
-      target: ""
+    - source: "./snmp_generator/snmp.yml"
+      target: "/etc/snmp_exporter/snmp.yml"
