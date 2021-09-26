@@ -5,3 +5,25 @@ container_name: "snmp_exporter"
 
 docker_envs:
   kv:
+
+prometheus_mib_modules:
+  - name: ""
+    walk:
+      - ""
+    version: ""
+    max_repetitions: ""
+    retries: ""
+    timeout: ""
+    auth:
+      community: ""
+      username: ""
+      security_level: ""
+      password: ""
+      auth_protocol: ""
+      priv_protocol: ""
+      priv_password: ""
+      context_name: ""
+    lookups:
+      - source_indexes: []
+        lookup: ""
+        drop_source_indexes: ""

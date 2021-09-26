@@ -7,13 +7,11 @@ version: "3"
 # More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
 services:
   snmp_exporter:
-    build:
-      context: build/
     container_name: "{{ container_name }}"
     image: "{{ image_base }}:{{ image_base_tag }}"
     env_file: snmp_exporter.env
     ports:
-      - ""
+      - "9116:9116"
     networks:
       - {{ docker_networks.monitoring.name }}
     # Volumes store your data between container upgrades
@@ -24,3 +22,4 @@ services:
     restart: "always"
 networks:
   {{ docker_networks.monitoring.name }}:
+    external: true

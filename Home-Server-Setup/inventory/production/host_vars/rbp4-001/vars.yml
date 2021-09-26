@@ -30,7 +30,7 @@ docker_networks:
     enable_ipv6: "false"
     scope: "local"
     internal: "false"
-    external: "false"
+    external: "true"
     state: "present"
 
 docker_user_root_dir: "/home/{{ ansible_user }}/docker"
@@ -127,3 +127,16 @@ ufw_rules:
       proto: any
   remove:
     -
+
+prometheus_mib_modules:
+  - name: "PRINTER-MIB"
+    walk:
+      - "prtMarkerSuppliesLevel"
+      - "prtMarkerSuppliesMaxCapacity"
+    version: "2"
+    max_repetitions: "25"
+    retries: "3"
+    timeout: "5s"
+    auth:
+      community: "{{ snmp_community_strings.printer }}"
+    lookups:

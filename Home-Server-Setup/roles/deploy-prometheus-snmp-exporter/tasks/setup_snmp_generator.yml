@@ -12,6 +12,7 @@
     single_branch: yes
     # version: "{{ image_base_tag }}"
     version: "main"
+    force: yes
 
 - name: "TASK: Make SNMP Generator MIBS"
   community.general.make:
@@ -34,6 +35,14 @@
   args:
       chdir: "{{ docker_data_dir }}/temp/generator"
 
+- name: "TASK: Add generator.yml entries"
+  blockinfile:
+    path: "{{ docker_data_dir }}/temp/generator/generator.yml"
+    block: "{{ lookup('template', 'generator.yml.j2')}}"
+    insertafter: "EOF"
+    mode: 0664
+    state: "present"
+
 - name: "TASK: Generate snmp.yml"
   shell:
     cmd: "./generator generate"
@@ -41,3 +50,10 @@
       chdir: "{{ docker_data_dir }}/temp/generator"
   environment:
     MIBDIRS: "mibs"
+
+- name: "TASK: Move snmp.yml out of temp folder"
+  copy:
+    src: "{{ docker_data_dir }}/temp/generator/snmp.yml"
+    remote_src: yes
+    dest: "{{ docker_data_dir }}/snmp_generator"
+    mode: 0664

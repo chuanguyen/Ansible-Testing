@@ -33,5 +33,6 @@ services:
     restart: "always"
 networks:
   {{ docker_networks.monitoring.name }}:
+    external: true
   {{ docker_networks.proxy.name }}:
     external: true
