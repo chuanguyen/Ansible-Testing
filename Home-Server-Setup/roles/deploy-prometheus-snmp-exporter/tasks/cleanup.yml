@@ -1,0 +1,6 @@
+---
+
+- name: "TASK: Delete contents in temp directory"
+  file:
+    path: "{{ docker_data_dir }}/temp"
+    state: "absent"
