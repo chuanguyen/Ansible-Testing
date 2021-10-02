@@ -14,13 +14,45 @@ global:
 # A scrape configuration containing exactly one endpoint to scrape:
 scrape_configs:
   # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
-  - job_name: 'prometheus'
-
-    # Override the global default and scrape targets from this job every 5 seconds.
-    scrape_interval: 5s
-
+{% for prom_job in prometheus_scrape_configs %}
+  - job_name: '{{ prom_job.job_name }}'
     static_configs:
-      - targets: ['localhost:9090']
+{% for prom_targets in prom_job.static_configs.targets %}
+      - targets:
+{% for host in prom_targets.hosts %}
+        - '{{ lookup('community.general.dig', host) }}'
+{% endfor %}
+{% if (prom_targets.labels is defined) and prom_targets.labels %}
+        labels:
+{% for label_key,label_item in prom_targets.labels.items() %}
+           {{ label_key }}: '{{ label_item }}'
+{% endfor %}
+{% endif %}
+{% endfor %}
+    metrics_path: "{{ prom_job.metrics_path }}"
+{% if (prom_job.params is defined) and prom_job.params %}
+    params:
+{% for param_key,param_value in prom_job.params.items() %}
+      {{ param_key }}: {{ param_value }}
+{% endfor %}
+{% endif %}
+{% if (prom_job.scrape_interval is defined) and (prom_job.scrape_interval != "") %}
+    scrape_interval: "{{ prom_job.scrape_interval }}"
+{% endif %}
+{% if (prom_job.scrape_timeout is defined) and (prom_job.scrape_timeout != "") %}
+    scrape_timeout: "{{ prom_job.scrape_timeout }}"
+{% endif %}
+{% if (prom_job.relabel_configs is defined) and prom_job.relabel_configs %}
+    relabel_configs:
+{% for relabel_config in prom_job.relabel_configs %}
+      -
+{% for relabel_config_key,relabel_config_value in relabel_config.items() %}
+        {{ relabel_config_key }}: {{ relabel_config_value }}
+{% endfor %}
+{% endfor %}
+{% endif %}
+
+{% endfor %}
 
 # Alerting specifies settings related to the Alertmanager.
 alerting:

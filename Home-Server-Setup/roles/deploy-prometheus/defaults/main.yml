@@ -24,3 +24,18 @@ docker_cli_commands:
 prometheus_global_scrape_interval: "1m"
 prometheus_global_scrape_timeout: "10s"
 prometheus_global_evaluation_interval: "1m"
+
+prometheus_scrape_configs:
+  - job_name: "DEFAULT_JOB"
+    static_configs:
+      targets:
+      # Expects hostnames, and will resolve to IP for Prometheus
+      # dig Lookup ran in prometheus.yml template
+        - hosts:
+            - ""
+          labels:
+    metrics_path: "/metrics"
+    params:
+    scrape_interval: ""
+    scrape_timeout: ""
+    relabel_configs:
