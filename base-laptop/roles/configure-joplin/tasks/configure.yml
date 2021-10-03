@@ -1,0 +1,21 @@
+---
+# configure-joplin tasks
+
+- name: "TASK: Create Joplin config directory"
+  file:
+    name: "{{ ansible_env.HOME }}/.config/joplin-desktop/"
+    state: directory
+
+- name: "TASK: Template Joplin settings file"
+  template:
+    src: "settings.json.j2"
+    dest: "{{ ansible_env.HOME }}/.config/joplin-desktop/settings.json"
+    mode: 0644
+    backup: yes
+
+- name: "TASK: Install Joplin keymap file"
+  copy:
+    src: "keymap-desktop.json"
+    dest: "{{ ansible_env.HOME }}/.config/joplin-desktop/keymap-desktop.json"
+    mode: 0644
+    backup: yes

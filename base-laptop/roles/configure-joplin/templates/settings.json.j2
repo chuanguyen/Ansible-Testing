@@ -1,0 +1,63 @@
+{
+        "$schema": "https://joplinapp.org/schema/settings.json",
+        "locale": "{{ joplin_setting_locale }}",
+        "api.token": "{{ joplin_setting_api_token }}",
+        "markdown.plugin.softbreaks": false,
+        "markdown.plugin.typographer": false,
+        "spellChecker.language": "{{ joplin_setting_spellChecker_language }}",
+        "ui.layout": {
+                "key": "root",
+                "children": [
+                        {
+                                "key": "sideBar",
+                                "visible": true,
+                                "width": 207
+                        },
+                        {
+                                "key": "noteList",
+                                "visible": true,
+                                "width": 242
+                        },
+                        {
+                                "key": "tempContainer-CfO5JJ1xVx8NBlTp1y7vZA",
+                                "children": [
+                                        {
+                                                "key": "plugin-view-joplin.plugin.note.tabs-note.tabs.panel",
+                                                "context": {
+                                                        "pluginId": "joplin.plugin.note.tabs"
+                                                },
+                                                "visible": true,
+                                                "height": 40
+                                        },
+                                        {
+                                                "key": "plugin-view-joplin.plugin.benji.favorites-favorites.panel",
+                                                "context": {
+                                                        "pluginId": "joplin.plugin.benji.favorites"
+                                                },
+                                                "visible": true,
+                                                "height": 40
+                                        },
+                                        {
+                                                "key": "editor",
+                                                "visible": true
+                                        }
+                                ],
+                                "visible": true
+                        }
+                ],
+                "visible": true
+        },
+        "noteVisiblePanes": [
+                "editor",
+                "viewer"
+        ],
+        "sync.target": {{ joplin_setting_sync }},
+        "sync.{{ joplin_setting_sync }}.path": "{{ joplin_setting_webdav_path }}",
+        "sync.{{ joplin_setting_sync }}.username": "{{ joplin_setting_webdav_user }}",
+        "trackLocation": {{ joplin_setting_trackLocation }},
+        "showTrayIcon": {{ joplin_setting_showTrayIcon }},
+        "editor.codeView": true,
+        "clipperServer.autoStart": {{ joplin_setting_clipperServer_autoStart }},
+        "notes.sortOrder.field": "{{ joplin_setting_notes_sortOrder_field }}",
+        "style.editor.contentMaxWidth": {{ joplin_setting_style_editor_contentMaxWidth }}
+}
