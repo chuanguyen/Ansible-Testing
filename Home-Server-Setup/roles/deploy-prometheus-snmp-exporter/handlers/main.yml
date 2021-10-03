@@ -1,0 +1,5 @@
+# HANDLERS deploy-prometheus
+
+- name: "HANDLER: Restart containers"
+  set_fact:
+    container_restarted: "yes"

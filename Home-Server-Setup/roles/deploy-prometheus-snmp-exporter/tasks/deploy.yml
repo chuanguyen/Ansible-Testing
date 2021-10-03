@@ -33,8 +33,12 @@
       when: container_state.exists and image_base_pull.changed
   when: container_image_tag[1] != image_base_tag
 
+- name: "HANDLER: Flush handlers"
+  meta: flush_handlers
+
 - name: "TASK: Deploy {{ container_name }}"
   community.docker.docker_compose:
     project_src: "{{ docker_data_dir }}"
     nocache: "no"
     state: "present"
+    restarted: "{{ container_restarted }}"

@@ -58,3 +58,5 @@
     remote_src: yes
     dest: "{{ docker_data_dir }}/snmp_generator"
     mode: 0664
+  notify:
+    - "HANDLER: Restart containers"

@@ -2,6 +2,8 @@ docker_data_dir: "{{ docker_user_root_dir }}/snmp_exporter"
 
 image_base: "prom/snmp-exporter"
 container_name: "snmp_exporter"
+# Used to determine if to restart containers
+container_restarted: "no"
 
 docker_envs:
   kv:
