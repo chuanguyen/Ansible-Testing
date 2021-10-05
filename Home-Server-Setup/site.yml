@@ -1,0 +1,56 @@
+---
+
+- name: "PLAY: Baselining servers"
+  hosts: rbp4-001
+  gather_facts: true
+
+  roles:
+    - role: install-system-packages
+      tags: [ baseline ]
+    - role: configure-hostname
+      tags: [ baseline ]
+    - role: configure-systemd-resolved
+      tags: [ baseline, refresh, network ]
+    - role: configure-cloud-init
+      tags: [ baseline, refresh, network ]
+    - role: configure-netplan
+      tags: [ baseline, refresh ]
+    - role: configure-ssh-server
+      tags: [ baseline, refresh, security ]
+    - role: configure-ufw
+      tags: [ baseline, refresh, network, security ]
+    - role: configure-fail2ban
+      tags: [ baseline, refresh, security ]
+    - role: configure-cron
+      tags: [ baseline, refresh ]
+    - role: configure-autofs
+      tags: [ baseline, refresh ]
+    - role: configure-docker
+      tags: [ baseline, refresh ]
+
+- name: "PLAY: Deploy services"
+  hosts: rbp4-001
+  gather_facts: true
+
+  roles:
+    - role: deploy-pihole
+      tags: [ services, pihole ]
+    - role: configure-ddclient
+      tags: [ services, vpn, ddclient ]
+    - role: deploy-wireguard
+      tags: [ services, vpn, wireguard ]
+    - role: deploy-traefik
+      tags: [ services, proxy, traefik ]
+    - role: deploy-smtp-relay
+      tags: [ services, smtp_relay ]
+    - role: deploy-grafana
+      tags: [ services, grafana]
+    - role: deploy-prometheus
+      tags: [ services, prometheus ]
+
+- name: "PLAY: Configure NAS"
+  hosts: nas
+
+  roles:
+    - role: configure-qnap-le-ssl
+      tags: [ nas, certificate ]

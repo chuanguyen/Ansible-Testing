@@ -1,0 +1,11 @@
+---
+
+- name: "TASK: Create Docker networks"
+  community.docker.docker_network:
+    name: "{{ item.value.name }}"
+    driver: "{{ item.value.driver }}"
+    enable_ipv6: "{{ item.value.enable_ipv6 }}"
+    scope: "{{ item.value.scope }}"
+    internal: "{{ item.value.internal }}"
+    state: "{{ item.value.state }}"
+  with_dict: "{{ docker_networks }}"

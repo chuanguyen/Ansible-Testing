@@ -1,0 +1,8 @@
+all:
+  children:
+    raspberry_pi_servers:
+      hosts:
+        "rbp4-001":
+    nas:
+      hosts:
+        "nas1":

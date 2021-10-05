@@ -1,0 +1,6 @@
+---
+
+ssh_config_hosts:
+- host: "*"
+  options:
+    User: ""

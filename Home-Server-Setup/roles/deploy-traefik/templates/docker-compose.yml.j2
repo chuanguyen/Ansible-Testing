@@ -1,0 +1,38 @@
+---
+
+# {{ ansible_managed }}
+
+version: "3.8"
+
+services:
+  traefik:
+    container_name: "{{ traefik_container_name }}"
+    image: "{{ traefik_image_base }}:{{ traefik_image_base_tag }}"
+    env_file: traefik.env
+    security_opt:
+      - no-new-privileges:true
+    ports:
+      - 80:80
+      - 443:443
+      - 51820:51820/udp
+    networks:
+      - {{ docker_networks.proxy.name }}
+    # Volumes store your data between container upgrades
+    volumes:
+{% for volume in traefik_container_volumes.binds %}
+      - {{ volume.source }}:{{ volume.target }}
+{% endfor %}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network={{ docker_networks.proxy.name }}"
+      - "traefik.http.routers.traefik1.rule=Host(`traefik.{{ home_lan_domain }}`) || Host(`{{ ansible_default_ipv4.address }}`)"
+      - "traefik.http.routers.traefik1.entrypoints=websecure"
+      - "traefik.http.routers.traefik1.middlewares=lanWhitelist@file,secureHeaders@file"
+      - "traefik.http.routers.traefik1.service=api@internal"
+      - "traefik.http.routers.traefik1.tls=true"
+      - "traefik.http.routers.traefik1.tls.certresolver=letsEncrypt"
+      - "traefik.http.routers.traefik1.tls.domains[0].main={{ home_lan_domain }}"
+    restart: "always"
+networks:
+  {{ docker_networks.proxy.name }}:
+    external: true

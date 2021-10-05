@@ -1,0 +1,6 @@
+# {{ ansible_managed }}
+# ddclient scheduled execution
+
+SHELL=/bin/bash
+
+0 04 * * *  root  /usr/sbin/ddclient --force 

@@ -1,0 +1,5 @@
+# {{ ansible_managed }}
+
+{% for nfs_share in autofs_nfs_shares %}
+{{ nfs_share.mountpoint }}  {{ nfs_share.options | join(',') }} {{ nfs_share.nfs_server }}:{{ nfs_share.share }}
+{% endfor %}

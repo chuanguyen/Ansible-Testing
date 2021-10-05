@@ -1,0 +1,41 @@
+---
+
+- name: "TASK: Retrieve container info"
+  community.docker.docker_container_info:
+    name: "{{ pihole_container_name }}"
+  register: pihole_container_state
+
+- name: "TASK: Set container facts"
+  set_fact:
+    pihole_container_exists: "{{ pihole_container_state.exists }}"
+    pihole_container_image: "{{ pihole_container_state.container.Config.Image | default('tag:n/a') }}"
+
+- name: "TASK: Set container image tag"
+  set_fact:
+    pihole_container_image_tag: "{{ pihole_container_image.split(':') }}"
+
+- block:
+    - include: "pihole_image_cleanup.yml"
+
+    - name: "TASK: Pull base image"
+      community.docker.docker_image:
+        name: "{{ pihole_image_base }}"
+        tag: "{{ pihole_image_base_tag }}"
+        source: "pull"
+        state: "present"
+      register: "pihole_image_base_pull"
+
+    - name: "TASK: Remove container for updates"
+      community.docker.docker_container:
+        name: "{{ pihole_container_name }}"
+        container_default_behavior: "no_defaults"
+        state: "absent"
+      when: pihole_container_state.exists and pihole_image_base_pull.changed
+  when: pihole_container_image_tag[1] != pihole_image_base_tag
+
+- name: "TASK: Deploy {{ pihole_container_name }}"
+  community.docker.docker_compose:
+    project_src: "{{ docker_data_dir }}"
+    build: "{{ 'yes' if pihole_image_base_pull.changed else 'no' }}"
+    nocache: "no"
+    state: "present"

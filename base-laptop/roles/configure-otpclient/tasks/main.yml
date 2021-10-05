@@ -1,0 +1,13 @@
+---
+
+- name: "TASK: Verify OTPClient config directory exists"
+  file:
+    path: "{{ otpclient_db_path }}"
+    state: directory
+    mode: 0755
+
+- name: "TASK: Template OTPClient config"
+  template:
+    src: "otpclient.cfg.j2"
+    dest: "{{ ansible_env.HOME }}/.config/otpclient.cfg"
+    mode: 0644

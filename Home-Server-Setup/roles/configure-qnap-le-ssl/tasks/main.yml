@@ -1,0 +1,25 @@
+---
+# configure-qnap-le-ssl
+
+- include: setup.yml
+
+- name: "TASK: Add cron entry for lego script"
+  lineinfile:
+    path: "/etc/config/crontab"
+    line: "{{ lego_refresh_interval }} {{ ssl_path }}/scripts/lego_renew.sh"
+    insertafter: "EOF"
+    state: present
+  notify:
+    - "HANDLER: Refresh crontab"
+    - "HANDLER: Restart crond"
+
+- name: "TASK: Look for LE certificate file"
+  stat:
+    path: "{{ cert_path }}/{{ lego_domains[0] }}.crt"
+  register: stat_le_cert
+
+- name: "TASK: Request for LE certificate"
+  shell: "{{ ssl_path }}/scripts/lego_request.sh"
+  args:
+    executable: "/bin/sh"
+  when: not stat_le_cert.stat.exists

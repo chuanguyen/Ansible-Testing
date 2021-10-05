@@ -1,0 +1,31 @@
+---
+
+- name: "TASK: Create folders for build and container data"
+  file:
+    path: "{{ docker_data_dir }}/{{ item }}"
+    state: "directory"
+  with_items: "{{ docker_data_dir_sub_folders }}"
+
+- name: "TASK: Template files for building and running {{ traefik_container_name }}"
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    group: "docker"
+    mode: 0660
+  with_items:
+    - src: "docker-compose.yml.j2"
+      dest: "{{ docker_data_dir }}/docker-compose.yml"
+    - src: "traefik.env.j2"
+      dest: "{{ docker_data_dir }}/traefik.env"
+    - src: "traefik.yml.j2"
+      dest: "{{ docker_data_dir }}/traefik.yml"
+    - src: "traefik-dynamic.yml.j2"
+      dest: "{{ docker_data_dir }}/configurations/traefik-dynamic.yml"
+  loop_control:
+    label: "{{ item.src }}"
+
+- name: "TASK: Restrict letsEncrypt bind mount"
+  file:
+    path: "{{ docker_data_dir }}/letsEncrypt"
+    state: "directory"
+    mode: 0600

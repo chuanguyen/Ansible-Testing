@@ -1,0 +1,28 @@
+### {{ ansible_managed }}
+
+global:
+  # How frequently to scrape targets by default.
+  scrape_interval:     {{ prometheus_global_scrape_interval }}
+
+  # How long until a scrape request times out.
+  scrape_timeout: {{ prometheus_global_scrape_timeout }}
+
+  # How frequently to evaluate rules.
+  evaluation_interval: {{ prometheus_global_evaluation_interval }}
+
+# A list of scrape configurations.
+# A scrape configuration containing exactly one endpoint to scrape:
+scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: 'prometheus'
+
+    # Override the global default and scrape targets from this job every 5 seconds.
+    scrape_interval: 5s
+
+    static_configs:
+      - targets: ['localhost:9090']
+
+# Alerting specifies settings related to the Alertmanager.
+alerting:
+  alert_relabel_configs:
+  alertmanagers:

@@ -1,0 +1,4 @@
+- name: "run ddclient"
+  become: true
+  command: "ddclient --force"
+  changed_when: true

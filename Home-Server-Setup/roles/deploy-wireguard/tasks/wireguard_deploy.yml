@@ -1,0 +1,40 @@
+---
+
+- name: "TASK: Retrieve container info"
+  community.docker.docker_container_info:
+    name: "{{ wireguard_container_name }}"
+  register: wireguard_container_state
+
+- name: "TASK: Set container facts"
+  set_fact:
+    wireguard_container_exists: "{{ wireguard_container_state.exists }}"
+    wireguard_container_image: "{{ wireguard_container_state.container.Config.Image | default('tag:n/a') }}"
+
+- name: "TASK: Set container image tag"
+  set_fact:
+    wireguard_container_image_tag: "{{ wireguard_container_image.split(':') }}"
+
+- block:
+    - include: "wireguard_image_cleanup.yml"
+
+    - name: "TASK: Pull base image"
+      community.docker.docker_image:
+        name: "{{ wireguard_image_base }}"
+        tag: "{{ wireguard_image_base_tag }}"
+        source: "pull"
+        state: "present"
+      register: "wireguard_image_base_pull"
+
+    - name: "TASK: Remove container for updates"
+      community.docker.docker_container:
+        name: "{{ wireguard_container_name }}"
+        container_default_behavior: "no_defaults"
+        state: "absent"
+      when: wireguard_container_state.exists and wireguard_image_base_pull.changed
+  when: wireguard_container_image_tag[1] != wireguard_image_base_tag
+
+- name: "TASK: Deploy {{ wireguard_container_name }}"
+  community.docker.docker_compose:
+    project_src: "{{ docker_data_dir }}"
+    nocache: "no"
+    state: "present"

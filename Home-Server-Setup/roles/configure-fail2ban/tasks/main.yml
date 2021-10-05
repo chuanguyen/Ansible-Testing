@@ -1,0 +1,33 @@
+---
+
+- name: "TASK: Ensure fail2fan is installed"
+  include_role:
+    name: install-system-packages
+  vars:
+    packages_to_install:
+      - fail2ban
+
+- name: "TASK: Enable fail2ban"
+  become: true
+  service:
+    name: "fail2ban"
+    enabled: "yes"
+    state: "started"
+
+- name: "TASK: Create fail2ban configuration file"
+  become: true
+  template:
+    src: "fail2ban.local.j2"
+    dest: /etc/fail2ban/fail2ban.local
+    mode: 0644
+  notify:
+  - "restart fail2ban"
+
+- name: "TASK: Create fail2ban jail file"
+  become: true
+  template:
+    src: "jail.local.j2"
+    dest: /etc/fail2ban/jail.local
+    mode: 0644
+  notify:
+  - "restart fail2ban"

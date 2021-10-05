@@ -1,0 +1,20 @@
+docker_data_dir: "{{ docker_user_root_dir }}/wireguard"
+
+wireguard_image_base: "linuxserver/wireguard"
+wireguard_container_name: "wireguard"
+
+wireguard_backup_directory: "/mnt/backup/"
+wireguard_nfs_backup_directory: "/nfs/Container-Data/docker/wireguard/peers/"
+# Defines via cron syntax how often to run backup
+wireguard_nfs_backup_frequency: "0 1 */30 * *"
+
+wireguard_envs:
+  kv:
+    PUID: "1000"
+    PGID: "1000"
+    SERVERPORT: "51820"
+    TZ: "America/Vancouver"
+    SERVERURL: "{{ home_vpn_server_external_url }}"
+    INTERNAL_SUBNET: "{{ home_vpn_cidr |  ipaddr('network') }}"
+    PEERS: "{{ home_vpn_peers | join(',') }}"
+    PEERDNS: "{{ home_lan_dns_servers | join(',') }}"

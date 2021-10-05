@@ -1,0 +1,22 @@
+---
+
+- name: Ensure docker is installed
+  include_role:
+    name: install-system-packages
+  vars:
+    packages_to_install:
+      - docker
+
+- name: Start the docker service
+  become: true
+  service:
+    name: docker
+    state: started
+
+- name: Generate docker configuration
+  become: true
+  template:
+    src: daemon.json.yml
+    dest: "/etc/docker/deamon.json"
+    mode: 0644
+  notify: Restart docker

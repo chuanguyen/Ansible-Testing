@@ -1,0 +1,37 @@
+---
+ansible_host: "{{ inventory_hostname }}.{{ home_lan_domain }}"
+
+nfs_server_ipv4_address: "{{ vault_nfs_server_ipv4_address }}"
+autofs_nfs_shares: "{{ vault_autofs_nfs_shares }}"
+
+ansible_user: "{{ vault_ansible_user }}"
+local_users: "{{ vault_local_users }}"
+
+# Used for any admin console on deployed Docker services
+docker_services_admin_username: "{{ vault_docker_services_admin_username }}"
+docker_services_admin_password: "{{ vault_docker_services_admin_password }}"
+
+home_lan_domain_public: "{{ vault_home_lan_domain_public }}"
+home_lan_domain: "{{ vault_home_lan_domain }}"
+home_lan_cidr: "{{ vault_home_lan_cidr }}"
+home_lan_gateway: "{{ vault_home_lan_gateway }}"
+home_lan_dns_servers: "{{ vault_home_lan_dns_servers }}"
+
+home_vpn_cidr: "{{ vault_home_vpn_cidr }}"
+home_vpn_server_external_url: "wg.{{ home_lan_domain_public }}"
+# List of Wireguard peers to create
+home_vpn_peers: "{{ vault_home_vpn_peers }}"
+
+home_smtp_relay_server: "smtp.sendgrid.net"
+home_smtp_relay_server_username: "apikey"
+home_smtp_relay_server_api_key: "{{ vault_home_smtp_relay_server_api_key }}"
+home_smtp_relay_server_hostname: "{{ home_lan_domain_public }}"
+home_smtp_relay_server_authenticated_sender: "{{ vault_home_smtp_relay_server_authenticated_sender }}"
+
+dns_provider_ddns_domains_to_update: "{{ vault_dns_provider_ddns_domains_to_update }}"
+dns_provider_api_token:  "{{ vault_dns_provider_api_token }}"
+dns_provider_api_token_letsencrypt: "{{ vault_dns_provider_api_token_letsencrypt }}"
+
+### Monitoring
+# List of community strings 
+snmp_community_strings: "{{ vault_snmp_community_strings }}"

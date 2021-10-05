@@ -1,0 +1,13 @@
+---
+
+- include_role:
+    name: "configure-logrotate"
+  vars:
+    logrotate_custom_app:
+      name: "traefik"
+      path: "/var/log/traefik/*.log"
+      missingok: "missingok"
+      notifempty: "notifempty"
+      rotate: "5"
+      size: "10M"
+      postrotate: "docker kill --signal=USR1 traefik"

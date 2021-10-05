@@ -1,0 +1,7 @@
+{
+  "dns": [
+{% for dns_server in docker_dns %}
+    "{{ dns_server }}"{{ ", " if not loop.last else "" }}
+{% endfor %}
+  ]
+}

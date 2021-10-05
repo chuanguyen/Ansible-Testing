@@ -1,0 +1,4 @@
+- name: "TASK: Set hostname"
+  hostname:
+    name: "{{ inventory_hostname }}"
+  ignore_errors: yes

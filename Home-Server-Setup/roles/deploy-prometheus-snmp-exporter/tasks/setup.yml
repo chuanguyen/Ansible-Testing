@@ -1,0 +1,26 @@
+---
+
+- name: "Create root folder for container"
+  file:
+    path: "{{ docker_data_dir }}"
+    state: "directory"
+
+- name: "Create folders for build and container data"
+  file:
+    path: "{{ docker_data_dir }}/{{ item }}"
+    state: "directory"
+  with_items: "{{ docker_data_dir_sub_folders }}"
+
+- name: "Template files for building and running {{ container_name }}"
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    group: "docker"
+    mode: 0660
+  with_items:
+    - src: "docker-compose.yml.j2"
+      dest: "{{ docker_data_dir }}/docker-compose.yml"
+    - src: "snmp_exporter.env.j2"
+      dest: "{{ docker_data_dir }}/snmp_exporter.env"
+  loop_control:
+    label: "{{ item.src }}"

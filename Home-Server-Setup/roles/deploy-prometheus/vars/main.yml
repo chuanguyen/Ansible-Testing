@@ -1,0 +1,18 @@
+docker_data_dir_sub_folders:
+  - "etc-prometheus/"
+  - "mnt-backup/"
+  - "scripts"
+
+image_base_tag: "v2.29.2"
+# Ensures previous version of working
+# prometheus image is available for failback
+image_base_tag_old: ""
+
+container_volumes:
+  binds:
+    - source: "./etc-prometheus/prometheus.yml"
+      target: "/etc/prometheus/prometheus.yml"
+    - source: "./etc-prometheus/web.yml"
+      target: "/etc/prometheus/web.yml"
+    - source: "./mnt-backup/"
+      target: "/mnt/backup/"

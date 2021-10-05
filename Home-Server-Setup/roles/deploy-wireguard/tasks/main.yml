@@ -1,0 +1,5 @@
+---
+
+- include: "wireguard_setup.yml"
+- include: "wireguard_deploy.yml"
+- include: "wireguard-host-cron-backup.yml"

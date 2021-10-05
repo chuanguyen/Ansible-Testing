@@ -1,0 +1,41 @@
+---
+
+# {{ ansible_managed }}
+
+version: "3"
+
+# More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
+services:
+  pihole:
+    build:
+      context: build/
+    container_name: "{{ pihole_container_name }}"
+    image: "{{ pihole_image_custom }}:{{ pihole_image_base_tag }}"
+    # Set to host mode as per documentation for Docker & PiHole DHCP
+    # Disabled network definitions and port mappings as well
+    # https://docs.pi-hole.net/docker/DHCP/
+    env_file: pi-hole.env
+    ports:
+      - "{{ pihole_external_ip_mapping }}:53:53/tcp"
+      - "{{ pihole_external_ip_mapping }}:53:53/udp"
+    networks:
+      - {{ docker_networks.proxy.name }}
+    # Volumes store your data between container upgrades
+    volumes:
+{% for volume in pihole_container_volumes.binds %}
+      - {{ volume.source }}:{{ volume.target }}
+{% endfor %}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network={{ docker_networks.proxy.name }}"
+      - "traefik.http.routers.pihole1.rule=Host(`pihole.{{ home_lan_domain }}`)"
+      - "traefik.http.routers.pihole1.entrypoints=websecure"
+      - "traefik.http.routers.pihole1.middlewares=secureHeaders@file"
+      - "traefik.http.routers.pihole1.service=pihole-svc"
+      - "traefik.http.services.pihole-svc.loadbalancer.server.port=80"
+      - "traefik.http.routers.pihole1.tls=true"
+      - "traefik.http.routers.pihole1.tls.certresolver=letsEncrypt"
+    restart: "always"
+networks:
+  {{ docker_networks.proxy.name }}:
+    external: true

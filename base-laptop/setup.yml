@@ -64,6 +64,10 @@
       tags: [ users, refresh ]
     - role: configure-signal-desktop
       tags: [ users, refresh ]
+    - role: configure-otpclient
+      tags: [ users, refresh ]
+    - role: configure-joplin
+      tags: [ users, refresh ]
     ### KDE-related
     - role: configure-kde
       tags: [ users, refresh, kde ]

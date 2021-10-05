@@ -1,0 +1,5 @@
+- name: Install Pacman packages
+  become: true
+  pacman:
+    name: "{{ packages_to_install }}"
+    update_cache: yes

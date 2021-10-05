@@ -1,0 +1,18 @@
+docker_data_dir_sub_folders:
+  - "wireguard_config"
+  - "mnt-backup/"
+  - "scripts"
+
+wireguard_image_base_tag: "arm64v8-version-v1.0.20210914"
+# Ensures previous version of working
+# wireguard image is available for failback
+wireguard_image_base_tag_old: "arm64v8-version-v1.0.20210424"
+
+wireguard_container_volumes:
+  binds:
+    - source: "./wireguard_config/"
+      target: "/config"
+    - source: "./mnt-backup/"
+      target: "/mnt/backup/"
+    - source: "/lib/modules"
+      target: "/lib/modules"

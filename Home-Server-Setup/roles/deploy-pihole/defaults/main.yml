@@ -1,0 +1,23 @@
+docker_data_dir: "{{ docker_user_root_dir }}/pihole"
+
+pihole_image_base: "pihole/pihole"
+pihole_container_name: "pihole"
+pihole_image_custom: "{{ ansible_user }}/pihole"
+
+pihole_external_ip_mapping: "{{ home_lan_dns_servers[0] }}"
+
+pihole_backup_directory: "/mnt/backup/"
+pihole_nfs_backup_directory: "/nfs/Container-Data/docker/pihole/teleport"
+# Defines in days age of backups to remove
+pihole_nfs_backup_cleanup_period: "60"
+# Defines via cron syntax how often to run backup
+pihole_nfs_backup_frequency: "0 1 */15 * *"
+
+pihole_envs:
+  kv:
+    TZ: "America/Vancouver"
+    WEBPASSWORD: "{{ docker_services_admin_password }}"
+    WEB_PORT: "80"
+  PIHOLE_DNS_:
+    - 1.1.1.1
+    - 8.8.8.8

@@ -1,0 +1,4 @@
+# Defines required Ansible Collections
+collections:
+  - community.general
+  - community.docker

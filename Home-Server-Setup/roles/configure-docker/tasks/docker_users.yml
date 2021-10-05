@@ -1,0 +1,14 @@
+---
+
+- name: "TASK: Create docker group"
+  become: true
+  group:
+    name: "docker"
+    state: "present"
+
+- name: "TASK: Populate docker group"
+  become: true
+  user:
+    name: "{{ ansible_user }}"
+    groups: "docker"
+    append: "yes"

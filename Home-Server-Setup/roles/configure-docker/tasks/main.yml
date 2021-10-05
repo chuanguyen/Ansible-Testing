@@ -1,0 +1,45 @@
+---
+
+- name: "TASK: Install apt HTTPS dependencies"
+  include_role:
+    name: install-system-packages
+  vars:
+    packages_to_install:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg
+      - lsb-release
+
+- name: "TASK: Install Docker's official GPG key"
+  become: true
+  apt_key:
+    url: "{{ docker_gpg_key_url }}"
+    state: "present"
+    validate_certs: "yes"
+
+- name: "TASK: Add Docker repo"
+  become: true
+  apt_repository:
+    repo: "{{ docker_repo_name }}"
+    filename: "{{ docker_repo_filename }}"
+
+- name: "TASK: Install Docker components"
+  include_role:
+    name: install-system-packages
+  vars:
+    packages_to_install:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-compose
+
+- name: "TASK: Enable docker service"
+  become: true
+  service:
+    name: "docker"
+    enabled: "yes"
+    state: "started"
+
+- include: "docker_users.yml"
+- include: "docker_networks.yml"
