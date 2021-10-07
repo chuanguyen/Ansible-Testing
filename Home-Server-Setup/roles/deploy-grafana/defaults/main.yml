@@ -14,5 +14,6 @@ grafana_envs:
   kv:
     GF_LOG_MODE: "console file"
     GF_LOG_LEVEL: "warn"
+    GF_FEATURE_TOGGLES_ENABLE: "ngalert"
   GF_INSTALL_PLUGINS:
     - "grafana-clock-panel"

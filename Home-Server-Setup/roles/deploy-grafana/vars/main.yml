@@ -3,10 +3,10 @@ docker_data_dir_sub_folders:
   - "mnt-backup/"
   - "scripts"
 
-grafana_image_base_tag: "8.1.1-ubuntu"
+grafana_image_base_tag: "8.1.7-ubuntu"
 # Ensures previous version of working
 # grafana image is available for failback
-grafana_image_base_tag_old: ""
+grafana_image_base_tag_old: "8.1.1-ubuntu"
 
 grafana_container_volumes:
   binds:
