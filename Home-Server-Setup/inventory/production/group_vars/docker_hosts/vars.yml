@@ -1,0 +1,4 @@
+---
+# Used for any admin console on deployed Docker services
+docker_services_admin_username: "{{ vault_docker_services_admin_username }}"
+docker_services_admin_password: "{{ vault_docker_services_admin_password }}"

@@ -7,10 +7,6 @@ autofs_nfs_shares: "{{ vault_autofs_nfs_shares }}"
 ansible_user: "{{ vault_ansible_user }}"
 local_users: "{{ vault_local_users }}"
 
-# Used for any admin console on deployed Docker services
-docker_services_admin_username: "{{ vault_docker_services_admin_username }}"
-docker_services_admin_password: "{{ vault_docker_services_admin_password }}"
-
 home_lan_domain_public: "{{ vault_home_lan_domain_public }}"
 home_lan_domain: "{{ vault_home_lan_domain }}"
 home_lan_cidr: "{{ vault_home_lan_cidr }}"
@@ -33,5 +29,5 @@ dns_provider_api_token:  "{{ vault_dns_provider_api_token }}"
 dns_provider_api_token_letsencrypt: "{{ vault_dns_provider_api_token_letsencrypt }}"
 
 ### Monitoring
-# List of community strings 
+# List of community strings
 snmp_community_strings: "{{ vault_snmp_community_strings }}"
