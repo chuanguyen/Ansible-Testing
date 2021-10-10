@@ -24,3 +24,9 @@
       dest: "{{ docker_data_dir }}/snmp_exporter.env"
   loop_control:
     label: "{{ item.src }}"
+  register: "container_templated_files"
+
+- name: "TASK: Set containers to restart when templated files change"
+  set_fact:
+    container_restart: "yes"
+  when: "container_templated_files.changed"
