@@ -1,4 +1,24 @@
 ---
+docker_user_root_dir: "/home/{{ ansible_user }}/docker"
+
 # Used for any admin console on deployed Docker services
 docker_services_admin_username: "{{ vault_docker_services_admin_username }}"
 docker_services_admin_password: "{{ vault_docker_services_admin_password }}"
+
+docker_networks:
+  proxy:
+    name: "proxy"
+    driver: "bridge"
+    enable_ipv6: "false"
+    scope: "local"
+    internal: "false"
+    external: "true"
+    state: "present"
+  monitoring:
+    name: "monitoring"
+    driver: "bridge"
+    enable_ipv6: "false"
+    scope: "local"
+    internal: "false"
+    external: "true"
+    state: "present"

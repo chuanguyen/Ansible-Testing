@@ -15,26 +15,6 @@ system_packages:
 fail2ban_ignoreip:
 - "{{ home_lan_cidr }}"
 
-docker_networks:
-  proxy:
-    name: "proxy"
-    driver: "bridge"
-    enable_ipv6: "false"
-    scope: "local"
-    internal: "false"
-    external: "true"
-    state: "present"
-  monitoring:
-    name: "monitoring"
-    driver: "bridge"
-    enable_ipv6: "false"
-    scope: "local"
-    internal: "false"
-    external: "true"
-    state: "present"
-
-docker_user_root_dir: "/home/{{ ansible_user }}/docker"
-
 ufw_rules:
   add:
     - comment: "Permits incoming SSH connections"
