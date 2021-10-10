@@ -1,6 +1,10 @@
 docker_data_dir: "{{ docker_user_root_dir }}/grafana"
 
 grafana_image_base: "grafana/grafana"
+grafana_image_base_tag: ""
+# Ensures previous version of working
+# grafana image is available for failback
+grafana_image_base_tag_old: ""
 grafana_container_name: "grafana"
 # Controls whether docker-compose restarts Docker containers
 container_restart: no
