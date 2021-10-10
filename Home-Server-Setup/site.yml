@@ -1,5 +1,5 @@
 ---
 
-# - import_playbook: "site-setup.yml"
+- import_playbook: "site-setup.yml"
 - import_playbook: "site-services-docker-deploy.yml"
-# - import_playbook: "site-services-nas-deploy.yml"
+- import_playbook: "site-services-nas-deploy.yml"
