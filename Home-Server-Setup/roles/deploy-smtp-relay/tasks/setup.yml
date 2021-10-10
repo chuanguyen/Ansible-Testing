@@ -5,7 +5,7 @@
     path: "{{ docker_data_dir }}"
     state: "directory"
 
-- name: "Template files for building and running {{ pihole_container_name }}"
+- name: "Template files for building and running {{ smtp_relay_container_name }}"
   template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"

@@ -2,11 +2,6 @@ docker_data_dir_sub_folders:
   - "configurations"
   - "letsEncrypt"
 
-traefik_image_base_tag: "v2.5.3"
-# Ensures previous version of working
-# traefik image is available for failback
-traefik_image_base_tag_old: "v2.5.1"
-
 traefik_container_volumes:
   binds:
     - source: "/var/run/docker.sock"

@@ -1,6 +1,10 @@
 docker_data_dir: "{{ docker_user_root_dir }}/wireguard"
 
 wireguard_image_base: "linuxserver/wireguard"
+wireguard_image_base_tag: ""
+# Ensures previous version of working
+# wireguard image is available for failback
+wireguard_image_base_tag_old: ""
 wireguard_container_name: "wireguard"
 # Controls whether docker-compose restarts Docker containers
 container_restart: no

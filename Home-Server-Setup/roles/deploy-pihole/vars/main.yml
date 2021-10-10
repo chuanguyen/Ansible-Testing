@@ -6,11 +6,6 @@ docker_data_dir_sub_folders:
   - "mnt-backup/"
   - "scripts"
 
-pihole_image_base_tag: "v5.8.1"
-# Ensures previous version of working
-# pihole image is available for failback
-pihole_image_base_tag_old: ""
-
 pihole_container_volumes:
   binds:
     - source: "./etc-pihole/"

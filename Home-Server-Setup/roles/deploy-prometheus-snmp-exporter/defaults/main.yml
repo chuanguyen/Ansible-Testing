@@ -1,6 +1,10 @@
 docker_data_dir: "{{ docker_user_root_dir }}/snmp_exporter"
 
 image_base: "prom/snmp-exporter"
+image_base_tag: ""
+# Ensures previous version of working
+# snmp_exporter image is available for failback
+image_base_tag_old: ""
 container_name: "snmp_exporter"
 # Controls whether docker-compose restarts Docker containers
 container_restart: no

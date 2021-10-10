@@ -1,4 +1,4 @@
-ddclient_version: "3.9.1"
+ddclient_version: ""
 ddclient_url: "https://github.com/ddclient/ddclient/archive/refs/tags/v{{ ddclient_version }}.tar.gz"
 
 ddclient_daemon: "600"

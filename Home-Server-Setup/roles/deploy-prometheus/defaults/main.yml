@@ -1,6 +1,10 @@
 docker_data_dir: "{{ docker_user_root_dir }}/prometheus"
 
 image_base: "prom/prometheus"
+image_base_tag: ""
+# Ensures previous version of working
+# prometheus image is available for failback
+image_base_tag_old: ""
 container_name: "prometheus"
 # Controls whether docker-compose restarts Docker containers
 container_restart: no

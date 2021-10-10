@@ -1,6 +1,10 @@
 docker_data_dir: "{{ docker_user_root_dir }}/pihole"
 
 pihole_image_base: "pihole/pihole"
+pihole_image_base_tag: ""
+# Ensures previous version of working
+# pihole image is available for failback
+pihole_image_base_tag_old: ""
 pihole_container_name: "pihole"
 # Controls whether docker-compose restarts Docker containers
 container_restart: no

@@ -1,4 +1,1 @@
-smtp_relay_image_base_tag: "1.3.0"
-# Ensures previous version of working
-# smtp_relay image is available for failback
-smtp_relay_image_base_tag_old: ""
+---

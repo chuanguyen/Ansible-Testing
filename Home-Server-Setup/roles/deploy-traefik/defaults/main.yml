@@ -1,6 +1,10 @@
 docker_data_dir: "{{ docker_user_root_dir }}/traefik"
 
 traefik_image_base: "traefik"
+traefik_image_base_tag: ""
+# Ensures previous version of working
+# traefik image is available for failback
+traefik_image_base_tag_old: ""
 traefik_container_name: "traefik"
 # Controls whether docker-compose restarts Docker containers
 container_restart: no
