@@ -1,0 +1,44 @@
+---
+
+
+### Prometheus
+prometheus_scrape_configs:
+  - job_name: "snmp_printers"
+    static_configs:
+      targets:
+      # Expects hostnames, and will resolve to IP for Prometheus
+      # dig Lookup ran in prometheus.yml template
+        - hosts:
+            - "printer.{{ home_lan_domain }}"
+          labels:
+            device_type: "printer"
+    metrics_path: "/snmp"
+    params:
+      module: "[PRINTER-MIB]"
+    scrape_interval: "30m"
+    scrape_timeout: "5s"
+    relabel_configs:
+      - source_labels: "[__address__]"
+        target_label: "__param_target"
+      - source_labels: "[__param_target]"
+        target_label: "instance"
+      - target_label: "__address__"
+        replacement: "snmp_exporter:9116"
+
+prometheus_mib_modules:
+  - name: "PRINTER-MIB"
+    walk:
+      - "prtMarkerSuppliesLevel"
+      - "prtMarkerSuppliesMaxCapacity"
+      - "hrDeviceStatus"
+      - "hrPrinterStatus"
+    version: "2"
+    max_repetitions: "25"
+    retries: "3"
+    timeout: "5s"
+    auth:
+      community: "{{ snmp_community_strings.printer }}"
+    lookups:
+      - source_indexes: [hrDeviceIndex]
+        lookup: hrDeviceDescr
+        drop_source_indexes: true
