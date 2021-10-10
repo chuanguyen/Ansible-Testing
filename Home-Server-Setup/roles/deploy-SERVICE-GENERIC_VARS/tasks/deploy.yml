@@ -39,3 +39,4 @@
     build: "{{ 'yes' if image_base_pull.changed else 'no' }}"
     nocache: "no"
     state: "present"
+    restarted: "{{ container_restart }}"
