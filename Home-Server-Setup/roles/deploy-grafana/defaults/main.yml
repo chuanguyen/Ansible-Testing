@@ -22,7 +22,8 @@ grafana_envs:
     GF_LOG_LEVEL: "warn"
     ### Deprecated in v8.2
     # GF_FEATURE_TOGGLES_ENABLE: "ngalert"
-    GF_SERVER_ROOT_URL: "https://grafana.{{ home_lan_domain }}"
+    ########## NEED TO VERIFY THIS AND DEFINE PORT VARIBLE THEN ##########
+    # GF_SERVER_ROOT_URL: "https://grafana.{{ home_lan_domain }}:3000"
     GF_SMTP_ENABLED: "true"
     GF_SMTP_HOST: "{{ smtp_monitoring_server }}"
     GF_SMTP_USER: "apikey"
