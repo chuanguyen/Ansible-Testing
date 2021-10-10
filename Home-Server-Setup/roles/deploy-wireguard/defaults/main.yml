@@ -2,6 +2,8 @@ docker_data_dir: "{{ docker_user_root_dir }}/wireguard"
 
 wireguard_image_base: "linuxserver/wireguard"
 wireguard_container_name: "wireguard"
+# Controls whether docker-compose restarts Docker containers
+container_restart: no
 
 wireguard_backup_directory: "/mnt/backup/"
 wireguard_nfs_backup_directory: "/nfs/Container-Data/docker/wireguard/peers/"

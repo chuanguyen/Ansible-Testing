@@ -2,6 +2,8 @@ docker_data_dir: "{{ docker_user_root_dir }}/SERVICE"
 
 image_base: "SERVICE/SERVICE"
 container_name: "SERVICE"
+# Controls whether docker-compose restarts Docker containers
+container_restart: no
 image_custom: "{{ ansible_user }}/SERVICE"
 
 backup_directory: "/mnt/backup/"

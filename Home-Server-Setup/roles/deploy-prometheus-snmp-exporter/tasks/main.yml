@@ -3,3 +3,4 @@
 - include: "setup.yml"
 - include: "setup_snmp_generator.yml"
 - include: "deploy.yml"
+- include: "cleanup.yml"

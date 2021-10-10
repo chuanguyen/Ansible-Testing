@@ -1,7 +1,13 @@
 docker_data_dir: "{{ docker_user_root_dir }}/grafana"
 
 grafana_image_base: "grafana/grafana"
+grafana_image_base_tag: ""
+# Ensures previous version of working
+# grafana image is available for failback
+grafana_image_base_tag_old: ""
 grafana_container_name: "grafana"
+# Controls whether docker-compose restarts Docker containers
+container_restart: no
 
 grafana_backup_directory: "/mnt/backup/"
 grafana_nfs_backup_directory: "/nfs/Container-Data/docker/grafana/"
@@ -14,5 +20,6 @@ grafana_envs:
   kv:
     GF_LOG_MODE: "console file"
     GF_LOG_LEVEL: "warn"
+    GF_FEATURE_TOGGLES_ENABLE: "ngalert"
   GF_INSTALL_PLUGINS:
     - "grafana-clock-panel"

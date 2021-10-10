@@ -1,0 +1,93 @@
+---
+
+- name: "PLAY: Deploy services"
+  hosts: rbp4-001
+  gather_facts: true
+
+  tasks:
+    - include_role:
+        name: "deploy-pihole"
+        apply:
+          tags:
+            - services
+            - pihole
+      vars:
+      tags:
+        - services
+        - pihole
+
+    - include_role:
+        name: "configure-ddclient"
+        apply:
+          tags:
+            - services
+            - vpn
+            - ddclient
+      vars:
+      tags:
+        - services
+        - vpn
+        - ddclient
+
+    - include_role:
+        name: "deploy-wireguard"
+        apply:
+          tags:
+            - services
+            - vpn
+            - wireguard
+      vars:
+      tags:
+        - services
+        - vpn
+        - wireguard
+
+    - include_role:
+        name: "deploy-traefik"
+        apply:
+          tags:
+            - services
+            - proxy
+            - traefik
+      vars:
+      tags:
+        - services
+        - proxy
+        - traefik
+
+    - include_role:
+        name: "deploy-smtp-relay"
+        apply:
+          tags:
+            - services
+            - smtp_relay
+      vars:
+      tags:
+        - services
+        - smtp_relay
+
+    - include_role:
+        name: "deploy-pihole"
+        apply:
+          tags:
+            - services
+            - pihole
+      vars:
+      tags:
+        - services
+        - pihole
+
+    - include_role:
+        name: "deploy-grafana"
+        apply:
+          tags:
+            - services
+            - grafana
+      vars:
+        grafana_image_base_tag: "8.1.7-ubuntu"
+        grafana_image_base_tag_old: "8.1.1-ubuntu"
+        grafana_nfs_backup_cleanup_period: "60"
+        grafana_nfs_backup_frequency: "0 1 */15 * *"
+      tags:
+        - services
+        - grafana

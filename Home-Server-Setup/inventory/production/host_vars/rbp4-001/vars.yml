@@ -15,26 +15,6 @@ system_packages:
 fail2ban_ignoreip:
 - "{{ home_lan_cidr }}"
 
-docker_networks:
-  proxy:
-    name: "proxy"
-    driver: "bridge"
-    enable_ipv6: "false"
-    scope: "local"
-    internal: "false"
-    external: "true"
-    state: "present"
-  monitoring:
-    name: "monitoring"
-    driver: "bridge"
-    enable_ipv6: "false"
-    scope: "local"
-    internal: "false"
-    external: "true"
-    state: "present"
-
-docker_user_root_dir: "/home/{{ ansible_user }}/docker"
-
 ufw_rules:
   add:
     - comment: "Permits incoming SSH connections"
@@ -127,16 +107,3 @@ ufw_rules:
       proto: any
   remove:
     -
-
-prometheus_mib_modules:
-  - name: "PRINTER-MIB"
-    walk:
-      - "prtMarkerSuppliesLevel"
-      - "prtMarkerSuppliesMaxCapacity"
-    version: "2"
-    max_repetitions: "25"
-    retries: "3"
-    timeout: "5s"
-    auth:
-      community: "{{ snmp_community_strings.printer }}"
-    lookups:

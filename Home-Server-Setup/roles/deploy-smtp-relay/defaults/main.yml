@@ -2,6 +2,8 @@ docker_data_dir: "{{ docker_user_root_dir }}/smtp_relay"
 
 smtp_relay_image_base: "juanluisbaptiste/postfix"
 smtp_relay_container_name: "smtp_relay"
+# Controls whether docker-compose restarts Docker containers
+container_restart: no
 
 smtp_relay_envs:
   kv:

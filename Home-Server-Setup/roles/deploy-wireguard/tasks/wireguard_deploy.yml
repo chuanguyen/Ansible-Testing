@@ -38,3 +38,4 @@
     project_src: "{{ docker_data_dir }}"
     nocache: "no"
     state: "present"
+    restarted: "{{ container_restart }}"

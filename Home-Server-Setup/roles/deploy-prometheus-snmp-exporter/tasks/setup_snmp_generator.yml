@@ -24,6 +24,7 @@
     src: "{{ item }}"
     dest: "{{ docker_data_dir }}/temp/generator/mibs"
     mode: 0664
+    force: yes
   with_fileglob:
     - "mibs/*"
   loop_control:
@@ -57,3 +58,5 @@
     remote_src: yes
     dest: "{{ docker_data_dir }}/snmp_generator"
     mode: 0664
+  notify:
+    - "HANDLER: Restart containers"

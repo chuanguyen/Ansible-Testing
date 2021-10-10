@@ -2,6 +2,8 @@ docker_data_dir: "{{ docker_user_root_dir }}/traefik"
 
 traefik_image_base: "traefik"
 traefik_container_name: "traefik"
+# Controls whether docker-compose restarts Docker containers
+container_restart: no
 
 traefik_logging_directory: "/var/log/traefik"
 
