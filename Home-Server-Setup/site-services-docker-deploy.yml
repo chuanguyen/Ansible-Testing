@@ -88,8 +88,8 @@
             - monitoring
             - grafana
       vars:
-        grafana_image_base_tag: "8.2.0-ubuntu"
-        grafana_image_base_tag_old: "8.1.7-ubuntu"
+        grafana_image_base_tag: "8.1.7-ubuntu"
+        grafana_image_base_tag_old: ""
         grafana_nfs_backup_cleanup_period: "60"
         grafana_nfs_backup_frequency: "0 1 */15 * *"
       tags:
