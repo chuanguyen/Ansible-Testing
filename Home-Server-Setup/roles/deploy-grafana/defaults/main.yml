@@ -31,10 +31,10 @@ grafana_envs:
     GF_SMTP_USER: "apikey"
     GF_SMTP_PASSWORD: "{{ smtp_monitoring_api_key }}"
     GF_SMTP_FROM_ADDRESS: "services+monitoring@{{ home_lan_domain_public }}"
+    GF_SMTP_FROM_NAME: "Grafana Alerts"
     ### Enabling Unified Alerting in < v8.2
     GF_FEATURE_TOGGLES_ENABLE: "ngalert"
     ### Enabling Unified Alerting in v8.2
-    # GF_SMTP_FROM_NAME: "Grafana Alerts"
     # GF_UNIFIED_ALERTING_MAX_ATTEMPTS: "3"
     # GF_UNIFIED_ALERTING_MIN_INTERVAL: "10s"
     # GF_UNIFIED_ALERTING_ENABLED: "true"
