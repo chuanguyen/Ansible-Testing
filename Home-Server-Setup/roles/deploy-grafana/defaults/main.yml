@@ -27,7 +27,7 @@ grafana_envs:
     ########## NEED TO VERIFY THIS AND DEFINE PORT VARIBLE THEN ##########
     GF_SERVER_ROOT_URL: "https://grafana.{{ home_lan_domain }}"
     GF_SMTP_ENABLED: "true"
-    GF_SMTP_HOST: "{{ smtp_monitoring_server }}"
+    GF_SMTP_HOST: "{{ smtp_monitoring_server_url }}"
     GF_SMTP_USER: "apikey"
     GF_SMTP_PASSWORD: "{{ smtp_monitoring_api_key }}"
     GF_SMTP_FROM_ADDRESS: "services+monitoring@{{ home_lan_domain_public }}"
