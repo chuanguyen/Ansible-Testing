@@ -9,3 +9,6 @@ all:
     nas:
       hosts:
         "nas1":
+    services_monitoring:
+      hosts:
+        "rbp4-001": 
