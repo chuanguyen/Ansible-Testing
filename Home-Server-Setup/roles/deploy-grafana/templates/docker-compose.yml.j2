@@ -10,8 +10,8 @@ services:
     container_name: "{{ grafana_container_name }}"
     image: "{{ grafana_image_base }}:{{ grafana_image_base_tag }}"
     env_file: grafana.env
-    # Grabs UID of Ansible user to ensure container has RW to folders
-    user: "{{ grafana_container_uid }}"
+    # Use UID of Grafana user in Docker image
+    user: "{{ container_uid }}"
     networks:
       - {{ docker_networks.monitoring.name }}
       - {{ docker_networks.proxy.name }}

@@ -1,26 +1,31 @@
 ---
 
 - name: "Create folders for build and container data"
+  become: true
   file:
     path: "{{ docker_data_dir }}/{{ item }}"
     state: "directory"
+    mode: 0776
+    owner: "{{ container_uid }}"
+    group: "docker"
   with_items: "{{ docker_data_dir_sub_folders }}"
 
-- name: "Get UID of Ansible user"
-  getent:
-    database: "passwd"
-    key: "{{ ansible_user }}"
-  register: grafana_getent_output
-
-- set_fact:
-    grafana_container_uid: "{{ grafana_getent_output['ansible_facts']['getent_passwd'][ansible_user][1] }}"
+### Removing since in v8.2, if run as non-existent UID, it will fail to start
+# - name: "Get UID of Ansible user"
+#   getent:
+#     database: "passwd"
+#     key: "{{ ansible_user }}"
+#   register: grafana_getent_output
+#
+# - set_fact:
+#     grafana_container_uid: "{{ grafana_getent_output['ansible_facts']['getent_passwd'][ansible_user][1] }}"
 
 - name: "Template files for building and running {{ grafana_container_name }}"
   template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
-    group: "docker"
     mode: 0660
+    group: "docker"
   with_items:
     - src: "docker-compose.yml.j2"
       dest: "{{ docker_data_dir }}/docker-compose.yml"
