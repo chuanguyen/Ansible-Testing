@@ -1,5 +1,5 @@
 ---
-docker_user_root_dir: "/home/{{ ansible_user }}/docker"
+docker_user_root_dir: "/mnt/docker-data/container-data"
 
 # Used for any admin console on deployed Docker services
 docker_services_admin_username: "{{ vault_docker_services_admin_username }}"
