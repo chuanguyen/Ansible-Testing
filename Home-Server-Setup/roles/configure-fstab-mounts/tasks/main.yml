@@ -1,0 +1,23 @@
+---
+
+- name: "TASK: Create mount points"
+  become: True
+  file:
+    path: "{{ item.mount_point.path }}"
+    state: directory
+    mode: "{{ item.mount_point.mask | default('0775')}}"
+    owner: "{{ item.mount_point.owner | default('root')}}"
+    group: "{{ item.mount_point.group | default('root')}}"
+  with_items: "{{ fstab_entries }}"
+  loop_control:
+    label: "{{ item.mount_point.path }}"
+
+- name: "TASK: Inserting entries in /etc/fstab"
+  become: True
+  blockinfile:
+    path: "/etc/fstab"
+    backup: yes
+    insertafter: "EOF"
+    block: "{{ lookup('template', 'fstab-EOF.j2') }}"
+    marker: "### {mark} /etc/fstab EOF ###"
+    state: "present"

@@ -1,0 +1,13 @@
+---
+
+fstab_entries:
+  - id: ""
+    mount_point:
+      path: ""
+      group: ""
+      mask: ""
+    file_system: ""
+    mount_options:
+      - "defaults"
+    dump: 0
+    fsck: 0
