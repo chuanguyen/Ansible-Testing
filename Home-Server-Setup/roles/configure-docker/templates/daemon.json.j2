@@ -1,0 +1,13 @@
+{
+{% for config in docker_daemon_config %}
+{% if not loop.last %}
+{% for key,value in config.items() %}
+  "{{ key }}": "{{ value }}",
+{% endfor %}
+{% else %}
+{% for key,value in config.items() %}
+  "{{ key }}": "{{ value }}"
+{% endfor %}
+{% endif %}
+{% endfor %}
+}

@@ -1,0 +1,13 @@
+---
+
+- name: "TASK: Configure docker daemon"
+  become: true
+  template:
+    src: "daemon.json.j2"
+    dest: "/etc/docker/daemon.json"
+    backup: yes
+    owner: "root"
+    group: "root"
+    mode: 0600
+  notify:
+    - "HANDLER: restart docker daemon"

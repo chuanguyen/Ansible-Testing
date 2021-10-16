@@ -8,3 +8,6 @@ docker_repo_name: "deb [arch={{ docker_architectures[ansible_architecture] }}] h
 docker_architectures:
   "x86_64": "arm64"
   "aarch64": "arm64"
+
+docker_daemon_config:
+  - data-root: "{{ docker_data_root_dir }}"
