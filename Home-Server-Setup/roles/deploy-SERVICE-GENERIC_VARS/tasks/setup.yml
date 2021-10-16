@@ -1,13 +1,20 @@
 ---
 
 - name: "Create root folder for container"
+  become: true
   file:
     path: "{{ docker_data_dir }}"
+    owner: "root"
+    group: "docker"
+    mode: 0775
     state: "directory"
 
 - name: "Create folders for build and container data"
   file:
     path: "{{ docker_data_dir }}/{{ item }}"
+    owner: "root"
+    group: "docker"
+    mode: 0775
     state: "directory"
   with_items: "{{ docker_data_dir_sub_folders }}"
 
