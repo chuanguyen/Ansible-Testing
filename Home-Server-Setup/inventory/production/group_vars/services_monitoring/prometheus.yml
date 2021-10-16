@@ -15,7 +15,7 @@ prometheus_scrape_configs:
     metrics_path: "/snmp"
     params:
       module: "[PRINTER-MIB]"
-    scrape_interval: "30m"
+    scrape_interval: "1m"
     scrape_timeout: "5s"
     relabel_configs:
       - source_labels: "[__address__]"
