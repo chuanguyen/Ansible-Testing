@@ -1,3 +1,16 @@
+fstab_entries:
+  - id: "UUID=e843fdde-6b74-4132-aa77-bd074e258daa"
+    mount_point:
+      path: "/mnt/docker-data"
+      owner: "root"
+      group: "docker"
+      mask: '0775'
+    file_system: "ext4"
+    mount_options:
+      - "defaults"
+    dump: 0
+    fsck: 0
+
 system_packages:
 - autofs
 - build-essential
