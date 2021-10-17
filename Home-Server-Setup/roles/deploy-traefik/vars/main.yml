@@ -1,4 +1,4 @@
-docker_data_dir_sub_folders:
+traefik_container_data_dir_sub_folders:
   - "configurations"
   - "letsEncrypt"
 

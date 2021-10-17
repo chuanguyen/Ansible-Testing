@@ -1,4 +1,4 @@
-docker_data_dir: "{{ docker_container_root_dir }}/traefik"
+traefik_container_data_dir: "{{ docker_container_root_dir }}/traefik"
 
 traefik_image_base: "traefik"
 traefik_image_base_tag: ""
@@ -7,10 +7,10 @@ traefik_image_base_tag: ""
 traefik_image_base_tag_old: ""
 traefik_container_name: "traefik"
 # Controls whether docker-compose restarts Docker containers
-container_restart: no
+traefik_container_restart: no
 
 traefik_logging_directory: "/var/log/traefik"
 
-traefik_envs:
+traefik_container_envs:
   kv:
     CF_DNS_API_TOKEN: "{{ dns_provider_api_token }}"
