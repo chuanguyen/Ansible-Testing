@@ -4,4 +4,4 @@
 SHELL=/bin/bash
 PATH=/usr/bin
 
-{{ pihole_nfs_backup_frequency }}   root  {{ docker_data_dir }}/scripts/pihole-backup.sh
+{{ pihole_nfs_backup_frequency }}   root  {{ pihole_container_data_dir }}/scripts/pihole-backup.sh

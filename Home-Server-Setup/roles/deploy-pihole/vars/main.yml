@@ -1,4 +1,4 @@
-docker_data_dir_sub_folders:
+pihole_container_data_dir_sub_folders:
   - "build/"
   - "etc-pihole/"
   - "etc-dnsmasq.d/"

@@ -35,8 +35,8 @@
 
 - name: "TASK: Deploy {{ pihole_container_name }}"
   community.docker.docker_compose:
-    project_src: "{{ docker_data_dir }}"
+    project_src: "{{ pihole_container_data_dir }}"
     build: "{{ 'yes' if pihole_image_base_pull.changed else 'no' }}"
     nocache: "no"
     state: "present"
-    restarted: "{{ container_restart }}"
+    restarted: "{{ pihole_container_restart }}"

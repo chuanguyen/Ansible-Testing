@@ -1,4 +1,4 @@
-docker_data_dir: "{{ docker_container_root_dir }}/pihole"
+pihole_container_data_dir: "{{ docker_container_root_dir }}/pihole"
 
 pihole_image_base: "pihole/pihole"
 pihole_image_base_tag: ""
@@ -7,7 +7,7 @@ pihole_image_base_tag: ""
 pihole_image_base_tag_old: ""
 pihole_container_name: "pihole"
 # Controls whether docker-compose restarts Docker containers
-container_restart: no
+pihole_container_restart: no
 pihole_image_custom: "{{ ansible_user }}/pihole"
 
 pihole_external_ip_mapping: "{{ home_lan_dns_servers[0] }}"
@@ -19,7 +19,7 @@ pihole_nfs_backup_cleanup_period: "60"
 # Defines via cron syntax how often to run backup
 pihole_nfs_backup_frequency: "0 1 */15 * *"
 
-pihole_envs:
+pihole_container_envs:
   kv:
     TZ: "America/Vancouver"
     WEBPASSWORD: "{{ docker_services_admin_password }}"

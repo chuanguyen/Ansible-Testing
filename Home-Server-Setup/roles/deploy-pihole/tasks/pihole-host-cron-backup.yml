@@ -29,7 +29,7 @@
   become: true
   template:
     src: "pihole-backup.sh.j2"
-    dest: "{{ docker_data_dir }}/scripts/pihole-backup.sh"
+    dest: "{{ pihole_container_data_dir }}/scripts/pihole-backup.sh"
     owner: root
     group: root
     mode: 0755
