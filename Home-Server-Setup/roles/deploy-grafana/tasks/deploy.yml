@@ -35,7 +35,7 @@
 
 - name: "TASK: Deploy {{ grafana_container_name }}"
   community.docker.docker_compose:
-    project_src: "{{ docker_data_dir }}"
+    project_src: "{{ grafana_container_data_dir }}"
     nocache: "no"
     state: "present"
-    restarted: "{{ container_restart }}"
+    restarted: "{{ grafana_container_restart }}"

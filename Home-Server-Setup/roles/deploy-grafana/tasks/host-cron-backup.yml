@@ -26,7 +26,7 @@
   become: true
   template:
     src: "grafana-backup.sh.j2"
-    dest: "{{ docker_data_dir }}/scripts/grafana-backup.sh"
+    dest: "{{ grafana_container_data_dir }}/scripts/grafana-backup.sh"
     owner: root
     group: root
     mode: 0755

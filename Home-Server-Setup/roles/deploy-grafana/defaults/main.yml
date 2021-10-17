@@ -1,4 +1,4 @@
-docker_data_dir: "{{ docker_container_root_dir }}/grafana"
+grafana_container_data_dir: "{{ docker_container_root_dir }}/grafana"
 
 grafana_image_base: "grafana/grafana"
 grafana_image_base_tag: ""
@@ -7,9 +7,9 @@ grafana_image_base_tag: ""
 grafana_image_base_tag_old: ""
 grafana_container_name: "grafana"
 # Controls whether docker-compose restarts Docker containers
-container_restart: no
+grafana_container_restart: no
 # Defines UID that container runs as
-container_uid: 472
+grafana_container_uid: 472
 
 grafana_backup_directory: "/mnt/backup/"
 grafana_nfs_backup_directory: "/nfs/Container-Data/docker/grafana/"
@@ -18,7 +18,7 @@ grafana_nfs_backup_cleanup_period: "60"
 # Defines via cron syntax how often to run backup
 grafana_nfs_backup_frequency: "0 1 */15 * *"
 
-grafana_envs:
+grafana_container_envs:
   kv:
     GF_LOG_MODE: "console file"
     GF_LOG_LEVEL: "warn"

@@ -11,7 +11,7 @@ services:
     image: "{{ grafana_image_base }}:{{ grafana_image_base_tag }}"
     env_file: grafana.env
     # Use UID of Grafana user in Docker image
-    user: "{{ container_uid }}"
+    user: "{{ grafana_container_uid }}"
     networks:
       - {{ docker_networks.monitoring.name }}
       - {{ docker_networks.proxy.name }}
