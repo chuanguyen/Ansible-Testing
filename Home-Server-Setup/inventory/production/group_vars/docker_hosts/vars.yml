@@ -1,7 +1,7 @@
 ---
 docker_data_root_dir: "/mnt/docker-data/var/lib/docker"
 ### Rename to container data
-docker_user_root_dir: "/mnt/docker-data/container-data"
+docker_container_root_dir: "/mnt/docker-data/container-data"
 
 # Used for any admin console on deployed Docker services
 docker_services_admin_username: "{{ vault_docker_services_admin_username }}"

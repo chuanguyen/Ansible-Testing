@@ -1,4 +1,4 @@
-docker_data_dir: "{{ docker_user_root_dir }}/grafana"
+docker_data_dir: "{{ docker_container_root_dir }}/grafana"
 
 grafana_image_base: "grafana/grafana"
 grafana_image_base_tag: ""

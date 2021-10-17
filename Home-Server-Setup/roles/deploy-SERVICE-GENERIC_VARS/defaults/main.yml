@@ -1,4 +1,4 @@
-docker_data_dir: "{{ docker_user_root_dir }}/SERVICE"
+docker_data_dir: "{{ docker_container_root_dir }}/SERVICE"
 
 image_base: "SERVICE/SERVICE"
 container_name: "SERVICE"

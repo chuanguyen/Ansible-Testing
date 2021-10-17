@@ -1,4 +1,4 @@
-docker_data_dir: "{{ docker_user_root_dir }}/smtp_relay"
+docker_data_dir: "{{ docker_container_root_dir }}/smtp_relay"
 
 smtp_relay_image_base: "juanluisbaptiste/postfix"
 smtp_relay_image_base_tag: ""

@@ -1,4 +1,4 @@
-docker_data_dir: "{{ docker_user_root_dir }}/traefik"
+docker_data_dir: "{{ docker_container_root_dir }}/traefik"
 
 traefik_image_base: "traefik"
 traefik_image_base_tag: ""

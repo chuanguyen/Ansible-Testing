@@ -1,4 +1,4 @@
-docker_data_dir: "{{ docker_user_root_dir }}/pihole"
+docker_data_dir: "{{ docker_container_root_dir }}/pihole"
 
 pihole_image_base: "pihole/pihole"
 pihole_image_base_tag: ""
