@@ -5,7 +5,7 @@ snmp_exporter_image_base_tag: ""
 # Ensures previous version of working
 # snmp_exporter image is available for failback
 snmp_exporter_image_base_tag_old: ""
-container_name: "snmp_exporter"
+snmp_exporter_container_name: "snmp_exporter"
 # Controls whether docker-compose restarts Docker containers
 snmp_exporter_container_restart: no
 
