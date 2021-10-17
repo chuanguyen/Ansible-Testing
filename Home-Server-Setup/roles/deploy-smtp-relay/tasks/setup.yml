@@ -2,7 +2,7 @@
 
 - name: "Create folders for build and container data"
   file:
-    path: "{{ docker_data_dir }}"
+    path: "{{ smtp_relay_container_data_dir }}"
     state: "directory"
 
 - name: "Template files for building and running {{ smtp_relay_container_name }}"
@@ -13,14 +13,14 @@
     mode: 0660
   with_items:
     - src: "docker-compose.yml.j2"
-      dest: "{{ docker_data_dir }}/docker-compose.yml"
+      dest: "{{ smtp_relay_container_data_dir }}/docker-compose.yml"
     - src: "smtp_relay.env.j2"
-      dest: "{{ docker_data_dir }}/smtp_relay.env"
+      dest: "{{ smtp_relay_container_data_dir }}/smtp_relay.env"
   loop_control:
     label: "{{ item.src }}"
   register: "container_templated_files"
 
 - name: "TASK: Set containers to restart when templated files change"
   set_fact:
-    container_restart: "yes"
+    smtp_relay_container_restart: "yes"
   when: "container_templated_files.changed"

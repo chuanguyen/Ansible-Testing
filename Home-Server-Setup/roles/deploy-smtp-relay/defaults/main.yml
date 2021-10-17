@@ -1,4 +1,4 @@
-docker_data_dir: "{{ docker_container_root_dir }}/smtp_relay"
+smtp_relay_container_data_dir: "{{ docker_container_root_dir }}/smtp_relay"
 
 smtp_relay_image_base: "juanluisbaptiste/postfix"
 smtp_relay_image_base_tag: ""
@@ -7,9 +7,9 @@ smtp_relay_image_base_tag: ""
 smtp_relay_image_base_tag_old: ""
 smtp_relay_container_name: "smtp_relay"
 # Controls whether docker-compose restarts Docker containers
-container_restart: no
+smtp_relay_container_restart: no
 
-smtp_relay_envs:
+smtp_relay_container_envs:
   kv:
     SMTP_SERVER: "{{ home_smtp_relay_server }}"
     SMTP_USERNAME: "{{ home_smtp_relay_server_username }}"
