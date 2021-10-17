@@ -2,40 +2,41 @@
 
 - name: "TASK: Retrieve container info"
   community.docker.docker_container_info:
-    name: "{{ SERVICE_container_name }}"
-  register: SERVICE_container_state
+    name: "{{ SERVICE__container_name }}"
+  register: container_state
 
 - name: "TASK: Set container facts"
   set_fact:
-    SERVICE_container_exists: "{{ SERVICE_container_state.exists }}"
-    SERVICE_container_image: "{{ SERVICE_container_state.container.Config.Image | default('tag:n/a') }}"
+    container_exists: "{{ SERVICE__container_state.exists }}"
+    container_image: "{{ container_state.container.Config.Image | default('tag:n/a') }}"
 
 - name: "TASK: Set container image tag"
   set_fact:
-    SERVICE_container_image_tag: "{{ SERVICE_container_image.split(':') }}"
+    container_image_tag: "{{ container_image.split(':') }}"
 
 - block:
     - include: "image_cleanup.yml"
 
     - name: "TASK: Pull base image"
       community.docker.docker_image:
-        name: "{{ SERVICE_image_base }}"
-        tag: "{{ SERVICE_image_base_tag }}"
+        name: "{{ SERVICE__image_base }}"
+        tag: "{{ SERVICE__image_base_tag }}"
         source: "pull"
         state: "present"
-      register: "SERVICE_image_base_pull"
+      register: "image_base_pull"
 
     - name: "TASK: Remove container for updates"
       community.docker.docker_container:
-        name: "{{ SERVICE_container_name }}"
+        name: "{{ SERVICE__container_name }}"
         container_default_behavior: "no_defaults"
         state: "absent"
-      when: SERVICE_container_state.exists and SERVICE_image_base_pull.changed
-  when: SERVICE_container_image_tag[1] != SERVICE_image_base_tag
+      when: container_state.exists and image_base_pull.changed
+  when: container_image_tag[1] != image_base_tag
 
-- name: "TASK: Deploy {{ SERVICE_container_name }}"
+- name: "TASK: Deploy {{ SERVICE__container_name }}"
   community.docker.docker_compose:
-    project_src: "{{ docker_data_dir }}"
-    build: "{{ 'yes' if SERVICE_image_base_pull.changed else 'no' }}"
+    project_src: "{{ SERVICE__container_data_dir }}"
+    build: "{{ 'yes' if image_base_pull.changed else 'no' }}"
     nocache: "no"
     state: "present"
+    restarted: "{{ SERVICE__container_restart }}"

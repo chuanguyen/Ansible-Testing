@@ -6,20 +6,28 @@ version: "3"
 
 # More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
 services:
-  SERVICE:
+  SERVICE_:
     build:
       context: build/
-    container_name: "{{ SERVICE_container_name }}"
-    image: "{{ SERVICE_image_base }}:{{ SERVICE_image_base_tag }}"
-    env_file: SERVICE.env
+    container_name: "{{ SERVICE__container_name }}"
+    image: "{{ SERVICE__image_base }}:{{ SERVICE__image_base_tag }}"
+    env_file: SERVICE_.env
     ports:
       - ""
     networks:
       - ""
     # Volumes store your data between container upgrades
     volumes:
-{% for volume in SERVICE_container_volumes.binds %}
+{% for volume in SERVICE__container_volumes.binds %}
       - {{ volume.source }}:{{ volume.target }}
 {% endfor %}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network={{ docker_networks.proxy.name }}"
+      - "traefik.http.routers.SERVICE_.rule=Host(`SERVICE_.{{ home_lan_domain }}`)"
+      - "traefik.http.routers.SERVICE_.entrypoints=websecure"
+      - "traefik.http.routers.SERVICE_.middlewares=lanWhitelist@file,secureHeaders@file"
+      - "traefik.http.routers.SERVICE_.tls=true"
+      - "traefik.http.routers.SERVICE_.tls.certresolver=letsEncrypt"
     restart: "always"
 networks:

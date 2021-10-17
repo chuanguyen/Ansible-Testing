@@ -2,8 +2,8 @@
 
 ### {{ ansible_managed }}
 
-docker exec -d -w "{{ SERVICE_backup_directory }}" SERVICE
+docker exec -d -w "{{ backup_directory }}" SERVICE_
 
-sleep 5s && rsync --remove-source-files -zv {{ docker_data_dir }}/mnt-backup/* {{ SERVICE_nfs_backup_directory }}
+sleep 5s && rsync --remove-source-files -zv {{ SERVICE__container_data_dir }}/mnt-backup/* {{ SERVICE__nfs_backup_directory }}
 
-find {{ SERVICE_nfs_backup_directory }} -mtime +{{ SERVICE_nfs_backup_cleanup_period }} -exec rm {} \;
+find {{ SERVICE__nfs_backup_directory }} -mtime +{{ SERVICE__nfs_backup_cleanup_period }} -exec rm {} \;
