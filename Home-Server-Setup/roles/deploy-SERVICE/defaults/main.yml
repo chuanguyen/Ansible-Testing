@@ -8,6 +8,7 @@ SERVICE__image_base_tag_old: ""
 SERVICE__container_name: "SERVICE_"
 # Controls whether docker-compose restarts Docker containers
 SERVICE__container_restart: no
+# Defines image ID for custom image
 SERVICE__image_custom: "{{ ansible_user }}/SERVICE_"
 
 SERVICE__backup_directory: "/mnt/backup/"
