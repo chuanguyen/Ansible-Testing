@@ -4,4 +4,4 @@
 SHELL=/bin/bash
 PATH=/usr/bin
 
-{{ wireguard_nfs_backup_frequency }}   root  {{ docker_data_dir }}/scripts/wireguard-backup.sh
+{{ wireguard_nfs_backup_frequency }}   root  {{ wireguard_container_data_dir }}/scripts/wireguard-backup.sh

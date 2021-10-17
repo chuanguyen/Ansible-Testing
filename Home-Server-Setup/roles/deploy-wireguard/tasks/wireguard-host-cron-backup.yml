@@ -26,7 +26,7 @@
   become: true
   template:
     src: "wireguard-backup.sh.j2"
-    dest: "{{ docker_data_dir }}/scripts/wireguard-backup.sh"
+    dest: "{{ wireguard_container_data_dir }}/scripts/wireguard-backup.sh"
     owner: root
     group: root
     mode: 0755

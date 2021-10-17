@@ -1,4 +1,4 @@
-docker_data_dir_sub_folders:
+wireguard_container_data_dir_sub_folders:
   - "wireguard_config"
   - "mnt-backup/"
   - "scripts"
