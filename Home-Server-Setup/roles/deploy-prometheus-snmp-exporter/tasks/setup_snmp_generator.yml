@@ -8,21 +8,21 @@
 - name: "TASK: Clone SNMP exporter repo"
   git:
     repo: "https://github.com/prometheus/snmp_exporter.git"
-    dest: "{{ docker_data_dir }}/temp"
+    dest: "{{ snmp_exporter_container_data_dir }}/temp"
     single_branch: yes
-    # version: "{{ image_base_tag }}"
+    # version: "{{ snmp_exporter_image_base_tag }}"
     version: "main"
     force: yes
 
 - name: "TASK: Make SNMP Generator MIBS"
   community.general.make:
-    chdir: "{{ docker_data_dir }}/temp/generator"
+    chdir: "{{ snmp_exporter_container_data_dir }}/temp/generator"
     target: "mibs"
 
 - name: "TASK: Add custom MIBS to mibs directory"
   copy:
     src: "{{ item }}"
-    dest: "{{ docker_data_dir }}/temp/generator/mibs"
+    dest: "{{ snmp_exporter_container_data_dir }}/temp/generator/mibs"
     mode: 0664
     force: yes
   with_fileglob:
@@ -34,11 +34,11 @@
   shell:
     cmd: "go build"
   args:
-      chdir: "{{ docker_data_dir }}/temp/generator"
+      chdir: "{{ snmp_exporter_container_data_dir }}/temp/generator"
 
 - name: "TASK: Add generator.yml entries"
   blockinfile:
-    path: "{{ docker_data_dir }}/temp/generator/generator.yml"
+    path: "{{ snmp_exporter_container_data_dir }}/temp/generator/generator.yml"
     block: "{{ lookup('template', 'generator.yml.j2')}}"
     insertafter: "EOF"
     mode: 0664
@@ -48,15 +48,15 @@
   shell:
     cmd: "./generator generate"
   args:
-      chdir: "{{ docker_data_dir }}/temp/generator"
+      chdir: "{{ snmp_exporter_container_data_dir }}/temp/generator"
   environment:
     MIBDIRS: "mibs"
 
 - name: "TASK: Move snmp.yml out of temp folder"
   copy:
-    src: "{{ docker_data_dir }}/temp/generator/snmp.yml"
+    src: "{{ snmp_exporter_container_data_dir }}/temp/generator/snmp.yml"
     remote_src: yes
-    dest: "{{ docker_data_dir }}/snmp_generator"
+    dest: "{{ snmp_exporter_container_data_dir }}/snmp_generator"
     mode: 0664
   notify:
     - "HANDLER: Restart containers"

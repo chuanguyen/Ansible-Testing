@@ -2,5 +2,5 @@
 
 - name: "TASK: Delete contents in temp directory"
   file:
-    path: "{{ docker_data_dir }}/temp"
+    path: "{{ snmp_exporter_container_data_dir }}/temp"
     state: "absent"

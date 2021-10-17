@@ -1,4 +1,4 @@
-{% for module in prometheus_mib_modules %}
+{% for module in snmp_exporter_prometheus_mib_modules %}
   {{ module.name }}:
     walk:
 {% for oid in module.walk %}

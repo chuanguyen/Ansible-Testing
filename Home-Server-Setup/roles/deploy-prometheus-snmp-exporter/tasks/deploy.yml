@@ -2,7 +2,7 @@
 
 - name: "TASK: Retrieve container info"
   community.docker.docker_container_info:
-    name: "{{ container_name }}"
+    name: "{{ snmp_exporter_container_name }}"
   register: container_state
 
 - name: "TASK: Set container facts"
@@ -19,26 +19,26 @@
 
     - name: "TASK: Pull base image"
       community.docker.docker_image:
-        name: "{{ image_base }}"
-        tag: "{{ image_base_tag }}"
+        name: "{{ snmp_exporter_image_base }}"
+        tag: "{{ snmp_exporter_image_base_tag }}"
         source: "pull"
         state: "present"
-      register: "image_base_pull"
+      register: "snmp_exporter_image_base_pull"
 
     - name: "TASK: Remove container for updates"
       community.docker.docker_container:
-        name: "{{ container_name }}"
+        name: "{{ snmp_exporter_container_name }}"
         container_default_behavior: "no_defaults"
         state: "absent"
-      when: container_state.exists and image_base_pull.changed
-  when: container_image_tag[1] != image_base_tag
+      when: container_state.exists and snmp_exporter_image_base_pull.changed
+  when: container_image_tag[1] != snmp_exporter_image_base_tag
 
 - name: "HANDLER: Flush handlers"
   meta: flush_handlers
 
-- name: "TASK: Deploy {{ container_name }}"
+- name: "TASK: Deploy {{ snmp_exporter_container_name }}"
   community.docker.docker_compose:
-    project_src: "{{ docker_data_dir }}"
+    project_src: "{{ snmp_exporter_container_data_dir }}"
     nocache: "no"
     state: "present"
-    restarted: "{{ container_restart }}"
+    restarted: "{{ snmp_exporter_container_restart }}"

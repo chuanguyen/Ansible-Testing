@@ -1,8 +1,8 @@
-docker_data_dir_sub_folders:
+snmp_exporter_container_data_dir_sub_folders:
   - "temp"
   - "snmp_generator"
 
-container_volumes:
+snmp_exporter_container_volumes:
   binds:
     - source: "./snmp_generator/snmp.yml"
       target: "/etc/snmp_exporter/snmp.yml"

@@ -1,18 +1,18 @@
-docker_data_dir: "{{ docker_container_root_dir }}/snmp_exporter"
+snmp_exporter_container_data_dir: "{{ docker_container_root_dir }}/snmp_exporter"
 
-image_base: "prom/snmp-exporter"
-image_base_tag: ""
+snmp_exporter_image_base: "prom/snmp-exporter"
+snmp_exporter_image_base_tag: ""
 # Ensures previous version of working
 # snmp_exporter image is available for failback
-image_base_tag_old: ""
+snmp_exporter_image_base_tag_old: ""
 container_name: "snmp_exporter"
 # Controls whether docker-compose restarts Docker containers
-container_restart: no
+snmp_exporter_container_restart: no
 
-docker_envs:
+snmp_exporter_container_envs:
   kv:
 
-prometheus_mib_modules:
+snmp_exporter_prometheus_mib_modules:
   - name: ""
     walk:
       - ""

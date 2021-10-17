@@ -25,7 +25,7 @@ prometheus_scrape_configs:
       - target_label: "__address__"
         replacement: "snmp_exporter:9116"
 
-prometheus_mib_modules:
+snmp_exporter_prometheus_mib_modules:
   - name: "PRINTER-MIB"
     walk:
       - "prtMarkerSuppliesLevel"
