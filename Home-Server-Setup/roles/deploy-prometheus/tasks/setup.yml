@@ -2,16 +2,16 @@
 
 - name: "TASK: Create root folder for container"
   file:
-    path: "{{ docker_data_dir }}"
+    path: "{{ prometheus_container_data_dir }}"
     state: "directory"
 
 - name: "TASK: Create folders for build and container data"
   file:
-    path: "{{ docker_data_dir }}/{{ item }}"
+    path: "{{ prometheus_container_data_dir }}/{{ item }}"
     state: "directory"
-  with_items: "{{ docker_data_dir_sub_folders }}"
+  with_items: "{{ prometheus_container_data_dir_sub_folders }}"
 
-- name: "TASK: Template files for building and running {{ container_name }}"
+- name: "TASK: Template files for building and running {{ prometheus_container_name }}"
   template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
@@ -19,13 +19,13 @@
     mode: 0660
   with_items:
     - src: "docker-compose.yml.j2"
-      dest: "{{ docker_data_dir }}/docker-compose.yml"
+      dest: "{{ prometheus_container_data_dir }}/docker-compose.yml"
     - src: "prometheus.env.j2"
-      dest: "{{ docker_data_dir }}/prometheus.env"
+      dest: "{{ prometheus_container_data_dir }}/prometheus.env"
   loop_control:
     label: "{{ item.src }}"
 
-- name: "TASK: Template {{ container_name }} config files"
+- name: "TASK: Template {{ prometheus_container_name }} config files"
   become: true
   template:
     src: "{{ item.src }}"
@@ -36,14 +36,14 @@
     mode: 0660
   with_items:
     - src: "prometheus.yml.j2"
-      dest: "{{ docker_data_dir }}/etc-prometheus/prometheus.yml"
+      dest: "{{ prometheus_container_data_dir }}/etc-prometheus/prometheus.yml"
     - src: "web.yml.j2"
-      dest: "{{ docker_data_dir }}/etc-prometheus/web.yml"
+      dest: "{{ prometheus_container_data_dir }}/etc-prometheus/web.yml"
   loop_control:
     label: "{{ item.src }}"
   register: "container_templated_files"
 
 - name: "TASK: Set containers to restart when templated files change"
   set_fact:
-    container_restart: "yes"
+    prometheus_container_restart: "yes"
   when: "container_templated_files.changed"

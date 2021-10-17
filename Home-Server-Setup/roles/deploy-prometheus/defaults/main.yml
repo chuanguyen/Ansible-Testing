@@ -1,23 +1,15 @@
-docker_data_dir: "{{ docker_container_root_dir }}/prometheus"
+prometheus_container_data_dir: "{{ docker_container_root_dir }}/prometheus"
 
-image_base: "prom/prometheus"
-image_base_tag: ""
+prometheus_image_base: "prom/prometheus"
+prometheus_image_base_tag: ""
 # Ensures previous version of working
 # prometheus image is available for failback
-image_base_tag_old: ""
-container_name: "prometheus"
+prometheus_image_base_tag_old: ""
+prometheus_container_name: "prometheus"
 # Controls whether docker-compose restarts Docker containers
-container_restart: no
-image_custom: "{{ ansible_user }}/prometheus"
+prometheus_container_restart: no
 
-backup_directory: "/mnt/backup/"
-nfs_backup_directory: "/nfs/Container-Data/docker/prometheus/"
-# Defines in days age of backups to remove
-nfs_backup_cleanup_period: "60"
-# Defines via cron syntax how often to run backup
-nfs_backup_frequency: "0 1 */15 * *"
-
-docker_envs:
+prometheus_container_envs:
   kv:
 
 docker_cli_commands:

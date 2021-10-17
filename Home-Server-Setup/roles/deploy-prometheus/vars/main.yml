@@ -1,9 +1,9 @@
-docker_data_dir_sub_folders:
+prometheus_container_data_dir_sub_folders:
   - "etc-prometheus/"
   - "mnt-backup/"
   - "scripts"
 
-container_volumes:
+prometheus_container_volumes:
   binds:
     - source: "./etc-prometheus/prometheus.yml"
       target: "/etc/prometheus/prometheus.yml"

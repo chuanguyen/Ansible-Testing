@@ -7,15 +7,15 @@ version: "3"
 # More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
 services:
   prometheus:
-    container_name: "{{ container_name }}"
-    image: "{{ image_base }}:{{ image_base_tag }}"
+    container_name: "{{ prometheus_container_name }}"
+    image: "{{ prometheus_image_base }}:{{ prometheus_image_base_tag }}"
     env_file: prometheus.env
     networks:
       - {{ docker_networks.monitoring.name }}
       - {{ docker_networks.proxy.name }}
     # Volumes store your data between container upgrades
     volumes:
-{% for volume in container_volumes.binds %}
+{% for volume in prometheus_container_volumes.binds %}
       - {{ volume.source }}:{{ volume.target }}
 {% endfor %}
     command:
