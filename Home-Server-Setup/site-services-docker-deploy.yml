@@ -4,127 +4,27 @@
   hosts: rbp4-001
   gather_facts: true
 
-  tasks:
-    - include_role:
-        name: "deploy-pihole"
-        apply:
-          tags:
-            - services
-            - pihole
-      vars:
-        pihole_image_base_tag: "v5.8.1"
-        pihole_image_base_tag_old: ""
-        pihole_nfs_backup_cleanup_period: "60"
-        pihole_nfs_backup_frequency: "0 1 */15 * *"
-      tags:
-        - services
-        - pihole
+  roles:
+    - role: "deploy-pihole"
+      tags: [ services, pihole ]
 
-    - include_role:
-        name: "configure-ddclient"
-        apply:
-          tags:
-            - services
-            - vpn
-            - ddclient
-      vars:
-        ddclient_version: "3.9.1"
-        ddclient_protocol: "cloudflare"
-        ddclient_server: "api.cloudflare.com/client/v4"
-      tags:
-        - services
-        - vpn
-        - ddclient
+    - role: "configure-ddclient"
+      tags: [ services, vpn, ddclient ]
 
-    - include_role:
-        name: "deploy-wireguard"
-        apply:
-          tags:
-            - services
-            - vpn
-            - wireguard
-      vars:
-        wireguard_image_base_tag: "arm64v8-version-v1.0.20210914"
-        wireguard_image_base_tag_old: "arm64v8-version-v1.0.20210424"
-        wireguard_nfs_backup_frequency: "0 1 */30 * *"
-      tags:
-        - services
-        - vpn
-        - wireguard
+    - role: "deploy-wireguard"
+      tags: [ services, vpn, wireguard ]
 
-    - include_role:
-        name: "deploy-traefik"
-        apply:
-          tags:
-            - services
-            - proxy
-            - traefik
-      vars:
-        traefik_image_base_tag: "v2.5.3"
-        traefik_image_base_tag_old: "v2.5.1"
-      tags:
-        - services
-        - proxy
-        - traefik
+    - role: "deploy-traefik"
+      tags: [ services, proxy, traefik ]
 
-    - include_role:
-        name: "deploy-smtp-relay"
-        apply:
-          tags:
-            - services
-            - smtp_relay
-      vars:
-        smtp_relay_image_base_tag: "1.3.0"
-        smtp_relay_image_base_tag_old: ""
-      tags:
-        - services
-        - smtp_relay
+    - role: "deploy-smtp-relay"
+      tags: [ services, smtp_relay ]
 
-    - include_role:
-        name: "deploy-grafana"
-        apply:
-          tags:
-            - services
-            - monitoring
-            - grafana
-      vars:
-        grafana_image_base_tag: "8.1.7-ubuntu"
-        grafana_image_base_tag_old: ""
-        grafana_nfs_backup_cleanup_period: "60"
-        grafana_nfs_backup_frequency: "0 1 */15 * *"
-      tags:
-        - services
-        - monitoring
-        - grafana
+    - role: "deploy-grafana"
+      tags: [ services, monitoring, grafana ]
 
-    - include_role:
-        name: "deploy-prometheus"
-        apply:
-          tags:
-            - services
-            - monitoring
-            - prometheus
-      vars:
-        image_base_tag: "v2.29.2"
-        image_base_tag_old: ""
-        nfs_backup_cleanup_period: "60"
-        nfs_backup_frequency: "0 1 */15 * *"
-      tags:
-        - services
-        - monitoring
-        - prometheus
+    - role: "deploy-prometheus"
+      tags: [ services, monitoring, prometheus ]
 
-    - include_role:
-        name: "deploy-prometheus-snmp-exporter"
-        apply:
-          tags:
-            - services
-            - monitoring
-            - prometheus
-      vars:
-        image_base_tag: "v0.20.0"
-        image_base_tag_old: ""
-      tags:
-        - services
-        - monitoring
-        - prometheus
+    - role: "deploy-prometheus-snmp-exporter"
+      tags: [ services, monitoring, prometheus ]
