@@ -2,6 +2,11 @@
 ansible_host: "{{ inventory_hostname }}.{{ home_lan_domain }}"
 ansible_become_password: "{{ vault_ansible_become_password }}"
 
+# Converts Ansible detected architectures to commonly used ones
+cpu_architecture_mappings:
+  "x86_64": "amd64"
+  "aarch64": "arm64"
+
 nfs_server_ipv4_address: "{{ vault_nfs_server_ipv4_address }}"
 autofs_nfs_shares: "{{ vault_autofs_nfs_shares }}"
 
