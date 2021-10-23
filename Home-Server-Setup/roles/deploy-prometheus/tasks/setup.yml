@@ -47,3 +47,10 @@
   set_fact:
     prometheus_container_restart: "yes"
   when: "container_templated_files.changed"
+
+- name: "TASK: Create Prometheus user"
+  become: true
+  user:
+    name: "prometheus"
+    comment: "Runs Prometheus tasks on system"
+    state: "present"
