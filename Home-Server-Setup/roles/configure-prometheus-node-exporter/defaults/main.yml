@@ -1,0 +1,11 @@
+---
+
+prometheus_node_exporter_version: ""
+prometheus_node_exporter_url: "https://github.com/prometheus/node_exporter/releases/download/v{{ prometheus_node_exporter_version }}/node_exporter-{{ prometheus_node_exporter_version }}.{{ ansible_system | lower }}-{{ cpu_architecture_mappings[ansible_architecture] }}.tar.gz"
+
+prometheus_node_exporter_folder_name: "node_exporter-{{ prometheus_node_exporter_version }}.{{ ansible_system | lower }}-{{ cpu_architecture_mappings[ansible_architecture] }}"
+
+prometheus_node_exporter_user: "prometheus"
+prometheus_node_exporter_web_listen_port: "9100"
+prometheus_node_exporter_web_listen_address: ":{{ prometheus_node_exporter_web_listen_port }}"
+prometheus_node_exporter_web_telemetry_path: "/metrics"

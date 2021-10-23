@@ -1,0 +1,8 @@
+---
+# configure-prometheus-node-exporter
+
+- name: "HANDLER: Restart node-exporter"
+  become: true
+  service:
+    name: "node-exporter"
+    state: "restarted"

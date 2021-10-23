@@ -1,0 +1,27 @@
+---
+# configure-prometheus-node-exporter
+
+- name: "TASK: Template node_exporter systemd service"
+  become: true
+  template:
+    src: "node-exporter.service.j2"
+    dest: "/etc/systemd/system/node-exporter.service"
+    owner: "root"
+    group: "root"
+    mode: 0644
+  register: node_exporter_systemd_file
+  notify:
+    - "HANDLER: Restart node-exporter"
+
+- name: "TASK: Reload systemd daemon"
+  become: true
+  systemd:
+    daemon_reload: "yes"
+  when: "node_exporter_systemd_file.changed"
+
+- name: "TASK: Start node_exporter service"
+  become: true
+  service:
+    name: "node-exporter"
+    state: started
+    enabled: "yes"

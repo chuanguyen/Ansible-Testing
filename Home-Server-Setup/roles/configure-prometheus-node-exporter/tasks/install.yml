@@ -1,0 +1,24 @@
+---
+# configure-prometheus-node-exporter
+
+- name: "TASK: Retrieve node_exporter binary"
+  unarchive:
+    src: "{{ prometheus_node_exporter_url }}"
+    remote_src: "yes"
+    dest: /tmp/
+
+- name: "TASK: Move node_exporter binary"
+  become: true
+  copy:
+    src: "/tmp/{{ prometheus_node_exporter_folder_name }}/node_exporter"
+    remote_src: "yes"
+    dest: "/usr/local/bin"
+    owner: "root"
+    group: "root"
+    mode: 0755
+
+- name: "TASK: Delete node_exporter files"
+  become: true
+  file:
+    path: "/tmp/{{ prometheus_node_exporter_folder_name }}"
+    state: "absent"
