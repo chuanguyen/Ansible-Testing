@@ -30,7 +30,8 @@ prometheus_scrape_configs:
       # Expects hostnames, and will resolve to IP for Prometheus
       # dig Lookup ran in prometheus.yml template
         - hosts:
-            - ""
+            - hostname: ""
+              port: ""
           labels:
     metrics_path: "/metrics"
     params:
