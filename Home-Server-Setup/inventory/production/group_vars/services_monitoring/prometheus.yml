@@ -3,13 +3,27 @@
 
 ### Prometheus
 prometheus_scrape_configs:
+  - job_name: "node_exporters"
+    static_configs:
+      targets:
+      # Expects hostnames, and will resolve to IP for Prometheus
+      # dig Lookup ran in prometheus.yml template
+        - hosts:
+            - hostname: "rbp4-001.{{ home_lan_domain }}"
+              port: "9100"
+          labels:
+            device_type: "rbp4"
+    metrics_path: "/metrics"
+    scrape_interval: "1m"
+    scrape_timeout: "5s"
   - job_name: "snmp_printers"
     static_configs:
       targets:
       # Expects hostnames, and will resolve to IP for Prometheus
       # dig Lookup ran in prometheus.yml template
         - hosts:
-            - "printer.{{ home_lan_domain }}"
+            - hostname: "printer.{{ home_lan_domain }}"
+              port: ""
           labels:
             device_type: "printer"
     metrics_path: "/snmp"
