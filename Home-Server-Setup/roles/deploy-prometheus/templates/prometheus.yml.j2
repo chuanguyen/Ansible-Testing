@@ -30,6 +30,12 @@ scrape_configs:
 {% endif %}
 {% endfor %}
     metrics_path: "{{ prom_job.metrics_path }}"
+{% if (prom_job.basic_auth is defined) and prom_job.basic_auth %}
+    basic_auth:
+{% for basic_auth_key,basic_auth_value in prom_job.basic_auth.items() %}
+      {{ basic_auth_key }}: {{ basic_auth_value }}
+{% endfor %}
+{% endif %}
 {% if (prom_job.params is defined) and prom_job.params %}
     params:
 {% for param_key,param_value in prom_job.params.items() %}

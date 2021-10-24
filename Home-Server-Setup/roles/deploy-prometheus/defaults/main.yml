@@ -34,6 +34,9 @@ prometheus_scrape_configs:
               port: ""
           labels:
     metrics_path: "/metrics"
+    basic_auth:
+      username: ""
+      password: ""
     params:
     scrape_interval: ""
     scrape_timeout: ""
