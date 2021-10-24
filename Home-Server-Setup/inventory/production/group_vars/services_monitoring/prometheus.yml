@@ -10,7 +10,7 @@ prometheus_scrape_configs:
       # dig Lookup ran in prometheus.yml template
         - hosts:
             - hostname: "localhost"
-              port: "9090"
+              port: "{{ prometheus_container_web_port }}"
     metrics_path: "/metrics"
     basic_auth:
       username: "{{ docker_services_admin_username }}"

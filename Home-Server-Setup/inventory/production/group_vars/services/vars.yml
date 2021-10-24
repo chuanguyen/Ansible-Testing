@@ -3,3 +3,4 @@
 # Port definitions for various services
 pihole_container_web_port: "80"
 grafana_container_web_port: "3000"
+prometheus_container_web_port: "9090"

@@ -28,6 +28,8 @@ services:
       - "traefik.http.routers.prometheus1.rule=Host(`prometheus.{{ home_lan_domain }}`)"
       - "traefik.http.routers.prometheus1.entrypoints=websecure"
       - "traefik.http.routers.prometheus1.middlewares=secureHeaders@file"
+      - "traefik.http.routers.prometheus1.service=prometheus1-svc"
+      - "traefik.http.services.prometheus1-svc.loadbalancer.server.port={{ prometheus_container_web_port }}"
       - "traefik.http.routers.prometheus1.tls=true"
       - "traefik.http.routers.prometheus1.tls.certresolver=letsEncrypt"
     restart: "always"
