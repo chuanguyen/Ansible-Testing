@@ -1,0 +1,4 @@
+---
+
+# Port definitions for various services
+services_pihole_web_port: "80"
