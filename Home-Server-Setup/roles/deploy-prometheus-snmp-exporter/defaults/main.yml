@@ -6,11 +6,16 @@ snmp_exporter_image_base_tag: ""
 # snmp_exporter image is available for failback
 snmp_exporter_image_base_tag_old: ""
 snmp_exporter_container_name: "snmp_exporter"
+snmp_exporter_container_web_port: "9116"
 # Controls whether docker-compose restarts Docker containers
 snmp_exporter_container_restart: no
 
 snmp_exporter_container_envs:
   kv:
+
+docker_cli_commands:
+  "config.file": "/etc/snmp_exporter/snmp.yml"
+  "web.listen-address": ":{{ snmp_exporter_container_web_port }}"
 
 snmp_exporter_prometheus_mib_modules:
   - name: ""

@@ -51,7 +51,7 @@ prometheus_scrape_configs:
       - source_labels: "[__param_target]"
         target_label: "instance"
       - target_label: "__address__"
-        replacement: "snmp_exporter:9116"
+        replacement: "snmp_exporter:{{ snmp_exporter_container_web_port }}"
 
 ### Node_Exporter
 prometheus_node_exporter_version: "1.2.2"

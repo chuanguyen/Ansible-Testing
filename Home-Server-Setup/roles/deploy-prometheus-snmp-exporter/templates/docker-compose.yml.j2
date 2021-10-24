@@ -11,13 +11,17 @@ services:
     image: "{{ snmp_exporter_image_base }}:{{ snmp_exporter_image_base_tag }}"
     env_file: snmp_exporter.env
     ports:
-      - "9116:9116"
+      - "{{ snmp_exporter_container_web_port }}:{{ snmp_exporter_container_web_port }}"
     networks:
       - {{ docker_networks.monitoring.name }}
     # Volumes store your data between container upgrades
     volumes:
 {% for volume in snmp_exporter_container_volumes.binds %}
       - {{ volume.source }}:{{ volume.target }}
+{% endfor %}
+    command:
+{% for key,value in docker_cli_commands.items() %}
+      - "--{{ key }}={{ value }}"
 {% endfor %}
     restart: "always"
 networks:
