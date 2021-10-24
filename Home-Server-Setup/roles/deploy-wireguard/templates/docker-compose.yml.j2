@@ -26,7 +26,7 @@ services:
       - "traefik.docker.network={{ docker_networks.proxy.name }}"
       - "traefik.udp.routers.wireguard1.entrypoints=wireguard"
       - "traefik.udp.routers.wireguard1.service=wireguard-svc"
-      - "traefik.udp.services.wireguard-svc.loadbalancer.server.port=51820"
+      - "traefik.udp.services.wireguard-svc.loadbalancer.server.port={{ wireguard_container_port }}"
     restart: "always"
 networks:
   {{ docker_networks.proxy.name }}:

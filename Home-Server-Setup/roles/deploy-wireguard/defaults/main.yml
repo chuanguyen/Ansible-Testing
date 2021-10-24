@@ -6,6 +6,7 @@ wireguard_image_base_tag: ""
 # wireguard image is available for failback
 wireguard_image_base_tag_old: ""
 wireguard_container_name: "wireguard"
+wireguard_container_port: "51820"
 # Controls whether docker-compose restarts Docker containers
 wireguard_container_restart: no
 
@@ -18,7 +19,7 @@ wireguard_container_envs:
   kv:
     PUID: "1000"
     PGID: "1000"
-    SERVERPORT: "51820"
+    SERVERPORT: "{{ wireguard_container_port }}"
     TZ: "America/Vancouver"
     SERVERURL: "{{ home_vpn_server_external_url }}"
     INTERNAL_SUBNET: "{{ home_vpn_cidr |  ipaddr('network') }}"
