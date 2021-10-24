@@ -6,7 +6,7 @@ pihole_image_base_tag: ""
 # pihole image is available for failback
 pihole_image_base_tag_old: ""
 pihole_container_name: "pihole"
-pihole_web_port: "80"
+pihole_container_web_port: "80"
 # Controls whether docker-compose restarts Docker containers
 pihole_container_restart: no
 pihole_image_custom: "{{ ansible_user }}/pihole"
@@ -24,7 +24,7 @@ pihole_container_envs:
   kv:
     TZ: "America/Vancouver"
     WEBPASSWORD: "{{ docker_services_admin_password }}"
-    WEB_PORT: "{{ pihole_web_port }}"
+    WEB_PORT: "{{ pihole_container_web_port }}"
   PIHOLE_DNS_:
     - 1.1.1.1
     - 8.8.8.8

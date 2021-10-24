@@ -27,7 +27,7 @@ services:
       - "traefik.http.routers.grafana1.entrypoints=websecure"
       - "traefik.http.routers.grafana1.middlewares=secureHeaders@file"
       - "traefik.http.routers.grafana1.service=grafana1-svc"
-      - "traefik.http.services.grafana1-svc.loadbalancer.server.port={{ grafana_web_port }}"
+      - "traefik.http.services.grafana1-svc.loadbalancer.server.port={{ grafana_container_web_port }}"
       - "traefik.http.routers.grafana1.tls=true"
       - "traefik.http.routers.grafana1.tls.certresolver=letsEncrypt"
     restart: "always"
