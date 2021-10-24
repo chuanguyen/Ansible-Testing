@@ -6,6 +6,7 @@ grafana_image_base_tag: ""
 # grafana image is available for failback
 grafana_image_base_tag_old: ""
 grafana_container_name: "grafana"
+grafana_web_port: "3000"
 # Controls whether docker-compose restarts Docker containers
 grafana_container_restart: no
 # Defines UID that container runs as
@@ -22,9 +23,7 @@ grafana_container_envs:
   kv:
     GF_LOG_MODE: "console file"
     GF_LOG_LEVEL: "warn"
-    ### Deprecated in v8.2
-    # GF_FEATURE_TOGGLES_ENABLE: "ngalert"
-    ########## NEED TO VERIFY THIS AND DEFINE PORT VARIBLE THEN ##########
+    GF_SERVER_HTTP_PORT: "{{ grafana_web_port }}"
     GF_SERVER_ROOT_URL: "https://grafana.{{ home_lan_domain }}"
     GF_SMTP_ENABLED: "true"
     GF_SMTP_HOST: "{{ smtp_monitoring_server_url }}"

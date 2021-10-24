@@ -1,4 +1,5 @@
 ---
 
 # Port definitions for various services
-services_pihole_web_port: "80"
+pihole_web_port: "80"
+grafana_web_port: "3000"
