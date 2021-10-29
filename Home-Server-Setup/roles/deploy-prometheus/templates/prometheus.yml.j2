@@ -60,6 +60,13 @@ scrape_configs:
 
 {% endfor %}
 
+rule_files:
+{% if prometheus_rule_files[0] is defined and prometheus_rule_files[0] != "" %}
+{% for file in prometheus_rule_files %}
+  - {{ file }}
+{% endfor %}
+{% endif %}
+
 # Alerting specifies settings related to the Alertmanager.
 alerting:
   alert_relabel_configs:

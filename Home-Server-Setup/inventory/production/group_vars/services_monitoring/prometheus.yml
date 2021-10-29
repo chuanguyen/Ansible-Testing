@@ -53,6 +53,9 @@ prometheus_scrape_configs:
       - target_label: "__address__"
         replacement: "snmp_exporter:{{ snmp_exporter_container_web_port }}"
 
+prometheus_rule_files:
+  - "alert.rules"
+
 ### Node_Exporter
 prometheus_node_exporter_version: "1.2.2"
 

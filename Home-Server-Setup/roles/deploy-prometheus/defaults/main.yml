@@ -18,12 +18,16 @@ docker_cli_commands:
   "web.config.file": "/etc/prometheus/web.yml"
   "web.console.libraries": "/usr/share/prometheus/console_libraries"
   "web.console.templates": "/usr/share/prometheus/consoles"
-  "web.listen-address": ":{{ prometheus_container_web_port }}"
+  "web.listen-address": "{{ prometheus_container_web_port }}"
 
 
 prometheus_global_scrape_interval: "1m"
 prometheus_global_scrape_timeout: "10s"
 prometheus_global_evaluation_interval: "1m"
+
+# List of rule files
+prometheus_rule_files:
+  - ""
 
 prometheus_scrape_configs:
   - job_name: "DEFAULT_JOB"
@@ -43,3 +47,14 @@ prometheus_scrape_configs:
     scrape_interval: ""
     scrape_timeout: ""
     relabel_configs:
+
+prometheus_alerting_groups:
+  - group_name: "websites"
+    rules:
+      - alert_name: "websiteDown"
+        expr: "http_response_http_response_code != 200"
+        for: "1m"
+        labels:
+          severity: "critical"
+        annotations:
+          summary: "{{ '{{ $labels.instance }} is having issues' }}"
