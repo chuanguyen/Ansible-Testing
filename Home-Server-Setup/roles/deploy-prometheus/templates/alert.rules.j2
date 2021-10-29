@@ -12,13 +12,13 @@ groups:
 {% if rule.labels is defined %}
         labels:
 {% for label,value in rule.labels.items() %}
-          {{ label }}: {{ value }}
+          {{ label }}: "{{ value }}"
 {% endfor %}
 {% endif %}
 {% if rule.annotations is defined %}
         annotations:
 {% for label,value in rule.annotations.items() %}
-          {{ label }}: {{ value }}
+          {{ label }}: "{{ value }}"
 {% endfor %}
 {% endif %}
 {% endfor %}
