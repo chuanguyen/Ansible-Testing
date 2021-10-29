@@ -56,6 +56,29 @@ prometheus_scrape_configs:
 prometheus_rule_files:
   - "alert.rules"
 
+prometheus_alerting_groups:
+  - group_name: "Node-Exporter-HW-Alerts"
+    rules:
+      - alert_name: "InstanceDown"
+        expr: "up{{ '{' }}job='node_exporters'{{ '}' }} == 0"
+        for: "5m"
+        labels:
+          severity: "critical"
+        annotations:
+          summary: "Instance {{ '{{ $labels.instance }}' }} down"
+          description: "{{ '{{ $labels.instance }}' }} of job {{ '{{ $labels.job }}' }} has been down for more than 5 minutes."
+  - group_name: "SNMP-Printers-Alerts"
+    rules:
+      - alert_name: "InstanceDown"
+        expr: "up{{ '{' }}job='snmp_printers'{{ '}' }} == 0"
+        for: "5m"
+        labels:
+          severity: "critical"
+        annotations:
+          summary: "Instance {{ '{{ $labels.instance }}' }} down"
+          description: "{{ '{{ $labels.instance }}' }} of job {{ '{{ $labels.job }}' }} has been down for more than 5 minutes."
+
+
 ### Node_Exporter
 prometheus_node_exporter_version: "1.2.2"
 
