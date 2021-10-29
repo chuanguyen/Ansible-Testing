@@ -18,5 +18,5 @@ SERVICE__nfs_backup_cleanup_period: "60"
 # Defines via cron syntax how often to run backup
 SERVICE__nfs_backup_frequency: "0 1 */15 * *"
 
-SERVICE__docker_envs:
+SERVICE__container_envs:
   kv:
