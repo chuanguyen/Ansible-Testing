@@ -1,0 +1,7 @@
+# {{ ansible_managed }}
+# alertManager backup cron job
+
+SHELL=/bin/bash
+PATH=/usr/bin
+
+{{ alertManager_nfs_backup_frequency }}   root  {{ alertManager_container_data_dir }}/scripts/SERVICE-backup.sh

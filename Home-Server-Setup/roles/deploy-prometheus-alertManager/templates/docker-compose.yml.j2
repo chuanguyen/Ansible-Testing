@@ -1,0 +1,33 @@
+---
+
+# {{ ansible_managed }}
+
+version: "3"
+
+# More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
+services:
+  alertManager:
+    build:
+      context: build/
+    container_name: "{{ alertManager_container_name }}"
+    image: "{{ alertManager_image_base }}:{{ alertManager_image_base_tag }}"
+    env_file: alertManager.env
+    ports:
+      - ""
+    networks:
+      - ""
+    # Volumes store your data between container upgrades
+    volumes:
+{% for volume in alertManager_container_volumes.binds %}
+      - {{ volume.source }}:{{ volume.target }}
+{% endfor %}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network={{ docker_networks.proxy.name }}"
+      - "traefik.http.routers.alertManager.rule=Host(`alertManager.{{ home_lan_domain }}`)"
+      - "traefik.http.routers.alertManager.entrypoints=websecure"
+      - "traefik.http.routers.alertManager.middlewares=lanWhitelist@file,secureHeaders@file"
+      - "traefik.http.routers.alertManager.tls=true"
+      - "traefik.http.routers.alertManager.tls.certresolver=letsEncrypt"
+    restart: "always"
+networks:

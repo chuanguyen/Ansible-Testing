@@ -1,0 +1,9 @@
+#!/bin/bash
+
+### {{ ansible_managed }}
+
+docker exec -d -w "{{ backup_directory }}" alertManager
+
+sleep 5s && rsync --remove-source-files -zv {{ alertManager_container_data_dir }}/mnt-backup/* {{ alertManager_nfs_backup_directory }}
+
+find {{ alertManager_nfs_backup_directory }} -mtime +{{ alertManager_nfs_backup_cleanup_period }} -exec rm {} \;

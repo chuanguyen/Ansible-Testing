@@ -1,0 +1,11 @@
+alertManager_container_data_dir_sub_folders:
+  - "etc-SERVICE/"
+  - "mnt-backup/"
+  - "scripts"
+
+alertManager_container_volumes:
+  binds:
+    - source: "./etc-alertManager/"
+      target: "/etc/alertManager/"
+    - source: "./mnt-backup/"
+      target: "/mnt/backup/"
