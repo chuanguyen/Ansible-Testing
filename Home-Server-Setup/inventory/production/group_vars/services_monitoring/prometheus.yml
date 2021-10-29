@@ -74,3 +74,10 @@ snmp_exporter_prometheus_mib_modules:
       - source_indexes: [hrDeviceIndex]
         lookup: hrDeviceDescr
         drop_source_indexes: true
+
+### AlertManager
+
+alertmanager_global_smtp_from: "services+monitoring@{{ home_lan_domain_public }}"
+alertmanager_global_smtp_smarthost: "{{ smtp_monitoring_server_url }}"
+alertmanager_global_smtp_auth_username: "apikey"
+alertmanager_global_smtp_auth_password: "{{ smtp_monitoring_api_key }}"
