@@ -1,8 +1,8 @@
 alertManager_container_data_dir_sub_folders:
-  - "etc-SERVICE/"
+  - "etc-alertmanager/"
   - "scripts"
 
 alertManager_container_volumes:
   binds:
-    - source: "./etc-alertManager/"
-      target: "/etc/alertManager/"
+    - source: "./etc-alertmanager/"
+      target: "/etc/alertmanager/"
