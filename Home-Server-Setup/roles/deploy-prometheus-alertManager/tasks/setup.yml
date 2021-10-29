@@ -29,6 +29,8 @@
       dest: "{{ alertManager_container_data_dir }}/docker-compose.yml"
     - src: "alertManager.env.j2"
       dest: "{{ alertManager_container_data_dir }}/alertManager.env"
+    - src: "alertmanager.yml.j2"
+      dest: "{{ alertManager_container_data_dir }}/etc-alertmanager/alertmanager.yml"
   loop_control:
     label: "{{ item.src }}"
   register: "container_templated_files"

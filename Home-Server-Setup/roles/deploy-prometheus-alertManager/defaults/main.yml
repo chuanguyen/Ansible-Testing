@@ -12,3 +12,14 @@ alertManager_container_restart: no
 
 alertManager_container_envs:
   kv:
+
+alertmanager_global_smtp_from: ""
+alertmanager_global_smtp_smarthost: ""
+alertmanager_global_smtp_hello: "localhost"
+alertmanager_global_smtp_auth_username: ""
+alertmanager_global_smtp_auth_password: ""
+alertmanager_smtp_auth_identity: ""
+alertmanager_smtp_auth_secret: ""
+alertmanager_global_smtp_require_tls: "true"
+
+alertmanager_global_resolve_timeout: "5m"
