@@ -48,12 +48,13 @@ prometheus_scrape_configs:
     relabel_configs:
 
 prometheus_alerting_groups:
-  - group_name: "websites"
+  - group_name: ""
     rules:
-      - alert_name: "websiteDown"
-        expr: "http_response_http_response_code != 200"
-        for: "1m"
+      - alert_name: ""
+        expr: ""
+        for: ""
         labels:
           severity: "critical"
         annotations:
-          summary: "{{ '{{ $labels.instance }} is having issues' }}"
+          summary: ""
+          description: ""
