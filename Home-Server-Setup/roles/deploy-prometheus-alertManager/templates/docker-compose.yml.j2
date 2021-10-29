@@ -7,8 +7,6 @@ version: "3"
 # More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
 services:
   alertManager:
-    build:
-      context: build/
     container_name: "{{ alertManager_container_name }}"
     image: "{{ alertManager_image_base }}:{{ alertManager_image_base_tag }}"
     env_file: alertManager.env

@@ -9,7 +9,6 @@ alertManager_container_name: "alertManager"
 # Controls whether docker-compose restarts Docker containers
 alertManager_container_restart: no
 # Defines image ID for custom image
-alertManager_image_custom: "{{ ansible_user }}/alertManager"
 
 alertManager_container_envs:
   kv:
