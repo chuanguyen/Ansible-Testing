@@ -1,5 +1,5 @@
 SERVICE__container_data_dir_sub_folders:
-  - "etc-SERVICE/"
+  - "etc-SERVICE_/"
   - "mnt-backup/"
   - "scripts"
 
