@@ -14,8 +14,8 @@ traefik_image_base_tag_old: "v2.5.1"
 smtp_relay_image_base_tag: "1.3.0"
 smtp_relay_image_base_tag_old: ""
 
-grafana_image_base_tag: "8.1.7-ubuntu"
-grafana_image_base_tag_old: ""
+grafana_image_base_tag: "8.2.2-ubuntu"
+grafana_image_base_tag_old: "8.1.7-ubuntu"
 grafana_nfs_backup_cleanup_period: "60"
 grafana_nfs_backup_frequency: "0 1 */15 * *"
 
