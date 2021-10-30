@@ -2,12 +2,12 @@
 
 - name: "TASK: Retrieve container info"
   community.docker.docker_container_info:
-    name: "{{ alertManager_container_name }}"
+    name: "{{ alertmanager_container_name }}"
   register: container_state
 
 - name: "TASK: Set container facts"
   set_fact:
-    container_exists: "{{ alertManager_container_state.exists }}"
+    container_exists: "{{ container_state.exists }}"
     container_image: "{{ container_state.container.Config.Image | default('tag:n/a') }}"
 
 - name: "TASK: Set container image tag"
@@ -19,24 +19,24 @@
 
     - name: "TASK: Pull base image"
       community.docker.docker_image:
-        name: "{{ alertManager_image_base }}"
-        tag: "{{ alertManager_image_base_tag }}"
+        name: "{{ alertmanager_image_base }}"
+        tag: "{{ alertmanager_image_base_tag }}"
         source: "pull"
         state: "present"
       register: "image_base_pull"
 
     - name: "TASK: Remove container for updates"
       community.docker.docker_container:
-        name: "{{ alertManager_container_name }}"
+        name: "{{ alertmanager_container_name }}"
         container_default_behavior: "no_defaults"
         state: "absent"
       when: container_state.exists and image_base_pull.changed
-  when: container_image_tag[1] != image_base_tag
+  when: container_image_tag[1] != alertmanager_image_base_tag
 
-- name: "TASK: Deploy {{ alertManager_container_name }}"
+- name: "TASK: Deploy {{ alertmanager_container_name }}"
   community.docker.docker_compose:
-    project_src: "{{ alertManager_container_data_dir }}"
+    project_src: "{{ alertmanager_container_data_dir }}"
     build: "{{ 'yes' if image_base_pull.changed else 'no' }}"
     nocache: "no"
     state: "present"
-    restarted: "{{ alertManager_container_restart }}"
+    restarted: "{{ alertmanager_container_restart }}"

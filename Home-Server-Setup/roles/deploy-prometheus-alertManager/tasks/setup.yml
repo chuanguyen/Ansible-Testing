@@ -3,22 +3,23 @@
 - name: "Create root folder for container"
   become: true
   file:
-    path: "{{ alertManager_container_data_dir }}"
+    path: "{{ alertmanager_container_data_dir }}"
     owner: "root"
     group: "docker"
     mode: 0775
     state: "directory"
 
 - name: "Create folders for build and container data"
+  become: true
   file:
-    path: "{{ alertManager_container_data_dir }}/{{ item }}"
+    path: "{{ alertmanager_container_data_dir }}/{{ item }}"
     owner: "root"
     group: "docker"
     mode: 0775
     state: "directory"
-  with_items: "{{ alertManager_container_data_dir_sub_folders }}"
+  with_items: "{{ alertmanager_container_data_dir_sub_folders }}"
 
-- name: "Template files for building and running {{ alertManager_container_name }}"
+- name: "Template files for building and running {{ alertmanager_container_name }}"
   template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
@@ -26,11 +27,27 @@
     mode: 0660
   with_items:
     - src: "docker-compose.yml.j2"
-      dest: "{{ alertManager_container_data_dir }}/docker-compose.yml"
-    - src: "alertManager.env.j2"
-      dest: "{{ alertManager_container_data_dir }}/alertManager.env"
+      dest: "{{ alertmanager_container_data_dir }}/docker-compose.yml"
+    - src: "alertmanager.env.j2"
+      dest: "{{ alertmanager_container_data_dir }}/alertmanager.env"
     - src: "alertmanager.yml.j2"
-      dest: "{{ alertManager_container_data_dir }}/etc-alertmanager/alertmanager.yml"
+      dest: "{{ alertmanager_container_data_dir }}/etc-alertmanager/alertmanager.yml"
+  loop_control:
+    label: "{{ item.src }}"
+  register: "container_templated_files"
+
+- name: "TASK: Template {{ alertmanager_container_name }} config files"
+  become: true
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    # Maps to UID that's in alertmanager container
+    owner: "65534"
+    group: "docker"
+    mode: 0660
+  with_items:
+    - src: "alertmanager.yml.j2"
+      dest: "{{ alertmanager_container_data_dir }}/etc-alertmanager/alertmanager.yml"
   loop_control:
     label: "{{ item.src }}"
   register: "container_templated_files"

@@ -24,3 +24,6 @@ prometheus_image_base_tag_old: ""
 
 snmp_exporter_image_base_tag: "v0.20.0"
 snmp_exporter_image_base_tag_old: ""
+
+alertmanager_image_base_tag: "v0.23.0"
+alertmanager_image_base_tag_old: ""

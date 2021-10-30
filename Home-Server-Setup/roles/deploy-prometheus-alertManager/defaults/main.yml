@@ -1,16 +1,19 @@
-alertManager_container_data_dir: "{{ docker_container_root_dir }}/alertManager"
+alertmanager_container_data_dir: "{{ docker_container_root_dir }}/alertmanager"
 
-alertManager_image_base: "alertManager/alertManager"
-alertManager_image_base_tag: ""
+alertmanager_image_base: "prom/alertmanager"
+alertmanager_image_base_tag: ""
 # Ensures previous version of working
-# alertManager image is available for failback
-alertManager_image_base_tag_old: ""
-alertManager_container_name: "alertManager"
+# alertmanager image is available for failback
+alertmanager_image_base_tag_old: ""
+alertmanager_container_name: "alertmanager"
 # Controls whether docker-compose restarts Docker containers
-alertManager_container_restart: no
+alertmanager_container_restart: no
 # Defines image ID for custom image
 
-alertManager_container_envs:
+alertmanager_docker_cli_commands:
+  "config.file": "/etc/alertmanager/alertmanager.yml"
+
+alertmanager_container_envs:
   kv:
 
 alertmanager_global_smtp_from: ""
