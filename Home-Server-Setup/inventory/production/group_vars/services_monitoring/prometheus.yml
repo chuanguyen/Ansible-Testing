@@ -64,6 +64,7 @@ prometheus_alerting_groups:
         for: "5m"
         labels:
           severity: "critical"
+          maintenance: "false"
         annotations:
           summary: "Instance {{ '{{ $labels.instance }}' }} down"
           description: "{{ '{{ $labels.instance }}' }} of job {{ '{{ $labels.job }}' }} has been down for more than 5 minutes."
@@ -75,6 +76,7 @@ prometheus_alerting_groups:
         for: "5m"
         labels:
           severity: "critical"
+          maintenance: "false"
         annotations:
           summary: "Instance {{ '{{ $labels.instance }}' }} down"
           description: "{{ '{{ $labels.instance }}' }} of job {{ '{{ $labels.job }}' }} has been down for more than 5 minutes."
