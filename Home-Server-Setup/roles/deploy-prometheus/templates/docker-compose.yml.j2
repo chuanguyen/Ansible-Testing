@@ -19,7 +19,7 @@ services:
       - {{ volume.source }}:{{ volume.target }}
 {% endfor %}
     command:
-{% for key,value in docker_cli_commands.items() %}
+{% for key,value in prometheus_docker_cli_commands.items() %}
       - "--{{ key }}={{ value }}"
 {% endfor %}
     labels:

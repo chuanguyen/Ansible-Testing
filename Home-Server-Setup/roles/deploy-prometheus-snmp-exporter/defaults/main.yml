@@ -13,7 +13,7 @@ snmp_exporter_container_restart: no
 snmp_exporter_container_envs:
   kv:
 
-docker_cli_commands:
+snmp_exporterdocker_cli_commands:
   "config.file": "/etc/snmp_exporter/snmp.yml"
   "web.listen-address": ":{{ snmp_exporter_container_web_port }}"
 
