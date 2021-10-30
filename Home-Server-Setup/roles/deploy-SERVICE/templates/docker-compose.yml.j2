@@ -24,10 +24,10 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network={{ docker_networks.proxy.name }}"
-      - "traefik.http.routers.SERVICE_.rule=Host(`SERVICE_.{{ home_lan_domain }}`)"
-      - "traefik.http.routers.SERVICE_.entrypoints=websecure"
-      - "traefik.http.routers.SERVICE_.middlewares=lanWhitelist@file,secureHeaders@file"
-      - "traefik.http.routers.SERVICE_.tls=true"
-      - "traefik.http.routers.SERVICE_.tls.certresolver=letsEncrypt"
+      - "traefik.http.routers.SERVICE_1.rule=Host(`SERVICE_.{{ home_lan_domain }}`)"
+      - "traefik.http.routers.SERVICE_1.entrypoints=websecure"
+      - "traefik.http.routers.SERVICE_1.middlewares=lanWhitelist@file,secureHeaders@file"
+      - "traefik.http.routers.SERVICE_1.tls=true"
+      - "traefik.http.routers.SERVICE_1.tls.certresolver=letsEncrypt"
     restart: "always"
 networks:
