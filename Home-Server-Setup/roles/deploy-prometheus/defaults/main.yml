@@ -13,7 +13,7 @@ prometheus_container_restart: no
 prometheus_container_envs:
   kv:
 
-docker_cli_commands:
+prometheus_docker_cli_commands:
   "config.file": "/etc/prometheus/prometheus.yml"
   "web.config.file": "/etc/prometheus/web.yml"
   "web.console.libraries": "/usr/share/prometheus/console_libraries"
