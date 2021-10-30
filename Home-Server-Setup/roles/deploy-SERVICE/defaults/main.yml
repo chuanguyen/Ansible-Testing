@@ -1,6 +1,6 @@
 SERVICE__container_data_dir: "{{ docker_container_root_dir }}/SERVICE_"
 
-SERVICE__image_base: "SERVICE_/SERVICE_"
+SERVICE__image_base: "REPO/SERVICE_"
 SERVICE__image_base_tag: ""
 # Ensures previous version of working
 # SERVICE_ image is available for failback
