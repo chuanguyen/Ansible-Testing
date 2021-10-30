@@ -28,7 +28,7 @@
     - src: "docker-compose.yml.j2"
       dest: "{{ SERVICE__container_data_dir }}/docker-compose.yml"
     - src: "SERVICE.env.j2"
-      dest: "{{ SERVICE__container_data_dir }}/SERVICE.env"
+      dest: "{{ SERVICE__container_data_dir }}/SERVICE_.env"
     - src: "Dockerfile.j2"
       dest: "{{ SERVICE__container_data_dir }}/build/Dockerfile"
   loop_control:
