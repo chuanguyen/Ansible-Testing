@@ -21,8 +21,43 @@ alertmanager_global_smtp_smarthost: ""
 alertmanager_global_smtp_hello: "localhost"
 alertmanager_global_smtp_auth_username: ""
 alertmanager_global_smtp_auth_password: ""
-alertmanager_smtp_auth_identity: ""
-alertmanager_smtp_auth_secret: ""
+alertmanager_global_smtp_auth_identity: ""
+alertmanager_global_smtp_auth_secret: ""
 alertmanager_global_smtp_require_tls: "true"
 
 alertmanager_global_resolve_timeout: "5m"
+
+# Default receiver
+alertmanager_route_default_receiver: "default-receiver"
+alertmanager_route_default_group_wait: "30s"
+alertmanager_route_default_group_interval: "5m"
+alertmanager_route_default_repeat_interval: "4h"
+alertmanager_route_default_group_by:
+  - ""
+# List of receivers
+alertmanager_route_receivers:
+  - name: ""
+    group_wait: ""
+    group_interval: ""
+    repeat_interval: ""
+    group_by:
+      - ""
+    matchers:
+      - label: ""
+
+
+# List of template files
+alertmanager_templates:
+  - ""
+
+# List of notification receivers
+alertmanager_receivers:
+  - ""
+
+# List of inhibition rules
+alertmanager_inhibit_rules:
+  - ""
+
+# List of mute time intervals
+alertmanager_mute_time_intervals:
+  - ""

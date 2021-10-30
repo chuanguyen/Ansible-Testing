@@ -43,7 +43,7 @@ global:
   # Note that Go does not support unencrypted connections to remote SMTP endpoints.
   # [ smtp_require_tls: <bool> | default = true ]
 {% if (alertmanager_global_smtp_require_tls is defined) and (alertmanager_global_smtp_require_tls != "") %}
-  smtp_require_tls: "{{ alertmanager_global_smtp_require_tls }}"
+  smtp_require_tls: {{ alertmanager_global_smtp_require_tls }}
 {% endif %}
 
   # ResolveTimeout is the default value used by alertmanager if the alert does
@@ -51,3 +51,70 @@ global:
   # This has no impact on alerts from Prometheus, as they always include EndsAt.
   # [ resolve_timeout: <duration> | default = 5m ]
   resolve_timeout: {{ alertmanager_global_resolve_timeout }}
+
+route:
+  receiver: '{{ alertmanager_route_default_receiver }}'
+  group_wait: {{ alertmanager_route_default_group_wait }}
+  group_interval: {{ alertmanager_route_default_group_interval }}
+  repeat_interval: {{ alertmanager_route_default_repeat_interval }}
+{% if alertmanager_route_default_group_by is defined and alertmanager_route_default_group_by[0] != "" %}
+  group_by:
+{% for route_group_by in alertmanager_route_default_group_by %}
+    - "{{ route_group_by }}"
+{% endfor %}
+{% endif %}
+{% if alertmanager_route_receivers[0].name != "" %}
+  routes:
+{% for receiver_config in alertmanager_route_receivers %}
+    - receiver: "{{ receiver_config.name }}"
+{% if receiver_config.group_wait is defined %}
+      group_wait: {{ receiver_config.group_wait }}
+{% endif %}
+{% if receiver_config.group_interval is defined %}
+      group_interval: {{ receiver_config.group_interval }}
+{% endif %}
+{% if receiver_config.repeat_interval is defined %}
+      repeat_interval: {{ receiver_config.repeat_interval }}
+{% endif %}
+{% if receiver_config.group_by is defined and receiver_config.group_by[0] != "" %}
+      group_by:
+{% for receiver_group_by in receiver_config.group_by %}
+        - {{ receiver_group_by }}
+{% endfor %}
+{% endif %}
+      matchers:
+{% for receiver_matcher in receiver_config.matchers %}
+{% for matcher_label, matcher_value in receiver_matcher.items()%}
+        - {{ matcher_label }}="{{ matcher_value }}"
+{% endfor %}
+{% endfor %}
+{% endfor %}
+{% endif %}
+
+{% if alertmanager_templates is defined and alertmanager_templates[0] != "" %}
+templates:
+{% for alertmanager_template in alertmanager_templates %}
+  - {{ alertmanager_template }}
+{% endfor %}
+{% endif %}
+
+{% if alertmanager_receivers is defined and alertmanager_receivers[0] != "" %}
+receivers:
+{% for alertmanager_receiver in alertmanager_receivers %}
+  - {{ alertmanager_receiver }}
+{% endfor %}
+{% endif %}
+
+{% if alertmanager_inhibit_rules is defined and alertmanager_inhibit_rules[0] != "" %}
+inhibit_rules:
+{% for alertmanager_inhibit_rule in alertmanager_inhibit_rules %}
+  - {{ alertmanager_inhibit_rule }}
+{% endfor %}
+{% endif %}
+
+{% if alertmanager_mute_time_intervals is defined and alertmanager_mute_time_intervals[0] != "" %}
+mute_time_intervals:
+{% for alertmanager_mute_time_interval in alertmanager_mute_time_intervals %}
+  - {{ alertmanager_mute_time_interval }}
+{% endfor %}
+{% endif %}
