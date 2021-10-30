@@ -7,7 +7,7 @@
 
 - name: "TASK: Set container facts"
   set_fact:
-    container_exists: "{{ SERVICE__container_state.exists }}"
+    container_exists: "{{ container_state.exists }}"
     container_image: "{{ container_state.container.Config.Image | default('tag:n/a') }}"
 
 - name: "TASK: Set container image tag"
