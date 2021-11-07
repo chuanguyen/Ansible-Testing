@@ -53,6 +53,16 @@ prometheus_scrape_configs:
       - target_label: "__address__"
         replacement: "snmp_exporter:{{ snmp_exporter_container_web_port }}"
 
+prometheus_alerting_alertmanagers:
+  - timeout: ""
+    path_prefix: ""
+    scheme: ""
+    static_configs:
+      targets:
+        - hosts:
+            - hostname: "alertmanager"
+              port: "9093"
+
 prometheus_rule_files:
   - "alert.rules"
 
@@ -68,19 +78,19 @@ prometheus_alerting_groups:
         annotations:
           summary: "Instance {{ '{{ $labels.instance }}' }} down"
           description: "{{ '{{ $labels.instance }}' }} of job {{ '{{ $labels.job }}' }} has been down for more than 5 minutes."
-          dashboard: "https://grafana.hq1.chuanguyen.ca/d/rYdddlPWk/node-exporter-full?orgId=1&from=1635443077266&to=1635529477266"
+          dashboard: "https://grafana.hq1.chuanguyen.ca/d/rYdddlPWk/node-exporter-full?orgId=1"
   - group_name: "SNMP-Printers-Alerts"
     rules:
       - alert_name: "InstanceDown"
         expr: "up{{ '{' }}job='snmp_printers'{{ '}' }} == 0"
-        for: "5m"
+        for: "10s"
         labels:
           severity: "critical"
           maintenance: "false"
         annotations:
           summary: "Instance {{ '{{ $labels.instance }}' }} down"
           description: "{{ '{{ $labels.instance }}' }} of job {{ '{{ $labels.job }}' }} has been down for more than 5 minutes."
-          dashboard: "https://grafana.hq1.chuanguyen.ca/d/47ocflvnk/printers?orgId=1&viewPanel=2&from=1635507813543&to=1635529413543"
+          dashboard: "https://grafana.hq1.chuanguyen.ca/d/47ocflvnk/printers?orgId=1&viewPanel=2"
 
 
 ### Node_Exporter
@@ -126,4 +136,4 @@ alertmanager_receivers:
       auth_password: "{{ smtp_monitoring_api_key }}"
       auth_secret: ""
       auth_identity: ""
-      require_tls: ""
+      require_tls: "false"
