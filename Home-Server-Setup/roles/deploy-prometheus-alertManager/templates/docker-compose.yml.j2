@@ -12,6 +12,7 @@ services:
     env_file: alertmanager.env
     networks:
       - {{ docker_networks.monitoring.name }}
+      - {{ docker_networks.proxy.name }}
     # Volumes store your data between container upgrades
     volumes:
 {% for volume in alertmanager_container_volumes.binds %}
@@ -32,4 +33,6 @@ services:
     restart: "always"
 networks:
   {{ docker_networks.monitoring.name }}:
+    external: true
+  {{ docker_networks.proxy.name }}:
     external: true
