@@ -47,6 +47,16 @@ prometheus_scrape_configs:
     scrape_timeout: ""
     relabel_configs:
 
+prometheus_alerting_alertmanagers:
+  - timeout: ""
+    path_prefix: ""
+    scheme: ""
+    static_configs:
+      targets:
+        - hosts:
+            - hostname: ""
+              port: ""
+
 prometheus_alerting_groups:
   - group_name: ""
     rules:
