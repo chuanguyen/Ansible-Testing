@@ -12,6 +12,8 @@ alertmanager_container_restart: no
 
 alertmanager_docker_cli_commands:
   "config.file": "/etc/alertmanager/alertmanager.yml"
+  "storage.path": "/alertmanager"
+  "web.external-url": "https://alertmanager.{{ home_lan_domain }}"
 
 alertmanager_container_envs:
   kv:
@@ -53,7 +55,7 @@ alertmanager_templates:
 # List of notification receivers
 alertmanager_receivers:
   - name: ""
-    email_configs: 
+    email_configs:
       send_resolved: ""
       to: ""
       from: ""
