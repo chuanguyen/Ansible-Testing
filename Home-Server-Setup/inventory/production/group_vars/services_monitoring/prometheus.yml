@@ -78,19 +78,19 @@ prometheus_alerting_groups:
         annotations:
           summary: "Instance {{ '{{ $labels.instance }}' }} down"
           description: "{{ '{{ $labels.instance }}' }} of job {{ '{{ $labels.job }}' }} has been down for more than 5 minutes."
-          dashboard: "https://grafana.hq1.chuanguyen.ca/d/rYdddlPWk/node-exporter-full?orgId=1"
+          dashboard: "https://grafana.{{ home_lan_domain }}/d/rYdddlPWk/node-exporter-full?orgId=1"
   - group_name: "SNMP-Printers-Alerts"
     rules:
       - alert_name: "InstanceDown"
         expr: "up{{ '{' }}job='snmp_printers'{{ '}' }} == 0"
-        for: "10s"
+        for: "5m"
         labels:
           severity: "critical"
           maintenance: "false"
         annotations:
           summary: "Instance {{ '{{ $labels.instance }}' }} down"
           description: "{{ '{{ $labels.instance }}' }} of job {{ '{{ $labels.job }}' }} has been down for more than 5 minutes."
-          dashboard: "https://grafana.hq1.chuanguyen.ca/d/47ocflvnk/printers?orgId=1&viewPanel=2"
+          dashboard: "https://grafana.{{ home_lan_domain }}/d/47ocflvnk/printers?orgId=1&viewPanel=4"
 
 
 ### Node_Exporter
