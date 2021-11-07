@@ -52,7 +52,20 @@ alertmanager_templates:
 
 # List of notification receivers
 alertmanager_receivers:
-  - ""
+  - name: ""
+    email_configs: 
+      send_resolved: ""
+      to: ""
+      from: ""
+      smarthost: ""
+      hello: ""
+      auth_username: ""
+      auth_password: ""
+      auth_secret: ""
+      auth_identity: ""
+      require_tls: ""
+
+
 
 # List of inhibition rules
 alertmanager_inhibit_rules:

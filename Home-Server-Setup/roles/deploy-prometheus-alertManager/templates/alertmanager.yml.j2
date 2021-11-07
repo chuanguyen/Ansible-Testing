@@ -98,10 +98,19 @@ templates:
 {% endfor %}
 {% endif %}
 
-{% if alertmanager_receivers is defined and alertmanager_receivers[0] != "" %}
+{% if alertmanager_receivers is defined and alertmanager_receivers[0].name != "" %}
 receivers:
 {% for alertmanager_receiver in alertmanager_receivers %}
-  - {{ alertmanager_receiver }}
+  - name: {{ alertmanager_receiver.name }}
+{% if alertmanager_receiver.email_configs is defined %}
+    email_configs:
+      -
+{% for email_config_key,email_config_value in alertmanager_receiver.email_configs.items() %}
+{% if email_config_value != "" %}
+        {{ email_config_key }}: {{ email_config_value }}
+{% endif %}
+{% endfor %}
+{% endif %}
 {% endfor %}
 {% endif %}
 
