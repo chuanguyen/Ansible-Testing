@@ -112,8 +112,8 @@ prometheus_alerting_groups:
           description: "Printer {{ '{{ $labels.instance }}' }} of job {{ '{{ $labels.job }}' }} should have PC kit replaced"
           dashboard: "https://grafana.{{ home_lan_domain }}/d/47ocflvnk/printers?orgId=1&viewPanel=2"
       - alert_name: "Supplies-Toner-Low"
-        expr: "((prtMarkerSuppliesLevel{{ '{' }}prtMarkerSuppliesIndex='1'{{ '}' }} / prtMarkerSuppliesMaxCapacity{{ '{' }}prtMarkerSuppliesIndex='1'{{ '}' }}) * 100) < 50"
-        for: "10s"
+        expr: "((prtMarkerSuppliesLevel{{ '{' }}prtMarkerSuppliesIndex='1'{{ '}' }} / prtMarkerSuppliesMaxCapacity{{ '{' }}prtMarkerSuppliesIndex='1'{{ '}' }}) * 100) < 15"
+        for: "1h"
         labels:
           severity: "warning"
           maintenance: "false"
