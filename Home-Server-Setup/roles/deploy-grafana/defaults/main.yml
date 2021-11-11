@@ -40,3 +40,5 @@ grafana_container_envs:
     GF_ALERTING_ENABLED: "false"
   GF_INSTALL_PLUGINS:
     - "grafana-clock-panel"
+    # Home Internet Monitoring
+    - "flant-statusmap-panel"
