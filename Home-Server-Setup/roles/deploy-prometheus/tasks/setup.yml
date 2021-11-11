@@ -48,6 +48,27 @@
     prometheus_container_restart: "yes"
   when: "container_templated_files.changed"
 
+- block:
+  - name: "TASK: Template Prometheus rule files"
+    become: true
+    template:
+      src: "{{ item }}.j2"
+      dest: "{{ prometheus_container_data_dir }}/etc-prometheus/{{ item }}"
+      # Maps to UID that's in Prometheus container
+      owner: "65534"
+      group: "docker"
+      mode: 0660
+    with_items: "{{ prometheus_rule_files }}"
+    loop_control:
+      label: "{{ item }}"
+    register: "container_templated_files_rules"
+
+  - name: "TASK: Set containers to restart when templated files change"
+    set_fact:
+      prometheus_container_restart: "yes"
+    when: "container_templated_files_rules.changed"
+  when: "prometheus_rule_files[0] is defined and prometheus_rule_files[0] !=''"
+
 - name: "TASK: Create Prometheus user"
   become: true
   user:

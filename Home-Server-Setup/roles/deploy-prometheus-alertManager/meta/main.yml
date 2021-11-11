@@ -1,0 +1,5 @@
+---
+
+### Define Prometheus dependencies
+# dependencies:
+#   - "ROLE"

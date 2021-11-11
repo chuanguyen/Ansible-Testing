@@ -1,0 +1,78 @@
+alertmanager_container_data_dir: "{{ docker_container_root_dir }}/alertmanager"
+
+alertmanager_image_base: "prom/alertmanager"
+alertmanager_image_base_tag: ""
+# Ensures previous version of working
+# alertmanager image is available for failback
+alertmanager_image_base_tag_old: ""
+alertmanager_container_name: "alertmanager"
+# Controls whether docker-compose restarts Docker containers
+alertmanager_container_restart: no
+# Defines image ID for custom image
+
+alertmanager_docker_cli_commands:
+  "config.file": "/etc/alertmanager/alertmanager.yml"
+  "storage.path": "/alertmanager"
+  "web.external-url": "https://alertmanager.{{ home_lan_domain }}"
+
+alertmanager_container_envs:
+  kv:
+
+alertmanager_global_smtp_from: ""
+alertmanager_global_smtp_smarthost: ""
+alertmanager_global_smtp_hello: "localhost"
+alertmanager_global_smtp_auth_username: ""
+alertmanager_global_smtp_auth_password: ""
+alertmanager_global_smtp_auth_identity: ""
+alertmanager_global_smtp_auth_secret: ""
+alertmanager_global_smtp_require_tls: "true"
+
+alertmanager_global_resolve_timeout: "5m"
+
+# Default receiver
+alertmanager_route_default_receiver: "default-receiver"
+alertmanager_route_default_group_wait: "30s"
+alertmanager_route_default_group_interval: "5m"
+alertmanager_route_default_repeat_interval: "4h"
+alertmanager_route_default_group_by:
+  - ""
+# List of receivers
+alertmanager_route_receivers:
+  - name: ""
+    group_wait: ""
+    group_interval: ""
+    repeat_interval: ""
+    group_by:
+      - ""
+    matchers:
+      - label: ""
+
+
+# List of template files
+alertmanager_templates:
+  - ""
+
+# List of notification receivers
+alertmanager_receivers:
+  - name: ""
+    email_configs:
+      send_resolved: ""
+      to: ""
+      from: ""
+      smarthost: ""
+      hello: ""
+      auth_username: ""
+      auth_password: ""
+      auth_secret: ""
+      auth_identity: ""
+      require_tls: ""
+
+
+
+# List of inhibition rules
+alertmanager_inhibit_rules:
+  - ""
+
+# List of mute time intervals
+alertmanager_mute_time_intervals:
+  - ""

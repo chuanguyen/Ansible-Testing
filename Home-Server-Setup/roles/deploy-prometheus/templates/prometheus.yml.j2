@@ -60,7 +60,35 @@ scrape_configs:
 
 {% endfor %}
 
+rule_files:
+{% if prometheus_rule_files[0] is defined and prometheus_rule_files[0] != "" %}
+{% for file in prometheus_rule_files %}
+  - {{ file }}
+{% endfor %}
+{% endif %}
+
 # Alerting specifies settings related to the Alertmanager.
 alerting:
   alert_relabel_configs:
   alertmanagers:
+    -
+{% for alertmanager in prometheus_alerting_alertmanagers %}
+{% if ( alertmanager.timeout != "") %}
+      timeout: {{ alertmanager.timeout }}
+{% endif %}
+{% if ( alertmanager.path_prefix != "") %}
+      path_prefix: {{ alertmanager.path_prefix }}
+{% endif %}
+{% if ( alertmanager.scheme != "") %}
+      scheme: {{ alertmanager.scheme }}
+{% endif %}
+{% if alertmanager.static_configs is defined %}
+      static_configs:
+{% for alertmanager_target in alertmanager.static_configs.targets %}
+        - targets:
+{% for host in alertmanager_target.hosts %}
+          - '{{ host.hostname }}{{ ':'+host.port if host.port is defined and host.port != "" }}'
+{% endfor %}
+{% endfor %}
+{% endif %}
+{% endfor %}

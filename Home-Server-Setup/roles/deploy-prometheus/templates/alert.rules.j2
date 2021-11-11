@@ -1,0 +1,25 @@
+---
+### {{ ansible_managed }}
+
+groups:
+{% for alerting_group in prometheus_alerting_groups %}
+  - name: {{ alerting_group.group_name }}
+    rules:
+{% for rule in alerting_group.rules %}
+      - alert: {{ rule.alert_name }}
+        expr: {{ rule.expr }}
+        for: {{ rule.for }}
+{% if rule.labels is defined %}
+        labels:
+{% for label,value in rule.labels.items() %}
+          {{ label }}: "{{ value }}"
+{% endfor %}
+{% endif %}
+{% if rule.annotations is defined %}
+        annotations:
+{% for label,value in rule.annotations.items() %}
+          {{ label }}: "{{ value }}"
+{% endfor %}
+{% endif %}
+{% endfor %}
+{% endfor %}

@@ -10,6 +10,7 @@
     state: "directory"
 
 - name: "Create folders for build and container data"
+  become: true
   file:
     path: "{{ SERVICE__container_data_dir }}/{{ item }}"
     owner: "root"

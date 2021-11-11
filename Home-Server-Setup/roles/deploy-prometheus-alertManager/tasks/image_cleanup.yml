@@ -1,0 +1,16 @@
+---
+
+- name: "TASK: Grab all tags of a particular image"
+  shell: "docker images --filter=reference='{{ alertmanager_image_base }}:*' | tr -s ' ' | cut -d ' ' -f 2 | tail -n +2"
+  register: docker_image_filter_output
+
+- set_fact:
+    docker_image_filtered_tags: "{{ docker_image_filter_output.stdout_lines }}"
+
+- name: "TASK: Remove docker images filtered by tags"
+  community.docker.docker_image:
+    name: "{{ alertmanager_image_base }}"
+    tag: "{{ item }}"
+    state: "absent"
+  with_items: "{{ docker_image_filtered_tags }}"
+  when: "item != alertmanager_image_base_tag and item != alertmanager_image_base_tag_old"
