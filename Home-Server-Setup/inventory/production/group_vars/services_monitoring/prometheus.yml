@@ -55,6 +55,7 @@ prometheus_scrape_configs:
         target_label: "instance"
       - target_label: "__address__"
         replacement: "snmp_exporter:{{ snmp_exporter_container_web_port }}"
+### Home Internet Monitoring
   - job_name: 'speedtest'
     metrics_path: /metrics
     scrape_interval: 4h
@@ -65,6 +66,34 @@ prometheus_scrape_configs:
             - hostname: "speedtest"
               port: "{{ home_internet_speedtest_exporter_container_port }}"
               do_dig_lookup: false
+  - job_name: 'ping'
+    metrics_path: /probe
+    scrape_interval: "10s"
+    params:
+      module: [http_2xx]  # Look for a HTTP 200 response.
+    static_configs:
+      # [URL];[HUMAN_READABLE_NAME]
+      targets:
+        - hosts:
+            - hostname: "http://www.google.com/;google.com"
+              port: ""
+              do_dig_lookup: false
+            - hostname: "https://github.com/;github.com"
+              port: ""
+              do_dig_lookup: false
+    relabel_configs:
+      - source_labels: [__address__]
+        regex: '(.*);(.*)'  # first is the url, thus unique for instance
+        target_label: instance
+        replacement: $1
+      - source_labels: [__address__]
+        regex: '(.*);(.*)'  # second is humanname to use in charts
+        target_label: humanname
+        replacement: $2
+      - source_labels: [instance]
+        target_label: __param_target
+      - target_label: __address__
+        replacement: "ping:{{ home_internet_blackbox_exporter_container_port }}"  # The blackbox exporter's real hostname:port.
 
 prometheus_alerting_alertmanagers:
   - timeout: ""
