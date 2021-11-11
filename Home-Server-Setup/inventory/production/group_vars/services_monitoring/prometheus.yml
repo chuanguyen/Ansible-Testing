@@ -91,6 +91,36 @@ prometheus_alerting_groups:
           summary: "Instance {{ '{{ $labels.instance }}' }} down"
           description: "{{ '{{ $labels.instance }}' }} of job {{ '{{ $labels.job }}' }} has been down for more than 5 minutes."
           dashboard: "https://grafana.{{ home_lan_domain }}/d/47ocflvnk/printers?orgId=1&viewPanel=4"
+      - alert_name: "Supplies-Maintenance-Kit-Low"
+        expr: "((prtMarkerSuppliesLevel{{ '{' }}prtMarkerSuppliesIndex='3'{{ '}' }} / prtMarkerSuppliesMaxCapacity{{ '{' }}prtMarkerSuppliesIndex='3'{{ '}' }}) * 100) < 15"
+        for: "1h"
+        labels:
+          severity: "warning"
+          maintenance: "false"
+        annotations:
+          summary: "Printer {{ '{{ $labels.instance }}' }} maintenance kit Low"
+          description: "Printer {{ '{{ $labels.instance }}' }} of job {{ '{{ $labels.job }}' }} should have maintenance kit replaced"
+          dashboard: "https://grafana.{{ home_lan_domain }}/d/47ocflvnk/printers?orgId=1&viewPanel=2"
+      - alert_name: "Supplies-PC-Kit-Low"
+        expr: "((prtMarkerSuppliesLevel{{ '{' }}prtMarkerSuppliesIndex='2'{{ '}' }} / prtMarkerSuppliesMaxCapacity{{ '{' }}prtMarkerSuppliesIndex='2'{{ '}' }}) * 100) < 15"
+        for: "1h"
+        labels:
+          severity: "warning"
+          maintenance: "false"
+        annotations:
+          summary: "Printer {{ '{{ $labels.instance }}' }} PC kit Low"
+          description: "Printer {{ '{{ $labels.instance }}' }} of job {{ '{{ $labels.job }}' }} should have PC kit replaced"
+          dashboard: "https://grafana.{{ home_lan_domain }}/d/47ocflvnk/printers?orgId=1&viewPanel=2"
+      - alert_name: "Supplies-Toner-Low"
+        expr: "((prtMarkerSuppliesLevel{{ '{' }}prtMarkerSuppliesIndex='1'{{ '}' }} / prtMarkerSuppliesMaxCapacity{{ '{' }}prtMarkerSuppliesIndex='1'{{ '}' }}) * 100) < 50"
+        for: "10s"
+        labels:
+          severity: "warning"
+          maintenance: "false"
+        annotations:
+          summary: "Printer {{ '{{ $labels.instance }}' }} toner Low"
+          description: "Printer {{ '{{ $labels.instance }}' }} of job {{ '{{ $labels.job }}' }} should have toner replaced"
+          dashboard: "https://grafana.{{ home_lan_domain }}/d/47ocflvnk/printers?orgId=1&viewPanel=2"
 
 
 ### Node_Exporter
