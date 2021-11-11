@@ -1,0 +1,37 @@
+---
+
+# {{ ansible_managed }}
+
+version: "3"
+
+# More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
+services:
+  ping:
+    image: "{{ home_internet_blackbox_exporter_image_base }}:{{ home_internet_blackbox_exporter_image_base_tag }}"
+    container_name: "{{ home_internet_blackbox_exporter_container_name }}"
+    expose:
+      - {{ home_internet_blackbox_exporter_container_port }}
+    networks:
+      - {{ docker_networks.monitoring.name }}
+    # Volumes store your data between container upgrades
+    volumes:
+{% for volume in home_internet_blackbox_exporter_container_volumes.binds %}
+      - {{ volume.source }}:{{ volume.target }}
+{% endfor %}
+    command:
+{% for key,value in home_internet_blackbox_exporter_docker_cli_commands.items() %}
+      - "--{{ key }}={{ value }}"
+{% endfor %}
+    restart: "always"
+  speedtest:
+    image: {{ home_internet_speedtest_exporter_image_base }}:{{ home_internet_speedtest_exporter_image_base_tag }}
+    container_name: "{{ home_internet_speedtest_exporter_container_name }}"
+    env_file: speedtest.env
+    expose:
+      - {{ home_internet_speedtest_exporter_container_port }}
+    restart: always
+    networks:
+      - {{ docker_networks.monitoring.name }}
+networks:
+  {{ docker_networks.monitoring.name }}:
+    external: true

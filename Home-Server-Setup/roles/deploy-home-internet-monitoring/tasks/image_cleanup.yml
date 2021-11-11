@@ -1,0 +1,29 @@
+---
+
+- name: "TASK: Grab all tags of blackbox image"
+  shell: "docker images --filter=reference='{{ home_internet_blackbox_exporter_image_base }}:*' | tr -s ' ' | cut -d ' ' -f 2 | tail -n +2"
+  register: blackbox_docker_image_filter_output
+
+- name: "TASK: Grab all tags of speedtest image"
+  shell: "docker images --filter=reference='{{ home_internet_speedtest_exporter_image_base }}:*' | tr -s ' ' | cut -d ' ' -f 2 | tail -n +2"
+  register: speedtest_docker_image_filter_output
+
+- set_fact:
+    blackbox_docker_image_filtered_tags: "{{ blackbox_docker_image_filter_output.stdout_lines }}"
+    speedtest_docker_image_filtered_tags: "{{ speedtest_docker_image_filter_output.stdout_lines }}"
+
+- name: "TASK: Remove blackbox docker images filtered by tags"
+  community.docker.docker_image:
+    name: "{{ home_internet_blackbox_exporter_image_base }}"
+    tag: "{{ item }}"
+    state: "absent"
+  with_items: "{{ blackbox_docker_image_filtered_tags }}"
+  when: "item != home_internet_blackbox_exporter_image_base_tag"
+
+- name: "TASK: Remove speedtest docker images filtered by tags"
+  community.docker.docker_image:
+    name: "{{ home_internet_speedtest_exporter_image_base }}"
+    tag: "{{ item }}"
+    state: "absent"
+  with_items: "{{ speedtest_docker_image_filtered_tags }}"
+  when: "item != home_internet_speedtest_exporter_image_base_tag"

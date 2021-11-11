@@ -1,0 +1,7 @@
+home_internet_monitoring_container_data_dir_sub_folders:
+  - "blackbox/config/"
+
+home_internet_blackbox_exporter_container_volumes:
+  binds:
+    - source: "./blackbox/config"
+      target: "/config"

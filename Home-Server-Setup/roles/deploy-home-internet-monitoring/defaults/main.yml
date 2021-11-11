@@ -1,0 +1,22 @@
+home_internet_monitoring_container_data_dir: "{{ docker_container_root_dir }}/home_internet_monitoring"
+
+# Docker images
+home_internet_blackbox_exporter_image_base: "prom/blackbox-exporter"
+home_internet_blackbox_exporter_image_base_tag: ""
+home_internet_blackbox_exporter_container_name: "home_internet_blackbox_exporter"
+home_internet_blackbox_exporter_container_port: "9115"
+
+home_internet_speedtest_exporter_image_base: "miguelndecarvalho/speedtest-exporter"
+home_internet_speedtest_exporter_image_base_tag: ""
+home_internet_speedtest_exporter_container_name: "home_internet_speedtest_exporter"
+home_internet_speedtest_exporter_container_port: "9798"
+
+# Controls whether docker-compose restarts Docker containers
+container_restart: no
+
+home_internet_blackbox_exporter_docker_cli_commands:
+  "config.file": "/config/blackbox.yml"
+
+speedtest_container_envs:
+  kv:
+    SPEEDTEST_PORT: "{{ home_internet_speedtest_exporter_container_port }}"

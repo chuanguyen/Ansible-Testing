@@ -1,0 +1,65 @@
+---
+
+
+- name: "TASK: Retrieve {{ home_internet_blackbox_exporter_container_name }} container info"
+  community.docker.docker_container_info:
+    name: "{{ home_internet_blackbox_exporter_container_name }}"
+  register: blackbox_container_state
+
+- name: "TASK: Retrieve {{ home_internet_speedtest_exporter_container_name }} container info"
+  community.docker.docker_container_info:
+    name: "{{ home_internet_speedtest_exporter_container_name }}"
+  register: speedtest_container_state
+
+- name: "TASK: Set container facts"
+  set_fact:
+    blackbox_container_exists: "{{ blackbox_container_state.exists }}"
+    blackbox_container_image: "{{ blackbox_container_state.container.Config.Image | default('tag:n/a') }}"
+    speedtest_container_exists: "{{ speedtest_container_state.exists }}"
+    speedtest_container_image: "{{ speedtest_container_state.container.Config.Image | default('tag:n/a') }}"
+
+- name: "TASK: Set container image tag"
+  set_fact:
+    blackbox_container_image_tag: "{{ blackbox_container_image.split(':') }}"
+    speedtest_container_image_tag: "{{ speedtest_container_image.split(':') }}"
+
+- block:
+    - name: "TASK: Pull blackbox base image"
+      community.docker.docker_image:
+        name: "{{ home_internet_blackbox_exporter_image_base }}"
+        tag: "{{ home_internet_blackbox_exporter_image_base_tag }}"
+        source: "pull"
+        state: "present"
+      register: "blackbox_image_base_pull"
+
+    - name: "TASK: Pull speedtest base image"
+      community.docker.docker_image:
+        name: "{{ home_internet_speedtest_exporter_image_base }}"
+        tag: "{{ home_internet_speedtest_exporter_image_base_tag }}"
+        source: "pull"
+        state: "present"
+      register: "speedtest_image_base_pull"
+
+    - name: "TASK: Remove blackbox container for updates"
+      community.docker.docker_container:
+        name: "{{ home_internet_blackbox_exporter_container_name }}"
+        container_default_behavior: "no_defaults"
+        state: "absent"
+      when: blackbox_container_exists
+
+    - name: "TASK: Remove speedtest container for updates"
+      community.docker.docker_container:
+        name: "{{ home_internet_speedtest_exporter_container_name }}"
+        container_default_behavior: "no_defaults"
+        state: "absent"
+      when: speedtest_container_exists
+
+    - include: "image_cleanup.yml"
+  when: (blackbox_container_image_tag[1] != home_internet_blackbox_exporter_image_base_tag) or (speedtest_container_image_tag[1] != home_internet_speedtest_exporter_image_base_tag)
+
+- name: "TASK: Deploy home internet monitoring"
+  community.docker.docker_compose:
+    project_src: "{{ home_internet_monitoring_container_data_dir }}"
+    nocache: "no"
+    state: "present"
+    restarted: "{{ container_restart }}"
