@@ -11,6 +11,7 @@ prometheus_scrape_configs:
         - hosts:
             - hostname: "localhost"
               port: "{{ prometheus_container_web_port }}"
+              do_dig_lookup: false
     metrics_path: "/metrics"
     basic_auth:
       username: "{{ docker_services_admin_username }}"
@@ -25,6 +26,7 @@ prometheus_scrape_configs:
         - hosts:
             - hostname: "rbp4-001.{{ home_lan_domain }}"
               port: "9100"
+              do_dig_lookup: true
           labels:
             device_type: "rbp4"
     metrics_path: "/metrics"
@@ -38,6 +40,7 @@ prometheus_scrape_configs:
         - hosts:
             - hostname: "printer.{{ home_lan_domain }}"
               port: ""
+              do_dig_lookup: true
           labels:
             device_type: "printer"
     metrics_path: "/snmp"
@@ -52,6 +55,16 @@ prometheus_scrape_configs:
         target_label: "instance"
       - target_label: "__address__"
         replacement: "snmp_exporter:{{ snmp_exporter_container_web_port }}"
+  - job_name: 'speedtest'
+    metrics_path: /metrics
+    scrape_interval: 4h
+    scrape_timeout: 1m  # running speedtest needs time to complete
+    static_configs:
+      targets:
+        - hosts:
+            - hostname: "speedtest"
+              port: "{{ home_internet_speedtest_exporter_container_port }}"
+              do_dig_lookup: false
 
 prometheus_alerting_alertmanagers:
   - timeout: ""
