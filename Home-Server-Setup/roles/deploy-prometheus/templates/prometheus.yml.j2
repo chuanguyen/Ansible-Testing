@@ -20,7 +20,11 @@ scrape_configs:
 {% for prom_targets in prom_job.static_configs.targets %}
       - targets:
 {% for host in prom_targets.hosts %}
+{% if host.do_dig_lookup %}
         - '{{ lookup('community.general.dig', host.hostname) }}{{ ':'+host.port if host.port is defined and host.port != "" }}'
+{% else %}
+        - '{{ host.hostname }}{{ ':'+host.port if host.port is defined and host.port != "" }}'
+{% endif %}
 {% endfor %}
 {% if (prom_targets.labels is defined) and prom_targets.labels %}
         labels:
