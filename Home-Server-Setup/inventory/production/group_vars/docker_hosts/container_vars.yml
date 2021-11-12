@@ -22,6 +22,15 @@ grafana_nfs_backup_frequency: "0 1 */15 * *"
 prometheus_image_base_tag: "v2.29.2"
 prometheus_image_base_tag_old: ""
 
+prometheus_docker_cli_commands:
+  "config.file": "/etc/prometheus/prometheus.yml"
+  "web.config.file": "/etc/prometheus/web.yml"
+  "web.console.libraries": "/usr/share/prometheus/console_libraries"
+  "web.console.templates": "/usr/share/prometheus/consoles"
+  "web.external-url": "https://prometheus.{{ home_lan_domain }}"
+  "storage.tsdb.retention.time": "1y"
+  "storage.tsdb.retention.size": "50GB"
+
 snmp_exporter_image_base_tag: "v0.20.0"
 snmp_exporter_image_base_tag_old: ""
 
