@@ -30,7 +30,7 @@
         name: "{{ SERVICE__container_name }}"
         container_default_behavior: "no_defaults"
         state: "absent"
-      when: container_state.exists and image_base_pull.changed
+      when: container_exists and image_base_pull.changed
   when: container_image_tag[1] != SERVICE__image_base_tag
 
 - name: "TASK: Deploy {{ SERVICE__container_name }}"
