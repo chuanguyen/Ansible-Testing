@@ -2,4 +2,4 @@
 
 - name: "HANDLER: Restart containers"
   set_fact:
-    container_restarted: "yes"
+    snmp_exporter_container_restart: "yes"
