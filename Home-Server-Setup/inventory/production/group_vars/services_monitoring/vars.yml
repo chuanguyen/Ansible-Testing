@@ -1,6 +1,6 @@
 ---
 ### Monitoring
-# List of community strings
+# Dictionary of community strings
 snmp_community_strings: "{{ vault_snmp_community_strings }}"
 
 smtp_monitoring_server_url: "{{ vault_smtp_monitoring_server_url }}"
