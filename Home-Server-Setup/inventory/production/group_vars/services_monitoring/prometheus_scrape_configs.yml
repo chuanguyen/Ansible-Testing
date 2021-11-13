@@ -27,6 +27,12 @@ prometheus_scrape_configs:
               do_dig_lookup: true
           labels:
             device_type: "rbp4"
+        - hosts:
+            - hostname: "nas1.{{ home_lan_domain }}"
+              port: "9100"
+              do_dig_lookup: true
+          labels:
+            device_type: "nas"
     metrics_path: "/metrics"
     scrape_interval: "1m"
     scrape_timeout: "5s"
