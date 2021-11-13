@@ -1,0 +1,28 @@
+---
+
+# {{ ansible_managed }}
+
+version: "3"
+
+# More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
+services:
+  node_exporter:
+    container_name: "{{ node_exporter_container_name }}"
+    image: "{{ node_exporter_image_base }}:{{ node_exporter_image_base_tag }}"
+    env_file: node_exporter.env
+    ports:
+      - ""
+    network_mode: "host"
+    pid: "host"
+    command:
+{% for key,value in node_exporter_docker_cli_commands.items() %}
+      - "--{{ key }}={{ value }}"
+{% endfor %}
+      - "--collector.mountstats"
+    # Volumes store your data between container upgrades
+    volumes:
+{% for volume in node_exporter_container_volumes.binds %}
+      - {{ volume.source }}:{{ volume.target }}
+{% endfor %}
+    restart: "always"
+networks:

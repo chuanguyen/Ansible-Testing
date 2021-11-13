@@ -1,0 +1,16 @@
+node_exporter_container_data_dir: "{{ docker_container_root_dir }}/node_exporter"
+
+node_exporter_image_base: "prom/node-exporter"
+node_exporter_image_base_tag: ""
+# Ensures previous version of working
+# node_exporter image is available for failback
+node_exporter_image_base_tag_old: ""
+node_exporter_container_name: "node_exporter"
+# Controls whether docker-compose restarts Docker containers
+node_exporter_container_restart: no
+
+node_exporter_docker_cli_commands:
+  "path.rootfs": "/host"
+
+node_exporter_container_envs:
+  kv:

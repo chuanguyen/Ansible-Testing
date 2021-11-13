@@ -1,0 +1,4 @@
+node_exporter_container_volumes:
+  binds:
+    - source: "/"
+      target: "/host:ro,rslave"
