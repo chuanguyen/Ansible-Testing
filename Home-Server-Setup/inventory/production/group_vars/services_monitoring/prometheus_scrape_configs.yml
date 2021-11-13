@@ -59,6 +59,29 @@ prometheus_scrape_configs:
         target_label: "instance"
       - target_label: "__address__"
         replacement: "snmp_exporter:{{ snmp_exporter_container_web_port }}"
+  - job_name: "snmp_nas_qnap"
+    static_configs:
+      targets:
+      # Expects hostnames, and will resolve to IP for Prometheus
+      # dig Lookup ran in prometheus.yml template
+        - hosts:
+            - hostname: "nas1.{{ home_lan_domain }}"
+              port: ""
+              do_dig_lookup: true
+          labels:
+            device_type: "nas"
+    metrics_path: "/snmp"
+    params:
+      module: "[QNAP-MIB]"
+    scrape_interval: "1m"
+    scrape_timeout: "5s"
+    relabel_configs:
+      - source_labels: "[__address__]"
+        target_label: "__param_target"
+      - source_labels: "[__param_target]"
+        target_label: "instance"
+      - target_label: "__address__"
+        replacement: "snmp_exporter:{{ snmp_exporter_container_web_port }}"
 ### Home Internet Monitoring
   - job_name: 'speedtest'
     metrics_path: /metrics
