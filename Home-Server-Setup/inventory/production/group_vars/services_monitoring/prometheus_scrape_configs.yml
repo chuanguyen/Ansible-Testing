@@ -1,0 +1,94 @@
+---
+
+prometheus_scrape_configs:
+  - job_name: "prometheus"
+    static_configs:
+      targets:
+      # Expects hostnames, and will resolve to IP for Prometheus
+      # dig Lookup ran in prometheus.yml template
+        - hosts:
+            - hostname: "localhost"
+              port: "{{ prometheus_container_web_port }}"
+              do_dig_lookup: false
+    metrics_path: "/metrics"
+    basic_auth:
+      username: "{{ docker_services_admin_username }}"
+      password: "{{ docker_services_admin_password }}"
+    scrape_interval: "15s"
+    scrape_timeout: "5s"
+  - job_name: "node_exporters"
+    static_configs:
+      targets:
+      # Expects hostnames, and will resolve to IP for Prometheus
+      # dig Lookup ran in prometheus.yml template
+        - hosts:
+            - hostname: "rbp4-001.{{ home_lan_domain }}"
+              port: "9100"
+              do_dig_lookup: true
+          labels:
+            device_type: "rbp4"
+    metrics_path: "/metrics"
+    scrape_interval: "1m"
+    scrape_timeout: "5s"
+  - job_name: "snmp_printers"
+    static_configs:
+      targets:
+      # Expects hostnames, and will resolve to IP for Prometheus
+      # dig Lookup ran in prometheus.yml template
+        - hosts:
+            - hostname: "printer.{{ home_lan_domain }}"
+              port: ""
+              do_dig_lookup: true
+          labels:
+            device_type: "printer"
+    metrics_path: "/snmp"
+    params:
+      module: "[PRINTER-MIB]"
+    scrape_interval: "1m"
+    scrape_timeout: "5s"
+    relabel_configs:
+      - source_labels: "[__address__]"
+        target_label: "__param_target"
+      - source_labels: "[__param_target]"
+        target_label: "instance"
+      - target_label: "__address__"
+        replacement: "snmp_exporter:{{ snmp_exporter_container_web_port }}"
+### Home Internet Monitoring
+  - job_name: 'speedtest'
+    metrics_path: /metrics
+    scrape_interval: 4h
+    scrape_timeout: 1m  # running speedtest needs time to complete
+    static_configs:
+      targets:
+        - hosts:
+            - hostname: "speedtest"
+              port: "{{ home_internet_speedtest_exporter_container_port }}"
+              do_dig_lookup: false
+  - job_name: 'ping'
+    metrics_path: /probe
+    scrape_interval: "10s"
+    params:
+      module: [http_2xx]  # Look for a HTTP 200 response.
+    static_configs:
+      # [URL];[HUMAN_READABLE_NAME]
+      targets:
+        - hosts:
+            - hostname: "http://www.google.com/;google.com"
+              port: ""
+              do_dig_lookup: false
+            - hostname: "https://github.com/;github.com"
+              port: ""
+              do_dig_lookup: false
+    relabel_configs:
+      - source_labels: [__address__]
+        regex: '(.*);(.*)'  # first is the url, thus unique for instance
+        target_label: instance
+        replacement: $1
+      - source_labels: [__address__]
+        regex: '(.*);(.*)'  # second is humanname to use in charts
+        target_label: humanname
+        replacement: $2
+      - source_labels: [instance]
+        target_label: __param_target
+      - target_label: __address__
+        replacement: "ping:{{ home_internet_blackbox_exporter_container_port }}"  # The blackbox exporter's real hostname:port.

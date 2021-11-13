@@ -1,0 +1,23 @@
+---
+
+### Node_Exporter
+prometheus_node_exporter_version: "1.2.2"
+
+### SNMP
+snmp_exporter_prometheus_mib_modules:
+  - name: "PRINTER-MIB"
+    walk:
+      - "prtMarkerSuppliesLevel"
+      - "prtMarkerSuppliesMaxCapacity"
+      - "hrDeviceStatus"
+      - "hrPrinterStatus"
+    version: "2"
+    max_repetitions: "25"
+    retries: "3"
+    timeout: "5s"
+    auth:
+      community: "{{ snmp_community_strings.printer }}"
+    lookups:
+      - source_indexes: [hrDeviceIndex]
+        lookup: hrDeviceDescr
+        drop_source_indexes: true

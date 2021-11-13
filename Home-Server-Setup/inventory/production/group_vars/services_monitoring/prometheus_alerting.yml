@@ -1,0 +1,97 @@
+---
+
+
+### Prometheus AlertManager discovery
+prometheus_alerting_alertmanagers:
+  - timeout: ""
+    path_prefix: ""
+    scheme: ""
+    static_configs:
+      targets:
+        - hosts:
+            - hostname: "alertmanager"
+              port: "9093"
+
+### AlertManager
+
+# Default receiver
+alertmanager_route_default_receiver: "default-receiver"
+alertmanager_route_default_group_wait: "30s"
+alertmanager_route_default_group_interval: "5m"
+alertmanager_route_default_repeat_interval: "4h"
+
+# List of notification receivers
+alertmanager_receivers:
+  - name: "default-receiver"
+    email_configs:
+      send_resolved: "true"
+      to: "services+alertmanager@{{ home_lan_domain_public}}"
+      from: "services+monitoring@{{ home_lan_domain_public }}"
+      smarthost: "{{ smtp_monitoring_server_url }}"
+      hello: ""
+      auth_username: "apikey"
+      auth_password: "{{ smtp_monitoring_api_key }}"
+      auth_secret: ""
+      auth_identity: ""
+      require_tls: "false"
+
+### Alerting rules
+
+prometheus_rule_files:
+  - "alert.rules"
+
+prometheus_alerting_groups:
+  - group_name: "Node-Exporter-HW-Alerts"
+    rules:
+      - alert_name: "InstanceDown"
+        expr: "up{{ '{' }}job='node_exporters'{{ '}' }} == 0"
+        for: "5m"
+        labels:
+          severity: "critical"
+          maintenance: "false"
+        annotations:
+          summary: "Instance {{ '{{ $labels.instance }}' }} down"
+          description: "{{ '{{ $labels.instance }}' }} of job {{ '{{ $labels.job }}' }} has been down for more than 5 minutes."
+          dashboard: "https://grafana.{{ home_lan_domain }}/d/rYdddlPWk/node-exporter-full?orgId=1"
+  - group_name: "SNMP-Printers-Alerts"
+    rules:
+      - alert_name: "InstanceDown"
+        expr: "up{{ '{' }}job='snmp_printers'{{ '}' }} == 0"
+        for: "5m"
+        labels:
+          severity: "critical"
+          maintenance: "false"
+        annotations:
+          summary: "Instance {{ '{{ $labels.instance }}' }} down"
+          description: "{{ '{{ $labels.instance }}' }} of job {{ '{{ $labels.job }}' }} has been down for more than 5 minutes."
+          dashboard: "https://grafana.{{ home_lan_domain }}/d/47ocflvnk/printers?orgId=1&viewPanel=4"
+      - alert_name: "Supplies-Maintenance-Kit-Low"
+        expr: "((prtMarkerSuppliesLevel{{ '{' }}prtMarkerSuppliesIndex='3'{{ '}' }} / prtMarkerSuppliesMaxCapacity{{ '{' }}prtMarkerSuppliesIndex='3'{{ '}' }}) * 100) < 15"
+        for: "1h"
+        labels:
+          severity: "warning"
+          maintenance: "false"
+        annotations:
+          summary: "Printer {{ '{{ $labels.instance }}' }} maintenance kit Low"
+          description: "Printer {{ '{{ $labels.instance }}' }} of job {{ '{{ $labels.job }}' }} should have maintenance kit replaced"
+          dashboard: "https://grafana.{{ home_lan_domain }}/d/47ocflvnk/printers?orgId=1&viewPanel=2"
+      - alert_name: "Supplies-PC-Kit-Low"
+        expr: "((prtMarkerSuppliesLevel{{ '{' }}prtMarkerSuppliesIndex='2'{{ '}' }} / prtMarkerSuppliesMaxCapacity{{ '{' }}prtMarkerSuppliesIndex='2'{{ '}' }}) * 100) < 15"
+        for: "1h"
+        labels:
+          severity: "warning"
+          maintenance: "false"
+        annotations:
+          summary: "Printer {{ '{{ $labels.instance }}' }} PC kit Low"
+          description: "Printer {{ '{{ $labels.instance }}' }} of job {{ '{{ $labels.job }}' }} should have PC kit replaced"
+          dashboard: "https://grafana.{{ home_lan_domain }}/d/47ocflvnk/printers?orgId=1&viewPanel=2"
+      - alert_name: "Supplies-Toner-Low"
+        expr: "((prtMarkerSuppliesLevel{{ '{' }}prtMarkerSuppliesIndex='1'{{ '}' }} / prtMarkerSuppliesMaxCapacity{{ '{' }}prtMarkerSuppliesIndex='1'{{ '}' }}) * 100) < 15"
+        for: "1h"
+        labels:
+          severity: "warning"
+          maintenance: "false"
+        annotations:
+          summary: "Printer {{ '{{ $labels.instance }}' }} toner Low"
+          description: "Printer {{ '{{ $labels.instance }}' }} of job {{ '{{ $labels.job }}' }} should have toner replaced"
+          dashboard: "https://grafana.{{ home_lan_domain }}/d/47ocflvnk/printers?orgId=1&viewPanel=2"
