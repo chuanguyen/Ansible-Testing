@@ -33,6 +33,7 @@ prometheus_scrape_configs:
               do_dig_lookup: true
           labels:
             device_type: "nas"
+            vendor: "qnap"
     metrics_path: "/metrics"
     scrape_interval: "1m"
     scrape_timeout: "5s"
@@ -70,6 +71,7 @@ prometheus_scrape_configs:
               do_dig_lookup: true
           labels:
             device_type: "nas"
+            vendor: "qnap"
     metrics_path: "/snmp"
     params:
       module: "[QNAP-MIB]"
