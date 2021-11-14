@@ -26,5 +26,14 @@
     - role: "deploy-prometheus"
       tags: [ services, monitoring, prometheus ]
 
-    - role: "deploy-prometheus-snmp-exporter"
+    - role: "deploy-prometheus-alertManager"
       tags: [ services, monitoring, prometheus ]
+
+    - role: "deploy-prometheus-snmp-exporter"
+      tags: [ services, monitoring, prometheus, prometheus-exporter ]
+
+    - role: "configure-prometheus-node-exporter"
+      tags: [ services, monitoring, prometheus, prometheus-exporter ]
+
+    - role: "deploy-prometheus-home-internet-monitoring"
+      tags: [ services, monitoring, prometheus, prometheus-exporter ]
