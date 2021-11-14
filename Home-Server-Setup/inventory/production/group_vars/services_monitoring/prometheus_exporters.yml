@@ -23,11 +23,49 @@ snmp_exporter_prometheus_mib_modules:
         drop_source_indexes: true
   - name: "QNAP-MIB"
     walk:
-      - "systemUptimeEX"
+      - cpuUsage
+      - systemCPU-UsageEX
+      - systemFreeMemEX
+      - systemFreeMem
+      - systemUsedMemory
+      - systemAvailableMem
+      - systemUptimeEX
+      - systemTemperatureEX
+      - enclosureSystemTemp
+      - ifPacketsReceivedEX
+      - ifPacketsSentEX
+      - sysFanSpeedEX
+      - sysVolumeFreeSizeEX
+      - sysVolumeStatusEX
+      - diskTemperture
+      - diskSmartInfo
+      - volumeStatus
+      - iops
+      - latency
     version: "2"
     max_repetitions: "25"
     retries: "3"
     timeout: "5s"
     auth:
       community: "{{ snmp_community_strings.qnap }}"
-    lookups: 
+    lookups:
+
+  - name: "QNAP-LONG-MIB"
+    walk:
+      - modelNameEX
+      - hostNameEX
+      - firmwareVersion
+      - firmwareUpgradeAvailable
+      - sysVolumeDescrEX
+      - sysVolumeTotalSizeEX
+      - diskModel
+      - diskCapacity
+      - volumeName
+      - volumeCapacity
+    version: "2"
+    max_repetitions: "25"
+    retries: "3"
+    timeout: "5s"
+    auth:
+      community: "{{ snmp_community_strings.qnap }}"
+    lookups:
