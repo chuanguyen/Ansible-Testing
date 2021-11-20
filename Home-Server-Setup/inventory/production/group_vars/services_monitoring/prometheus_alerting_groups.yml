@@ -1,0 +1,179 @@
+---
+
+prometheus_alerting_groups:
+  - group_name: "Node-Exporter-HW-Alerts"
+    rules:
+      - alert_name: "InstanceDown"
+        expr: "up{{ '{' }}job='node_exporters'{{ '}' }} == 0"
+        for: "5m"
+        labels:
+          severity: "critical"
+          maintenance: "false"
+        annotations:
+          summary: "Instance {{ '{{ $labels.instance }}' }} down"
+          description: "{{ '{{ $labels.instance }}' }} of job {{ '{{ $labels.job }}' }} has been down for more than 5 minutes."
+          dashboard: "https://grafana.{{ home_lan_domain }}/d/rYdddlPWk/node-exporter-full?orgId=1"
+      - alert_name: "DiskSpaceLow_Warning"
+        expr: "100 - ((node_filesystem_avail_bytes{{ '{' }}device_type!~'nas',job='node_exporters',device!~'rootfs',mountpoint!~'.*boot.*|.*run.*'{{ '}' }} * 100) / node_filesystem_size_bytes{{ '{' }}device_type!~'nas',job='node_exporters',device!~'rootfs',mountpoint!~'.*boot.*|.*run.*'{{ '}' }}) >= 85"
+        for: "5m"
+        labels:
+          severity: "warning"
+          maintenance: "false"
+        annotations:
+          summary: "Disk {{ '{{ $labels.mountpoint }}' }} on Instance {{ '{{ $labels.instance }}' }} 85% full"
+          description: "Disk {{ '{{ $labels.mountpoint }}' }} on Instance {{ '{{ $labels.instance }}' }} is more than 85% full. Consider cleaning up space or expanding the disk."
+          dashboard: "https://grafana.hq1.chuanguyen.ca/d/rYdddlPWk/node-exporter?orgId=1&viewPanel=152"
+      - alert_name: "DiskSpaceLow_Critical"
+        expr: "100 - ((node_filesystem_avail_bytes{{ '{' }}device_type!~'nas',job='node_exporters',device!~'rootfs',mountpoint!~'.*boot.*|.*run.*'{{ '}' }} * 100) / node_filesystem_size_bytes{{ '{' }}device_type!~'nas',job='node_exporters',device!~'rootfs',mountpoint!~'.*boot.*|.*run.*'{{ '}' }}) >= 95"
+        for: "5m"
+        labels:
+          severity: "critical"
+          maintenance: "false"
+        annotations:
+          summary: "Disk {{ '{{ $labels.mountpoint }}' }} on Instance {{ '{{ $labels.instance }}' }} 95% full"
+          description: "Disk {{ '{{ $labels.mountpoint }}' }} on Instance {{ '{{ $labels.instance }}' }} is more than 95% full. Consider cleaning up space or expanding the disk."
+          dashboard: "https://grafana.hq1.chuanguyen.ca/d/rYdddlPWk/node-exporter?orgId=1&viewPanel=152"
+      - alert_name: "MemoryFreeLow_Warning"
+        expr: "(100 * ((node_memory_MemFree_bytes{{ '{' }}job='node_exporters'{{ '}' }}) / node_memory_MemTotal_bytes{{ '{' }}job='node_exporters'{{ '}' }})) < 5"
+        for: "15m"
+        labels:
+          severity: "warning"
+          maintenance: "false"
+        annotations:
+          summary: "Memory on Instance {{ '{{ $labels.instance }}' }} 95% used"
+          description: "Memory consumption on Instance {{ '{{ $labels.instance }}' }} at more than 95% for longer than 15 minutes."
+          dashboard: "https://grafana.hq1.chuanguyen.ca/d/rYdddlPWk/node-exporter?orgId=1&viewPanel=78"
+      - alert_name: "SystemTemperatureHigh_Critical"
+        expr: "(avg(node_hwmon_temp_celsius{{ '{' }}job='node_exporters'{{ '}' }})) >= 90"
+        for: "2m"
+        labels:
+          severity: "critical"
+          maintenance: "false"
+        annotations:
+          summary: "Temperature on Instance {{ '{{ $labels.instance }}' }} over 90 Celsius"
+          description: "Temperature on Instance {{ '{{ $labels.instance }}' }} at more than 90 Celsius for longer than 2 minutes."
+          dashboard: "https://grafana.hq1.chuanguyen.ca/d/rYdddlPWk/node-exporter?orgId=1&viewPanel=158"
+      - alert_name: "SystemTemperatureHigh_Warning"
+        expr: "(avg(node_hwmon_temp_celsius{{ '{' }}job='node_exporters'{{ '}' }})) >= 75"
+        for: "5m"
+        labels:
+          severity: "warning"
+          maintenance: "false"
+        annotations:
+          summary: "Temperature on Instance {{ '{{ $labels.instance }}' }} over 75 Celsius"
+          description: "Temperature on Instance {{ '{{ $labels.instance }}' }} at more than 75 Celsius for longer than 5 minutes."
+          dashboard: "https://grafana.hq1.chuanguyen.ca/d/rYdddlPWk/node-exporter?orgId=1&viewPanel=158"
+      - alert_name: "CPUBusy_Warning"
+        expr: "(100 - (avg by (instance)(rate(node_cpu_seconds_total{{ '{' }}mode='idle',job='node_exporters'{{ '}' }}[5m])) * 100)) >= 95"
+        for: "5m"
+        labels:
+          severity: "warning"
+          maintenance: "false"
+        annotations:
+          summary: "CPU on Instance {{ '{{ $labels.instance }}' }} 95% busy"
+          description: "CPU on Instance {{ '{{ $labels.instance }}' }} 95% busy for longer than 5 minutes."
+          dashboard: "https://grafana.hq1.chuanguyen.ca/d/rYdddlPWk/node-exporter?orgId=1"
+  - group_name: "QNAP-Alerts"
+    rules:
+      - alert_name: "SystemTemperatureHigh_Warning"
+        expr: "systemTemperatureEX{{ '{' }}job='snmp_nas_qnap'{{ '}' }} >= 42"
+        for: "1m"
+        labels:
+          severity: "warning"
+          maintenance: "false"
+        annotations:
+          summary: "System temperature on Instance {{ '{{ $labels.instance }}' }} over 42 Celsius"
+          description: "System temperature on Instance {{ '{{ $labels.instance }}' }} at more than 42 Celsius for longer than 1 minutes."
+          dashboard: "https://grafana.hq1.chuanguyen.ca/d/pwwviueMz/qnap-snmp-monitor?orgId=1"
+      - alert_name: "DiskTemperatureHigh_Warning"
+        expr: "diskTemperture{{ '{' }}job='snmp_nas_qnap'{{ '}' }} >= 40"
+        for: "1m"
+        labels:
+          severity: "warning"
+          maintenance: "false"
+        annotations:
+          summary: "Disk {{ '{{ $labels.diskIndex }}' }} temperature on Instance {{ '{{ $labels.instance }}' }} over 40 Celsius"
+          description: "Disk {{ '{{ $labels.diskIndex }}' }} temperature on Instance {{ '{{ $labels.instance }}' }} at more than 40 Celsius for longer than 1 minutes."
+          dashboard: "https://grafana.hq1.chuanguyen.ca/d/pwwviueMz/qnap-snmp-monitor?orgId=1"
+      - alert_name: "DiskTemperatureHigh_Critical"
+        expr: "diskTemperture{{ '{' }}job='snmp_nas_qnap'{{ '}' }} >= 45"
+        for: "1m"
+        labels:
+          severity: "critical"
+          maintenance: "false"
+        annotations:
+          summary: "Disk {{ '{{ $labels.diskIndex }}' }} temperature on Instance {{ '{{ $labels.instance }}' }} over 45 Celsius"
+          description: "Disk {{ '{{ $labels.diskIndex }}' }} temperature on Instance {{ '{{ $labels.instance }}' }} at more than 45 Celsius for longer than 1 minutes."
+          dashboard: "https://grafana.hq1.chuanguyen.ca/d/pwwviueMz/qnap-snmp-monitor?orgId=1"
+      - alert_name: "DiskHealthInfo"
+        expr: "diskSmartInfo{{ '{' }}job='snmp_nas_qnap'{{ '}' }} != 0"
+        for: "1m"
+        labels:
+          severity: "critical"
+          maintenance: "false"
+        annotations:
+          summary: "Disk {{ '{{ $labels.diskIndex }}' }} Instance {{ '{{ $labels.instance }}' }} Unhealthy"
+          description: "Check the health on Disk {{ '{{ $labels.diskIndex }}' }} on Instance {{ '{{ $labels.instance }}' }}"
+          dashboard: "https://grafana.hq1.chuanguyen.ca/d/pwwviueMz/qnap-snmp-monitor?orgId=1&viewPanel=30"
+      - alert_name: "VolumeUse_Warning"
+        expr: "(100 - ((sysVolumeFreeSizeEX{{ '{' }}job='snmp_nas_qnap'{{ '}' }} /on(instance,sysVolumeIndexEX) sysVolumeTotalSizeEX{{ '{' }}job='snmp_nas_qnap_long'{{ '}' }}) * 100)) >= 75"
+        for: "1m"
+        labels:
+          severity: "warning"
+          maintenance: "false"
+        annotations:
+          summary: "Disk {{ '{{ $labels.sysVolumeIndexEX }}' }} Instance {{ '{{ $labels.instance }}' }} 75% full"
+          description: "Disk {{ '{{ $labels.diskIndex }}' }} on Instance {{ '{{ $labels.instance }}' }} is 75% full"
+          dashboard: "https://grafana.hq1.chuanguyen.ca/d/pwwviueMz/qnap-snmp-monitor?orgId=1&viewPanel=30"
+      - alert_name: "VolumeUse_Critical"
+        expr: "(100 - ((sysVolumeFreeSizeEX{{ '{' }}job='snmp_nas_qnap'{{ '}' }} /on(instance,sysVolumeIndexEX) sysVolumeTotalSizeEX{{ '{' }}job='snmp_nas_qnap_long'{{ '}' }}) * 100)) >= 95"
+        for: "1m"
+        labels:
+          severity: "critical"
+          maintenance: "false"
+        annotations:
+          summary: "Disk {{ '{{ $labels.sysVolumeIndexEX }}' }} Instance {{ '{{ $labels.instance }}' }} 95% full"
+          description: "Disk {{ '{{ $labels.diskIndex }}' }} on Instance {{ '{{ $labels.instance }}' }} is 95% full. Consider clearing space"
+          dashboard: "https://grafana.hq1.chuanguyen.ca/d/pwwviueMz/qnap-snmp-monitor?orgId=1&viewPanel=30"
+  - group_name: "SNMP-Printers-Alerts"
+    rules:
+      - alert_name: "InstanceDown"
+        expr: "up{{ '{' }}job='snmp_printers'{{ '}' }} == 0"
+        for: "5m"
+        labels:
+          severity: "critical"
+          maintenance: "false"
+        annotations:
+          summary: "Instance {{ '{{ $labels.instance }}' }} down"
+          description: "{{ '{{ $labels.instance }}' }} of job {{ '{{ $labels.job }}' }} has been down for more than 5 minutes."
+          dashboard: "https://grafana.{{ home_lan_domain }}/d/47ocflvnk/printers?orgId=1&viewPanel=4"
+      - alert_name: "Supplies-Maintenance-Kit-Low"
+        expr: "((prtMarkerSuppliesLevel{{ '{' }}prtMarkerSuppliesIndex='3'{{ '}' }} / prtMarkerSuppliesMaxCapacity{{ '{' }}prtMarkerSuppliesIndex='3'{{ '}' }}) * 100) < 15"
+        for: "1h"
+        labels:
+          severity: "warning"
+          maintenance: "false"
+        annotations:
+          summary: "Printer {{ '{{ $labels.instance }}' }} maintenance kit Low"
+          description: "Printer {{ '{{ $labels.instance }}' }} of job {{ '{{ $labels.job }}' }} should have maintenance kit replaced"
+          dashboard: "https://grafana.{{ home_lan_domain }}/d/47ocflvnk/printers?orgId=1&viewPanel=2"
+      - alert_name: "Supplies-PC-Kit-Low"
+        expr: "((prtMarkerSuppliesLevel{{ '{' }}prtMarkerSuppliesIndex='2'{{ '}' }} / prtMarkerSuppliesMaxCapacity{{ '{' }}prtMarkerSuppliesIndex='2'{{ '}' }}) * 100) < 15"
+        for: "1h"
+        labels:
+          severity: "warning"
+          maintenance: "false"
+        annotations:
+          summary: "Printer {{ '{{ $labels.instance }}' }} PC kit Low"
+          description: "Printer {{ '{{ $labels.instance }}' }} of job {{ '{{ $labels.job }}' }} should have PC kit replaced"
+          dashboard: "https://grafana.{{ home_lan_domain }}/d/47ocflvnk/printers?orgId=1&viewPanel=2"
+      - alert_name: "Supplies-Toner-Low"
+        expr: "((prtMarkerSuppliesLevel{{ '{' }}prtMarkerSuppliesIndex='1'{{ '}' }} / prtMarkerSuppliesMaxCapacity{{ '{' }}prtMarkerSuppliesIndex='1'{{ '}' }}) * 100) < 15"
+        for: "1h"
+        labels:
+          severity: "warning"
+          maintenance: "false"
+        annotations:
+          summary: "Printer {{ '{{ $labels.instance }}' }} toner Low"
+          description: "Printer {{ '{{ $labels.instance }}' }} of job {{ '{{ $labels.job }}' }} should have toner replaced"
+          dashboard: "https://grafana.{{ home_lan_domain }}/d/47ocflvnk/printers?orgId=1&viewPanel=2"
