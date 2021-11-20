@@ -75,7 +75,7 @@ prometheus_scrape_configs:
     metrics_path: "/snmp"
     params:
       module: "[QNAP-MIB]"
-    scrape_interval: "1m"
+    scrape_interval: "90s"
     scrape_timeout: "60s"
     relabel_configs:
       - source_labels: "[__address__]"
@@ -99,7 +99,7 @@ prometheus_scrape_configs:
     metrics_path: "/snmp"
     params:
       module: "[QNAP-LONG-MIB]"
-    scrape_interval: "1m"
+    scrape_interval: "5m"
     scrape_timeout: "60s"
     relabel_configs:
       - source_labels: "[__address__]"
