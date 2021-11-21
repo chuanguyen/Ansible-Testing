@@ -1,0 +1,11 @@
+grafana_loki_container_data_dir_sub_folders:
+  - "loki/"
+  - "mnt-backup/"
+  - "scripts"
+
+grafana_loki_container_volumes:
+  binds:
+    - source: "./loki"
+      target: "/loki"
+    - source: "./mnt-backup/"
+      target: "/mnt/backup/"

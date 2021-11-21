@@ -1,0 +1,9 @@
+#!/bin/bash
+
+### {{ ansible_managed }}
+
+docker exec -d -w "{{ backup_directory }}" grafana_loki
+
+sleep 5s && rsync --remove-source-files -zv {{ grafana_loki_container_data_dir }}/mnt-backup/* {{ grafana_loki_nfs_backup_directory }}
+
+find {{ grafana_loki_nfs_backup_directory }} -mtime +{{ grafana_loki_nfs_backup_cleanup_period }} -exec rm {} \;

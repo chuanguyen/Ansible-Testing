@@ -10,8 +10,10 @@ services:
     container_name: "{{ snmp_exporter_container_name }}"
     image: "{{ snmp_exporter_image_base }}:{{ snmp_exporter_image_base_tag }}"
     env_file: snmp_exporter.env
-    ports:
-      - "{{ snmp_exporter_container_web_port }}:{{ snmp_exporter_container_web_port }}"
+    ### Expose for testing SNMP
+    # Disable once finished
+    # ports:
+      # - "{{ snmp_exporter_container_web_port }}:{{ snmp_exporter_container_web_port }}"
     networks:
       - {{ docker_networks.monitoring.name }}
     # Volumes store your data between container upgrades

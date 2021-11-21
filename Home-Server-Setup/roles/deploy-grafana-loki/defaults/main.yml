@@ -1,0 +1,22 @@
+grafana_loki_container_data_dir: "{{ docker_container_root_dir }}/grafana_loki"
+
+grafana_loki_image_base: "grafana/loki"
+grafana_loki_image_base_tag: ""
+# Ensures previous version of working
+# grafana_loki image is available for failback
+grafana_loki_image_base_tag_old: ""
+grafana_loki_container_name: "grafana_loki"
+# Controls whether docker-compose restarts Docker containers
+grafana_loki_container_restart: no
+# Defines image ID for custom image
+grafana_loki_image_custom: "{{ ansible_user }}/grafana_loki"
+
+grafana_loki_backup_directory: "/mnt/backup/"
+grafana_loki_nfs_backup_directory: "/nfs/Container-Data/docker/grafana_loki/"
+# Defines in days age of backups to remove
+grafana_loki_nfs_backup_cleanup_period: "60"
+# Defines via cron syntax how often to run backup
+grafana_loki_nfs_backup_frequency: "0 1 */15 * *"
+
+grafana_loki_container_envs:
+  kv:

@@ -1,0 +1,7 @@
+# {{ ansible_managed }}
+# grafana_loki backup cron job
+
+SHELL=/bin/bash
+PATH=/usr/bin
+
+{{ grafana_loki_nfs_backup_frequency }}   root  {{ grafana_loki_container_data_dir }}/scripts/SERVICE-backup.sh

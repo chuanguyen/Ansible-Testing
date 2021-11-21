@@ -1,0 +1,12 @@
+---
+
+- name: "PLAY: Deploy services"
+  hosts: rbp4-001
+  gather_facts: true
+
+  roles:
+    - role: "deploy-prometheus-snmp-exporter"
+      tags: [ services, monitoring, prometheus ]
+
+    # - role: "deploy-prometheus-snmp-exporter"
+    #   tags: [ services, monitoring, prometheus, prometheus-exporter ]

@@ -1,0 +1,33 @@
+---
+
+# {{ ansible_managed }}
+
+version: "3"
+
+# More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
+services:
+  grafana_loki:
+    build:
+      context: build/
+    container_name: "{{ grafana_loki_container_name }}"
+    image: "{{ grafana_loki_image_base }}:{{ grafana_loki_image_base_tag }}"
+    env_file: grafana_loki.env
+    ports:
+      - ""
+    networks:
+      - ""
+    # Volumes store your data between container upgrades
+    volumes:
+{% for volume in grafana_loki_container_volumes.binds %}
+      - {{ volume.source }}:{{ volume.target }}
+{% endfor %}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network={{ docker_networks.proxy.name }}"
+      - "traefik.http.routers.grafana_loki1.rule=Host(`grafana_loki.{{ home_lan_domain }}`)"
+      - "traefik.http.routers.grafana_loki1.entrypoints=websecure"
+      - "traefik.http.routers.grafana_loki1.middlewares=lanWhitelist@file,secureHeaders@file"
+      - "traefik.http.routers.grafana_loki1.tls=true"
+      - "traefik.http.routers.grafana_loki1.tls.certresolver=letsEncrypt"
+    restart: "always"
+networks:
