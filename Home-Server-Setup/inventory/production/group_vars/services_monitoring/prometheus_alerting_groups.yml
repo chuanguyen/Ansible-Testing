@@ -34,7 +34,7 @@ prometheus_alerting_groups:
           description: "Disk {{ '{{ $labels.mountpoint }}' }} on Instance {{ '{{ $labels.instance }}' }} is more than 95% full. Consider cleaning up space or expanding the disk."
           dashboard: "https://grafana.hq1.chuanguyen.ca/d/rYdddlPWk/node-exporter?orgId=1&viewPanel=152"
       - alert_name: "MemoryFreeLow_Warning"
-        expr: "(100 * ((node_memory_MemFree_bytes{{ '{' }}job='node_exporters'{{ '}' }}) / node_memory_MemTotal_bytes{{ '{' }}job='node_exporters'{{ '}' }})) < 5"
+        expr: "(100 - ((node_memory_MemAvailable_bytes{{ '{' }}job='node_exporters'{{ '}' }} * 100) / node_memory_MemTotal_bytes{{ '{' }}job='node_exporters'{{ '}' }})) >= 95"
         for: "15m"
         labels:
           severity: "warning"
