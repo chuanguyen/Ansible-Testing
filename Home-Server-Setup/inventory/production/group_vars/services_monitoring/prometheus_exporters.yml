@@ -21,6 +21,7 @@ snmp_exporter_prometheus_mib_modules:
       - source_indexes: [hrDeviceIndex]
         lookup: hrDeviceDescr
         drop_source_indexes: true
+    overrides:
   - name: "QNAP-MIB"
     walk:
       - cpuUsage
@@ -39,6 +40,7 @@ snmp_exporter_prometheus_mib_modules:
       - sysVolumeStatusEX
       - diskTemperture
       - diskSmartInfo
+      - diskStatus
       - volumeStatus
       - iops
       - latency
@@ -49,7 +51,11 @@ snmp_exporter_prometheus_mib_modules:
     auth:
       community: "{{ snmp_community_strings.qnap }}"
     lookups:
-
+    overrides:
+      - metric_name: "diskStatus"
+        type: "DisplayString"
+      - metric_name: "volumeStatus"
+        type: "DisplayString"
   - name: "QNAP-LONG-MIB"
     walk:
       - modelNameEX
@@ -60,6 +66,8 @@ snmp_exporter_prometheus_mib_modules:
       - sysVolumeTotalSizeEX
       - diskModel
       - diskCapacity
+      - diskSerialNumber
+      - diskManufacturer
       - volumeName
       - volumeCapacity
     version: "2"
@@ -69,3 +77,20 @@ snmp_exporter_prometheus_mib_modules:
     auth:
       community: "{{ snmp_community_strings.qnap }}"
     lookups:
+    overrides:
+      - metric_name: "modelNameEX"
+        type: "DisplayString"
+      - metric_name: "hostNameEX"
+        type: "DisplayString"
+      - metric_name: "firmwareVersion"
+        type: "DisplayString"
+      - metric_name: "sysVolumeDescrEX"
+        type: "DisplayString"
+      - metric_name: "diskModel"
+        type: "DisplayString"
+      - metric_name: "diskType"
+        type: "DisplayString"
+      - metric_name: "diskManufacturer"
+        type: "DisplayString"
+      - metric_name: "volumeName"
+        type: "DisplayString"
