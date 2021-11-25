@@ -20,4 +20,11 @@
         drop_source_indexes: {{ lookup_entry.drop_source_indexes }}
 {% endfor %}
 {% endif %}
+{% if module.overrides is not none %}
+    overrides:
+{% for override in module.overrides %}
+      {{ override.metric_name }}:
+        type: {{ override.type }}
+{% endfor %}
+{% endif %}
 {% endfor %}

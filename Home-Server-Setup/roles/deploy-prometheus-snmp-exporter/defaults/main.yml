@@ -38,3 +38,6 @@ snmp_exporter_prometheus_mib_modules:
       - source_indexes: []
         lookup: ""
         drop_source_indexes: ""
+    overrides:
+      - metric_name: ""
+        type: ""
