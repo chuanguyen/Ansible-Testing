@@ -41,7 +41,6 @@ snmp_exporter_prometheus_mib_modules:
       - diskTemperture
       - diskSmartInfo
       - diskStatus
-      - volumeStatus
       - iops
       - latency
     version: "2"
@@ -54,7 +53,7 @@ snmp_exporter_prometheus_mib_modules:
     overrides:
       - metric_name: "diskStatus"
         type: "DisplayString"
-      - metric_name: "volumeStatus"
+      - metric_name: "sysVolumeStatusEX"
         type: "DisplayString"
   - name: "QNAP-LONG-MIB"
     walk:
@@ -68,8 +67,6 @@ snmp_exporter_prometheus_mib_modules:
       - diskCapacity
       - diskSerialNumber
       - diskManufacturer
-      - volumeName
-      - volumeCapacity
     version: "2"
     max_repetitions: "25"
     retries: "3"
@@ -91,6 +88,4 @@ snmp_exporter_prometheus_mib_modules:
       - metric_name: "diskType"
         type: "DisplayString"
       - metric_name: "diskManufacturer"
-        type: "DisplayString"
-      - metric_name: "volumeName"
         type: "DisplayString"
