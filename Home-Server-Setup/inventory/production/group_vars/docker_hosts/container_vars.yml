@@ -1,6 +1,6 @@
 ---
-pihole_image_base_tag: "2021.11"
-pihole_image_base_tag_old: "2021.10.1"
+pihole_image_base_tag: "2022.01.1"
+pihole_image_base_tag_old: "2021.11"
 pihole_nfs_backup_cleanup_period: "60"
 pihole_nfs_backup_frequency: "0 1 */15 * *"
 
