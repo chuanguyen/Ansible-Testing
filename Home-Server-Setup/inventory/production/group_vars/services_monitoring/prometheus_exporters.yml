@@ -50,10 +50,15 @@ snmp_exporter_prometheus_mib_modules:
     auth:
       community: "{{ snmp_community_strings.qnap }}"
     lookups:
+      - source_indexes: [sysVolumeIndexEX]
+        lookup: sysVolumeDescrEX
+        drop_source_indexes: False
     overrides:
       - metric_name: "diskStatus"
         type: "DisplayString"
       - metric_name: "sysVolumeStatusEX"
+        type: "DisplayString"
+      - metric_name: "sysVolumeDescrEX"
         type: "DisplayString"
   - name: "QNAP-LONG-MIB"
     walk:
@@ -74,6 +79,9 @@ snmp_exporter_prometheus_mib_modules:
     auth:
       community: "{{ snmp_community_strings.qnap }}"
     lookups:
+      - source_indexes: [sysVolumeIndexEX]
+        lookup: sysVolumeDescrEX
+        drop_source_indexes: False
     overrides:
       - metric_name: "modelNameEX"
         type: "DisplayString"
