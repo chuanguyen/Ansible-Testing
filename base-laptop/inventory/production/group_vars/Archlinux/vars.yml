@@ -59,6 +59,7 @@ aur_packages:
   - otpclient
   - postman # May error out due to problems w/ package
   - spotify
+  - visual-studio-code-bin
   - vivaldi-snapshot
   - xmind
   - xnviewmp
