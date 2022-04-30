@@ -1,0 +1,4 @@
+#!/usr/bin/env python
+# PW: test!@#
+import os
+print (os.environ['VAULT_PASS'])

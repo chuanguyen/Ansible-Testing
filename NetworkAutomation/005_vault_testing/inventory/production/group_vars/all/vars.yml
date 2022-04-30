@@ -1,0 +1,1 @@
+hashi_vault_token: "{{ lookup('env', 'HASHI_VAULT_TOKEN') }}"

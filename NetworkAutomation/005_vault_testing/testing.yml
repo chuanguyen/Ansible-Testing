@@ -1,0 +1,10 @@
+---
+
+- name: "TASK: Testing connection to hashicorp vault"
+  hosts: "localhost"
+  connection: "local"
+  gather_facts: false
+
+  tasks:
+    - debug:
+        msg: "{{ lookup('community.hashi_vault.hashi_vault', 'secret=net-auto/data/CA/BBY-HQ/TEST/COMMON/snmp:snmp_server_ip validate_certs=no') }}"
