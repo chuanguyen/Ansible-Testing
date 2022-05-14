@@ -1,5 +1,7 @@
 # configure-plover tasks
 
+# TODO: Test installation
+
 - name: "TASK: Scrape Plover version from Github"
   uri:
     url: https://api.github.com/repos/openstenoproject/plover/releases/latest
@@ -8,7 +10,7 @@
 
 - name: "TASK: Retrieve latest Plover version"
   set_fact:
-    latest_version: "{{ latest.json.tag_name | regex_replace('v') }}"
+    latest_version: "{{ latest.json.tag_name | regex_replace('^v') }}"
 
 - name: "TASK: Check for Plover version file"
   stat:
@@ -38,7 +40,7 @@
 
     - name: "TASK: Retrieve latest Plover appimage"
       get_url:
-        url: "https://github.com/openstenoproject/plover/releases/download/continuous/{{ latest_version }}.AppImage"
+        url: "https://github.com/openstenoproject/plover/releases/download/v{{ latest_version }}/plover-{{ latest_version }}-x86_64.AppImage"
         dest: "{{ ansible_env.HOME }}/Applications/Plover.AppImage"
         mode: 0755
 
