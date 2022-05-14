@@ -1,21 +1,19 @@
 ---
-# configure-joplin tasks
+# configure-plover tasks
 
-- name: "TASK: Create Joplin config directory"
+- name: "TASK: Create Plover config directory"
   file:
-    name: "{{ ansible_env.HOME }}/.config/joplin-desktop/"
+    name: "{{ ansible_env.HOME }}/.config/plover/"
     state: directory
 
-- name: "TASK: Template Joplin settings file"
-  template:
-    src: "settings.json.j2"
-    dest: "{{ ansible_env.HOME }}/.config/joplin-desktop/settings.json"
-    mode: 0644
-    backup: yes
-
-- name: "TASK: Install Joplin keymap file"
+- name: "TASK: Template Plover settings file"
   copy:
-    src: "keymap-desktop.json"
-    dest: "{{ ansible_env.HOME }}/.config/joplin-desktop/keymap-desktop.json"
+    src: "{{ item }}"
+    dest: "{{ ansible_env.HOME }}/.config/plover/{{ item }}"
     mode: 0644
     backup: yes
+  with_items:
+    - "commands.json"
+    - "main.json"
+    - "plover.cfg"
+    - "user.json"
