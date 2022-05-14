@@ -1,0 +1,54 @@
+# configure-plover tasks
+
+- name: "TASK: Scrape Plover version from Github"
+  uri:
+    url: https://api.github.com/repos/openstenoproject/plover/releases/latest
+    return_content: true
+  register: latest
+
+- name: "TASK: Retrieve latest Plover version"
+  set_fact:
+    latest_version: "{{ latest.json.tag_name | regex_replace('v') }}"
+
+- name: "TASK: Check for Plover version file"
+  stat:
+    path: "{{ ansible_env.HOME }}/.plover/VERSION"
+  register: VERSION_file
+
+- name: "TASK: Retrieve currently installed Plover version"
+  set_fact:
+    VERSION_contents: "{{ lookup('file', '{{ ansible_env.HOME }}/.plover/VERSION') }}"
+  when: VERSION_file.stat.exists
+
+- name: "TASK: Install latest version of Plover"
+  block:
+    - name: "TASK: Remove existing Plover install"
+      file:
+        name: "{{ item }}"
+        state: absent
+      with_items:
+        - "{{ ansible_env.HOME }}/.local/share/applications/appimagekit-plover.desktop"
+        - "{{ ansible_env.HOME }}/Applications/Plover.AppImage"
+        - "{{ ansible_env.HOME }}/.plover/VERSION"
+
+    - name: "TASK: Create Plover directory"
+      file:
+        name: "{{ ansible_env.HOME }}/.plover"
+        state: directory
+
+    - name: "TASK: Retrieve latest Plover appimage"
+      get_url:
+        url: "https://github.com/openstenoproject/plover/releases/download/continuous/{{ latest_version }}.AppImage"
+        dest: "{{ ansible_env.HOME }}/Applications/Plover.AppImage"
+        mode: 0755
+
+    - name: "TASK: Template Plover desktop file"
+      template:
+        src: plover_desktop.j2
+        dest: "{{ ansible_env.HOME }}/.local/share/applications/appimagekit-plover.desktop"
+
+    - name: "TASK: Output Plover installed version"
+      copy:
+        content: "{{ latest_version }}"
+        dest: "{{ ansible_env.HOME }}/.plover/VERSION"
+  when: (not VERSION_file.stat.exists) or (VERSION_contents != latest_version)

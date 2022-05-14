@@ -1,0 +1,11 @@
+# configure-joplin tasks
+
+- include: "install.yml"
+# - include: "configure.yml"
+
+# - name: "TASK: Loop through plugins to install"
+#   include: "plugins.yml"
+#   with_items:
+#     - "{{ joplin_plugins }}"
+#   loop_control:
+#     loop_var: joplin_plugin
