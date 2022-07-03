@@ -1,0 +1,3 @@
+# configure-via-keyboard defaults
+
+- include_tasks: "install.yml"

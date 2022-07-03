@@ -1,0 +1,54 @@
+# configure-via-keyboard defaults
+
+- name: "TASK: Scrape VIA version from Github"
+  uri:
+    url: https://api.github.com/repos/the-via/releases/releases/latest
+    return_content: true
+  register: latest
+
+- name: "TASK: Retrieve latest VIA version"
+  set_fact:
+    latest_version: "{{ latest.json.tag_name | regex_replace('^v') }}"
+
+- name: "TASK: Check for VIA version file"
+  stat:
+    path: "{{ ansible_env.HOME }}/.via_keyboard/VERSION"
+  register: VERSION_file
+
+- name: "TASK: Retrieve currently installed VIA version"
+  set_fact:
+    VERSION_contents: "{{ lookup('file', '{{ ansible_env.HOME }}/.via_keyboard/VERSION') }}"
+  when: VERSION_file.stat.exists
+
+- name: "TASK: Install latest version of VIA"
+  block:
+    - name: "TASK: Remove existing VIA install"
+      file:
+        name: "{{ item }}"
+        state: absent
+      with_items:
+        - "{{ ansible_env.HOME }}/.local/share/applications/appimagekit-via-keyboard.desktop"
+        - "{{ ansible_env.HOME }}/Applications/via-keyboard.AppImage"
+        - "{{ ansible_env.HOME }}/.via_keyboard/VERSION"
+
+    - name: "TASK: Create VIA directory"
+      file:
+        name: "{{ ansible_env.HOME }}/.via_keyboard"
+        state: directory
+
+    - name: "TASK: Retrieve latest VIA appimage"
+      get_url:
+        url: "https://github.com/the-via/releases/releases/download/v{{ latest_version }}/via-{{ latest_version }}-linux.AppImage"
+        dest: "{{ ansible_env.HOME }}/Applications/via-keyboard.AppImage"
+        mode: 0755
+
+    - name: "TASK: Template VIA desktop file"
+      template:
+        src: via-keyboard_desktop.j2
+        dest: "{{ ansible_env.HOME }}/.local/share/applications/appimagekit-via-keyboard.desktop"
+
+    - name: "TASK: Output VIA installed version"
+      copy:
+        content: "{{ latest_version }}"
+        dest: "{{ ansible_env.HOME }}/.via_keyboard/VERSION"
+  when: (not VERSION_file.stat.exists) or (VERSION_contents != latest_version)

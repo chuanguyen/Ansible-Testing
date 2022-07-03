@@ -1,0 +1,35 @@
+[Desktop Entry]
+Name=VIA ({{ latest_version }})
+Exec={{ ansible_env.HOME }}/Applications/via-keyboard.AppImage
+Terminal=false
+Type=Application
+StartupWMClass=VIA
+X-AppImage-Version={{ latest_version }}
+Comment=Yet another keyboard configurator
+Categories=Development;
+
+TryExec={{ ansible_env.HOME }}/Applications/via-keyboard.AppImage
+X-AppImage-Old-Icon=via
+X-AppImage-Old-Name=VIA
+X-AppImage-Identifier=5e1559219d6af16e0fa6e4cfe17160b8
+Actions=Remove;
+X-AppImageLauncher-Version=2.2.0 (git commit 0f91801), built on 2022-05-29 15:58:36 UTC
+
+[Desktop Action Remove]
+Name=Remove AppImage from system
+Icon=AppImageLauncher
+Exec=/usr/lib/appimagelauncher/remove "{{ ansible_env.HOME }}/Applications/via-keyboard.AppImage
+Terminal=false"
+Name[ast]=Desaniciar AppImage del sistema
+Name[cs]=Odebrat AppImage ze systému
+Name[de]=AppImage vom System entfernen
+Name[en]=Remove AppImage from system
+Name[es]=Eliminar Appimage del Sistema
+Name[fr]=Supprimer l'AppImage du système
+Name[it]=Rimuovi AppImage dal sistema
+Name[nl]=AppImage deïnstalleren
+Name[pl]=Usuń AppImage z systemu
+Name[pt]=Remover AppImage do sistema
+Name[pt_PT]=Remover AppImage do sistema
+Name[ru]=Удалить AppImage из системы
+Name[zh_Hans]=从系统中移除 AppImage
