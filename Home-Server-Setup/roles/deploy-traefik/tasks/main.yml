@@ -1,5 +1,4 @@
 ---
-
-- include: "traefik_setup.yml"
-- include: "traefik_deploy.yml"
-- include: "traefik_logging.yml"
+- include_tasks: "traefik_setup.yml"
+- include_tasks: "traefik_deploy.yml"
+- include_tasks: "traefik_logging.yml"

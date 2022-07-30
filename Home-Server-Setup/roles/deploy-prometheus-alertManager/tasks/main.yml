@@ -1,4 +1,3 @@
 ---
-
-- include: "setup.yml"
-- include: "deploy.yml"
+- include_tasks: "setup.yml"
+- include_tasks: "deploy.yml"

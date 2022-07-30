@@ -1,6 +1,5 @@
 ---
-
-- include: "docker_install.yml"
-- include: "docker_users.yml"
-- include: "docker_daemon_configuration.yml"
-- include: "docker_networks.yml"
+- include_tasks: "docker_install.yml"
+- include_tasks: "docker_users.yml"
+- include_tasks: "docker_daemon_configuration.yml"
+- include_tasks: "docker_networks.yml"

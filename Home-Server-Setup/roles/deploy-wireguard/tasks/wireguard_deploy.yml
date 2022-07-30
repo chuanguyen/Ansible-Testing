@@ -1,5 +1,4 @@
 ---
-
 - name: "TASK: Retrieve container info"
   community.docker.docker_container_info:
     name: "{{ wireguard_container_name }}"
@@ -15,7 +14,7 @@
     wireguard_container_image_tag: "{{ wireguard_container_image.split(':') }}"
 
 - block:
-    - include: "wireguard_image_cleanup.yml"
+    - include_tasks: "wireguard_image_cleanup.yml"
 
     - name: "TASK: Pull base image"
       community.docker.docker_image:

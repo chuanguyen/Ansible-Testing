@@ -1,5 +1,4 @@
 ---
-
-- include: "pihole_setup.yml"
-- include: "pihole_deploy.yml"
-- include: "pihole-host-cron-backup.yml"
+- include_tasks: "pihole_setup.yml"
+- include_tasks: "pihole_deploy.yml"
+- include_tasks: "pihole-host-cron-backup.yml"

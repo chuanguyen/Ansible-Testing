@@ -1,7 +1,7 @@
 ---
 # configure-qnap-le-ssl
 
-- include: setup.yml
+- include_tasks: setup.yml
 
 - name: "TASK: Add cron entry for lego script"
   lineinfile:

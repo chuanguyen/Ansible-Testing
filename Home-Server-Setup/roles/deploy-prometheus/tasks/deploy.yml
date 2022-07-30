@@ -1,5 +1,4 @@
 ---
-
 - name: "TASK: Retrieve container info"
   community.docker.docker_container_info:
     name: "{{ prometheus_container_name }}"
@@ -15,7 +14,7 @@
     container_image_tag: "{{ container_image.split(':') }}"
 
 - block:
-    - include: "image_cleanup.yml"
+    - include_tasks: "image_cleanup.yml"
 
     - name: "TASK: Pull base image"
       community.docker.docker_image:

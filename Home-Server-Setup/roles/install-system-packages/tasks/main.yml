@@ -1,1 +1,1 @@
-- include: "{{ ansible_distribution }}-install.yml"
+- include_tasks: "{{ ansible_distribution }}-install.yml"

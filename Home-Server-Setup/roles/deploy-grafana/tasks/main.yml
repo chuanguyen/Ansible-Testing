@@ -1,5 +1,4 @@
 ---
-
-- include: "setup.yml"
-- include: "deploy.yml"
-- include: "host-cron-backup.yml"
+- include_tasks: "setup.yml"
+- include_tasks: "deploy.yml"
+- include_tasks: "host-cron-backup.yml"

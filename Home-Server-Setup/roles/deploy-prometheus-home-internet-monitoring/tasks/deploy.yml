@@ -1,6 +1,4 @@
 ---
-
-
 - name: "TASK: Retrieve {{ home_internet_blackbox_exporter_container_name }} container info"
   community.docker.docker_container_info:
     name: "{{ home_internet_blackbox_exporter_container_name }}"
@@ -54,7 +52,7 @@
         state: "absent"
       when: speedtest_container_exists
 
-    - include: "image_cleanup.yml"
+    - include_tasks: "image_cleanup.yml"
   when: (blackbox_container_image_tag[1] != home_internet_blackbox_exporter_image_base_tag) or (speedtest_container_image_tag[1] != home_internet_speedtest_exporter_image_base_tag)
 
 - name: "TASK: Deploy home internet monitoring"
