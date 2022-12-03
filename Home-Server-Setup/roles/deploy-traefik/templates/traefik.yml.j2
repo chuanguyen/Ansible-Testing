@@ -39,7 +39,7 @@ providers:
 certificatesResolvers:
   letsEncrypt:
     acme:
-      email: services+letsencrypt@{{ home_lan_domain_public }}
+      email: lets.encrypt.certs@m.{{ home_lan_domain_public }}
       storage: /letsEncrypt/acme.json
       dnsChallenge:
         provider: "cloudflare"

@@ -13,5 +13,5 @@ lego_refresh_interval: "0 3 * * 6"
 # Threshold in days for when LE certs should be renewed
 lego_cert_renewal_period: 30
 
-cf_api_email: "services+letsencrypt@{{ home_lan_domain_public }}"
+cf_api_email: "lets.encrypt.certs@m.{{ home_lan_domain_public }}"
 cf_dns_api_token: "{{ dns_provider_api_token_letsencrypt }}"
