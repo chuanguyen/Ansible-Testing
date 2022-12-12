@@ -1,0 +1,45 @@
+---
+# configure-qnap-le-ssl
+
+- name: "TASK: Create LEgo directory"
+  file:
+    path: "{{ lego_installation_dir }}"
+    state: directory
+    mode: 0755
+
+- name: "TASK: Verify {{ lego_version }} of LEgo is installed"
+  stat:
+    path: "{{ lego_installation_dir }}/lego_{{  lego_version }}"
+  register: stat_lego_version_installed
+
+# Install Lego if version mismatch
+- block:
+    - name: "TASK: Remove previous versions of LEgo"
+      file:
+        path: "{{ lego_installation_dir }}/lego_{{ lego_version_previous }}"
+        state: absent
+
+    # Will retrieve the armv7 version
+    - name: "TASK: Download LEgo"
+      unarchive:
+        src: "{{ lego_install_url }}"
+        dest: "/tmp"
+        owner: "root"
+        group: "root"
+        mode: "0755"
+        remote_src: yes
+      changed_when: false
+
+    - name: "TASK: Move LEgo executable"
+      copy:
+        src: "/tmp/lego"
+        dest: "{{ lego_installation_dir }}/lego_{{ lego_version }}"
+        mode: 0755
+
+    - name: "TASK: Create LEgo symlink"
+      file:
+        src: "{{ lego_installation_dir }}/lego_{{ lego_version }}"
+        dest: "/usr/local/bin/lego"
+        state: link
+
+  when: not stat_lego_version_installed.exists

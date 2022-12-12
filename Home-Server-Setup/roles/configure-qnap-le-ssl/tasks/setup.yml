@@ -3,7 +3,7 @@
 
 - name: "TASK: Verify LEGO is installed"
   stat:
-    path: "/share/CACHEDEV1_DATA/.qpkg/LEgo/"
+    path: "{{ lego_installation_dir }}"
   register: stat_lego_dir
 
 - name: "TASK: Assert LEGO directory exists"

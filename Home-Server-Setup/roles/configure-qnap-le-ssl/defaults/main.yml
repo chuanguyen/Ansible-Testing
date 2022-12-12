@@ -4,6 +4,13 @@
 ssl_path: "/share/Public/ssl"
 cert_path: "{{ ssl_path }}/certificates"
 
+# Indicates version of LEgo to install
+lego_version: "4.9.1"
+lego_version_previous: ""
+lego_install_url: "https://github.com/go-acme/lego/releases/download/v{{ lego_version }}/lego_v{{ lego_version }}_linux_armv7.tar.gz"
+
+lego_installation_dir: "/share/CACHEDEV1_DATA/.qpkg/LEgo"
+
 # List of domains to request for LE certificates
 lego_domains:
   - "nas1.{{ home_lan_domain }}"
