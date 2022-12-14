@@ -1,2 +1,4 @@
-netaddr
+ansible
 dnspython
+netaddr
+passlib
