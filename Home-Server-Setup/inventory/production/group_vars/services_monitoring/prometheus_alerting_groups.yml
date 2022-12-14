@@ -1,5 +1,4 @@
 ---
-
 prometheus_alerting_groups:
   - group_name: "Node-Exporter-HW-Alerts"
     rules:
@@ -65,7 +64,7 @@ prometheus_alerting_groups:
           dashboard: "https://grafana.hq1.chuanguyen.ca/d/rYdddlPWk/node-exporter?orgId=1&viewPanel=158"
       - alert_name: "CPUBusy_Warning"
         expr: "(100 - (avg by (instance)(rate(node_cpu_seconds_total{{ '{' }}mode='idle',job='node_exporters'{{ '}' }}[5m])) * 100)) >= 95"
-        for: "5m"
+        for: "30m"
         labels:
           severity: "warning"
           maintenance: "false"
