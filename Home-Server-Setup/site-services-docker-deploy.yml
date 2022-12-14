@@ -1,39 +1,35 @@
 ---
-
 - name: "PLAY: Deploy services"
   hosts: rbp4-001
   gather_facts: true
 
   roles:
     - role: "deploy-pihole"
-      tags: [ services, pihole ]
+      tags: [services, pihole]
 
     - role: "configure-ddclient"
-      tags: [ services, vpn, ddclient ]
+      tags: [services, vpn, ddclient]
 
     - role: "deploy-wireguard"
-      tags: [ services, vpn, wireguard ]
+      tags: [services, vpn, wireguard]
 
     - role: "deploy-traefik"
-      tags: [ services, proxy, traefik ]
+      tags: [services, proxy, traefik]
 
     - role: "deploy-smtp-relay"
-      tags: [ services, smtp_relay ]
+      tags: [services, smtp_relay]
 
     - role: "deploy-grafana"
-      tags: [ services, monitoring, grafana ]
+      tags: [services, monitoring, grafana]
 
     - role: "deploy-prometheus"
-      tags: [ services, monitoring, prometheus ]
+      tags: [services, monitoring, prometheus]
 
     - role: "deploy-prometheus-alertManager"
-      tags: [ services, monitoring, prometheus ]
+      tags: [services, monitoring, prometheus]
 
     - role: "deploy-prometheus-snmp-exporter"
-      tags: [ services, monitoring, prometheus, prometheus-exporter ]
-
-    - role: "configure-prometheus-node-exporter"
-      tags: [ services, monitoring, prometheus, prometheus-exporter ]
+      tags: [services, monitoring, prometheus, prometheus-exporter]
 
     - role: "deploy-prometheus-home-internet-monitoring"
-      tags: [ services, monitoring, prometheus, prometheus-exporter ]
+      tags: [services, monitoring, prometheus, prometheus-exporter]
