@@ -1,5 +1,7 @@
 # {{ ansible_managed }}
 
+# Ensures path has the LEgo executable in it
+export PATH="{{ lego_installation_dir }}:$PATH"
 export CPATH='{{ cert_path }}'
 export CNAME='{{ lego_domains[0] }}'
 export CURRENT=$(cat "$CPATH"/"$CNAME".crt)
