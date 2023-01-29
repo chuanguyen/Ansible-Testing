@@ -1,0 +1,31 @@
+---
+
+# {{ ansible_managed }}
+
+version: "3"
+
+# More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
+services:
+  portainer:
+    container_name: "{{ portainer_container_name }}"
+    image: "{{ portainer_image_base }}:{{ portainer_image_base_tag }}"
+    env_file: portainer.env
+    ports:
+      - ""
+    networks:
+      - ""
+    # Volumes store your data between container upgrades
+    volumes:
+{% for volume in portainer_container_volumes.binds %}
+      - {{ volume.source }}:{{ volume.target }}
+{% endfor %}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network={{ docker_networks.proxy.name }}"
+      - "traefik.http.routers.portainer1.rule=Host(`portainer.{{ home_lan_domain }}`)"
+      - "traefik.http.routers.portainer1.entrypoints=websecure"
+      - "traefik.http.routers.portainer1.middlewares=lanWhitelist@file,secureHeaders@file"
+      - "traefik.http.routers.portainer1.tls=true"
+      - "traefik.http.routers.portainer1.tls.certresolver=letsEncrypt"
+    restart: "always"
+networks:

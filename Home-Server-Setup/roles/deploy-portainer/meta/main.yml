@@ -1,0 +1,4 @@
+---
+dependencies:
+  - role: "ROLE"
+    tags: [role_dependency]
