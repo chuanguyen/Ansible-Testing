@@ -1,11 +1,14 @@
-portainer_container_data_dir_sub_folders:
-  - "etc-portainer/"
-  - "mnt-backup/"
-  - "scripts"
+---
+# portainer_container_data_dir_sub_folders:
+#   - "etc-portainer/"
+#   - "mnt-backup/"
+#   - "scripts"
 
 portainer_container_volumes:
   binds:
-    - source: "./etc-portainer/"
-      target: "/etc/portainer/"
-    - source: "./mnt-backup/"
-      target: "/mnt/backup/"
+    - source: "/var/run/docker.sock"
+      target: "/var/run/docker.sock"
+    - source: "portainer_data"
+      target: "/data"
+  volumes:
+    - "portainer_data"

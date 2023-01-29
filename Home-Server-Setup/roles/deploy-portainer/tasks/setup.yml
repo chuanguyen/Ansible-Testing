@@ -8,15 +8,16 @@
     mode: 0775
     state: "directory"
 
-- name: "Create folders for build and container data"
-  become: true
-  file:
-    path: "{{ portainer_container_data_dir }}/{{ item }}"
-    owner: "root"
-    group: "docker"
-    mode: 0775
-    state: "directory"
-  with_items: "{{ portainer_container_data_dir_sub_folders }}"
+### No config directories needed
+# - name: "Create folders for build and container data"
+#   become: true
+#   file:
+#     path: "{{ portainer_container_data_dir }}/{{ item }}"
+#     owner: "root"
+#     group: "docker"
+#     mode: 0775
+#     state: "directory"
+#   with_items: "{{ portainer_container_data_dir_sub_folders }}"
 
 - name: "Template files for building and running {{ portainer_container_name }}"
   template:
@@ -27,7 +28,7 @@
   with_items:
     - src: "docker-compose.yml.j2"
       dest: "{{ portainer_container_data_dir }}/docker-compose.yml"
-    - src: "SERVICE.env.j2"
+    - src: "portainer.env.j2"
       dest: "{{ portainer_container_data_dir }}/portainer.env"
   loop_control:
     label: "{{ item.src }}"

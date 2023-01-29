@@ -10,10 +10,8 @@ services:
     container_name: "{{ portainer_container_name }}"
     image: "{{ portainer_image_base }}:{{ portainer_image_base_tag }}"
     env_file: portainer.env
-    ports:
-      - ""
     networks:
-      - ""
+      - {{ docker_networks.proxy.name }}
     # Volumes store your data between container upgrades
     volumes:
 {% for volume in portainer_container_volumes.binds %}
@@ -25,7 +23,15 @@ services:
       - "traefik.http.routers.portainer1.rule=Host(`portainer.{{ home_lan_domain }}`)"
       - "traefik.http.routers.portainer1.entrypoints=websecure"
       - "traefik.http.routers.portainer1.middlewares=lanWhitelist@file,secureHeaders@file"
+      - "traefik.http.routers.portainer1.service=portainer-svc"
+      - "traefik.http.services.portainer-svc.loadbalancer.server.port={{ portainer_container_web_port }}"
       - "traefik.http.routers.portainer1.tls=true"
       - "traefik.http.routers.portainer1.tls.certresolver=letsEncrypt"
     restart: "always"
 networks:
+  {{ docker_networks.proxy.name }}:
+    external: true
+volumes:
+{% for volume in portainer_container_volumes.volumes %}
+  {{ volume }}:
+{% endfor %}

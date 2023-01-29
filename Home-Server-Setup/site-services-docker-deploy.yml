@@ -4,6 +4,9 @@
   gather_facts: true
 
   roles:
+    - role: "deploy-portainer"
+      tags: [services, portainer]
+
     - role: "deploy-pihole"
       tags: [services, pihole]
 
