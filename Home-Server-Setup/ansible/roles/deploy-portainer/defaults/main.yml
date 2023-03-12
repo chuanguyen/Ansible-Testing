@@ -10,7 +10,7 @@ portainer_container_name: "portainer"
 portainer_container_restart: no
 # Defines image ID for custom image
 portainer_image_custom: "{{ ansible_user }}/portainer"
-portainer_container_web_port: "9000"
+portainer_container_web_port: "9000local"
 
 portainer_container_envs:
   kv:

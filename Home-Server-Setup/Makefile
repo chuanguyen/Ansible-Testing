@@ -20,3 +20,9 @@ baseline_test:
 	@echo "************ Starting Ansible Baseline Test ************"
 	@ansible-playbook --check -K -k setup.yml
 	@echo "************ Completed Ansible Baseline Test ************"
+
+.PHONY: ansible-playbook
+ansible-playbook:
+	@docker container rm ansible 1>/dev/null 2> /dev/null || true
+	@docker run -it --name ansible -v $(shell pwd)/ansible:/ansible -v $(shell pwd)/ssh:/home/ansible/.ssh chua:ansible $(ANSIBLE_ARGS)
+	@docker container rm ansible 1>/dev/null 2> /dev/null || true
