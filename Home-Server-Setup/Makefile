@@ -24,5 +24,5 @@ baseline_test:
 .PHONY: ansible-playbook
 ansible-playbook:
 	@docker container rm ansible 1>/dev/null 2> /dev/null || true
-	@docker run -it --name ansible -v $(shell pwd)/ansible:/ansible -v $(shell pwd)/ssh:/home/ansible/.ssh chua:ansible $(ANSIBLE_ARGS)
+	@docker run -it --name ansible -v $(shell pwd)/ansible:/ansible -v $(shell pwd)/ansible_ssh:/home/ansible/.ssh chua:ansible $(ANSIBLE_ARGS)
 	@docker container rm ansible 1>/dev/null 2> /dev/null || true
