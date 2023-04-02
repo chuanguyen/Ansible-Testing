@@ -1,6 +1,3 @@
-# Arch clearing the lock on caps-lock
-xmodmap -e "clear Lock"
-
 # change default text editor
 export EDITORS=vim
 
@@ -9,10 +6,6 @@ export EDITORS=vim
 
 # Configuring PS1 - terminal hostname color
 export PS1="\[\033[38;5;50m\]\u\[\033[38;5;245m\]@\[\033[38;5;253m\]\H \[\033[38;5;245m\]\w \[\033[38;5;081m\]$ \[\e[0m\]"
-
-# Modify XKB to remap keys
-# Undo: xmodmap -e "keycode 22 = BackSpace"
-xmodmap -e "keycode 22 = Caps_Lock"
 
 # Ensure ~/bin is in PATH
 export PATH="$HOME/bin:$PATH"

@@ -1,0 +1,7 @@
+# Modify XKB to remap keys
+# Arch clearing the lock on caps-lock
+xmodmap -e "clear Lock"
+# Undo: xmodmap -e "keycode 22 = Caps_Lock"
+xmodmap -e "keycode 22 = BackSpace"
+# Undo: xmodmap -e "keycode 66 = BackSpace"
+xmodmap -e "keycode 66 = Caps_Lock"

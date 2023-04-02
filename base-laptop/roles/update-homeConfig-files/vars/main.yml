@@ -12,3 +12,6 @@ home_files:
     - src_file: "{{ ansible_product_version }}/.bashrc-EOF"
       marker: "### {mark} .bashrc EOF ###"
       path: "{{ ansible_env.HOME }}/.bashrc"
+    - src_file: "{{ ansible_product_version }}/.bash_profile-EOF"
+      marker: "### {mark} .bash_profile EOF ###"
+      path: "{{ ansible_env.HOME }}/.bash_profile"
