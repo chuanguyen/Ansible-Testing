@@ -5,7 +5,8 @@
 
 ## Global
 use=web
-web-skip="IP Address"
+web='https://cloudflare.com/cdn-cgi/trace'
+web-skip="ip="
 daemon={{ ddclient_daemon }}
 syslog=yes
 pid=/var/run/ddclient.pid
@@ -19,7 +20,6 @@ ssl=yes
 # https://github.com/ddclient/ddclient/pull/102
 # https://github.com/ddclient/ddclient/issues/272
 {% for ddns_domains_to_update in dns_provider_ddns_domains_to_update %}
-login='{{ ddns_domains_to_update.dns_provider_username }}'
 password='{{ ddns_domains_to_update.dns_provider_token }}'
 zone={{ ddns_domains_to_update.zone }}
 {{ ddns_domains_to_update.sub_domains | join(',') }}
