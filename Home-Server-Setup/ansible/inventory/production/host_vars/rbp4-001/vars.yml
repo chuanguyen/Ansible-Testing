@@ -4,7 +4,7 @@ fstab_entries:
       path: "/mnt/docker-data"
       owner: "root"
       group: "docker"
-      mask: '0775'
+      mask: "0775"
     file_system: "ext4"
     mount_options:
       - "defaults"
@@ -12,21 +12,22 @@ fstab_entries:
     fsck: 0
 
 system_packages:
-- autofs
-- build-essential
-- cron
-- ddclient
-- fail2ban
-- golang-go
-- iperf3
-- libdata-validate-ip-perl
-- libsnmp
-- net-tools
-- p7zip-full
-- unzip
+  - autoconf
+  - autofs
+  - build-essential
+  - cron
+  - ddclient
+  - fail2ban
+  - golang-go
+  - iperf3
+  - libdata-validate-ip-perl
+  - libsnmp
+  - net-tools
+  - p7zip-full
+  - unzip
 
 fail2ban_ignoreip:
-- "{{ home_lan_cidr }}"
+  - "{{ home_lan_cidr }}"
 
 ufw_rules:
   add:
@@ -36,7 +37,7 @@ ufw_rules:
       from_ip: any
       to_ip: any
       from_port: null
-      to_port: '22'
+      to_port: "22"
       proto: tcp
     - comment: "Permits incoming HTTP connections"
       rule: allow
@@ -44,7 +45,7 @@ ufw_rules:
       from_ip: any
       to_ip: any
       from_port: null
-      to_port: '80'
+      to_port: "80"
       proto: tcp
     - comment: "Permits incoming HTTPS connections"
       rule: allow
@@ -52,7 +53,7 @@ ufw_rules:
       from_ip: any
       to_ip: any
       from_port: null
-      to_port: '443'
+      to_port: "443"
       proto: tcp
     - comment: "Permits incoming DHCP connections"
       rule: allow
@@ -60,7 +61,7 @@ ufw_rules:
       from_ip: any
       from_port: null
       to_ip: any
-      to_port: '67'
+      to_port: "67"
       proto: udp
     - comment: "Permits incoming UDP DNS connections"
       rule: allow
@@ -68,7 +69,7 @@ ufw_rules:
       from_ip: any
       to_ip: any
       from_port: null
-      to_port: '53'
+      to_port: "53"
       proto: udp
     - comment: "Permits incoming TCP DNS connections"
       rule: allow
@@ -76,7 +77,7 @@ ufw_rules:
       from_ip: any
       to_ip: any
       from_port: null
-      to_port: '53'
+      to_port: "53"
       proto: tcp
     - comment: "Permits incoming TCP connections to iperf3"
       rule: allow
@@ -84,7 +85,7 @@ ufw_rules:
       from_ip: "{{ home_lan_cidr }}"
       to_ip: any
       from_port: null
-      to_port: '5201'
+      to_port: "5201"
       proto: tcp
     - comment: "Permits incoming UDP connections to iperf3"
       rule: allow
@@ -92,7 +93,7 @@ ufw_rules:
       from_ip: "{{ home_lan_cidr }}"
       to_ip: any
       from_port: null
-      to_port: '5201'
+      to_port: "5201"
       proto: udp
     - comment: "Permits incoming UDP Wireguard connections"
       rule: allow
@@ -100,7 +101,7 @@ ufw_rules:
       from_ip: any
       to_ip: any
       from_port: null
-      to_port: '{{ wireguard_container_port }}'
+      to_port: "{{ wireguard_container_port }}"
       proto: udp
     - comment: "Permits incoming SMTP connections"
       rule: allow
@@ -108,7 +109,7 @@ ufw_rules:
       from_ip: "{{ home_lan_cidr }}"
       to_ip: any
       from_port: null
-      to_port: '25'
+      to_port: "25"
       proto: any
     - comment: "Permits incoming Prometheus node exporter connections"
       rule: allow
@@ -116,7 +117,7 @@ ufw_rules:
       from_ip: "any"
       to_ip: any
       from_port: null
-      to_port: '9100'
+      to_port: "9100"
       proto: any
   remove:
     -

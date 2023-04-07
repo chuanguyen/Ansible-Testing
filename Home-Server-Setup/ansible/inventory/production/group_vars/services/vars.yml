@@ -1,5 +1,4 @@
 ---
-
 # Port definitions for various services
 pihole_container_web_port: "80"
 grafana_container_web_port: "3000"
@@ -9,3 +8,6 @@ wireguard_container_port: "51820"
 # Home Internet Monitoring
 home_internet_blackbox_exporter_container_port: "9115"
 home_internet_speedtest_exporter_container_port: "9798"
+
+# ddclient
+ddclient_version: "3.10.0"
