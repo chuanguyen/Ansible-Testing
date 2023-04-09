@@ -1,5 +1,6 @@
 ---
 ansible_host: "{{ inventory_hostname }}.{{ home_lan_domain }}"
+ansible_user: "{{ vault_ansible_user }}"
 ansible_become_password: "{{ vault_ansible_become_password }}"
 
 # Converts Ansible detected architectures to commonly used ones
@@ -10,7 +11,6 @@ cpu_architecture_mappings:
 nfs_server_ipv4_address: "{{ vault_nfs_server_ipv4_address }}"
 autofs_nfs_shares: "{{ vault_autofs_nfs_shares }}"
 
-ansible_user: "{{ vault_ansible_user }}"
 local_users: "{{ vault_local_users }}"
 
 home_lan_domain_public: "{{ vault_home_lan_domain_public }}"
@@ -31,5 +31,5 @@ home_smtp_relay_server_hostname: "{{ home_lan_domain_public }}"
 home_smtp_relay_server_authenticated_sender: "{{ vault_home_smtp_relay_server_authenticated_sender }}"
 
 dns_provider_ddns_domains_to_update: "{{ vault_dns_provider_ddns_domains_to_update }}"
-dns_provider_api_token:  "{{ vault_dns_provider_api_token }}"
+dns_provider_api_token: "{{ vault_dns_provider_api_token }}"
 dns_provider_api_token_letsencrypt: "{{ vault_dns_provider_api_token_letsencrypt }}"
