@@ -9,6 +9,11 @@ all:
     nas:
       hosts:
         "nas1":
+    hypervisors:
+      children:
+        proxmox_servers:
+          hosts:
+            "proxmox-001":
     services:
       children:
         services_monitoring:
