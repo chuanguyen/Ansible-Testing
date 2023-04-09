@@ -1,0 +1,15 @@
+---
+- name: "TASK: Configure Proxmox Admin Sudoers"
+  become: true
+  community.general.sudoers:
+    name: "{{ item.name }}"
+    user: "{{ item.user }}"
+    commands: "{{ item.commands }}"
+    host: "{{ item.host }}"
+    nopassword: "{{ item.nopassword }}"
+    state: "{{ item.state }}"
+    sudoers_path: "{{ item.sudoers_path }}"
+    validation: "{{ item.validation }}"
+  with_items: "{{ sudoer_identities }}"
+  loop_control:
+    label: "{{ item.identity }}"

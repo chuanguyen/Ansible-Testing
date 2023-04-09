@@ -1,0 +1,13 @@
+---
+# List of identities with given sudoer configuration
+sudoer_identities:
+  - identity: "" # Not used in module, but for loop label
+    user: ""
+    name: ""
+    commands: "ALL"
+    nopassword: "true"
+    host: "ALL"
+    setenv: "false"
+    state: "present"
+    sudoers_path: "/etc/sudoers.d"
+    validation: "detect"
