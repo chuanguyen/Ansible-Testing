@@ -4,6 +4,7 @@
 ### Ansible ###
 *.retry
 *.cache
+.vault_pass_makefile
 
 ### Vagrant ###
 # General
