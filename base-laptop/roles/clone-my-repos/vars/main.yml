@@ -23,6 +23,6 @@ automation_git_repos:
     dest: "{{ ansible_env.HOME }}/.myConfigFiles"
     base_folder: "{{ ansible_env.HOME }}"
 
-  - repo: "git@github.com:chuanguyen/Docker-Testing.git"
-    dest: "{{ ansible_env.HOME }}/Docker-Testing"
+  - repo: "git@github.com:chuanguyen/docker-base.git"
+    dest: "{{ ansible_env.HOME }}/docker-base"
     base_folder: "{{ ansible_env.HOME }}"
