@@ -1,5 +1,4 @@
 ---
-
 - name: "TASK: Verify backup directory"
   stat:
     path: "{{ SERVICE__nfs_backup_directory }}"
@@ -16,8 +15,8 @@
 - name: "TASK: Create {{ SERVICE__container_name }} backup cron job"
   become: true
   template:
-    src: SERVICE-backup.j2
-    dest: "/etc/cron.d/SERVICE-backup"
+    src: SERVICE_-backup.j2
+    dest: "/etc/cron.d/SERVICE_-backup"
     owner: root
     group: root
     mode: 0644
@@ -25,8 +24,8 @@
 - name: "TASK: Create {{ SERVICE__container_name }} backup script"
   become: true
   template:
-    src: "SERVICE-backup.sh.j2"
-    dest: "{{ SERVICE__container_data_dir }}/scripts/SERVICE-backup.sh"
+    src: "SERVICE_-backup.sh.j2"
+    dest: "{{ SERVICE__container_data_dir }}/scripts/SERVICE_-backup.sh"
     owner: root
     group: root
     mode: 0755
