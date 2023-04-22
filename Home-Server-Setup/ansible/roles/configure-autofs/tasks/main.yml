@@ -1,11 +1,19 @@
 ---
-
 - name: "TASK: Ensure autofs is installed"
   include_role:
     name: install-system-packages
   vars:
     packages_to_install:
       - autofs
+
+- name: "TASK: Create autofs NFS mount directory"
+  become: true
+  file:
+    path: "{{ autofs_root_dir }}"
+    owner: "root"
+    group: "root"
+    mode: 0775
+    state: "directory"
 
 - name: "TASK: Enable autofs"
   become: true
@@ -21,7 +29,7 @@
     dest: "/etc/default/nfs-common"
     owner: root
     group: root
-    mode: '0644'
+    mode: "0644"
     backup: yes
 
 - name: "TASK: Define autofs mount point settings"
@@ -31,9 +39,9 @@
     dest: "/etc/auto.master.d/nfs.autofs"
     owner: root
     group: root
-    mode: '0644'
+    mode: "0644"
   notify:
-  - "restart autofs"
+    - "restart autofs"
 
 - name: "TASK: Creates autofs mappings"
   become: true
@@ -44,4 +52,4 @@
     group: root
     mode: 0644
   notify:
-  - "restart autofs"
+    - "restart autofs"
