@@ -4,16 +4,24 @@
 
 version: "3"
 
-# More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
+# More info at https://docs.frigate.video/frigate/installation#docker
 services:
   frigate:
-    build:
-      context: build/
     container_name: "{{ frigate_container_name }}"
     image: "{{ frigate_image_base }}:{{ frigate_image_base_tag }}"
+    # See if need to set to true
+    privileged: false
+    shm_size: "4gb" # Refer to Frigate documentation
     env_file: frigate.env
+    # devices:
+    #  - /dev/bus/usb:/dev/bus/usb # passes the USB Coral, needs to be modified for other versions
+    #  - /dev/apex_0:/dev/apex_0 # passes a PCIe Coral, follow driver instructions here https://coral.ai/docs/m2/get-started/#2a-on-linux
+    #  - /dev/dri/renderD128 # for intel hwaccel, needs to be updated for your hardware
     ports:
-      - ""
+      - "5000:5000"
+      - "8554:8554" # RTSP feeds
+      - "8555:8555/tcp" # WebRTC over tcp
+      - "8555:8555/udp" # WebRTC over udp
     networks:
       - ""
     # Volumes store your data between container upgrades
@@ -29,5 +37,5 @@ services:
       - "traefik.http.routers.frigate1.middlewares=lanWhitelist@file,secureHeaders@file"
       - "traefik.http.routers.frigate1.tls=true"
       - "traefik.http.routers.frigate1.tls.certresolver=letsEncrypt"
-    restart: "always"
+    restart: "unless-stopped"
 networks:

@@ -43,3 +43,6 @@ home_internet_speedtest_exporter_image_base_tag: "v3.3.4"
 
 portainer_image_base_tag: "2.16.2"
 portainer_image_base_tag_old: ""
+
+frigate_image_base_tag: "0.12.0"
+frigate_image_base_tag_old: ""

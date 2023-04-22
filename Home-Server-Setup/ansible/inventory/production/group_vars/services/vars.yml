@@ -11,3 +11,9 @@ home_internet_speedtest_exporter_container_port: "9798"
 
 # ddclient
 ddclient_version: "3.10.0"
+
+# Frigate
+frigate_rtsp_password: "{{ vault_frigate_rtsp_password }}"
+frigate_port_web: 5000
+frigate_port_rtsp: 8554
+frigate_port_webrtc: 8555

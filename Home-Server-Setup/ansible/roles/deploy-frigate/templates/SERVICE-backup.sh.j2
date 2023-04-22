@@ -1,9 +1,0 @@
-#!/bin/bash
-
-### {{ ansible_managed }}
-
-docker exec -d -w "{{ backup_directory }}" frigate
-
-sleep 5s && rsync --remove-source-files -zv {{ frigate_container_data_dir }}/mnt-backup/* {{ frigate_nfs_backup_directory }}
-
-find {{ frigate_nfs_backup_directory }} -mtime +{{ frigate_nfs_backup_cleanup_period }} -exec rm {} \;

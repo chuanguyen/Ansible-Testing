@@ -27,10 +27,10 @@
   with_items:
     - src: "docker-compose.yml.j2"
       dest: "{{ frigate_container_data_dir }}/docker-compose.yml"
-    - src: "SERVICE.env.j2"
+    - src: "frigate.env.j2"
       dest: "{{ frigate_container_data_dir }}/frigate.env"
-    - src: "Dockerfile.j2"
-      dest: "{{ frigate_container_data_dir }}/build/Dockerfile"
+    - src: "frigate-config.yml.j2"
+      dest: "{{ frigate_container_data_dir }}/config.yml"
   loop_control:
     label: "{{ item.src }}"
   register: "container_templated_files"
