@@ -29,13 +29,5 @@ services:
 {% for volume in frigate_container_volumes.binds %}
       - {{ volume.source }}:{{ volume.target }}
 {% endfor %}
-    labels:
-      - "traefik.enable=true"
-      - "traefik.docker.network={{ docker_networks.proxy.name }}"
-      - "traefik.http.routers.frigate1.rule=Host(`frigate.{{ home_lan_domain }}`)"
-      - "traefik.http.routers.frigate1.entrypoints=websecure"
-      - "traefik.http.routers.frigate1.middlewares=lanWhitelist@file,secureHeaders@file"
-      - "traefik.http.routers.frigate1.tls=true"
-      - "traefik.http.routers.frigate1.tls.certresolver=letsEncrypt"
     restart: "unless-stopped"
 networks:
