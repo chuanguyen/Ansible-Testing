@@ -36,3 +36,17 @@
 
     - role: "deploy-prometheus-home-internet-monitoring"
       tags: [services, monitoring, prometheus, prometheus-exporter]
+
+- name: "PLAY: Deploy home automation services"
+  hosts: family-docker-001
+  gather_facts: true
+
+  roles:
+    - role: "deploy-portainer"
+      tags: [services, portainer]
+
+    - role: "deploy-frigate"
+      tags: [services, frigate]
+
+    - role: "deploy-mqtt-mosquitto"
+      tags: [services, mqtt-mosquitto]

@@ -46,3 +46,6 @@ portainer_image_base_tag_old: ""
 
 frigate_image_base_tag: "0.12.0"
 frigate_image_base_tag_old: ""
+
+mqtt-mosquitto_image_base_tag: "2.0.15"
+mqtt-mosquitto_image_base_tag_old: ""

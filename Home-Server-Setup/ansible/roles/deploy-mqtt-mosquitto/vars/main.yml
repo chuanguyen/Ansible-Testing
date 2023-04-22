@@ -1,0 +1,13 @@
+mqtt-mosquitto_container_data_dir_sub_folders:
+  - "config"
+  - "data"
+  - "log"
+
+mqtt-mosquitto_container_volumes:
+  binds:
+    - source: "./config"
+      target: "/mosquitto/config"
+    - source: "./data"
+      target: "/mosquitto/data"
+    - source: "./log"
+      target: "/mosquitto/log"

@@ -1,0 +1,24 @@
+---
+
+# {{ ansible_managed }}
+
+version: "3"
+
+services:
+  mqtt-mosquitto:
+    build:
+      context: build/
+    container_name: "{{ mqtt-mosquitto_container_name }}"
+    image: "{{ mqtt-mosquitto_image_base }}:{{ mqtt-mosquitto_image_base_tag }}"
+    env_file: mqtt-mosquitto.env
+    ports:
+      - ""
+    networks:
+      - ""
+    # Volumes store your data between container upgrades
+    volumes:
+{% for volume in mqtt-mosquitto_container_volumes.binds %}
+      - {{ volume.source }}:{{ volume.target }}
+{% endfor %}
+    restart: "always"
+networks:
