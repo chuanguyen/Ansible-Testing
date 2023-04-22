@@ -1,0 +1,11 @@
+frigate_container_data_dir_sub_folders:
+  - "etc-frigate/"
+  - "mnt-backup/"
+  - "scripts"
+
+frigate_container_volumes:
+  binds:
+    - source: "./etc-frigate/"
+      target: "/etc/frigate/"
+    - source: "./mnt-backup/"
+      target: "/mnt/backup/"

@@ -1,0 +1,22 @@
+frigate_container_data_dir: "{{ docker_container_root_dir }}/frigate"
+
+frigate_image_base: "blakeblackshear/frigate"
+frigate_image_base_tag: ""
+# Ensures previous version of working
+# frigate image is available for failback
+frigate_image_base_tag_old: ""
+frigate_container_name: "frigate"
+# Controls whether docker-compose restarts Docker containers
+frigate_container_restart: no
+# Defines image ID for custom image
+frigate_image_custom: "{{ ansible_user }}/frigate"
+
+frigate_backup_directory: "/mnt/backup/"
+frigate_nfs_backup_directory: "/nfs/Container-Data/docker/frigate/"
+# Defines in days age of backups to remove
+frigate_nfs_backup_cleanup_period: "60"
+# Defines via cron syntax how often to run backup
+frigate_nfs_backup_frequency: "0 1 */15 * *"
+
+frigate_container_envs:
+  kv:

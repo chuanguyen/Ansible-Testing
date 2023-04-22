@@ -1,0 +1,33 @@
+---
+
+# {{ ansible_managed }}
+
+version: "3"
+
+# More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
+services:
+  frigate:
+    build:
+      context: build/
+    container_name: "{{ frigate_container_name }}"
+    image: "{{ frigate_image_base }}:{{ frigate_image_base_tag }}"
+    env_file: frigate.env
+    ports:
+      - ""
+    networks:
+      - ""
+    # Volumes store your data between container upgrades
+    volumes:
+{% for volume in frigate_container_volumes.binds %}
+      - {{ volume.source }}:{{ volume.target }}
+{% endfor %}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network={{ docker_networks.proxy.name }}"
+      - "traefik.http.routers.frigate1.rule=Host(`frigate.{{ home_lan_domain }}`)"
+      - "traefik.http.routers.frigate1.entrypoints=websecure"
+      - "traefik.http.routers.frigate1.middlewares=lanWhitelist@file,secureHeaders@file"
+      - "traefik.http.routers.frigate1.tls=true"
+      - "traefik.http.routers.frigate1.tls.certresolver=letsEncrypt"
+    restart: "always"
+networks:

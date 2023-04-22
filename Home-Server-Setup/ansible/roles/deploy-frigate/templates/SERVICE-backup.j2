@@ -1,0 +1,7 @@
+# {{ ansible_managed }}
+# frigate backup cron job
+
+SHELL=/bin/bash
+PATH=/usr/bin
+
+{{ frigate_nfs_backup_frequency }}   root  {{ frigate_container_data_dir }}/scripts/SERVICE-backup.sh
