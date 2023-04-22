@@ -3,15 +3,15 @@
 # Onboards server for management
 
 - name: "PLAY: Baselining servers"
-  hosts: rbp4-001
+  hosts: all
   gather_facts: true
 
   roles:
     - role: install-system-packages
-      tags: [ baseline ]
+      tags: [baseline]
     - role: configure-hostname
-      tags: [ baseline ]
+      tags: [baseline]
     - role: configure-local-users
-      tags: [ baseline ]
+      tags: [baseline]
     - role: configure-netplan
-      tags: [ baseline, network ]
+      tags: [baseline, network]

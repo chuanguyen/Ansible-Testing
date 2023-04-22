@@ -3,6 +3,7 @@ all:
     docker_hosts:
       hosts:
         "rbp4-001":
+        "family-docker-001":
     raspberry_pi_servers:
       hosts:
         "rbp4-001":

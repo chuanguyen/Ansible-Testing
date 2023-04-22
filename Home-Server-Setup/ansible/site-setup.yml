@@ -1,6 +1,6 @@
 ---
 - name: "PLAY: Baselining servers"
-  hosts: rbp4-001
+  hosts: rbp4-001,family-docker-001
   gather_facts: true
 
   roles:
