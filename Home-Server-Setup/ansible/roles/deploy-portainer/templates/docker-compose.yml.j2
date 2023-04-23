@@ -20,7 +20,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network={{ docker_networks.proxy.name }}"
-      - "traefik.http.routers.portainer1.rule=Host(`portainer.{{ home_lan_domain }}`)"
+      - "traefik.http.routers.portainer1.rule=Host(`{{ traefik_http_rule_hostname }}.{{ home_lan_domain }}`)"
       - "traefik.http.routers.portainer1.entrypoints=websecure"
       - "traefik.http.routers.portainer1.middlewares=lanWhitelist@file,secureHeaders@file"
       - "traefik.http.routers.portainer1.service=portainer-svc"

@@ -14,3 +14,5 @@ portainer_container_web_port: "9000"
 
 portainer_container_envs:
   kv:
+
+traefik_http_rule_hostname: "portainer"
