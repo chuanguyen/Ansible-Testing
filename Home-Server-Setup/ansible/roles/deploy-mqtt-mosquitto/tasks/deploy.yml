@@ -1,7 +1,7 @@
 ---
 - name: "TASK: Retrieve container info"
   community.docker.docker_container_info:
-    name: "{{ mqtt-mosquitto_container_name }}"
+    name: "{{ mqtt_mosquitto_container_name }}"
   register: container_state
 
 - name: "TASK: Set container facts"
@@ -18,23 +18,23 @@
 
     - name: "TASK: Pull base image"
       community.docker.docker_image:
-        name: "{{ mqtt-mosquitto_image_base }}"
-        tag: "{{ mqtt-mosquitto_image_base_tag }}"
+        name: "{{ mqtt_mosquitto_image_base }}"
+        tag: "{{ mqtt_mosquitto_image_base_tag }}"
         source: "pull"
         state: "present"
       register: "image_base_pull"
 
     - name: "TASK: Remove container for updates"
       community.docker.docker_container:
-        name: "{{ mqtt-mosquitto_container_name }}"
+        name: "{{ mqtt_mosquitto_container_name }}"
         container_default_behavior: "no_defaults"
         state: "absent"
       when: container_exists and image_base_pull.changed
-  when: container_image_tag[1] != mqtt-mosquitto_image_base_tag
+  when: container_image_tag[1] != mqtt_mosquitto_image_base_tag
 
-- name: "TASK: Deploy {{ mqtt-mosquitto_container_name }}"
+- name: "TASK: Deploy {{ mqtt_mosquitto_container_name }}"
   community.docker.docker_compose:
-    project_src: "{{ mqtt-mosquitto_container_data_dir }}"
+    project_src: "{{ mqtt_mosquitto_container_data_dir }}"
     nocache: "no"
     state: "present"
-    restarted: "{{ mqtt-mosquitto_container_restart }}"
+    restarted: "{{ mqtt_mosquitto_container_restart }}"

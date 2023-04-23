@@ -5,20 +5,30 @@
 version: "3"
 
 services:
-  mqtt-mosquitto:
+  mqtt_mosquitto:
     build:
       context: build/
-    container_name: "{{ mqtt-mosquitto_container_name }}"
-    image: "{{ mqtt-mosquitto_image_base }}:{{ mqtt-mosquitto_image_base_tag }}"
-    env_file: mqtt-mosquitto.env
-    ports:
-      - ""
+    container_name: "{{ mqtt_mosquitto_container_name }}"
+    image: "{{ mqtt_mosquitto_image_base }}:{{ mqtt_mosquitto_image_base_tag }}"
+    env_file: mqtt_mosquitto.env
     networks:
-      - ""
+      - {{ docker_networks.proxy.name }}
     # Volumes store your data between container upgrades
     volumes:
-{% for volume in mqtt-mosquitto_container_volumes.binds %}
+{% for volume in mqtt_mosquitto_container_volumes.binds %}
       - {{ volume.source }}:{{ volume.target }}
 {% endfor %}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network={{ docker_networks.proxy.name }}"
+      - "traefik.http.routers.mqtt_mosquitto1.rule=Host(`{{ traefik_http_rule_hostname }}.{{ home_lan_domain }}`)"
+      - "traefik.http.routers.mqtt_mosquitto1.entrypoints=websecure"
+      - "traefik.http.routers.mqtt_mosquitto1.middlewares=secureHeaders@file"
+      - "traefik.http.routers.mqtt_mosquitto1.service=mqtt_mosquitto1-svc"
+      - "traefik.http.services.mqtt_mosquitto1-svc.loadbalancer.server.port={{ mqtt_mosquitto_port_secure_tcp }}"
+      - "traefik.http.routers.mqtt_mosquitto1.tls=true"
+      - "traefik.http.routers.mqtt_mosquitto1.tls.certresolver=letsEncrypt"
     restart: "always"
 networks:
+  {{ docker_networks.proxy.name }}:
+    external: true

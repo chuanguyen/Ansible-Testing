@@ -1,6 +1,6 @@
 ---
 - name: "TASK: Grab all tags of a particular image"
-  shell: "docker images --filter=reference='{{ mqtt-mosquitto_image_base }}:*' | tr -s ' ' | cut -d ' ' -f 2 | tail -n +2"
+  shell: "docker images --filter=reference='{{ mqtt_mosquitto_image_base }}:*' | tr -s ' ' | cut -d ' ' -f 2 | tail -n +2"
   register: docker_image_filter_output
 
 - set_fact:
@@ -8,16 +8,16 @@
 
 - name: "TASK: Remove docker images filtered by tags"
   community.docker.docker_image:
-    name: "{{ mqtt-mosquitto_image_base }}"
+    name: "{{ mqtt_mosquitto_image_base }}"
     tag: "{{ item }}"
     state: "absent"
   with_items: "{{ docker_image_filtered_tags }}"
-  when: "item != mqtt-mosquitto_image_base_tag and item != mqtt-mosquitto_image_base_tag_old"
+  when: "item != mqtt_mosquitto_image_base_tag and item != mqtt_mosquitto_image_base_tag_old"
 
 - name: "TASK: Remove custom docker images filtered by tags"
   community.docker.docker_image:
-    name: "{{ mqtt-mosquitto_image_custom }}"
+    name: "{{ mqtt_mosquitto_image_custom }}"
     tag: "{{ item }}"
     state: "absent"
   with_items: "{{ docker_image_filtered_tags }}"
-  when: "item != mqtt-mosquitto_image_base_tag and item != mqtt-mosquitto_image_base_tag_old"
+  when: "item != mqtt_mosquitto_image_base_tag and item != mqtt_mosquitto_image_base_tag_old"

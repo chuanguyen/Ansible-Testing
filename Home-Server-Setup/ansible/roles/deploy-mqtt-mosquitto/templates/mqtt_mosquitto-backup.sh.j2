@@ -1,0 +1,9 @@
+#!/bin/bash
+
+### {{ ansible_managed }}
+
+docker exec -d -w "{{ backup_directory }}" mqtt_mosquitto
+
+sleep 5s && rsync --remove-source-files -zv {{ mqtt_mosquitto_container_data_dir }}/mnt-backup/* {{ mqtt_mosquitto_nfs_backup_directory }}
+
+find {{ mqtt_mosquitto_nfs_backup_directory }} -mtime +{{ mqtt_mosquitto_nfs_backup_cleanup_period }} -exec rm {} \;

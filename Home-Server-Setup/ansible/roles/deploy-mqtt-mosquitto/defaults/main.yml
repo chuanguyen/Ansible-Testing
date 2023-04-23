@@ -1,26 +1,37 @@
-mqtt-mosquitto_container_data_dir: "{{ docker_container_root_dir }}/mqtt-mosquitto"
+mqtt_mosquitto_container_data_dir: "{{ docker_container_root_dir }}/mqtt_mosquitto"
 
-mqtt-mosquitto_image_base: "eclipse-mosquitto"
-mqtt-mosquitto_image_base_tag: ""
+mqtt_mosquitto_image_base: "eclipse-mosquitto"
+mqtt_mosquitto_image_base_tag: ""
 # Ensures previous version of working
-# mqtt-mosquitto image is available for failback
-mqtt-mosquitto_image_base_tag_old: ""
-mqtt-mosquitto_container_name: "mqtt-mosquitto"
+# mqtt_mosquitto image is available for failback
+mqtt_mosquitto_image_base_tag_old: ""
+mqtt_mosquitto_container_name: "mqtt_mosquitto"
 # Controls whether docker-compose restarts Docker containers
-mqtt-mosquitto_container_restart: no
+mqtt_mosquitto_container_restart: no
 # Defines image ID for custom image
-mqtt-mosquitto_image_custom: "{{ ansible_user }}/mqtt-mosquitto"
+mqtt_mosquitto_image_custom: "{{ ansible_user }}/mqtt_mosquitto"
 
 # Ports
 mqtt_mosquitto_port_tcp: 1883
+mqtt_mosquitto_port_secure_tcp: 8883
 mqtt_mosquitto_port_web_socket: 9001
 
-mqtt-mosquitto_backup_directory: "/mnt/backup/"
-mqtt-mosquitto_nfs_backup_directory: "/nfs/Container-Data/docker/mqtt-mosquitto/"
+mqtt_mosquitto_backup_directory: "/mnt/backup/"
+mqtt_mosquitto_nfs_backup_directory: "/nfs/Container-Data/docker/mqtt_mosquitto/"
 # Defines in days age of backups to remove
-mqtt-mosquitto_nfs_backup_cleanup_period: "60"
+mqtt_mosquitto_nfs_backup_cleanup_period: "60"
 # Defines via cron syntax how often to run backup
-mqtt-mosquitto_nfs_backup_frequency: "0 1 */15 * *"
+mqtt_mosquitto_nfs_backup_frequency: "0 1 */15 * *"
 
-mqtt-mosquitto_container_envs:
+mqtt_mosquitto_container_envs:
   kv:
+
+traefik_http_rule_hostname: "mqtt"
+
+# Mosquitto configuration values
+mqtt_mosquitto_conf_persistence: true
+mqtt_mosquitto_conf_persistence_location: "/mosquitto/data/"
+mqtt_mosquitto_conf_log_destinations:
+  - "file /mosquitto/log/mosquitto.log"
+  - "stdout"
+mqtt_mosquitto_conf_user: "mosquitto"

@@ -1,0 +1,7 @@
+# {{ ansible_managed }}
+# mqtt_mosquitto backup cron job
+
+SHELL=/bin/bash
+PATH=/usr/bin
+
+{{ mqtt_mosquitto_nfs_backup_frequency }}   root  {{ mqtt_mosquitto_container_data_dir }}/scripts/SERVICE-backup.sh

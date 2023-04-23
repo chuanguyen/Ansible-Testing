@@ -1,7 +1,7 @@
 ---
 - name: "TASK: Verify backup directory"
   stat:
-    path: "{{ mqtt-mosquitto_nfs_backup_directory }}"
+    path: "{{ mqtt_mosquitto_nfs_backup_directory }}"
   register: stat_backup_dir
 
 - name: "TASK: Assert backup directory exists"
@@ -12,20 +12,20 @@
     fail_msg: "Backup directory doesn't exist"
     success_msg: "Backup directory exists"
 
-- name: "TASK: Create {{ mqtt-mosquitto_container_name }} backup cron job"
+- name: "TASK: Create {{ mqtt_mosquitto_container_name }} backup cron job"
   become: true
   template:
-    src: mqtt-mosquitto-backup.j2
-    dest: "/etc/cron.d/mqtt-mosquitto-backup"
+    src: mqtt_mosquitto-backup.j2
+    dest: "/etc/cron.d/mqtt_mosquitto-backup"
     owner: root
     group: root
     mode: 0644
 
-- name: "TASK: Create {{ mqtt-mosquitto_container_name }} backup script"
+- name: "TASK: Create {{ mqtt_mosquitto_container_name }} backup script"
   become: true
   template:
-    src: "mqtt-mosquitto-backup.sh.j2"
-    dest: "{{ mqtt-mosquitto_container_data_dir }}/scripts/mqtt-mosquitto-backup.sh"
+    src: "mqtt_mosquitto-backup.sh.j2"
+    dest: "{{ mqtt_mosquitto_container_data_dir }}/scripts/mqtt_mosquitto-backup.sh"
     owner: root
     group: root
     mode: 0755
