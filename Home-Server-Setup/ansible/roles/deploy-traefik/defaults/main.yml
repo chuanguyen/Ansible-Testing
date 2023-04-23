@@ -14,3 +14,5 @@ traefik_logging_directory: "/var/log/traefik"
 traefik_container_envs:
   kv:
     CF_DNS_API_TOKEN: "{{ dns_provider_api_token }}"
+
+traefik_http_rule_hostname: "traefik"
