@@ -16,6 +16,8 @@ all:
           hosts:
             "proxmox-001":
     services:
+      hosts:
+        "family-docker-001":
       children:
         services_monitoring:
           hosts:

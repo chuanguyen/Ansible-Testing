@@ -22,6 +22,21 @@ ufw_rules:
       from_port: null
       to_port: "22"
       proto: tcp
+    - comment: "Permits incoming HTTP connections"
+      rule: allow
+      delete: no
+      from_ip: any
+      to_ip: any
+      from_port: null
+      to_port: "80"
+      proto: tcp
+    - comment: "Permits incoming HTTPS connections"
+      rule: allow
+      delete: no
+      from_ip: any
+      to_ip: any
+      from_port: null
+      to_port: "443"
     - comment: "Permits incoming TCP connections to iperf3"
       rule: allow
       delete: no
