@@ -14,7 +14,9 @@ services:
     ports:
       - 80:80
       - 443:443
+{% if wireguard_container_port is defined %}
       - {{ wireguard_container_port }}:{{ wireguard_container_port }}/udp
+{% endif %}
     networks:
       - {{ docker_networks.proxy.name }}
     # Volumes store your data between container upgrades
@@ -25,7 +27,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network={{ docker_networks.proxy.name }}"
-      - "traefik.http.routers.traefik1.rule=Host(`traefik.{{ home_lan_domain }}`) || Host(`{{ ansible_default_ipv4.address }}`)"
+      - "traefik.http.routers.traefik1.rule=Host(`{{ traefik_http_rule_hostname }}.{{ home_lan_domain }}`) || Host(`{{ ansible_default_ipv4.address }}`)"
       - "traefik.http.routers.traefik1.entrypoints=websecure"
       - "traefik.http.routers.traefik1.middlewares=lanWhitelist@file,secureHeaders@file"
       - "traefik.http.routers.traefik1.service=api@internal"

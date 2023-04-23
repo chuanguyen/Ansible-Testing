@@ -26,8 +26,10 @@ entryPoints:
     http:
       middlewares:
         - secureHeaders@file
+{% if wireguard_container_port is defined %}
   wireguard:
     address: :{{ wireguard_container_port }}/udp
+{% endif %}
 
 providers:
   docker:
