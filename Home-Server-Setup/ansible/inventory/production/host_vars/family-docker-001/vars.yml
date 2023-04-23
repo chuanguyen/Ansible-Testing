@@ -37,6 +37,7 @@ ufw_rules:
       to_ip: any
       from_port: null
       to_port: "443"
+      proto: tcp
     - comment: "Permits incoming TCP connections to iperf3"
       rule: allow
       delete: no
@@ -68,6 +69,7 @@ ufw_rules:
       to_ip: any
       from_port: null
       to_port: "{{ frigate_port_web }}"
+      proto: tcp
     - comment: "Permits incoming connection to frigate RTSP feeds"
       rule: allow
       delete: no
@@ -75,6 +77,7 @@ ufw_rules:
       to_ip: any
       from_port: null
       to_port: "{{ frigate_port_rtsp }}"
+      proto: any
     - comment: "Permits incoming connection to frigate WebRTC (TCP/UDP)"
       rule: allow
       delete: no
@@ -82,6 +85,7 @@ ufw_rules:
       to_ip: any
       from_port: null
       to_port: "{{ frigate_port_webrtc }}"
+      proto: any
     - comment: "Permits incoming connection to MQTT Mosquitto TCP"
       rule: allow
       delete: no
@@ -89,6 +93,7 @@ ufw_rules:
       to_ip: any
       from_port: null
       to_port: "{{ mqtt_mosquitto_port_tcp }}"
+      proto: tcp
     - comment: "Permits incoming connection to MQTT Mosquitto Websocket"
       rule: allow
       delete: no
@@ -96,5 +101,6 @@ ufw_rules:
       to_ip: any
       from_port: null
       to_port: "{{ mqtt_mosquitto_port_web_socket }}"
+      proto: any
   remove:
     -
