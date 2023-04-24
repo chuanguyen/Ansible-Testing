@@ -42,11 +42,20 @@
   gather_facts: true
 
   roles:
+    - role: "deploy-traefik"
+      tags: [services, proxy, traefik]
+      vars:
+        traefik_http_rule_hostname: "traefik-001"
+
     - role: "deploy-portainer"
       tags: [services, portainer]
-
-    - role: "deploy-frigate"
-      tags: [services, frigate]
+      vars:
+        traefik_http_rule_hostname: "portainer-001"
 
     - role: "deploy-mqtt-mosquitto"
       tags: [services, mqtt-mosquitto]
+      vars:
+        traefik_http_rule_hostname: "mqtt-001"
+
+    - role: "deploy-frigate"
+      tags: [services, frigate]
