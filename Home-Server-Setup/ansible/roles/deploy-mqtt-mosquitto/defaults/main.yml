@@ -29,7 +29,7 @@ mqtt_mosquitto_container_envs:
 traefik_http_rule_hostname: "mqtt"
 
 # Mosquitto configuration values
-mqtt_mosquitto_conf_persistence: true
+mqtt_mosquitto_conf_persistence: "true"
 mqtt_mosquitto_conf_persistence_location: "/mosquitto/data/"
 mqtt_mosquitto_conf_log_destinations:
   - "file /mosquitto/log/mosquitto.log"

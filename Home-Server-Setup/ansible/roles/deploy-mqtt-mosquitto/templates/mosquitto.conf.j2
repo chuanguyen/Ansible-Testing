@@ -10,8 +10,5 @@ user {{ mqtt_mosquitto_conf_user }}
 
 ### Listeners
 
-# Disables the standard unencrypted MQTT port
-listener {{ mqtt_mosquitto_port_tcp }} localhost
-
 # MQTTS (Encrypted port)
 listener {{ mqtt_mosquitto_port_secure_tcp }}

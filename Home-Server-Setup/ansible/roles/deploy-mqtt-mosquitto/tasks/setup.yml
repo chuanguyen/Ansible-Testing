@@ -19,6 +19,7 @@
   with_items: "{{ mqtt_mosquitto_container_data_dir_sub_folders }}"
 
 - name: "Template files for building and running {{ mqtt_mosquitto_container_name }}"
+  become: true
   template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
@@ -37,5 +38,5 @@
 
 - name: "TASK: Set containers to restart when templated files change"
   set_fact:
-    container_restart: "yes"
+    mqtt_mosquitto_container_restart: "yes"
   when: "container_templated_files.changed"

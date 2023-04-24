@@ -6,8 +6,6 @@ version: "3"
 
 services:
   mqtt_mosquitto:
-    build:
-      context: build/
     container_name: "{{ mqtt_mosquitto_container_name }}"
     image: "{{ mqtt_mosquitto_image_base }}:{{ mqtt_mosquitto_image_base_tag }}"
     env_file: mqtt_mosquitto.env
@@ -19,15 +17,23 @@ services:
       - {{ volume.source }}:{{ volume.target }}
 {% endfor %}
     labels:
+      ### Details for TLS for MQTTS found here: https://gist.github.com/natcl/ed8253a34e7b87d879baabeba82cb846
       - "traefik.enable=true"
       - "traefik.docker.network={{ docker_networks.proxy.name }}"
-      - "traefik.http.routers.mqtt_mosquitto1.rule=Host(`{{ traefik_http_rule_hostname }}.{{ home_lan_domain }}`)"
-      - "traefik.http.routers.mqtt_mosquitto1.entrypoints=websecure"
-      - "traefik.http.routers.mqtt_mosquitto1.middlewares=secureHeaders@file"
-      - "traefik.http.routers.mqtt_mosquitto1.service=mqtt_mosquitto1-svc"
-      - "traefik.http.services.mqtt_mosquitto1-svc.loadbalancer.server.port={{ mqtt_mosquitto_port_secure_tcp }}"
-      - "traefik.http.routers.mqtt_mosquitto1.tls=true"
-      - "traefik.http.routers.mqtt_mosquitto1.tls.certresolver=letsEncrypt"
+      - "traefik.tcp.routers.mosquitto1.rule=HostSNI(`mqtt-001.{{ home_lan_domain }}`)"
+      - "traefik.tcp.routers.mosquitto1.entrypoints=mqtt_secure"
+      - "traefik.tcp.routers.mosquitto1.service=mosquitto1-svc"
+      - "traefik.tcp.routers.mosquitto1.tls=true"
+      - "traefik.tcp.routers.mosquitto1.tls.certresolver=letsEncrypt"
+      - "traefik.tcp.services.mosquitto1-svc.loadbalancer.server.port={{ mqtt_mosquitto_port_secure_tcp }}"
+      ### Toggle on for websocket if needed
+      # - "traefik.http.routers.mqtt_mosquitto1.rule=Host(`{{ traefik_http_rule_hostname }}.{{ home_lan_domain }}`)"
+      # - "traefik.http.routers.mqtt_mosquitto1.entrypoints=websecure"
+      # - "traefik.http.routers.mqtt_mosquitto1.middlewares=secureHeaders@file"
+      # - "traefik.http.routers.mqtt_mosquitto1.service=mqtt_mosquitto1-svc"
+      # - "traefik.http.services.mqtt_mosquitto1-svc.loadbalancer.server.port={{ mqtt_mosquitto_port_secure_tcp }}"
+      # - "traefik.http.routers.mqtt_mosquitto1.tls=true"
+      # - "traefik.http.routers.mqtt_mosquitto1.tls.certresolver=letsEncrypt"
     restart: "always"
 networks:
   {{ docker_networks.proxy.name }}:
