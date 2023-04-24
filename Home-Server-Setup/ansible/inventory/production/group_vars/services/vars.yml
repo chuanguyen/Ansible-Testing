@@ -3,7 +3,6 @@
 pihole_container_web_port: "80"
 grafana_container_web_port: "3000"
 snmp_exporter_container_web_port: "9116"
-wireguard_container_port: "51820"
 
 # Home Internet Monitoring
 home_internet_blackbox_exporter_container_port: "9115"
@@ -17,8 +16,3 @@ frigate_rtsp_password: "{{ vault_frigate_rtsp_password }}"
 frigate_port_web: 5000
 frigate_port_rtsp: 8554
 frigate_port_webrtc: 8555
-
-# MQTT Mosquitto
-mqtt_mosquitto_port_tcp: 1883
-mqtt_mosquitto_port_secure_tcp: 8883
-mqtt_mosquitto_port_web_socket: 9001
