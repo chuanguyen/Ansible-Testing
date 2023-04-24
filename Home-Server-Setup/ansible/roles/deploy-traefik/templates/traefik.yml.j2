@@ -26,6 +26,12 @@ entryPoints:
     http:
       middlewares:
         - secureHeaders@file
+
+{% if mqtt_mosquitto_port_secure_tcp is defined %}
+  mqtt_secure:
+    address: ":{{ mqtt_mosquitto_port_secure_tcp }}"
+{% endif %}
+
 {% if wireguard_container_port is defined %}
   wireguard:
     address: :{{ wireguard_container_port }}/udp

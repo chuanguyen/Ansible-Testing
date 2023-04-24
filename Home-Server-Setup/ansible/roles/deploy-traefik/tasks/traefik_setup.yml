@@ -1,5 +1,4 @@
 ---
-
 - name: "TASK: Create folders for build and container data"
   file:
     path: "{{ traefik_container_data_dir }}/{{ item }}"

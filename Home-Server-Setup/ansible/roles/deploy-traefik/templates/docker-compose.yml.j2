@@ -17,6 +17,9 @@ services:
 {% if wireguard_container_port is defined %}
       - {{ wireguard_container_port }}:{{ wireguard_container_port }}/udp
 {% endif %}
+{% if mqtt_mosquitto_port_secure_tcp is defined %}
+      - {{ mqtt_mosquitto_port_secure_tcp }}:{{ mqtt_mosquitto_port_secure_tcp }}/tcp
+{% endif %}
     networks:
       - {{ docker_networks.proxy.name }}
     # Volumes store your data between container upgrades
