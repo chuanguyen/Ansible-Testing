@@ -16,3 +16,6 @@ frigate_rtsp_password: "{{ vault_frigate_rtsp_password }}"
 frigate_port_web: 5000
 frigate_port_rtsp: 8554
 frigate_port_webrtc: 8555
+
+# MQTT
+mqtt_mosquitto_auth_credentials: "{{ vault_mqtt_mosquitto_auth_credentials }}"
