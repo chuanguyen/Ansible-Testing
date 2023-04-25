@@ -35,3 +35,15 @@ mqtt_mosquitto_conf_log_destinations:
   - "file /mosquitto/log/mosquitto.log"
   - "stdout"
 mqtt_mosquitto_conf_user: "mosquitto"
+mqtt_mosquitto_conf_per_listener_settings: "true"
+
+### MQTT Authentication
+# Defines whether new MQTT credential file is created
+mqtt_mosquitto_auth_enable: "false"
+# Set to true to recreate the MQTT pasword file
+mqtt_mosquitto_auth_refresh: false
+mqtt_mosquitto_auth_password_file: "mqtt_credentials"
+mqtt_mosquitto_auth_credentials:
+  - username: ""
+    password: ""
+    hash: ""

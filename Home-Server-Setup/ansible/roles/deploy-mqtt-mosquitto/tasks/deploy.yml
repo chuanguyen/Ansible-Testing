@@ -1,4 +1,11 @@
 ---
+- name: "TASK: Ensure mosquitto packages are installed"
+  include_role:
+    name: install-system-packages
+  vars:
+    packages_to_install:
+      - mosquitto
+
 - name: "TASK: Retrieve container info"
   community.docker.docker_container_info:
     name: "{{ mqtt_mosquitto_container_name }}"
@@ -31,6 +38,10 @@
         state: "absent"
       when: container_exists and image_base_pull.changed
   when: container_image_tag[1] != mqtt_mosquitto_image_base_tag
+
+- block:
+    - include_tasks: "deploy_authentication.yml"
+  when: "mqtt_mosquitto_auth_refresh and mqtt_mosquitto_auth_enable"
 
 - name: "TASK: Deploy {{ mqtt_mosquitto_container_name }}"
   community.docker.docker_compose:

@@ -8,7 +8,14 @@ log_dest {{ log_dest }}
 
 user {{ mqtt_mosquitto_conf_user }}
 
+per_listener_settings {{ mqtt_mosquitto_conf_per_listener_settings }}
+
 ### Listeners
 
 # MQTTS (Encrypted port)
 listener {{ mqtt_mosquitto_port_secure_tcp }}
+{% if mqtt_mosquitto_auth_enable %}
+password_file /mosquitto/config/{{ mqtt_mosquitto_auth_password_file }}
+{% else  %}
+allow_anonymous true
+{% endif %}

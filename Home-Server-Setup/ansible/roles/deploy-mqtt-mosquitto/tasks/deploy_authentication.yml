@@ -1,0 +1,21 @@
+---
+- name: "TASK: Creates Mosquitto password file"
+  become: true
+  ansible.builtin.file:
+    path: "{{ mqtt_mosquitto_container_data_dir }}/config/{{ mqtt_mosquitto_auth_password_file }}"
+    owner: 1883
+    group: "docker"
+    mode: 0664
+    state: touch
+
+- name: "TASK: Updates Mosquitto password file"
+  ansible.builtin.shell:
+    cmd: "mosquitto_passwd -b -H {{ item.hash }} {{ mqtt_mosquitto_auth_password_file }} {{ item.username }} {{ item.password }}"
+    chdir: "{{ mqtt_mosquitto_container_data_dir }}/config"
+  with_items: "{{ mqtt_mosquitto_auth_credentials }}"
+  register: create_mosquitto_password_file
+
+- name: "TASK: Restart container if password file created"
+  ansible.builtin.set_fact:
+    mqtt_mosquitto_container_restart: yes
+  when: create_mosquitto_password_file.changed

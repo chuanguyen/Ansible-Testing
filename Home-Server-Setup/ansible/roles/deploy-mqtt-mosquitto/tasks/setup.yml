@@ -12,7 +12,7 @@
   become: true
   file:
     path: "{{ mqtt_mosquitto_container_data_dir }}/{{ item }}"
-    owner: "root"
+    owner: "1883"
     group: "docker"
     mode: 0775
     state: "directory"
@@ -23,6 +23,7 @@
   template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
+    owner: 1883
     group: "docker"
     mode: 0660
   with_items:
