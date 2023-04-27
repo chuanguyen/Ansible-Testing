@@ -18,16 +18,27 @@ services:
     #  - /dev/apex_0:/dev/apex_0 # passes a PCIe Coral, follow driver instructions here https://coral.ai/docs/m2/get-started/#2a-on-linux
     #  - /dev/dri/renderD128 # for intel hwaccel, needs to be updated for your hardware
     ports:
-      - "5000:5000"
-      - "8554:8554" # RTSP feeds
-      - "8555:8555/tcp" # WebRTC over tcp
-      - "8555:8555/udp" # WebRTC over udp
+      - "{{ frigate_port_rtsp }}:{{ frigate_port_rtsp }}" # RTSP feeds
+      - "{{ frigate_port_webrtc }}:{{ frigate_port_webrtc }}/tcp" # WebRTC over tcp
+      - "{{ frigate_port_webrtc }}:{{ frigate_port_webrtc }}/udp" # WebRTC over udp
     networks:
-      - ""
+      - {{ docker_networks.proxy.name }}
     # Volumes store your data between container upgrades
     volumes:
 {% for volume in frigate_container_volumes.binds %}
       - {{ volume.source }}:{{ volume.target }}
 {% endfor %}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network={{ docker_networks.proxy.name }}"
+      - "traefik.http.routers.frigate1.rule=Host(`{{ traefik_http_rule_hostname }}.{{ home_lan_domain }}`)"
+      - "traefik.http.routers.frigate1.entrypoints=websecure"
+      - "traefik.http.routers.frigate1.middlewares=lanWhitelist@file,secureHeaders@file"
+      - "traefik.http.routers.frigate1.service=portainer-svc"
+      - "traefik.http.services.frigate-svc.loadbalancer.server.port={{ frigate_port_web }}"
+      - "traefik.http.routers.frigate1.tls=true"
+      - "traefik.http.routers.frigate1.tls.certresolver=letsEncrypt"
     restart: "unless-stopped"
 networks:
+  {{ docker_networks.proxy.name }}:
+    external: true
