@@ -11,6 +11,9 @@ services:
     env_file: mqtt_mosquitto.env
     networks:
       - {{ docker_networks.proxy.name }}
+    expose:
+      - {{ mqtt_mosquitto_port_tcp }}
+      - {{ mqtt_mosquitto_port_secure_tcp }}
     # Volumes store your data between container upgrades
     volumes:
 {% for volume in mqtt_mosquitto_container_volumes.binds %}
