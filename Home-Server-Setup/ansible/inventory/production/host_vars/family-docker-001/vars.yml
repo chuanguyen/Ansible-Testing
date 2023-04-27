@@ -62,14 +62,6 @@ ufw_rules:
       from_port: null
       to_port: "9100"
       proto: any
-    - comment: "Permits incoming connection to frigate web portal"
-      rule: allow
-      delete: no
-      from_ip: "{{ home_lan_cidr }}"
-      to_ip: any
-      from_port: null
-      to_port: "{{ frigate_port_web }}"
-      proto: tcp
     - comment: "Permits incoming connection to frigate RTSP feeds"
       rule: allow
       delete: no
