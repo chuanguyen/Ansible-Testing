@@ -12,6 +12,16 @@ per_listener_settings {{ mqtt_mosquitto_conf_per_listener_settings }}
 
 ### Listeners
 
+# MQTT (Unencrypted)
+# Used by containers on same Docker host
+# Shouldn't be made reachable externally
+listener {{ mqtt_mosquitto_port_tcp }}
+{% if mqtt_mosquitto_auth_enable %}
+password_file /mosquitto/config/{{ mqtt_mosquitto_auth_password_file }}
+{% else  %}
+allow_anonymous true
+{% endif %}
+
 # MQTTS (Encrypted port)
 listener {{ mqtt_mosquitto_port_secure_tcp }}
 {% if mqtt_mosquitto_auth_enable %}
