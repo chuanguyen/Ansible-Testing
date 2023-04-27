@@ -11,7 +11,8 @@ frigate_container_restart: no
 # Defines image ID for custom image
 frigate_image_custom: "{{ ansible_user }}/frigate"
 
-# Ports
+#### Ports
+# Web port will be mapped by traefik
 frigate_port_web: 5000
 frigate_port_rtsp: 8554
 frigate_port_webrtc: 8555
@@ -19,3 +20,5 @@ frigate_port_webrtc: 8555
 frigate_container_envs:
   kv:
     "FRIGATE_RTSP_PASSWORD": "{{ frigate_rtsp_password }}"
+
+traefik_http_rule_hostname: "frigate"
