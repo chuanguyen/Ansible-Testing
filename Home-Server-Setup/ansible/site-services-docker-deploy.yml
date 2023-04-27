@@ -57,7 +57,7 @@
       vars:
         traefik_http_rule_hostname: "mqtt-001"
         mqtt_mosquitto_auth_enable: "true"
-        mqtt_mosquitto_auth_refresh: "false"
+        mqtt_mosquitto_auth_refresh: false
 
     - role: "deploy-frigate"
       tags: [services, frigate]
