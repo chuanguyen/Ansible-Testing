@@ -2,3 +2,8 @@
 mqtt_mosquitto_port_tcp: 1883
 mqtt_mosquitto_port_secure_tcp: 8883
 mqtt_mosquitto_port_web_socket: 9001
+
+# Frigate
+frigate_port_web: 5000
+frigate_port_rtsp: 8554
+frigate_port_webrtc: 8555
