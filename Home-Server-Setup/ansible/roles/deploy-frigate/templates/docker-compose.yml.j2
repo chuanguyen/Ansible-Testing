@@ -34,7 +34,7 @@ services:
       - "traefik.http.routers.frigate1.rule=Host(`{{ traefik_http_rule_hostname }}.{{ home_lan_domain }}`)"
       - "traefik.http.routers.frigate1.entrypoints=websecure"
       - "traefik.http.routers.frigate1.middlewares=lanWhitelist@file,secureHeaders@file"
-      - "traefik.http.routers.frigate1.service=portainer-svc"
+      - "traefik.http.routers.frigate1.service=frigate-svc"
       - "traefik.http.services.frigate-svc.loadbalancer.server.port={{ frigate_port_web }}"
       - "traefik.http.routers.frigate1.tls=true"
       - "traefik.http.routers.frigate1.tls.certresolver=letsEncrypt"

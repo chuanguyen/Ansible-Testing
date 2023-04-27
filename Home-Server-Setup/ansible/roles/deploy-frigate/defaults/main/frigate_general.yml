@@ -19,6 +19,6 @@ frigate_port_webrtc: 8555
 
 frigate_container_envs:
   kv:
-    "FRIGATE_RTSP_PASSWORD": "{{ frigate_rtsp_password }}"
+    FRIGATE_RTSP_PASSWORD: "{{ frigate_rtsp_password }}"
 
 traefik_http_rule_hostname: "frigate"

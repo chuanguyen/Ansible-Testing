@@ -1,0 +1,11 @@
+---
+frigate_mqtt_enabled: True
+frigate_mqtt_host: ""
+frigate_mqtt_port: 1883
+frigate_mqtt_topic_prefix: "frigate"
+frigate_mqtt_client_id: "frigate"
+frigate_mqtt_user: ""
+frigate_mqtt_password: ""
+frigate_mqtt_tls_ca_certs: "/etc/ssl/certs/ca-certificates.crt"
+frigate_mqtt_tls_insecure: false
+frigate_mqtt_stats_interval: 60

@@ -1,0 +1,38 @@
+---
+# {{ ansible_managed }}
+mqtt:
+  enabled: {{ frigate_mqtt_enabled }}
+  host: '{{ frigate_mqtt_host }}'
+  port: {{ frigate_mqtt_port }}
+  topic_prefix: {{ frigate_mqtt_topic_prefix }}
+  client_id: {{ frigate_mqtt_client_id }}
+  user: '{{ frigate_mqtt_user }}'
+  password: '{{ frigate_mqtt_password }}'
+  # tls_ca_certs must be defined even if LetsEncrypt used
+  # Without, error is thrown and won't connect
+  # https://github.com/blakeblackshear/frigate/issues/2471
+  # Set to default cert path in Ubuntu
+  tls_ca_certs: {{ frigate_mqtt_tls_ca_certs }}
+  tls_insecure: {{ frigate_mqtt_tls_insecure }}
+  stats_interval: {{ frigate_mqtt_stats_interval }}
+
+cameras:
+  cam_1_pixel_6: # <------ Name the camera
+    ffmpeg:
+      inputs:
+        - path: rtsp://10.20.252.31:8080/video/h264 # <----- The stream you want to use for detection
+          roles:
+            - detect
+    detect:
+      enabled: True # <---- disable detection until you have a working camera feed
+      width: 1920 # <---- update for your camera's resolution
+      height: 1080 # <---- update for your camera's resolution
+    snapshots:
+      enabled: True
+detectors:
+  cpu1:
+    type: cpu
+    num_threads: 2
+
+logger:
+  default: info
