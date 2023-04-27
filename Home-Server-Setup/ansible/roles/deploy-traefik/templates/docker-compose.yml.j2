@@ -14,6 +14,9 @@ services:
     ports:
       - 80:80
       - 443:443
+{% if frigate_port_web is defined %}
+      - {{ frigate_port_web }}:{{ frigate_port_web }}
+{% endif %}
 {% if wireguard_container_port is defined %}
       - {{ wireguard_container_port }}:{{ wireguard_container_port }}/udp
 {% endif %}
