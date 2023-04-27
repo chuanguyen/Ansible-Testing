@@ -12,8 +12,8 @@ mqtt:
   # Without, error is thrown and won't connect
   # https://github.com/blakeblackshear/frigate/issues/2471
   # Set to default cert path in Ubuntu
-  tls_ca_certs: {{ frigate_mqtt_tls_ca_certs }}
-  tls_insecure: {{ frigate_mqtt_tls_insecure }}
+  # tls_ca_certs: {{ frigate_mqtt_tls_ca_certs }}
+  # tls_insecure: {{ frigate_mqtt_tls_insecure }}
   stats_interval: {{ frigate_mqtt_stats_interval }}
 
 cameras:
