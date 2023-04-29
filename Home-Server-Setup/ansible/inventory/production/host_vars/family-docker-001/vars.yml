@@ -62,6 +62,14 @@ ufw_rules:
       from_port: null
       to_port: "9100"
       proto: any
+    - comment: "Permits incoming connection to frigate web portal"
+      rule: allow
+      delete: no
+      from_ip: "{{ lookup('community.general.dig', 'home-assistant-001.'+home_lan_domain) }}"
+      to_ip: any
+      from_port: null
+      to_port: "{{ frigate_port_web }}"
+      proto: tcp
     - comment: "Permits incoming connection to frigate RTSP feeds"
       rule: allow
       delete: no
@@ -95,4 +103,11 @@ ufw_rules:
       to_port: "{{ mqtt_mosquitto_port_web_socket }}"
       proto: any
   remove:
-    -
+    - comment: "Permits incoming connection to frigate web portal"
+      rule: allow
+      delete: no
+      from_ip: "{{ home_lan_cidr }}"
+      to_ip: any
+      from_port: null
+      to_port: "{{ frigate_port_web }}"
+      proto: tcp

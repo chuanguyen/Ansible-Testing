@@ -1,0 +1,33 @@
+---
+# Frigate configuration
+frigate_mqtt_enabled: True
+# Frigate MQTT Host is name of MQTT container running on the same host
+# Only defined like this since communication through traefik doesn't
+# work over SSL
+frigate_mqtt_host: "mqtt_mosquitto"
+frigate_mqtt_port: "{{ mqtt_mosquitto_port_tcp }}"
+frigate_mqtt_user: "{{ mqtt_mosquitto_auth_credentials[0].username }}"
+frigate_mqtt_password: "{{ mqtt_mosquitto_auth_credentials[0].password }}"
+
+frigate_cameras:
+  cam_1_pixel_6: # <------ Name the camera
+    ffmpeg:
+      inputs:
+        - path: rtsp://10.20.252.31:8080/video/h264 # <----- The stream you want to use for detection
+          roles:
+            - detect
+    detect:
+      enabled: True # <---- disable detection until you have a working camera feed
+      width: 1920 # <---- update for your camera's resolution
+      height: 1080 # <---- update for your camera's resolution
+    snapshots:
+      enabled: True
+
+frigate_detectors:
+  cpu1:
+    type: "cpu"
+    num_threads: 2
+
+### Logger
+frigate_logger:
+  default: "info"

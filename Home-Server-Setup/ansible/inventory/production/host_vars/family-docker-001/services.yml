@@ -7,13 +7,3 @@ mqtt_mosquitto_port_web_socket: 9001
 frigate_port_web: 5000
 frigate_port_rtsp: 8554
 frigate_port_webrtc: 8555
-
-# Frigate configuration
-frigate_mqtt_enabled: True
-# Frigate MQTT Host is name of MQTT container running on the same host
-# Only defined like this since communication through traefik doesn't
-# work over SSL
-frigate_mqtt_host: "mqtt_mosquitto"
-frigate_mqtt_port: "{{ mqtt_mosquitto_port_tcp }}"
-frigate_mqtt_user: "{{ mqtt_mosquitto_auth_credentials[0].username }}"
-frigate_mqtt_password: "{{ mqtt_mosquitto_auth_credentials[0].password }}"
