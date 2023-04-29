@@ -1,4 +1,5 @@
 ---
+### MQTT
 frigate_mqtt_enabled: True
 frigate_mqtt_host: ""
 frigate_mqtt_port: 1883
@@ -9,3 +10,34 @@ frigate_mqtt_password: ""
 frigate_mqtt_tls_ca_certs: "/etc/ssl/certs/ca-certificates.crt"
 frigate_mqtt_tls_insecure: false
 frigate_mqtt_stats_interval: 60
+
+### Cameras
+frigate_cameras:
+  CAM_NAME: ""
+
+### Birdseye
+frigate_birdseye:
+  enabled: True
+  restream: False
+  width: 1280
+  height: 720
+  # Optional: Encoding quality of the mpeg1 feed (default: shown below)
+  # 1 is the highest quality, and 31 is the lowest. Lower quality feeds utilize less CPU resources.
+  quality: 8
+  # Optional: Mode of the view. Available options are: objects, motion, and continuous
+  #   objects - cameras are included if they have had a tracked object within the last 30 seconds
+  #   motion - cameras are included if motion was detected in the last 30 seconds
+  #   continuous - all cameras are included always
+  mode: objects
+
+### Detectors
+frigate_detectors:
+  NAME:
+    type: ""
+
+### Logger
+frigate_logger:
+  default: "info"
+  # Optional
+  logs:
+    frigate.event: debug

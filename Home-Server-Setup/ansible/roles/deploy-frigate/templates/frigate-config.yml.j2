@@ -17,22 +17,19 @@ mqtt:
   stats_interval: {{ frigate_mqtt_stats_interval }}
 
 cameras:
-  cam_1_pixel_6: # <------ Name the camera
-    ffmpeg:
-      inputs:
-        - path: rtsp://10.20.252.31:8080/video/h264 # <----- The stream you want to use for detection
-          roles:
-            - detect
-    detect:
-      enabled: True # <---- disable detection until you have a working camera feed
-      width: 1920 # <---- update for your camera's resolution
-      height: 1080 # <---- update for your camera's resolution
-    snapshots:
-      enabled: True
+{% for camera_name, camera_config in frigate_cameras.items() %}
+  {{ camera_name }}:
+    {{ camera_config }}
+{% endfor %}
+
+birdseye:
+  {{ frigate_birdseye }}
+
 detectors:
-  cpu1:
-    type: cpu
-    num_threads: 2
+{% for detector_name, detector_config in frigate_detectors.items() %}
+  {{ detector_name }}:
+    {{ detector_config }}
+{% endfor %}
 
 logger:
-  default: info
+  {{ frigate_logger }}
