@@ -103,11 +103,4 @@ ufw_rules:
       to_port: "{{ mqtt_mosquitto_port_web_socket }}"
       proto: any
   remove:
-    - comment: "Permits incoming connection to frigate web portal"
-      rule: allow
-      delete: no
-      from_ip: "{{ home_lan_cidr }}"
-      to_ip: any
-      from_port: null
-      to_port: "{{ frigate_port_web }}"
-      proto: tcp
+    -
