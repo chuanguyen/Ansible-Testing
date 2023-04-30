@@ -1,4 +1,5 @@
 ansible_become_password: "{{ vault_ansible_become_password }}"
-ansible_user: root
+### Only used when initializing Proxmox hosts without users configured
+# ansible_user: root
 
 sudoer_identities: "{{ vault_sudoer_identities }}"

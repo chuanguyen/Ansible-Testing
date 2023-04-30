@@ -38,3 +38,5 @@
       tags: [baseline, refresh, security, sudoer]
     - role: configure-ssh-server
       tags: [baseline, refresh, security]
+    - role: configure-prometheus-node-exporter
+      tags: [baseline, monitoring, refresh]

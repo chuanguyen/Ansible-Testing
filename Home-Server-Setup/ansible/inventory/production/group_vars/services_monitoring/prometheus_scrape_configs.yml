@@ -31,6 +31,14 @@ prometheus_scrape_configs:
               port: "9100"
               do_dig_lookup: true
         - hosts:
+            - hostname: "home-assistant-001.{{ home_lan_domain }}"
+              port: "9100"
+              do_dig_lookup: true
+        - hosts:
+            - hostname: "proxmox-001.{{ home_lan_domain }}"
+              port: "9100"
+              do_dig_lookup: true
+        - hosts:
             - hostname: "nas1.{{ home_lan_domain }}"
               port: "9100"
               do_dig_lookup: true
