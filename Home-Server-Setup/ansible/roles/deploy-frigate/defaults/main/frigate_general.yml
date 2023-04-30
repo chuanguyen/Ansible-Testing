@@ -23,3 +23,15 @@ frigate_container_envs:
     FRIGATE_RTSP_PASSWORD: "{{ frigate_rtsp_password }}"
 
 traefik_http_rule_hostname: "frigate"
+
+frigate_container_data_dir_sub_folders:
+  - "media-frigate"
+
+frigate_container_volumes:
+  binds:
+    - source: "./config.yml"
+      target: "/config/config.yml"
+    - source: "./media-frigate"
+      target: "/media/frigate"
+    - source: "/etc/localtime"
+      target: "/etc/localtime:ro"
