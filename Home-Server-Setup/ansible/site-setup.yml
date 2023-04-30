@@ -26,6 +26,8 @@
       tags: [baseline, refresh]
     - role: configure-docker
       tags: [baseline, refresh]
+    - role: configure-prometheus-node-exporter
+      tags: [baseline, monitoring, refresh]
 
 - name: "PLAY: Baseline Proxmox"
   hosts: proxmox_servers

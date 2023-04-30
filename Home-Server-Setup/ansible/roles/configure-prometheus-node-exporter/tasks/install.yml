@@ -1,6 +1,12 @@
 ---
 # configure-prometheus-node-exporter
 
+- name: "TASK: Configure Prometheus users"
+  become: true
+  user:
+    name: "{{ prometheus_node_exporter_user }}"
+    state: "present"
+
 - name: "TASK: Retrieve node_exporter binary"
   unarchive:
     src: "{{ prometheus_node_exporter_url }}"
