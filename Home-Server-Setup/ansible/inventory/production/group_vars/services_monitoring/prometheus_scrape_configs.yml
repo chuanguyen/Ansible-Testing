@@ -1,11 +1,10 @@
 ---
-
 prometheus_scrape_configs:
   - job_name: "prometheus"
     static_configs:
       targets:
-      # Expects hostnames, and will resolve to IP for Prometheus
-      # dig Lookup ran in prometheus.yml template
+        # Expects hostnames, and will resolve to IP for Prometheus
+        # dig Lookup ran in prometheus.yml template
         - hosts:
             - hostname: "localhost"
               port: "{{ prometheus_container_web_port }}"
@@ -19,14 +18,18 @@ prometheus_scrape_configs:
   - job_name: "node_exporters"
     static_configs:
       targets:
-      # Expects hostnames, and will resolve to IP for Prometheus
-      # dig Lookup ran in prometheus.yml template
+        # Expects hostnames, and will resolve to IP for Prometheus
+        # dig Lookup ran in prometheus.yml template
         - hosts:
             - hostname: "rbp4-001.{{ home_lan_domain }}"
               port: "9100"
               do_dig_lookup: true
           labels:
             device_type: "rbp4"
+        - hosts:
+            - hostname: "family-docker-001.{{ home_lan_domain }}"
+              port: "9100"
+              do_dig_lookup: true
         - hosts:
             - hostname: "nas1.{{ home_lan_domain }}"
               port: "9100"
@@ -40,8 +43,8 @@ prometheus_scrape_configs:
   - job_name: "snmp_printers"
     static_configs:
       targets:
-      # Expects hostnames, and will resolve to IP for Prometheus
-      # dig Lookup ran in prometheus.yml template
+        # Expects hostnames, and will resolve to IP for Prometheus
+        # dig Lookup ran in prometheus.yml template
         - hosts:
             - hostname: "printer.{{ home_lan_domain }}"
               port: ""
@@ -63,8 +66,8 @@ prometheus_scrape_configs:
   - job_name: "snmp_nas_qnap"
     static_configs:
       targets:
-      # Expects hostnames, and will resolve to IP for Prometheus
-      # dig Lookup ran in prometheus.yml template
+        # Expects hostnames, and will resolve to IP for Prometheus
+        # dig Lookup ran in prometheus.yml template
         - hosts:
             - hostname: "nas1.{{ home_lan_domain }}"
               port: ""
@@ -87,8 +90,8 @@ prometheus_scrape_configs:
   - job_name: "snmp_nas_qnap_long"
     static_configs:
       targets:
-      # Expects hostnames, and will resolve to IP for Prometheus
-      # dig Lookup ran in prometheus.yml template
+        # Expects hostnames, and will resolve to IP for Prometheus
+        # dig Lookup ran in prometheus.yml template
         - hosts:
             - hostname: "nas1.{{ home_lan_domain }}"
               port: ""
@@ -108,22 +111,22 @@ prometheus_scrape_configs:
         target_label: "instance"
       - target_label: "__address__"
         replacement: "snmp_exporter:{{ snmp_exporter_container_web_port }}"
-### Home Internet Monitoring
-  - job_name: 'speedtest'
+  ### Home Internet Monitoring
+  - job_name: "speedtest"
     metrics_path: /metrics
     scrape_interval: 4h
-    scrape_timeout: 1m  # running speedtest needs time to complete
+    scrape_timeout: 1m # running speedtest needs time to complete
     static_configs:
       targets:
         - hosts:
             - hostname: "speedtest"
               port: "{{ home_internet_speedtest_exporter_container_port }}"
               do_dig_lookup: false
-  - job_name: 'ping'
+  - job_name: "ping"
     metrics_path: /probe
     scrape_interval: "10s"
     params:
-      module: [http_2xx]  # Look for a HTTP 200 response.
+      module: [http_2xx] # Look for a HTTP 200 response.
     static_configs:
       # [URL];[HUMAN_READABLE_NAME]
       targets:
@@ -136,14 +139,14 @@ prometheus_scrape_configs:
               do_dig_lookup: false
     relabel_configs:
       - source_labels: [__address__]
-        regex: '(.*);(.*)'  # first is the url, thus unique for instance
+        regex: "(.*);(.*)" # first is the url, thus unique for instance
         target_label: instance
         replacement: $1
       - source_labels: [__address__]
-        regex: '(.*);(.*)'  # second is humanname to use in charts
+        regex: "(.*);(.*)" # second is humanname to use in charts
         target_label: humanname
         replacement: $2
       - source_labels: [instance]
         target_label: __param_target
       - target_label: __address__
-        replacement: "ping:{{ home_internet_blackbox_exporter_container_port }}"  # The blackbox exporter's real hostname:port.
+        replacement: "ping:{{ home_internet_blackbox_exporter_container_port }}" # The blackbox exporter's real hostname:port.
