@@ -26,7 +26,7 @@
       tags: [services, monitoring, grafana]
 
     - role: "deploy-prometheus"
-      tags: [services, monitoring, prometheus]
+      tags: [services, monitoring, prometheus, prometheus_core]
 
     - role: "deploy-prometheus-alertManager"
       tags: [services, monitoring, prometheus, alertmanager]
