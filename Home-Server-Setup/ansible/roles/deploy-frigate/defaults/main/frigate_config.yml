@@ -11,11 +11,9 @@ frigate_mqtt_tls_ca_certs: "/etc/ssl/certs/ca-certificates.crt"
 frigate_mqtt_tls_insecure: false
 frigate_mqtt_stats_interval: 60
 
-### Cameras
 frigate_cameras:
   CAM_NAME: ""
 
-### Birdseye
 frigate_birdseye:
   enabled: True
   restream: False
@@ -30,10 +28,79 @@ frigate_birdseye:
   #   continuous - all cameras are included always
   mode: objects
 
-### Detectors
 frigate_detectors:
   NAME:
     type: ""
+
+frigate_record:
+  enabled: False
+  expire_interval: 60
+  retain:
+    days: 0
+    mode: all
+  events:
+    pre_capture: 5
+    post_capture: 5
+    objects:
+      - person
+    required_zones: []
+    retain:
+      default: 10
+      mode: motion
+      objects:
+        person: 15
+
+frigate_snapshots:
+  # Optional: Enable writing jpg snapshot to /media/frigate/clips (default: shown below)
+  enabled: True
+  # Optional: save a clean PNG copy of the snapshot image (default: shown below)
+  clean_copy: True
+  # Optional: print a timestamp on the snapshots (default: shown below)
+  timestamp: False
+  # Optional: draw bounding box on the snapshots (default: shown below)
+  bounding_box: True
+  # Optional: crop the snapshot (default: shown below)
+  crop: False
+  # Optional: height to resize the snapshot to (default: original size)
+  height: 175
+  # Optional: Restrict snapshots to objects that entered any of the listed zones (default: no required zones)
+  required_zones: []
+  # Optional: Camera override for retention settings (default: global values)
+  retain:
+    # Required: Default retention days (default: shown below)
+    default: 10
+    # Optional: Per object retention days
+    objects:
+      person: 15
+
+frigate_timestamp_style:
+  # Optional: Position of the timestamp (default: shown below)
+  #           "tl" (top left), "tr" (top right), "bl" (bottom left), "br" (bottom right)
+  position: "bl"
+  # Optional: Format specifier conform to the Python package "datetime" (default: shown below)
+  #           Additional Examples:
+  #             german: "%d.%m.%Y %H:%M:%S"
+  format: "%Y-%m-%d %H:%M:%S"
+  # Optional: Color of font
+  color:
+    # All Required when color is specified (default: shown below)
+    red: 255
+    green: 255
+    blue: 255
+  # Optional: Line thickness of font (default: shown below)
+  thickness: 4
+  # Optional: Effect of lettering (default: shown below)
+  #           None (No effect),
+  #           "solid" (solid background in inverse color of font)
+  #           "shadow" (shadow for font)
+  effect: "solid"
+
+frigate_ui:
+  live_mode: "mse"
+  use_experimental: False
+  time_format: "browser"
+  date_style: "short"
+  time_style: "medium"
 
 ### Logger
 frigate_logger:

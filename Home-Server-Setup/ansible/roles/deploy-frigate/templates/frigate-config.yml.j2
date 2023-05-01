@@ -31,5 +31,17 @@ detectors:
     {{ detector_config }}
 {% endfor %}
 
+record:
+  {{ frigate_record }}
+
+snapshots:
+  {{ frigate_snapshots }}
+
+timestamp_style:
+  {{ frigate_timestamp_style }}
+
+ui:
+  {{ frigate_ui }}
+
 logger:
   {{ frigate_logger }}

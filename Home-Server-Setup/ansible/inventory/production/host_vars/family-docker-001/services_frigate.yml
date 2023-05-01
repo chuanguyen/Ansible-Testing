@@ -28,6 +28,13 @@ frigate_detectors:
     type: "cpu"
     num_threads: 2
 
+frigate_ui:
+  live_mode: "mse"
+  use_experimental: False
+  time_format: "24hour"
+  date_style: "short"
+  time_style: "medium"
+
 ### Logger
 frigate_logger:
   default: "info"
