@@ -8,6 +8,8 @@
       tags: [baseline]
     - role: configure-hostname
       tags: [baseline]
+    - role: configure-timezone
+      tags: [baseline, timezone]
     - role: configure-systemd-resolved
       tags: [baseline, refresh, network]
     - role: configure-cloud-init
