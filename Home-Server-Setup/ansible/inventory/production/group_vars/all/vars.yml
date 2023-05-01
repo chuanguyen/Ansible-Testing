@@ -8,6 +8,8 @@ cpu_architecture_mappings:
   "x86_64": "amd64"
   "aarch64": "arm64"
 
+timezone_tz_identifier: "America/Vancouver"
+
 nfs_server_ipv4_address: "{{ vault_nfs_server_ipv4_address }}"
 autofs_nfs_shares: "{{ vault_autofs_nfs_shares }}"
 
