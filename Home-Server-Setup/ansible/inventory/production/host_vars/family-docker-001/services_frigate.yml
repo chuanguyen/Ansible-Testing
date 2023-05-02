@@ -9,11 +9,23 @@ frigate_mqtt_port: "{{ mqtt_mosquitto_port_tcp }}"
 frigate_mqtt_user: "{{ mqtt_mosquitto_auth_credentials[0].username }}"
 frigate_mqtt_password: "{{ mqtt_mosquitto_auth_credentials[0].password }}"
 
+frigate_go2rtc:
+  streams:
+    cam_1_pixel_6:
+      - "rtsp://10.20.252.31:8080/video/h264"
+      - "ffmpeg:cam_1_pixel_6#audio=opus"
+  # Necessary for establishing webrtc connection via live view
+  webrtc:
+    candidates:
+      - frigate-001.hq1.chuanguyen.ca:8555
+      - stun:8555
+
 frigate_cameras:
   cam_1_pixel_6: # <------ Name the camera
     ffmpeg:
       inputs:
-        - path: rtsp://10.20.252.31:8080/video/h264 # <----- The stream you want to use for detection
+        - path: "rtsp://127.0.0.1:8554/cam_1_pixel_6" # Restream connection
+          input_args: preset-rtsp-restream
           roles:
             - detect
     detect:
@@ -22,11 +34,29 @@ frigate_cameras:
       height: 1080 # <---- update for your camera's resolution
     snapshots:
       enabled: True
+    live:
+      stream_name: "cam_1_pixel_6"
 
 frigate_detectors:
   cpu1:
     type: "cpu"
     num_threads: 2
+
+frigate_detect:
+  width: 1280
+  height: 720
+  fps: 5
+  enabled: True
+  # Optional: Number of frames without a detection before Frigate considers an object to be gone. (default: 5x the frame rate)
+  max_disappeared: 25
+  # Optional: Configuration for stationary object tracking
+  stationary:
+    # Optional: Frequency for confirming stationary objects (default: shown below)
+    # When set to 0, object detection will not confirm stationary objects until movement is detected.
+    # If set to 10, object detection will run to confirm the object still exists on every 10th frame.
+    interval: 0
+    # Optional: Number of frames without a position change for an object to be considered stationary (default: 10x the frame rate or 10s)
+    threshold: 50
 
 frigate_ui:
   live_mode: "mse"

@@ -16,6 +16,9 @@ mqtt:
   # tls_insecure: {{ frigate_mqtt_tls_insecure }}
   stats_interval: {{ frigate_mqtt_stats_interval }}
 
+go2rtc:
+  {{ frigate_go2rtc }}
+
 cameras:
 {% for camera_name, camera_config in frigate_cameras.items() %}
   {{ camera_name }}:
@@ -31,6 +34,9 @@ detectors:
     {{ detector_config }}
 {% endfor %}
 
+detect:
+  {{ frigate_detect }}
+
 record:
   {{ frigate_record }}
 
@@ -39,6 +45,9 @@ snapshots:
 
 timestamp_style:
   {{ frigate_timestamp_style }}
+
+live:
+  {{ frigate_live }}
 
 ui:
   {{ frigate_ui }}
