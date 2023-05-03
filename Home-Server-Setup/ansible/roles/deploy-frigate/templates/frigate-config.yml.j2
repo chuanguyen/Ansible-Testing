@@ -34,6 +34,9 @@ detectors:
     {{ detector_config }}
 {% endfor %}
 
+ffmpeg:
+  {{ frigate_ffmpeg }}
+
 detect:
   {{ frigate_detect }}
 

@@ -32,6 +32,23 @@ frigate_detectors:
   NAME:
     type: ""
 
+frigate_ffmpeg:
+  # Optional: global ffmpeg args (default: shown below)
+  global_args: -hide_banner -loglevel warning -threads 2
+  # Optional: global hwaccel args (default: shown below)
+  # NOTE: See hardware acceleration docs for your specific device
+  hwaccel_args: []
+  # Optional: global input args (default: shown below)
+  input_args: preset-rtsp-generic
+  # Optional: global output args
+  output_args:
+    # Optional: output args for detect streams (default: shown below)
+    detect: -threads 2 -f rawvideo -pix_fmt yuv420p
+    # Optional: output args for record streams (default: shown below)
+    record: preset-record-generic
+    # Optional: output args for rtmp streams (default: shown below)
+    rtmp: preset-rtmp-generic
+
 frigate_record:
   enabled: False
   expire_interval: 60
