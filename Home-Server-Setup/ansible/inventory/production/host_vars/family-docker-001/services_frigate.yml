@@ -25,13 +25,27 @@ frigate_cameras:
     ffmpeg:
       inputs:
         - path: "rtsp://127.0.0.1:8554/cam_1_pixel_6" # Restream connection
-          input_args: preset-rtsp-restream
+          input_args: "preset-rtsp-restream"
           roles:
             - detect
+            - record
+      output_args:
+        record: "preset-record-generic-audio-copy"
     detect:
       enabled: True # <---- disable detection until you have a working camera feed
       width: 1920 # <---- update for your camera's resolution
       height: 1080 # <---- update for your camera's resolution
+    record:
+      enabled: False
+      events:
+        objects:
+          - person
+        required_zones: []
+        retain:
+          default: 10
+          mode: motion
+          objects:
+            person: 15
     snapshots:
       enabled: True
     live:
