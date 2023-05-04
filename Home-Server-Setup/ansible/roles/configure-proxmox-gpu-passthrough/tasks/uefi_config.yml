@@ -1,0 +1,10 @@
+---
+- name: "TASK: Update Kernel Cmdline file"
+  template:
+    src: "cmdline.j2"
+    dest: "/etc/kernel/cmdline"
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+# Update pve GRUB

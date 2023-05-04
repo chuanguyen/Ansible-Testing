@@ -1,0 +1,9 @@
+---
+grub_iommu:
+  GenuineIntel: "intel_iommu"
+  AuthenticAMD: "amd_iommu"
+
+use_optional_grub_cmdline_linux_attr: false
+# Use optional attributes if iommu doesn't work properly
+# https://gist.github.com/qubidt/64f617e959725e934992b080e677656f
+optional_grub_cmdline_linux_attr: "iommu=pt pcie_acs_override=downstream,multifunction nofb nomodeset video=vesafb:off,efifb:off"

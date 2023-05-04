@@ -1,0 +1,20 @@
+---
+- name: "TASK: Assess if system is UEFI or BIOS"
+  become: true
+  stat:
+    path: "/sys/firmware/efi"
+  register: uefi_or_bios_check
+
+- name: "TASK: Assess if CPU is Intel or AMD"
+  shell:
+    cmd: lscpu | grep "Vendor ID" | awk '{print $3}'
+    executable: "/bin/bash"
+  register: cpu_vendor_check
+
+- name: "TASK: Include UEFI-specific configuration"
+  include_tasks: "uefi_config.yml"
+  when: uefi_or_bios_check.stat.exists
+
+- name: "TASK: Include BIOS-specific configuration"
+  include_tasks: "uefi_config.yml"
+  when: not uefi_or_bios_check.stat.exists

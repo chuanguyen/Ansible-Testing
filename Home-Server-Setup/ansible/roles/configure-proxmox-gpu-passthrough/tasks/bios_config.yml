@@ -1,0 +1,10 @@
+---
+- name: "TASK: Update GRUB file"
+  template:
+    src: "grub.j2"
+    dest: "/etc/default/grub"
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+# Update GRUB
