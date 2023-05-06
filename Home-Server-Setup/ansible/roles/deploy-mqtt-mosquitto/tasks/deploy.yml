@@ -41,7 +41,7 @@
 
 - block:
     - include_tasks: "deploy_authentication.yml"
-  when: "mqtt_mosquitto_auth_refresh and mqtt_mosquitto_auth_enable == 'true'"
+  when: "mqtt_mosquitto_auth_enable == 'true'"
 
 - name: "TASK: Deploy {{ mqtt_mosquitto_container_name }}"
   community.docker.docker_compose:

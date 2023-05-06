@@ -14,6 +14,7 @@
     chdir: "{{ mqtt_mosquitto_container_data_dir }}/config"
   with_items: "{{ mqtt_mosquitto_auth_credentials }}"
   register: create_mosquitto_password_file
+  when: mqtt_mosquitto_auth_refresh
 
 - name: "TASK: Restart container if password file created"
   ansible.builtin.set_fact:
