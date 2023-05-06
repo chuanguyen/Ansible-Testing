@@ -1,6 +1,6 @@
 ---
-
 - name: "TASK: Create Docker networks"
+  become: true
   community.docker.docker_network:
     name: "{{ item.value.name }}"
     driver: "{{ item.value.driver }}"
