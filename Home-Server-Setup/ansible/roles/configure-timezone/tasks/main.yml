@@ -1,5 +1,6 @@
 ---
 - name: "TASK: Set the system timezone"
+  become: true
   ansible.builtin.file:
     src: "/usr/share/zoneinfo/{{ timezone_tz_identifier }}"
     dest: "/etc/localtime"
