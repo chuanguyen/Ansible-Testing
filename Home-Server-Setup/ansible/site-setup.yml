@@ -27,7 +27,7 @@
     - role: configure-autofs
       tags: [baseline, refresh]
     - role: configure-docker
-      tags: [baseline, refresh]
+      tags: [baseline, refresh, docker]
     - role: configure-prometheus-node-exporter
       tags: [baseline, monitoring, refresh]
 
