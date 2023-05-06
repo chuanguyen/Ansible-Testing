@@ -1,4 +1,11 @@
 ---
+- name: "TASK: Create Docker Data Root Directory"
+  file:
+    path: "{{ docker_data_root_dir }}"
+    state: Directory"
+    mode: 0770
+    owner: root
+    group: docker
 
 - name: "TASK: Configure docker daemon"
   become: true
