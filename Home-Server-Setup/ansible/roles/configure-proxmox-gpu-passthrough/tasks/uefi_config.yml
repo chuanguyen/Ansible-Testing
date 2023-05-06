@@ -7,4 +7,6 @@
     group: root
     mode: 0644
     backup: yes
+
 # Update pve GRUB
+proxmox-boot-tool refresh

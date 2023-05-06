@@ -1,0 +1,31 @@
+---
+# Add in vfio modules to /etc/modules
+# Template out the file
+vfio
+vfio_iommu_type1
+vfio_pci
+vfio_virqfd
+# Add in block lists for GPU drivers to the host
+# Add to /etc/modprobe.d/gpu-passthrough-blacklist.conf
+blacklist nvidia
+blacklist radeon
+blacklist nouveau
+
+# Run update-initramfs -u to update modules
+
+# Run lspci -nn to get full list of all PCI devices
+65:00.0 VGA compatible controller [0300]: NVIDIA Corporation GP107 [GeForce GTX 1050 Ti] [10de:1c82] (rev a1)
+65:00.1 Audio device [0403]: NVIDIA Corporation GP107GL High Definition Audio Controller [10de:0fb9] (rev a1)
+
+# Run lspci -n -s { ID OF PCI DEVICE }
+root@proxmox-001:/home/# lspci -n -s 65:00.0
+65:00.0 0300: 10de:1c82 (rev a1)
+root@proxmox-001:/home/# lspci -n -s 65:00.1
+65:00.1 0403: 10de:0fb9 (rev a1)
+
+# After, can add device into hardware list of VM
+
+### On the VM, so not in this role:
+# Blacklist nouveau drivers
+# Run ubuntu-drivers autoinstall to grab the compatible drivers
+# Reboot

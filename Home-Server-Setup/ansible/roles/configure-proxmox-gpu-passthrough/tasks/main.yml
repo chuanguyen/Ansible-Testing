@@ -11,6 +11,9 @@
     executable: "/bin/bash"
   register: cpu_vendor_check
 
+# CONSIDER I HAD TO RUN THE GRUB CONFIGURATION DESPITE HAVING UEFI
+# SETUP TO GET IOMMU ENABLED, SO SHOULD JUST RUN BOTH WITHOUT CHECKING
+
 - name: "TASK: Include UEFI-specific configuration"
   include_tasks: "uefi_config.yml"
   when: uefi_or_bios_check.stat.exists
