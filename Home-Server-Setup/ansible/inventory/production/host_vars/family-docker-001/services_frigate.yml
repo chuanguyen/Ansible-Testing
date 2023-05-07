@@ -36,7 +36,7 @@ frigate_cameras:
       width: 1920 # <---- update for your camera's resolution
       height: 1080 # <---- update for your camera's resolution
     record:
-      enabled: False
+      enabled: True
       events:
         objects:
           - person
