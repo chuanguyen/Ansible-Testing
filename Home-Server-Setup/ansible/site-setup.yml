@@ -42,3 +42,5 @@
       tags: [baseline, refresh, security]
     - role: configure-prometheus-node-exporter
       tags: [baseline, monitoring, refresh]
+    - role: configure-postfix
+      tags: [baseline, postfix]
