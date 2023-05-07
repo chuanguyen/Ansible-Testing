@@ -1,0 +1,2 @@
+---
+postfix_config_relay_host: "{{ home_smtp_relay_server }}:465"

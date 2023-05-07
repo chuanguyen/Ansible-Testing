@@ -1,0 +1,48 @@
+---
+- name: "TASK: Ensure SASL Postfix module is installed"
+  include_role:
+    name: install-system-packages
+  vars:
+    packages_to_install:
+      - "libsasl2-modules"
+
+# Add to the /etc/postfix/main.cf file
+- name: "TASK: Add Postfix SMTP server configuration"
+  become: true
+  blockinfile:
+    dest: "/etc/postfix/main.cf"
+    block: "{{ lookup('template', 'postfix_main.cf.j2') }}"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK FOR postfix"
+    backup: yes
+
+- name: "TASK: Create Postfix SASL Credential file"
+  become: true
+  template:
+    src: "postfix_sasl_passwd.j2"
+    dest: "{{ postfix_config_sasl_file_path }}"
+    owner: root
+    group: root
+    mode: 0600
+  notify:
+    - "HANDLER: Update postmap"
+    - "HANDLER: restart postfix service"
+
+- name: "TASK: Update permissions on SASL DB file"
+  become: true
+  file:
+    path: "{{ postfix_config_sasl_file_path }}.db"
+    owner: root
+    group: root
+    mode: 0600
+  notify:
+    - "HANDLER: restart postfix service"
+
+- name: "TASK: Update mail alias file"
+  become: true
+  lineinfile:
+    path: "/etc/aliases"
+    search_string: "root:"
+    line: "root: {{ postfix_root_alias_email }}"
+    state: present
+  notify:
+    - "HANDLER: Rebuild aliases database"

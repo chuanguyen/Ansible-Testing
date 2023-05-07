@@ -1,0 +1,18 @@
+---
+- name: "HANDLER: restart postfix service"
+  become: true
+  service:
+    name: "postfix"
+    state: "restarted"
+
+- name: "HANDLER: Update postmap"
+  become: true
+  shell:
+    cmd: "postmap {{ postfix_config_sasl_file_path }}"
+    executable: "/bin/bash"
+
+- name: "HANDLER: Rebuild aliases database"
+  become: true
+  shell:
+    cmd: "newaliases"
+    executable: "/bin/bash"
