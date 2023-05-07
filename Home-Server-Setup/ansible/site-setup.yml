@@ -44,3 +44,5 @@
       tags: [baseline, monitoring, refresh]
     - role: configure-postfix
       tags: [baseline, postfix]
+    - role: configure-fstab-mounts
+      tags: [baseline, fstab]

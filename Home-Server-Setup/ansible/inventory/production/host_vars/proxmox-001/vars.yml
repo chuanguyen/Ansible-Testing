@@ -1,0 +1,12 @@
+---
+fstab_entries:
+  - id: "//nas1.hq1.chuanguyen.ca/backups"
+    mount_point:
+      path: "/mnt/backups/family-nas-001"
+    file_system: "cifs"
+    mount_options:
+      - "username={{ home_backup_cifs_username }}"
+      - "password={{ home_backup_cifs_password }}"
+      - "noserverino"
+    dump: 0
+    fsck: 0

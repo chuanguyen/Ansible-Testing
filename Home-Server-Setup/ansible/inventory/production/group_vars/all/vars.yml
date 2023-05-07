@@ -36,6 +36,9 @@ dns_provider_ddns_domains_to_update: "{{ vault_dns_provider_ddns_domains_to_upda
 dns_provider_api_token: "{{ vault_dns_provider_api_token }}"
 dns_provider_api_token_letsencrypt: "{{ vault_dns_provider_api_token_letsencrypt }}"
 
+home_backup_cifs_username: "{{ vault_home_backup_cifs_username }}"
+home_backup_cifs_password: "{{ vault_home_backup_cifs_password }}"
+
 # Monitoring
 
 ### Node_Exporter
