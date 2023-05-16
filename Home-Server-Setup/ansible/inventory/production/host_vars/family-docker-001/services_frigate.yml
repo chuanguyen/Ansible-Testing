@@ -11,9 +11,11 @@ frigate_mqtt_password: "{{ mqtt_mosquitto_auth_credentials[0].password }}"
 
 frigate_go2rtc:
   streams:
-    cam_1_pixel_6:
-      - "rtsp://10.20.252.31:8080/video/h264"
-      - "ffmpeg:cam_1_pixel_6#audio=opus"
+    front_door:
+      - "rtsp://home-assistant-001.hq1.chuanguyen.ca:8554/front-door"
+      - "ffmpeg:front_door#audio=opus"
+    front_door_substream:
+      - "rtsp://home-assistant-001.hq1.chuanguyen.ca:8554/front-door-sub"
   # Necessary for establishing webrtc connection via live view
   webrtc:
     candidates:
@@ -21,26 +23,28 @@ frigate_go2rtc:
       - stun:8555
 
 frigate_cameras:
-  cam_1_pixel_6: # <------ Name the camera
+  front_door: # <------ Name the camera
     ffmpeg:
       inputs:
-        - path: "rtsp://127.0.0.1:8554/cam_1_pixel_6" # Restream connection
+        - path: "rtsp://127.0.0.1:8554/front_door" # Restream connection
+          input_args: "preset-rtsp-restream"
+          roles:
+            - record
+        - path: "rtsp://127.0.0.1:8554/front_door_substream" # Restream connection
           input_args: "preset-rtsp-restream"
           roles:
             - detect
-            - record
       output_args:
         record: "preset-record-generic-audio-copy"
     detect:
       enabled: True # <---- disable detection until you have a working camera feed
-      width: 1920 # <---- update for your camera's resolution
-      height: 1080 # <---- update for your camera's resolution
+      width: 640 # <---- update for your camera's resolution
+      height: 360 # <---- update for your camera's resolution
     record:
       enabled: True
       events:
-        objects:
-          - person
-        required_zones: []
+        required_zones:
+          - front_yard
         retain:
           default: 10
           mode: motion
@@ -48,8 +52,22 @@ frigate_cameras:
             person: 15
     snapshots:
       enabled: True
+      required_zones:
+        - front_yard
+    objects:
+      track:
+        - person
+        - cat
+        - dog
+    zones:
+      front_yard:
+        coordinates: 0,117,0,360,251,360,482,360,478,336,577,322,640,102,585,66,416,52,311,44,25,84
+    motion:
+      mask:
+        - 105,0,220,0,445,0,640,0,604,44,299,23,0,80,0,0
+        - 640,279,608,294,544,250,563,161,640,139
     live:
-      stream_name: "cam_1_pixel_6"
+      stream_name: "front_door"
 
 frigate_detectors:
   cpu1:
