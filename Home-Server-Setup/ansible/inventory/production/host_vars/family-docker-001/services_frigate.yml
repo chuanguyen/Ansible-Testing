@@ -16,6 +16,7 @@ frigate_go2rtc:
       - "ffmpeg:front_door#audio=opus"
     front_door_substream:
       - "rtsp://home-assistant-001.hq1.chuanguyen.ca:8554/front-door-sub"
+      - "ffmpeg:front_door_substream#audio=opus"
   # Necessary for establishing webrtc connection via live view
   webrtc:
     candidates:
@@ -35,7 +36,7 @@ frigate_cameras:
           roles:
             - detect
       output_args:
-        record: "preset-record-generic-audio-copy"
+        record: preset-record-generic-audio-copy
     detect:
       enabled: True # <---- disable detection until you have a working camera feed
       width: 640 # <---- update for your camera's resolution
@@ -45,6 +46,7 @@ frigate_cameras:
       events:
         required_zones:
           - front_yard
+          - front_yard_street
         retain:
           default: 10
           mode: motion
@@ -52,8 +54,7 @@ frigate_cameras:
             person: 15
     snapshots:
       enabled: True
-      required_zones:
-        - front_yard
+      bounding_box: True
     objects:
       track:
         - person
@@ -61,11 +62,14 @@ frigate_cameras:
         - dog
     zones:
       front_yard:
-        coordinates: 0,117,0,360,251,360,482,360,478,336,577,322,640,102,585,66,416,52,311,44,25,84
+        coordinates: 0,360,592,360,640,306,640,129,583,94,317,76,0,97
+      front_yard_street:
+        coordinates: 349,65,640,95,640,41,333,0,31,41,44,98
+        objects:
+          - person
     motion:
       mask:
-        - 105,0,220,0,445,0,640,0,604,44,299,23,0,80,0,0
-        - 640,279,608,294,544,250,563,161,640,139
+        - 640,360,583,360,550,301,540,229,591,179,640,153
     live:
       stream_name: "front_door"
 
