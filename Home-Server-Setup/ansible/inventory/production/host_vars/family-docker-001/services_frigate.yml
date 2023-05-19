@@ -44,6 +44,8 @@ frigate_cameras:
     record:
       enabled: True
       events:
+        pre_capture: 10
+        post_capture: 10
         required_zones:
           - front_yard
           - front_yard_street
