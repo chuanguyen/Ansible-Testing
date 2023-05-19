@@ -1,0 +1,32 @@
+---
+
+# {{ ansible_managed }}
+
+version: "3"
+
+services:
+  zigbee2mqtt:
+    build:
+      context: build/
+    container_name: "{{ zigbee2mqtt_container_name }}"
+    image: "{{ zigbee2mqtt_image_base }}:{{ zigbee2mqtt_image_base_tag }}"
+    env_file: zigbee2mqtt.env
+    ports:
+      - ""
+    networks:
+      - ""
+    # Volumes store your data between container upgrades
+    volumes:
+{% for volume in zigbee2mqtt_container_volumes.binds %}
+      - {{ volume.source }}:{{ volume.target }}
+{% endfor %}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network={{ docker_networks.proxy.name }}"
+      - "traefik.http.routers.zigbee2mqtt1.rule=Host(`zigbee2mqtt.{{ home_lan_domain }}`)"
+      - "traefik.http.routers.zigbee2mqtt1.entrypoints=websecure"
+      - "traefik.http.routers.zigbee2mqtt1.middlewares=lanWhitelist@file,secureHeaders@file"
+      - "traefik.http.routers.zigbee2mqtt1.tls=true"
+      - "traefik.http.routers.zigbee2mqtt1.tls.certresolver=letsEncrypt"
+    restart: "always"
+networks:

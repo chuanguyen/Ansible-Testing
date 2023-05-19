@@ -1,0 +1,7 @@
+# {{ ansible_managed }}
+# zigbee2mqtt backup cron job
+
+SHELL=/bin/bash
+PATH=/usr/bin
+
+{{ zigbee2mqtt_nfs_backup_frequency }}   root  {{ zigbee2mqtt_container_data_dir }}/scripts/SERVICE-backup.sh

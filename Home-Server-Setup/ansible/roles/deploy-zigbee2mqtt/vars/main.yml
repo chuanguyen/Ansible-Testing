@@ -1,0 +1,11 @@
+zigbee2mqtt_container_data_dir_sub_folders:
+  - "etc-zigbee2mqtt/"
+  - "mnt-backup/"
+  - "scripts"
+
+zigbee2mqtt_container_volumes:
+  binds:
+    - source: "./etc-zigbee2mqtt/"
+      target: "/etc/zigbee2mqtt/"
+    - source: "./mnt-backup/"
+      target: "/mnt/backup/"
