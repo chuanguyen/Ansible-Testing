@@ -12,7 +12,7 @@
   become: true
   file:
     path: "{{ zigbee2mqtt_container_data_dir }}/{{ item }}"
-    owner: "root"
+    owner: "{{ zigbee2mqtt_container_user_id }}"
     group: "docker"
     mode: 0775
     state: "directory"
@@ -22,6 +22,7 @@
   template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
+    owner: "{{ zigbee2mqtt_container_user_id }}"
     group: "docker"
     mode: 0660
   with_items:
@@ -29,8 +30,10 @@
       dest: "{{ zigbee2mqtt_container_data_dir }}/docker-compose.yml"
     - src: "zigbee2mqtt.env.j2"
       dest: "{{ zigbee2mqtt_container_data_dir }}/zigbee2mqtt.env"
-    - src: "Dockerfile.j2"
-      dest: "{{ zigbee2mqtt_container_data_dir }}/build/Dockerfile"
+    - src: "zigbee2mqtt_configuration.yaml.j2"
+      dest: "{{ zigbee2mqtt_container_data_dir }}/zigbee2mqtt-data/configuration.yaml"
+    - src: "zigbee2mqtt_secret.yaml.j2"
+      dest: "{{ zigbee2mqtt_container_data_dir }}/zigbee2mqtt-data/{{ zigbee2mqtt_secret_filename }}.yaml"
   loop_control:
     label: "{{ item.src }}"
   register: "container_templated_files"

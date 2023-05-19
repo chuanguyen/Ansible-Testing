@@ -63,3 +63,6 @@
       tags: [services, frigate]
       vars:
         traefik_http_rule_hostname: "frigate-001"
+
+    - role: "deploy-zigbee2mqtt"
+      tags: [services, zigbee2mqtt]

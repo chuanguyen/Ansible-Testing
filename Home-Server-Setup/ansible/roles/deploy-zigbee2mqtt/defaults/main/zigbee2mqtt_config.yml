@@ -1,0 +1,73 @@
+---
+zigbee2mqtt_permit_join: "true"
+# If set to true, newly discovered devices added to
+# homeassistant topic. Base topic doesn't impact
+zigbee2mqtt_homeassistant: "false"
+
+zigbee2mqtt_mqtt:
+  # Required: MQTT server URL (use mqtts:// for SSL/TLS connection)
+  server: "mqtt://localhost:1883"
+  # Optional: MQTT base topic for Zigbee2MQTT MQTT messages (default: zigbee2mqtt)
+  base_topic: zigbee2mqtt
+  # Optional: absolute path to SSL/TLS certificate of CA used to sign server and client certificates (default: nothing)
+  # ca: '/etc/ssl/mqtt-ca.crt'
+  # Optional: absolute paths to SSL/TLS key and certificate for client-authentication (default: nothing)
+  # key: '/etc/ssl/mqtt-client.key'
+  # cert: '/etc/ssl/mqtt-client.crt'
+  # Optional: MQTT server authentication user (default: nothing)
+  # user: my_user
+  # Optional: MQTT server authentication password (default: nothing)
+  # password: my_password
+  # Optional: MQTT client ID (default: nothing)
+  # client_id: 'MY_CLIENT_ID'
+  # Optional: disable self-signed SSL certificates (default: true)
+  # reject_unauthorized: true
+  # Optional: Include device information to mqtt messages (default: false)
+  # include_device_information: true
+  # Optional: MQTT keepalive in seconds (default: 60)
+  keepalive: 60
+  # Optional: MQTT protocol version (default: 4), set this to 5 if you
+  # use the 'retention' device specific configuration
+  version: 4
+  # Optional: Disable retain for all send messages. ONLY enable if you MQTT broker doesn't
+  # support retained message (e.g. AWS IoT core, Azure IoT Hub, Google Cloud IoT core, IBM Watson IoT Platform).
+  # Enabling will break the Home Assistant integration. (default: false)
+  force_disable_retain: false
+
+zigbee2mqtt_serial:
+  port: "{{ zigbee2mqtt_zigbee_container_usb_device_id }}"
+  disable_led: false
+  # Optional: Baud rate speed for serial port, this can be anything firmware support but default is 115200 for Z-Stack and EZSP, 38400 for Deconz, however note that some EZSP firmware need 57600.
+  baudrate: 115200
+  # Optional: RTS / CTS Hardware Flow Control for serial port (default: false)
+  rtscts: false
+
+zigbee2mqtt_advanced:
+  homeassistant_legacy_entity_attributes: false
+  legacy_api: false
+  legacy_availability_payload: false
+  channel: 11
+  ### Generate network key and then store in secret file
+  # network_key: "GENERATE"
+  network_key: "!{{ zigbee2mqtt_secret_filename }} network_key"
+
+zigbee2mqtt_device_options:
+  legacy: "false"
+
+zigbee2mqtt_frontend:
+  # Optional, default 8080
+  port: 8080
+  # Optional, default 0.0.0.0. Opens a unix socket when given a path instead of an address (e.g. '/run/zigbee2mqtt/zigbee2mqtt.sock')
+  # host: 0.0.0.0
+  # Optional, enables authentication, disabled by default
+  # auth_token: "!{{ zigbee2mqtt_secret_filename }} auth_token"
+  # Optional, url on which the frontend can be reached, currently only used for the Home Assistant device configuration page
+  # url: 'https://zigbee2mqtt.myhouse.org'
+  # Optional, certificate file path for exposing HTTPS. The sibling property 'ssl_key' must be set for HTTPS to be activated
+  # ssl_cert: /config/etc/letsencrypt/live/mydomain.com/fullchain.pem
+  # Optional, private key file path for exposing HTTPS. The sibling property 'ssl_cert' must be set for HTTPS to be activated
+  # ssl_key: /config/etc/letsencrypt/live/mydomain.com/privkey.pem
+
+zigbee2mqtt_secret_filename: "zigbee2mqtt_secret"
+# Should secure this value
+zigbee2mqtt_secret_network_key: []

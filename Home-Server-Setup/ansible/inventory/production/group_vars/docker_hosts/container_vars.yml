@@ -49,3 +49,6 @@ frigate_image_base_tag_old: ""
 
 mqtt_mosquitto_image_base_tag: "2.0.15"
 mqtt_mosquitto_image_base_tag_old: ""
+
+zigbee2mqtt_image_base_tag: "1.30.4"
+zigbee2mqtt_image_base_tag_old: ""

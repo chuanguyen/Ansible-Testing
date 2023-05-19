@@ -1,0 +1,22 @@
+---
+# zigbee2mqtt
+zigbee2mqtt_zigbee_host_usb_device_id: "usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20230221164549-if00"
+
+zigbee2mqtt_permit_join: "true"
+zigbee2mqtt_homeassistant: "true"
+
+zigbee2mqtt_mqtt:
+  # Required: MQTT server URL (use mqtts:// for SSL/TLS connection)
+  server: "mqtt://mqtt_mosquitto:{{ mqtt_mosquitto_port_secure_tcp }}"
+  # Optional: MQTT base topic for Zigbee2MQTT MQTT messages (default: zigbee2mqtt)
+  base_topic: zigbee2mqtt
+  # Optional: absolute path to SSL/TLS certificate of CA used to sign server and client certificates (default: nothing)
+  ca: "/etc/ssl/certs/ca-certificates.crt"
+  # Optional: MQTT server authentication user (default: nothing)
+  user: "{{ mqtt_mosquitto_auth_credentials[0].username }}"
+  # Optional: MQTT server authentication password (default: nothing)
+  password: "{{ mqtt_mosquitto_auth_credentials[0].password }}"
+  keepalive: 60
+  version: 4
+
+zigbee2mqtt_secret_network_key: "{{ vault_family_docker_001_zigbee2mqtt_secret_network_key }}"

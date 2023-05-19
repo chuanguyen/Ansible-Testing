@@ -1,6 +1,6 @@
 zigbee2mqtt_container_data_dir: "{{ docker_container_root_dir }}/zigbee2mqtt"
 
-zigbee2mqtt_image_base: "REPO/zigbee2mqtt"
+zigbee2mqtt_image_base: "koenkk/zigbee2mqtt"
 zigbee2mqtt_image_base_tag: ""
 # Ensures previous version of working
 # zigbee2mqtt image is available for failback
@@ -10,13 +10,14 @@ zigbee2mqtt_container_name: "zigbee2mqtt"
 zigbee2mqtt_container_restart: no
 # Defines image ID for custom image
 zigbee2mqtt_image_custom: "{{ ansible_user }}/zigbee2mqtt"
-
-zigbee2mqtt_backup_directory: "/mnt/backup/"
-zigbee2mqtt_nfs_backup_directory: "/nfs/Container-Data/docker/zigbee2mqtt/"
-# Defines in days age of backups to remove
-zigbee2mqtt_nfs_backup_cleanup_period: "60"
-# Defines via cron syntax how often to run backup
-zigbee2mqtt_nfs_backup_frequency: "0 1 */15 * *"
+zigbee2mqtt_container_user_id: "1000"
+# Group with access to the adapter
+zigbee2mqtt_container_user_group: "dialout"
+# Locate path for Zigbee adapter and define as hostvar
+zigbee2mqtt_zigbee_host_usb_device_id: ""
+# Defines device to map to in container
+zigbee2mqtt_zigbee_container_usb_device_id: "/dev/ttyACM0"
 
 zigbee2mqtt_container_envs:
   kv:
+    TZ: "America/Vancouver"

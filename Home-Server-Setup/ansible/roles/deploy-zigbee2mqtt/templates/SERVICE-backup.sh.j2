@@ -1,9 +1,0 @@
-#!/bin/bash
-
-### {{ ansible_managed }}
-
-docker exec -d -w "{{ backup_directory }}" zigbee2mqtt
-
-sleep 5s && rsync --remove-source-files -zv {{ zigbee2mqtt_container_data_dir }}/mnt-backup/* {{ zigbee2mqtt_nfs_backup_directory }}
-
-find {{ zigbee2mqtt_nfs_backup_directory }} -mtime +{{ zigbee2mqtt_nfs_backup_cleanup_period }} -exec rm {} \;
