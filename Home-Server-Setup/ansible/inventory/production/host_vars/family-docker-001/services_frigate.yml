@@ -12,10 +12,10 @@ frigate_mqtt_password: "{{ mqtt_mosquitto_auth_credentials[0].password }}"
 frigate_go2rtc:
   streams:
     front_door:
-      - "rtsp://home-assistant-001.hq1.chuanguyen.ca:8554/front-door"
+      - "rtsp://home-assistant-001.hq1.chuanguyen.ca:8556/front-door"
       - "ffmpeg:front_door#audio=opus"
     front_door_substream:
-      - "rtsp://home-assistant-001.hq1.chuanguyen.ca:8554/front-door-sub"
+      - "rtsp://home-assistant-001.hq1.chuanguyen.ca:8556/front-door-sub"
       - "ffmpeg:front_door_substream#audio=opus"
   # Necessary for establishing webrtc connection via live view
   webrtc:
