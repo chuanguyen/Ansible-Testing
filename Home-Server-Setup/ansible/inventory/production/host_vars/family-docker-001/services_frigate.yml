@@ -17,6 +17,12 @@ frigate_go2rtc:
     front_door_substream:
       - "rtsp://home-assistant-001.hq1.chuanguyen.ca:8556/front-door-sub"
       - "ffmpeg:front_door_substream#audio=opus"
+    garage:
+      - "rtsp://home-assistant-001.hq1.chuanguyen.ca:8556/rear-driveway"
+      - "ffmpeg:front_door#audio=opus"
+    garage_substream:
+      - "rtsp://home-assistant-001.hq1.chuanguyen.ca:8556/rear-driveway-sub"
+      - "ffmpeg:front_door_substream#audio=opus"
   # Necessary for establishing webrtc connection via live view
   webrtc:
     candidates:
@@ -74,6 +80,70 @@ frigate_cameras:
         - 640,360,583,360,550,301,540,229,591,179,640,153
     live:
       stream_name: "front_door"
+  garage:
+    ffmpeg:
+      inputs:
+        - path: "rtsp://127.0.0.1:8554/garage" # Restream connection
+          input_args: "preset-rtsp-restream"
+          roles:
+            - record
+        - path: "rtsp://127.0.0.1:8554/garage_substream" # Restream connection
+          input_args: "preset-rtsp-restream"
+          roles:
+            - detect
+      output_args:
+        record: preset-record-generic-audio-copy
+    detect:
+      enabled: True # <---- disable detection until you have a working camera feed
+      width: 640 # <---- update for your camera's resolution
+      height: 360 # <---- update for your camera's resolution
+    record:
+      enabled: True
+      events:
+        pre_capture: 10
+        post_capture: 10
+        required_zones:
+          - driveway
+          - driveway_entrance
+          - backyard
+        retain:
+          default: 10
+          mode: motion
+          objects:
+            person: 15
+    snapshots:
+      enabled: True
+      bounding_box: True
+      required_zones:
+        - driveway
+        - driveway_entrance
+        - backyard
+      retain:
+        objects:
+          car: 1
+    objects:
+      track:
+        - person
+        - cat
+        - dog
+        - car
+    zones:
+      driveway:
+        coordinates: 640,360,640,144,640,278,640,210,544,69,447,68,364,68,180,74,0,203,0,360
+        objects:
+          - person
+          - cat
+          - dog
+      driveway_entrance:
+        coordinates: 499,0,510,50,436,64,292,58,296,34,291,0
+      backyard:
+        coordinates: 0,78,94,29,195,74,0,201
+        objects:
+          - person
+          - cat
+          - dog
+    live:
+      stream_name: "garage"
 
 frigate_detectors:
   cpu1:
