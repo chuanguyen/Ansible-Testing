@@ -97,6 +97,12 @@ frigate_cameras:
       enabled: True # <---- disable detection until you have a working camera feed
       width: 640 # <---- update for your camera's resolution
       height: 360 # <---- update for your camera's resolution
+      stationary:
+        threshold: 25
+        max_frames:
+          objects:
+            # Disable stationary object tracking for cars in garage
+            car: 0
     record:
       enabled: True
       events:
@@ -118,9 +124,6 @@ frigate_cameras:
         - driveway
         - driveway_entrance
         - backyard
-      retain:
-        objects:
-          car: 1
     objects:
       track:
         - person
