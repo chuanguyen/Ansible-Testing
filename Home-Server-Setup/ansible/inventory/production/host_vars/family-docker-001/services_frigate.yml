@@ -132,13 +132,17 @@ frigate_cameras:
         - car
     zones:
       driveway_entrance:
-        coordinates: 499,0,510,50,436,64,292,58,296,34,291,0
+        coordinates: 499,0,510,50,414,52,286,46,291,0
+        objects:
+          - car
+          - cat
+          - dog
         filters:
           car:
             min_score: 0.4
             threshold: 0.6
       driveway:
-        coordinates: 640,360,640,278,640,210,640,78,566,45,449,33,366,34,246,44,0,209,0,360
+        coordinates: 640,360,640,278,640,210,640,78,554,0,425,0,423,47,326,50,311,31,246,44,0,209,0,360
         objects:
           - person
           - cat
