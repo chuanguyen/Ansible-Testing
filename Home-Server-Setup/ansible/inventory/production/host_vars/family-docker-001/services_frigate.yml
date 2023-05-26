@@ -52,6 +52,10 @@ frigate_cameras:
       events:
         pre_capture: 10
         post_capture: 10
+        objects:
+          - person
+          - cat
+          - dog
         required_zones:
           - front_yard
           - front_yard_street
@@ -98,6 +102,7 @@ frigate_cameras:
       width: 640 # <---- update for your camera's resolution
       height: 360 # <---- update for your camera's resolution
       stationary:
+        interval: 0
         threshold: 25
         max_frames:
           objects:
@@ -109,9 +114,14 @@ frigate_cameras:
         pre_capture: 10
         post_capture: 10
         required_zones:
-          - driveway
-          - driveway_entrance
-          - backyard
+          - "driveway"
+          - "driveway_entrance"
+          - "backyard"
+        objects:
+          - person
+          - cat
+          - dog
+          - car
         retain:
           default: 10
           mode: motion
@@ -121,9 +131,9 @@ frigate_cameras:
       enabled: True
       bounding_box: True
       required_zones:
-        - driveway
-        - driveway_entrance
-        - backyard
+        - "driveway"
+        - "driveway_entrance"
+        - "backyard"
     objects:
       track:
         - person
@@ -132,7 +142,7 @@ frigate_cameras:
         - car
     zones:
       driveway_entrance:
-        coordinates: 499,0,510,50,414,52,286,46,291,0
+        coordinates: 260,62,325,0,423,0,518,0,525,62
         objects:
           - car
           - cat
@@ -147,33 +157,33 @@ frigate_cameras:
           - person
           - cat
           - dog
-        filters:
-          person:
-            min_score: 0.4
-            threshold: 0.6
-          cat:
-            min_score: 0.4
-            threshold: 0.6
-          dog:
-            min_score: 0.4
-            threshold: 0.6
+        # filters:
+        #   person:
+        #     min_score: 0.4
+        #     threshold: 0.6
+        #   cat:
+        #     min_score: 0.4
+        #     threshold: 0.6
+        #   dog:
+        #     min_score: 0.4
+        #     threshold: 0.6
       backyard:
         coordinates: 0,195,0,78,75,26,192,26,219,111,31,285
         objects:
           - person
           - cat
           - dog
-        filters:
-          # Add filters due to small coverage area to increase detection
-          person:
-            min_score: 0.4
-            threshold: 0.6
-          cat:
-            min_score: 0.4
-            threshold: 0.6
-          dog:
-            min_score: 0.4
-            threshold: 0.6
+        # filters:
+        #   # Add filters due to small coverage area to increase detection
+        #   person:
+        #     min_score: 0.4
+        #     threshold: 0.6
+        #   cat:
+        #     min_score: 0.4
+        #     threshold: 0.6
+        #   dog:
+        #     min_score: 0.4
+        #     threshold: 0.6
     live:
       stream_name: "garage"
 
