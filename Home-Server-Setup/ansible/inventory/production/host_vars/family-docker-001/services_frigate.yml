@@ -142,7 +142,7 @@ frigate_cameras:
         - car
     zones:
       driveway_entrance:
-        coordinates: 260,62,325,0,423,0,518,0,525,62
+        coordinates: 436,61,407,105,368,103,341,61,329,40,284,37,300,0,423,0,493,0,495,38
         objects:
           - car
           - cat
@@ -157,33 +157,33 @@ frigate_cameras:
           - person
           - cat
           - dog
-        # filters:
-        #   person:
-        #     min_score: 0.4
-        #     threshold: 0.6
-        #   cat:
-        #     min_score: 0.4
-        #     threshold: 0.6
-        #   dog:
-        #     min_score: 0.4
-        #     threshold: 0.6
+        filters:
+          person:
+            min_score: 0.4
+            threshold: 0.6
+          cat:
+            min_score: 0.4
+            threshold: 0.6
+          dog:
+            min_score: 0.4
+            threshold: 0.6
       backyard:
         coordinates: 0,195,0,78,75,26,192,26,219,111,31,285
         objects:
           - person
           - cat
           - dog
-        # filters:
-        #   # Add filters due to small coverage area to increase detection
-        #   person:
-        #     min_score: 0.4
-        #     threshold: 0.6
-        #   cat:
-        #     min_score: 0.4
-        #     threshold: 0.6
-        #   dog:
-        #     min_score: 0.4
-        #     threshold: 0.6
+        filters:
+          # Add filters due to small coverage area to increase detection
+          person:
+            min_score: 0.4
+            threshold: 0.6
+          cat:
+            min_score: 0.4
+            threshold: 0.6
+          dog:
+            min_score: 0.4
+            threshold: 0.6
     live:
       stream_name: "garage"
 
