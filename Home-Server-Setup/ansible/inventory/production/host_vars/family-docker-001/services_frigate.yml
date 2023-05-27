@@ -45,8 +45,8 @@ frigate_cameras:
         record: preset-record-generic-audio-copy
     detect:
       enabled: True # <---- disable detection until you have a working camera feed
-      width: 640 # <---- update for your camera's resolution
-      height: 360 # <---- update for your camera's resolution
+      width: 1280 # <---- update for your camera's resolution
+      height: 720 # <---- update for your camera's resolution
     record:
       enabled: True
       events:
@@ -74,14 +74,25 @@ frigate_cameras:
         - dog
     zones:
       front_yard:
-        coordinates: 0,360,592,360,640,306,640,129,583,94,317,76,0,97
+        coordinates: 1280,720,1280,300,1280,90,1185,61,1139,128,955,107,807,95,726,101,561,99,367,110,88,163,57,105,0,114,0,720
       front_yard_street:
-        coordinates: 349,65,640,95,640,41,333,0,31,41,44,98
+        coordinates: 567,90,951,109,1092,130,1140,122,1154,61,976,0,739,0,238,0,190,37,137,83,91,117,92,158
         objects:
           - person
     motion:
       mask:
-        - 640,360,583,360,550,301,540,229,591,179,640,153
+        - 1280,720,1280,304,1254,298,1215,296,1185,291,1160,304,1139,332,1124,376,1094,414,1061,455,1059,531,1057,622,1125,720
+    ### Zone and masks for 360p
+    # zones:
+    #   front_yard:
+    #     coordinates: 0,360,592,360,640,306,640,129,583,94,317,76,0,97
+    #   front_yard_street:
+    #     coordinates: 349,65,640,95,640,41,333,0,31,41,44,98
+    #     objects:
+    #       - person
+    # motion:
+    #   mask:
+    #     - 640,360,583,360,550,301,540,229,591,179,640,153
     live:
       stream_name: "front_door"
   garage:
@@ -99,8 +110,8 @@ frigate_cameras:
         record: preset-record-generic-audio-copy
     detect:
       enabled: True # <---- disable detection until you have a working camera feed
-      width: 640 # <---- update for your camera's resolution
-      height: 360 # <---- update for your camera's resolution
+      width: 1280 # <---- update for your camera's resolution
+      height: 720 # <---- update for your camera's resolution
       stationary:
         interval: 0
         threshold: 25
@@ -142,7 +153,7 @@ frigate_cameras:
         - car
     zones:
       driveway_entrance:
-        coordinates: 436,61,407,105,368,103,341,61,329,40,284,37,300,0,423,0,493,0,495,38
+        coordinates: 663,87,765,152,866,91,1004,91,995,0,837,0,654,0,573,67
         objects:
           - car
           - cat
@@ -152,7 +163,7 @@ frigate_cameras:
             min_score: 0.4
             threshold: 0.6
       driveway:
-        coordinates: 640,360,640,278,640,210,640,78,554,0,425,0,423,47,326,50,311,31,246,44,0,209,0,360
+        coordinates: 351,181,505,82,587,73,573,0,645,0,658,95,844,91,844,0,974,31,1079,50,1280,140,1280,720,0,720,0,408
         objects:
           - person
           - cat
@@ -168,7 +179,7 @@ frigate_cameras:
             min_score: 0.4
             threshold: 0.6
       backyard:
-        coordinates: 0,195,0,78,75,26,192,26,219,111,31,285
+        coordinates: 0,195,0,151,113,98,359,29,560,0,573,58,380,158,239,221,0,408
         objects:
           - person
           - cat
@@ -184,6 +195,54 @@ frigate_cameras:
           dog:
             min_score: 0.4
             threshold: 0.6
+    motion:
+      mask:
+        - 495,0,0,0,0,77,0,154
+    ### Zone and masks for 360p
+    # zones:
+    #   driveway_entrance:
+    #     coordinates: 443,40,413,64,407,105,368,103,341,61,329,40,284,37,300,0,423,0,493,0,495,38
+    #     objects:
+    #       - car
+    #       - cat
+    #       - dog
+    #     filters:
+    #       car:
+    #         min_score: 0.4
+    #         threshold: 0.6
+    #   driveway:
+    #     coordinates: 640,360,640,278,640,210,640,78,554,0,425,0,423,47,326,50,311,31,246,44,0,209,0,360
+    #     objects:
+    #       - person
+    #       - cat
+    #       - dog
+    #     filters:
+    #       person:
+    #         min_score: 0.4
+    #         threshold: 0.6
+    #       cat:
+    #         min_score: 0.4
+    #         threshold: 0.6
+    #       dog:
+    #         min_score: 0.4
+    #         threshold: 0.6
+    #   backyard:
+    #     coordinates: 0,195,0,78,75,26,192,26,219,111,31,285
+    #     objects:
+    #       - person
+    #       - cat
+    #       - dog
+    #     filters:
+    #       # Add filters due to small coverage area to increase detection
+    #       person:
+    #         min_score: 0.4
+    #         threshold: 0.6
+    #       cat:
+    #         min_score: 0.4
+    #         threshold: 0.6
+    #       dog:
+    #         min_score: 0.4
+    #         threshold: 0.6
     live:
       stream_name: "garage"
 
@@ -191,10 +250,10 @@ frigate_detectors:
   # Recommended to have the same number of CPU detectors as available cameras
   cpu1:
     type: "cpu"
-    num_threads: 3
+    num_threads: 4
   cpu2:
     type: "cpu"
-    num_threads: 3
+    num_threads: 4
 
 frigate_detect:
   width: 1280
