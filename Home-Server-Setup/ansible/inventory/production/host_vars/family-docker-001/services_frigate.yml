@@ -47,6 +47,7 @@ frigate_cameras:
       enabled: True # <---- disable detection until you have a working camera feed
       width: 1280 # <---- update for your camera's resolution
       height: 720 # <---- update for your camera's resolution
+      fps: 10
     record:
       enabled: True
       events:
@@ -74,13 +75,13 @@ frigate_cameras:
         - dog
     zones:
       front_yard:
-        coordinates: 1280,720,1280,300,1280,90,1185,61,1140,171,966,152,808,144,736,144,563,147,368,162,86,197,57,105,0,114,0,720
+        coordinates: 1280,720,1280,300,1280,90,1207,83,1201,188,978,245,822,246,750,209,629,207,512,234,329,246,79,273,63,193,0,179,0,720
         objects:
           - person
           - cat
           - dog
       front_yard_street:
-        coordinates: 567,90,951,109,1092,130,1140,122,1154,61,976,0,739,0,238,0,190,37,137,83,91,117,92,158
+        coordinates: 577,149,974,158,1139,171,1140,122,1154,61,976,0,739,0,238,0,190,37,80,94,90,197,226,174
         objects:
           - person
     motion:
@@ -116,6 +117,7 @@ frigate_cameras:
       enabled: True # <---- disable detection until you have a working camera feed
       width: 1280 # <---- update for your camera's resolution
       height: 720 # <---- update for your camera's resolution
+      fps: 10
       stationary:
         interval: 0
         threshold: 25
@@ -157,7 +159,7 @@ frigate_cameras:
         - car
     zones:
       driveway_entrance:
-        coordinates: 663,87,765,152,866,91,1004,91,995,0,837,0,654,0,573,67
+        coordinates: 681,83,765,152,849,87,1001,75,995,0,847,0,848,37,650,39,575,75,622,72
         objects:
           - car
           - cat
@@ -167,7 +169,7 @@ frigate_cameras:
             min_score: 0.4
             threshold: 0.6
       driveway:
-        coordinates: 351,181,505,82,587,73,573,0,645,0,658,95,844,91,844,0,974,31,1079,50,1280,140,1280,720,0,720,0,408
+        coordinates: 351,181,505,82,587,73,573,0,647,139,848,141,859,0,961,22,1079,50,1280,140,1280,720,0,720,0,408
         objects:
           - person
           - cat
@@ -183,7 +185,7 @@ frigate_cameras:
             min_score: 0.4
             threshold: 0.6
       backyard:
-        coordinates: 0,195,0,151,113,98,359,29,560,0,573,58,380,158,239,221,0,408
+        coordinates: 0,195,0,151,113,98,359,29,560,0,573,73,423,139,448,235,63,549,0,408
         objects:
           - person
           - cat
@@ -202,6 +204,7 @@ frigate_cameras:
     motion:
       mask:
         - 495,0,0,0,0,77,0,154
+        - 849,0,841,31,645,29,656,0
     ### Zone and masks for 360p
     # zones:
     #   driveway_entrance:
