@@ -1,0 +1,11 @@
+zwave_js_ui_container_data_dir_sub_folders:
+  - "etc-zwave_js_ui/"
+  - "mnt-backup/"
+  - "scripts"
+
+zwave_js_ui_container_volumes:
+  binds:
+    - source: "./etc-zwave_js_ui/"
+      target: "/etc/zwave_js_ui/"
+    - source: "./mnt-backup/"
+      target: "/mnt/backup/"

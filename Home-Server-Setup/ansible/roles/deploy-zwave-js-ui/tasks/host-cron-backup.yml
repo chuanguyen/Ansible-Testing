@@ -1,0 +1,31 @@
+---
+- name: "TASK: Verify backup directory"
+  stat:
+    path: "{{ zwave_js_ui_nfs_backup_directory }}"
+  register: stat_backup_dir
+
+- name: "TASK: Assert backup directory exists"
+  assert:
+    that:
+      - stat_backup_dir.stat.isdir is defined
+      - stat_backup_dir.stat.isdir
+    fail_msg: "Backup directory doesn't exist"
+    success_msg: "Backup directory exists"
+
+- name: "TASK: Create {{ zwave_js_ui_container_name }} backup cron job"
+  become: true
+  template:
+    src: zwave_js_ui-backup.j2
+    dest: "/etc/cron.d/zwave_js_ui-backup"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: "TASK: Create {{ zwave_js_ui_container_name }} backup script"
+  become: true
+  template:
+    src: "zwave_js_ui-backup.sh.j2"
+    dest: "{{ zwave_js_ui_container_data_dir }}/scripts/zwave_js_ui-backup.sh"
+    owner: root
+    group: root
+    mode: 0755

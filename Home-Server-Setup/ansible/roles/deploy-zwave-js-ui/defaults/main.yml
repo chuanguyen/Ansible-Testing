@@ -1,0 +1,22 @@
+zwave_js_ui_container_data_dir: "{{ docker_container_root_dir }}/zwave_js_ui"
+
+zwave_js_ui_image_base: "zwavejs/zwave-js-ui"
+zwave_js_ui_image_base_tag: ""
+# Ensures previous version of working
+# zwave_js_ui image is available for failback
+zwave_js_ui_image_base_tag_old: ""
+zwave_js_ui_container_name: "zwave_js_ui"
+# Controls whether docker-compose restarts Docker containers
+zwave_js_ui_container_restart: no
+# Defines image ID for custom image
+zwave_js_ui_image_custom: "{{ ansible_user }}/zwave_js_ui"
+
+zwave_js_ui_backup_directory: "/mnt/backup/"
+zwave_js_ui_nfs_backup_directory: "/nfs/Container-Data/docker/zwave_js_ui/"
+# Defines in days age of backups to remove
+zwave_js_ui_nfs_backup_cleanup_period: "60"
+# Defines via cron syntax how often to run backup
+zwave_js_ui_nfs_backup_frequency: "0 1 */15 * *"
+
+zwave_js_ui_container_envs:
+  kv:

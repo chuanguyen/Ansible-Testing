@@ -1,0 +1,30 @@
+---
+
+# {{ ansible_managed }}
+
+version: "3"
+
+services:
+  zwave_js_ui:
+    container_name: "{{ zwave_js_ui_container_name }}"
+    image: "{{ zwave_js_ui_image_base }}:{{ zwave_js_ui_image_base_tag }}"
+    env_file: zwave_js_ui.env
+    ports:
+      - ""
+    networks:
+      - ""
+    # Volumes store your data between container upgrades
+    volumes:
+{% for volume in zwave_js_ui_container_volumes.binds %}
+      - {{ volume.source }}:{{ volume.target }}
+{% endfor %}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network={{ docker_networks.proxy.name }}"
+      - "traefik.http.routers.zwave_js_ui1.rule=Host(`zwave_js_ui.{{ home_lan_domain }}`)"
+      - "traefik.http.routers.zwave_js_ui1.entrypoints=websecure"
+      - "traefik.http.routers.zwave_js_ui1.middlewares=lanWhitelist@file,secureHeaders@file"
+      - "traefik.http.routers.zwave_js_ui1.tls=true"
+      - "traefik.http.routers.zwave_js_ui1.tls.certresolver=letsEncrypt"
+    restart: "always"
+networks:
