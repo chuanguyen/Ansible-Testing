@@ -113,6 +113,8 @@ frigate_cameras:
             - detect
       output_args:
         record: preset-record-generic-audio-copy
+    motion:
+      improve_contrast: True
     detect:
       enabled: True # <---- disable detection until you have a working camera feed
       width: 1280 # <---- update for your camera's resolution
@@ -176,8 +178,8 @@ frigate_cameras:
           - dog
         filters:
           person:
-            min_score: 0.4
-            threshold: 0.6
+            min_score: 0.5
+            threshold: 0.7
           cat:
             min_score: 0.4
             threshold: 0.6
