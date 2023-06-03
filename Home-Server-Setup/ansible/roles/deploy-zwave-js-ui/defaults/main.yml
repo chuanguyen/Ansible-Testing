@@ -18,5 +18,11 @@ zwave_js_ui_nfs_backup_cleanup_period: "60"
 # Defines via cron syntax how often to run backup
 zwave_js_ui_nfs_backup_frequency: "0 1 */15 * *"
 
+zwave_js_ui_host_usb_device_id: ""
+# Defines device to map to in container
+zwave_js_ui_container_usb_device_id: "/dev/zwave"
+zwave_js_ui_web_port: "8091"
+
 zwave_js_ui_container_envs:
   kv:
+    TZ: "Etc/UTC"

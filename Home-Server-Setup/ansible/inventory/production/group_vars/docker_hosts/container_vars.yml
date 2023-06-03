@@ -52,3 +52,6 @@ mqtt_mosquitto_image_base_tag_old: ""
 
 zigbee2mqtt_image_base_tag: "1.30.4"
 zigbee2mqtt_image_base_tag_old: ""
+
+zwave_js_ui_image_base_tag: "8.18"
+zwave_js_ui_image_base_tag_old: ""
