@@ -11,7 +11,7 @@ services:
     env_file: zwave_js_ui.env
     stop_signal: SIGINT
     ports:
-      - "3000:3000"
+      - "{{ zwave_js_ui_websocket_server_port }}:{{ zwave_js_ui_websocket_server_port }}"
     networks:
       - {{ docker_networks.proxy.name }}
     # Volumes store your data between container upgrades
@@ -19,12 +19,12 @@ services:
 {% for volume in zwave_js_ui_container_volumes.binds %}
       - {{ volume.source }}:{{ volume.target }}
 {% endfor %}
-    devices:
-      - /dev/serial/by-id/{{ zwave_js_ui_host_usb_device_id }}:{{ zwave_js_ui_container_usb_device_id }}
+    devices: []
+      # - /dev/serial/by-id/{{ zwave_js_ui_host_usb_device_id }}:{{ zwave_js_ui_container_usb_device_id }}
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network={{ docker_networks.proxy.name }}"
-      - "traefik.http.routers.zwave_js_ui1.rule=Host(`zwave_js_ui.{{ home_lan_domain }}`)"
+      - "traefik.http.routers.zwave_js_ui1.rule=Host(`zwave.{{ home_lan_domain }}`)"
       - "traefik.http.routers.zwave_js_ui1.entrypoints=websecure"
       - "traefik.http.routers.zwave_js_ui1.middlewares=secureHeaders@file"
       - "traefik.http.routers.zwave_js_ui1.tls=true"

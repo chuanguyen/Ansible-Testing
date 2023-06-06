@@ -66,3 +66,6 @@
 
     - role: "deploy-zigbee2mqtt"
       tags: [services, zigbee2mqtt]
+
+    - role: "deploy-zwave-js-ui"
+      tags: [services, zwave-js-ui]

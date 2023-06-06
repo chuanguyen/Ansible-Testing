@@ -94,5 +94,13 @@ ufw_rules:
       from_port: null
       to_port: "{{ mqtt_mosquitto_port_web_socket }}"
       proto: any
+    - comment: "Permits incoming connection to Z-Wave JS Webserver socket"
+      rule: allow
+      delete: no
+      from_ip: "any"
+      to_ip: any
+      from_port: null
+      to_port: "{{ zwave_js_ui_websocket_server_port }}"
+      proto: tcp
   remove:
     -
