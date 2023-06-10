@@ -19,7 +19,7 @@
     - role: configure-ssh-server
       tags: [baseline, refresh, security]
     - role: configure-ufw
-      tags: [baseline, refresh, network, security]
+      tags: [baseline, refresh, network, security, ufw]
     - role: configure-fail2ban
       tags: [baseline, refresh, security]
     - role: configure-cron

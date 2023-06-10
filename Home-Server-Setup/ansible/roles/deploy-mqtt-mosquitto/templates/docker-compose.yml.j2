@@ -11,6 +11,9 @@ services:
     env_file: mqtt_mosquitto.env
     networks:
       - {{ docker_networks.proxy.name }}
+    ports:
+      # Optional if want to expose non-secure port
+      - {{ mqtt_mosquitto_port_tcp }}:{{ mqtt_mosquitto_port_tcp }}
     expose:
       - {{ mqtt_mosquitto_port_tcp }}
       - {{ mqtt_mosquitto_port_secure_tcp }}
