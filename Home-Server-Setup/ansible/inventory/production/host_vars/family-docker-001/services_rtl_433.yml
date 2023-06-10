@@ -1,0 +1,11 @@
+---
+rtl_433_host_dev_usb_device_path: "/dev/bus/usb/009/004"
+
+rtl_433_outputs:
+  - "kv"
+  - "mqtt://mqtt_mosquitto:{{ mqtt_mosquitto_port_tcp }},user={{ mqtt_mosquitto_auth_credentials[0].username }},pass={{ mqtt_mosquitto_auth_credentials[0].password }},retain=1,devices=rtl_433/devices[/type][/model][/subtype][/channel][/id]"
+rtl_433_frequencies:
+  - "433.92M"
+  - "315M"
+  - "345M"
+rtl_433_convert_unit: "si"
