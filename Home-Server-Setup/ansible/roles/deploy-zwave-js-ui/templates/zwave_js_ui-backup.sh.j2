@@ -2,8 +2,25 @@
 
 ### {{ ansible_managed }}
 
-docker exec -d -w "{{ backup_directory }}" zwave_js_ui
+rsync -zv --ignore-existing {{ zwave_js_ui_backup_directory }}/store/* {{ zwave_js_ui_nfs_backup_directory }}/store
+rsync -zv --ignore-existing {{ zwave_js_ui_backup_directory }}/nvm/* {{ zwave_js_ui_nfs_backup_directory }}/nvm
 
-sleep 5s && rsync --remove-source-files -zv {{ zwave_js_ui_container_data_dir }}/mnt-backup/* {{ zwave_js_ui_nfs_backup_directory }}
+find {{ zwave_js_ui_nfs_backup_directory }}/store -mtime +{{ zwave_js_ui_nfs_backup_cleanup_period }} -exec rm {} \;
 
-find {{ zwave_js_ui_nfs_backup_directory }} -mtime +{{ zwave_js_ui_nfs_backup_cleanup_period }} -exec rm {} \;
+# Change to the directory
+cd "{{ zwave_js_ui_nfs_backup_directory }}/nvm" || exit
+
+# List all files in the directory sorted by modification time (newest first)
+files=($(ls -t))
+
+# Determine the number of files in the directory
+num_files=${{ '{' }}{{ '#' }}files[@]{{ '}' }}
+
+# Define the number of files to keep (7 in this case)
+num_files_to_keep={{ zwave_js_ui_nfs_backup_cleanup_num_files }}
+
+# Iterate over the files starting from the eighth file
+for ((i=num_files_to_keep; i<num_files; i++)); do
+  # Delete the file
+  rm "${{ '{' }}files[$i]{{ '}' }}"
+done
