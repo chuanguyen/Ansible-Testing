@@ -19,8 +19,8 @@ services:
 {% for volume in zwave_js_ui_container_volumes.binds %}
       - {{ volume.source }}:{{ volume.target }}
 {% endfor %}
-    devices: []
-      # - /dev/serial/by-id/{{ zwave_js_ui_host_usb_device_id }}:{{ zwave_js_ui_container_usb_device_id }}
+    devices:
+      - /dev/serial/by-id/{{ zwave_js_ui_host_usb_device_id }}:{{ zwave_js_ui_container_usb_device_id }}
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network={{ docker_networks.proxy.name }}"
