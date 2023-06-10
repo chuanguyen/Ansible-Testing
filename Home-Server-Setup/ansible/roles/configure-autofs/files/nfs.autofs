@@ -1,1 +1,1 @@
-{{ autofs_root_dir }}  /etc/auto.nfs
+/nfs  /etc/auto.nfs
