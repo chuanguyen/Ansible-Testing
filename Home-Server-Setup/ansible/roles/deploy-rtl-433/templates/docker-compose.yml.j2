@@ -1,0 +1,25 @@
+---
+
+# {{ ansible_managed }}
+
+version: "3"
+
+services:
+  rtl_433:
+    container_name: "{{ rtl_433_container_name }}"
+    image: "{{ rtl_433_image_base }}:{{ rtl_433_image_base_tag }}"
+    env_file: rtl_433.env
+    ports: []
+    networks:
+      - {{ docker_networks.proxy.name }}
+    devices:
+      - "{{ rtl_433_host_dev_usb_device_path }}"
+    # Volumes store your data between container upgrades
+    volumes:
+{% for volume in rtl_433_container_volumes.binds %}
+      - {{ volume.source }}:{{ volume.target }}
+{% endfor %}
+    restart: "always"
+networks:
+  {{ docker_networks.proxy.name }}:
+    external: true

@@ -1,0 +1,28 @@
+rtl_433_container_data_dir: "{{ docker_container_root_dir }}/rtl_433"
+
+rtl_433_image_base: "hertzg/rtl_433"
+rtl_433_image_base_tag: "latest"
+# Ensures previous version of working
+# rtl_433 image is available for failback
+rtl_433_image_base_tag_old: ""
+rtl_433_container_name: "rtl_433"
+# Controls whether docker-compose restarts Docker containers
+rtl_433_container_restart: no
+# Defines image ID for custom image
+rtl_433_image_custom: "{{ ansible_user }}/rtl_433"
+rtl_433_host_dev_usb_device_path: ""
+
+rtl_433_container_envs:
+  kv:
+
+### Reference for documentation:
+#     - https://triq.org/rtl_433/OPERATION.html#mqtt-output
+#     - https://github.com/merbanan/rtl_433/blob/master/conf/rtl_433.example.conf
+#     - https://github.com/hertzg/rtl_433_docker
+rtl_433_verbose_level: "4"
+rtl_433_outputs:
+  - "kv"
+rtl_433_frequencies:
+  - "433.92M"
+rtl_433_protocols: []
+rtl_433_convert_unit: "native"

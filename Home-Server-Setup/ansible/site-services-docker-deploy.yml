@@ -69,3 +69,6 @@
 
     - role: "deploy-zwave-js-ui"
       tags: [services, zwave-js-ui]
+
+    - role: "deploy-rtl-433"
+      tags: [services, rtl-433]

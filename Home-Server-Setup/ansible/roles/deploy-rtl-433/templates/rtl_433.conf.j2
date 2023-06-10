@@ -1,0 +1,20 @@
+# {{ ansible_managed }}
+# config for rtl_433
+
+verbose {{ rtl_433_verbose_level }}
+
+{% for rtl_433_output in rtl_433_outputs %}
+output  {{ rtl_433_output }}
+{% endfor %}
+
+{% for rtl_433_frequency in rtl_433_frequencies %}
+frequency   {{ rtl_433_frequency }}
+{% endfor %}
+
+{% if rtl_433_protocols | length > 0 %}
+{% for rtl_433_protocol in rtl_433_protocols %}
+protocol    {{ rtl_433_protocol }}
+{% endfor %}
+{% endif %}
+
+convert     {{ rtl_433_convert_unit }}
