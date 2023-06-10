@@ -25,7 +25,7 @@
     - role: configure-cron
       tags: [baseline, refresh]
     - role: configure-autofs
-      tags: [baseline, refresh]
+      tags: [baseline, refresh, autofs]
     - role: configure-docker
       tags: [baseline, refresh, docker]
     - role: configure-prometheus-node-exporter
