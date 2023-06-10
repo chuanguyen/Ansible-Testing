@@ -78,8 +78,8 @@ ufw_rules:
       from_port: null
       to_port: "{{ frigate_port_webrtc }}"
       proto: any
-    - comment: "Permits incoming connection to MQTT (Non-Secure) Mosquitto TCP"
-      rule: allow
+    - comment: "Controls incoming connection to MQTT (Non-Secure) Mosquitto TCP"
+      rule: deny
       delete: no
       from_ip: "{{ home_lan_cidr }}"
       to_ip: any
