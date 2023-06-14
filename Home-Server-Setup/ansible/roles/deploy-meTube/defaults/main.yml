@@ -1,0 +1,22 @@
+meTube_container_data_dir: "{{ docker_container_root_dir }}/meTube"
+
+meTube_image_base: "alexta69/metube"
+meTube_image_base_tag: ""
+# Ensures previous version of working
+# meTube image is available for failback
+meTube_image_base_tag_old: ""
+meTube_container_name: "meTube"
+# Controls whether docker-compose restarts Docker containers
+meTube_container_restart: no
+# Defines image ID for custom image
+meTube_image_custom: "{{ ansible_user }}/meTube"
+
+meTube_container_envs:
+  kv:
+    UID: 1000
+    GID: 1000
+    UMASK: 022
+    DOWNLOAD_DIR: "/downloads"
+    STATE_DIR: "/downloads/.metube"
+    TEMP_DIR: "/downloads"
+    DELETE_FILE_ON_TRASHCAN: "false"

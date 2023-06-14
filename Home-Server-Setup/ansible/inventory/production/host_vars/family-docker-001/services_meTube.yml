@@ -1,0 +1,10 @@
+---
+meTube_container_envs:
+  kv:
+    UID: 1000
+    GID: 1000
+    UMASK: 022
+    DOWNLOAD_DIR: "/downloads"
+    STATE_DIR: "/downloads/.metube"
+    TEMP_DIR: "/downloads"
+    DELETE_FILE_ON_TRASHCAN: "true"

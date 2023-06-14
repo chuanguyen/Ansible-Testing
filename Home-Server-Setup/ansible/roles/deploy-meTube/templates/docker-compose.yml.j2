@@ -1,0 +1,27 @@
+---
+
+# {{ ansible_managed }}
+
+version: "3"
+
+services:
+  meTube:
+    container_name: "{{ meTube_container_name }}"
+    image: "{{ meTube_image_base }}:{{ meTube_image_base_tag }}"
+    env_file: meTube.env
+    ports: []
+    networks:
+      - {{ docker_networks.proxy.name }}
+    # Volumes store your data between container upgrades
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network={{ docker_networks.proxy.name }}"
+      - "traefik.http.routers.meTube1.rule=Host(`meTube.{{ home_lan_domain }}`)"
+      - "traefik.http.routers.meTube1.entrypoints=websecure"
+      - "traefik.http.routers.meTube1.middlewares=lanWhitelist@file,secureHeaders@file"
+      - "traefik.http.routers.meTube1.tls=true"
+      - "traefik.http.routers.meTube1.tls.certresolver=letsEncrypt"
+    restart: "always"
+networks:
+  {{ docker_networks.proxy.name }}:
+    external: true

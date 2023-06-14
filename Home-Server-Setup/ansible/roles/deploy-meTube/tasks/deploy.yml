@@ -1,0 +1,40 @@
+---
+- name: "TASK: Retrieve container info"
+  community.docker.docker_container_info:
+    name: "{{ meTube_container_name }}"
+  register: container_state
+
+- name: "TASK: Set container facts"
+  set_fact:
+    container_exists: "{{ container_state.exists }}"
+    container_image: "{{ container_state.container.Config.Image | default('tag:n/a') }}"
+
+- name: "TASK: Set container image tag"
+  set_fact:
+    container_image_tag: "{{ container_image.split(':') }}"
+
+- block:
+    - include_tasks: "image_cleanup.yml"
+
+    - name: "TASK: Pull base image"
+      community.docker.docker_image:
+        name: "{{ meTube_image_base }}"
+        tag: "{{ meTube_image_base_tag }}"
+        source: "pull"
+        state: "present"
+      register: "image_base_pull"
+
+    - name: "TASK: Remove container for updates"
+      community.docker.docker_container:
+        name: "{{ meTube_container_name }}"
+        container_default_behavior: "no_defaults"
+        state: "absent"
+      when: container_exists and image_base_pull.changed
+  when: container_image_tag[1] != meTube_image_base_tag
+
+- name: "TASK: Deploy {{ meTube_container_name }}"
+  community.docker.docker_compose:
+    project_src: "{{ meTube_container_data_dir }}"
+    nocache: "no"
+    state: "present"
+    restarted: "{{ meTube_container_restart }}"
