@@ -8,6 +8,12 @@ services:
   rtl_433:
     container_name: "{{ rtl_433_container_name }}"
     image: "{{ rtl_433_image_base }}:{{ rtl_433_image_base_tag }}"
+    # Defined due to excessive log sizes
+    logging:
+      options:
+        max-size: "1g"
+        max-file: "5"
+        compress: "true"
     env_file: rtl_433.env
     ports: []
     networks:
