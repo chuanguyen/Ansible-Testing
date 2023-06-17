@@ -51,6 +51,12 @@ zigbee2mqtt_advanced:
   # network_key: "GENERATE"
   network_key: "!{{ zigbee2mqtt_secret_filename }} network_key"
 
+zigbee2mqtt_availability:
+  active:
+    timeout: 10
+  passive:
+    timeout: 1500
+
 zigbee2mqtt_device_options:
   legacy: "false"
 
