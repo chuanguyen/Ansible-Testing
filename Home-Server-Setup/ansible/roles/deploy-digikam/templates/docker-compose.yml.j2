@@ -1,0 +1,44 @@
+---
+
+# {{ ansible_managed }}
+
+version: "3"
+
+services:
+  digikam:
+    container_name: "{{ digikam_container_name }}"
+    image: "{{ digikam_image_base }}:{{ digikam_image_base_tag }}"
+    env_file: digikam.env
+    networks:
+      - {{ docker_networks.proxy.name }}
+    # Volumes store your data between container upgrades
+    volumes:
+{% for volume in digikam_container_volumes.binds %}
+      - {{ volume.source }}:{{ volume.target }}
+{% endfor %}
+{% for media_volume in digikam_media_volumes %}
+      - {{ media_volume.name }}:{{ media_volume.container_dest }}
+{% endfor %}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network={{ docker_networks.proxy.name }}"
+      - "traefik.http.routers.digikam1.rule=Host(`digikam.{{ home_lan_domain }}`)"
+      - "traefik.http.routers.digikam1.entrypoints=websecure"
+      - "traefik.http.routers.digikam1.middlewares=lanWhitelist@file,secureHeaders@file"
+      - "traefik.http.routers.digikam1.service=digikam-svc"
+      - "traefik.http.services.digikam-svc.loadbalancer.server.port=3000"
+      - "traefik.http.routers.digikam1.tls=true"
+      - "traefik.http.routers.digikam1.tls.certresolver=letsEncrypt"
+    restart: "always"
+networks:
+  {{ docker_networks.proxy.name }}:
+    external: true
+volumes:
+{% for media_volume in digikam_media_volumes %}
+  {{ media_volume.name }}:
+    driver: {{ media_volume.driver }}
+    driver_opts:
+      type: {{ media_volume.driver_opts.type }}
+      device: "{{ media_volume.driver_opts.device }}"
+      o: "{{ media_volume.driver_opts.o }}"
+{% endfor %}

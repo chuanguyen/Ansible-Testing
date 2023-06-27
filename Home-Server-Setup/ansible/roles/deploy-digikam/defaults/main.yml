@@ -1,0 +1,42 @@
+digikam_container_data_dir: "{{ docker_container_root_dir }}/digikam"
+
+digikam_image_base: "linuxserver/digikam"
+digikam_image_base_tag: ""
+# Ensures previous version of working
+# digikam image is available for failback
+digikam_image_base_tag_old: ""
+digikam_container_name: "digikam"
+# Controls whether docker-compose restarts Docker containers
+digikam_container_restart: no
+# Defines image ID for custom image
+digikam_image_custom: "{{ ansible_user }}/digikam"
+
+digikam_backup_directory: "/mnt/backup/"
+digikam_nfs_backup_directory: "/nfs/Container-Data/docker/digikam/"
+# Defines in days age of backups to remove
+digikam_nfs_backup_cleanup_period: "60"
+# Defines via cron syntax how often to run backup
+digikam_nfs_backup_frequency: "0 1 */15 * *"
+
+digikam_UID: "1000"
+digikam_GID: "1000"
+
+# Defines where in container media is located
+digikam_media_location: "/config/Pictures"
+
+# Network locations where photos are located
+digikam_media_volumes:
+  - name: "VOLUME_NAME"
+    container_dest: "CONTAINER_LOCATION"
+    driver: "local"
+    driver_opts:
+      type: "cifs"
+      device: "//SERVER/SHARE"
+      o: "addr=SERVER_FQDN,username=USER,password=PASSWORD,vers=3.0,uid=UID,gid=GID"
+
+digikam_container_envs:
+  kv:
+    PUID: "{{ digikam_UID }}"
+    PGID: "{{ digikam_GID }}"
+    TZ: "America/Vancouver"
+    SUBFOLDER: "/" #optional

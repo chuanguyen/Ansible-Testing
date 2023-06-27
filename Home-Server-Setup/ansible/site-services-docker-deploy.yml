@@ -75,3 +75,6 @@
 
     - role: "deploy-meTube"
       tags: [services, meTube]
+
+    - role: "deploy-digikam"
+      tags: [services, digikam]
