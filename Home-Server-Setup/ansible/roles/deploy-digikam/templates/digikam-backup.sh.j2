@@ -2,8 +2,18 @@
 
 ### {{ ansible_managed }}
 
-docker exec -d -w "{{ backup_directory }}" digikam
+# Change to the directory
+cd "{{ digikam_container_data_dir }}" || exit
 
-sleep 5s && rsync --remove-source-files -zv {{ digikam_container_data_dir }}/mnt-backup/* {{ digikam_nfs_backup_directory }}
+docker-compose down
 
-find {{ digikam_nfs_backup_directory }} -mtime +{{ digikam_nfs_backup_cleanup_period }} -exec rm {} \;
+sleep 5
+
+rsync -zv --ignore-existing {{ digikam_container_data_dir }}/digikam-config/.config/digikamrc {{ digikam_nfs_backup_directory }}/digikamrc_$(date +'%Y-%m-%d')
+rsync -zv --ignore-existing {{ digikam_container_data_dir }}/digikam-config/.config/digikam_systemrc {{ digikam_nfs_backup_directory }}/digikam_systemrc_$(date +'%Y-%m-%d')
+rsync -zv --ignore-existing {{ digikam_container_data_dir }}/digikam-config/Pictures/digikam4.db {{ digikam_nfs_backup_directory }}/digikam4.db_$(date +'%Y-%m-%d')
+rsync -zv --ignore-existing {{ digikam_container_data_dir }}/digikam-config/Pictures/thumbnails-digikam.db {{ digikam_nfs_backup_directory }}/thumbnails-digikam.db_$(date +'%Y-%m-%d')
+
+find {{ digikam_nfs_backup_directory }} -type f -ctime +25 -delete
+
+docker-compose up -d

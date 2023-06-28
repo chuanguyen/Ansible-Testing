@@ -1,6 +1,7 @@
 digikam_container_data_dir_sub_folders:
   - "digikam-config"
   - "digikam-config/Pictures"
+  - "scripts"
 
 digikam_container_volumes:
   binds:
