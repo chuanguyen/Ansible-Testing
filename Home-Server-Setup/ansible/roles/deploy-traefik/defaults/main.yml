@@ -16,3 +16,4 @@ traefik_container_envs:
     CF_DNS_API_TOKEN: "{{ dns_provider_api_token }}"
 
 traefik_http_rule_hostname: "traefik"
+traefik_label_configurations: []

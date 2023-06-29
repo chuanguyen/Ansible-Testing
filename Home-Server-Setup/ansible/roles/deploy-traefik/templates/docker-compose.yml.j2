@@ -37,6 +37,11 @@ services:
       - "traefik.http.routers.traefik1.tls=true"
       - "traefik.http.routers.traefik1.tls.certresolver=letsEncrypt"
       - "traefik.http.routers.traefik1.tls.domains[0].main={{ home_lan_domain }}"
+{% if traefik_label_configurations | length > 0 %}
+{% for traefik_label_config in traefik_label_configurations %}
+      - "{{ traefik_label_config }}"
+{% endfor %}
+{% endif %}
     restart: "always"
 networks:
   {{ docker_networks.proxy.name }}:

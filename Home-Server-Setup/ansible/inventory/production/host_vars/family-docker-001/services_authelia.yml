@@ -1,6 +1,7 @@
 ---
+authelia_config_listen_port: 9091
 authelia_config_log_level: "debug"
-authelia_config_log_default_redirection: "https://{{ home_lan_domain }}"
+authelia_config_log_default_redirection: "https://login.{{ home_lan_domain }}"
 authelia_config_totp_issuer: "{{ home_lan_domain }}"
 
 # Indicates secret provided via a file

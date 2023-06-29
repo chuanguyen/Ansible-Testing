@@ -1,0 +1,5 @@
+---
+traefik_label_configurations:
+  - "traefik.http.middlewares.authelia.forwardAuth.address=http://authelia:{{ authelia_config_listen_port }}/api/verify?rd=https%3A%2F%2Flogin.{{ home_lan_domain }}%2F"
+  - "traefik.http.middlewares.authelia.forwardAuth.trustForwardHeader=true"
+  - "traefik.http.middlewares.authelia.forwardAuth.authResponseHeaders=Remote-User,Remote-Groups,Remote-Name,Remote-Email"
