@@ -78,3 +78,6 @@
 
     - role: "deploy-digikam"
       tags: [services, digikam]
+
+    - role: "deploy-authelia"
+      tags: [services, authelia]
