@@ -1,0 +1,10 @@
+authelia_container_data_dir_sub_folders:
+  - "etc-authelia/"
+  - "scripts"
+
+authelia_container_volumes:
+  binds:
+    - source: "./etc-authelia/"
+      target: "/etc/authelia/"
+    - source: "./mnt-backup/"
+      target: "/mnt/backup/"

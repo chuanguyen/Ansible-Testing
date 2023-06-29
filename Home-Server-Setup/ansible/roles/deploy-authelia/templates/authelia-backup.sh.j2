@@ -1,0 +1,9 @@
+#!/bin/bash
+
+### {{ ansible_managed }}
+
+docker exec -d -w "{{ backup_directory }}" authelia
+
+sleep 5s && rsync --remove-source-files -zv {{ authelia_container_data_dir }}/mnt-backup/* {{ authelia_nfs_backup_directory }}
+
+find {{ authelia_nfs_backup_directory }} -mtime +{{ authelia_nfs_backup_cleanup_period }} -exec rm {} \;

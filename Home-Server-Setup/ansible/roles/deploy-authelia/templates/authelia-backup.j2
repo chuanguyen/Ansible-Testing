@@ -1,0 +1,7 @@
+# {{ ansible_managed }}
+# authelia backup cron job
+
+SHELL=/bin/bash
+PATH=/usr/bin
+
+{{ authelia_nfs_backup_frequency }}   root  {{ authelia_container_data_dir }}/scripts/authelia-backup.sh
