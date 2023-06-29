@@ -17,6 +17,8 @@ digikam_nfs_backup_cleanup_period: "60"
 # Defines via cron syntax how often to run backup
 digikam_nfs_backup_frequency: "0 1 */5 * *"
 
+digikam_traefik_additional_middlewares: ""
+
 digikam_UID: "1000"
 digikam_GID: "1000"
 

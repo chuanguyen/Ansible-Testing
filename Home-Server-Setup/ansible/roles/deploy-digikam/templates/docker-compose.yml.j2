@@ -24,7 +24,7 @@ services:
       - "traefik.docker.network={{ docker_networks.proxy.name }}"
       - "traefik.http.routers.digikam1.rule=Host(`digikam.{{ home_lan_domain }}`)"
       - "traefik.http.routers.digikam1.entrypoints=websecure"
-      - "traefik.http.routers.digikam1.middlewares=lanWhitelist@file,secureHeaders@file"
+      - "traefik.http.routers.digikam1.middlewares=lanWhitelist@file,secureHeaders@file{% if digikam_traefik_additional_middlewares != "" %},{{ digikam_traefik_additional_middlewares }}{% endif %}"
       - "traefik.http.routers.digikam1.service=digikam-svc"
       - "traefik.http.services.digikam-svc.loadbalancer.server.port=3000"
       - "traefik.http.routers.digikam1.tls=true"

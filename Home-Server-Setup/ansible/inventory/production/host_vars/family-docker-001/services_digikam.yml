@@ -1,6 +1,7 @@
 ---
-# Digikam media volumes
+digikam_traefik_additional_middlewares: "authelia"
 
+# Digikam media volumes
 digikam_media_volumes:
   - name: "nas1_share_1"
     container_dest: "{{ digikam_media_location }}/Nas1-Pending-Pictures"
