@@ -64,3 +64,6 @@ meTube_image_base_tag_old: ""
 
 digikam_image_base_tag: "version-2023-04-21"
 digikam_image_base_tag_old: ""
+
+authelia_image_base_tag: "4.37"
+authelia_image_base_tag_old: ""
