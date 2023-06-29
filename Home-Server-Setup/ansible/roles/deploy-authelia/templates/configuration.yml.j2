@@ -1,0 +1,103 @@
+---
+### {{ ansible_managed }}
+
+# General
+
+server:
+    host: {{ authelia_config_host }}
+    port: {{ authelia_config_listen_port }}
+log:
+    level: {{ authelia_config_log_level }}
+{% if not authelia_config_jwt_secret_external %}
+jwt_secret: {{ authelia_config_jwt_secret }}
+{% endif %}
+default_redirection_url: {{ authelia_config_log_default_redirection }}
+
+# TOTP
+
+totp:
+  issuer: {{ authelia_config_totp_issuer }}
+  period: 30
+  skew: 1
+
+# Authentication
+authentication_backend:
+  password_reset:
+    disable: {{ authelia_config_authentication_backend_disable_reset_password }}
+{% if authelia_config_authentication_backend_file %}
+  file:
+    path: {{ authelia_config_authentication_backend_file_path }}
+    password:
+      algorithm: "{{ authelia_config_authentication_backend_file_password_algorithm }}"
+      {{ authelia_config_authentication_backend_file_password_algorithm }}:
+        variant: "{{ authelia_config_authentication_backend_file_password_algorithm }}id"
+        iterations: {{ authelia_config_authentication_backend_file_password_iterations }}
+        key_length: {{ authelia_config_authentication_backend_file_password_key_length }}
+        salt_length: {{ authelia_config_authentication_backend_file_password_salt_length }}
+        memory: {{ authelia_config_authentication_backend_file_password_memory }}
+        parallelism: {{ authelia_config_authentication_backend_file_password_parallelism }}
+{% endif %}
+
+# Access Control
+access_control:
+    default_policy: {{ authelia_config_access_control_default_policy }}
+    rules:
+{% for access_control_rule in authelia_config_access_control_rules %}
+      - domain:
+{% for access_control_domain in access_control_rule.domains %}
+          - "{{ access_control_domain }}"
+{% endfor %}
+        policy: {{ access_control_rule.policy }}
+{% if access_control_rule.networks | length > 0 %}
+        networks:
+{% for access_rule_network in access_control_rule.networks %}
+          - "{{ access_rule_network }}"
+{% endfor %}
+{% endif %}
+{% endfor %}
+
+# Session
+session:
+    name: {{ authelia_config_session_name }}
+{% if not authelia_config_session_secret_external %}
+    secret: {{ authelia_config_session_secret }}
+{% endif %}
+    expiration: {{ authelia_config_session_expiration }}
+    inactivity: {{ authelia_config_session_inactivity }}
+    remember_me_duration: {{ authelia_config_session_remember_me_duration }}
+    domain: {{ authelia_config_session_domain }}
+
+regulation:
+    max_retries: {{ authelia_config_session_max_retries}}
+    find_time: {{ authelia_config_session_find_time }}
+    ban_time: {{ authelia_config_session_ban_time }}
+
+storage:
+    encryption_key: {{ authelia_storage_encryption_key }}
+{% if authelia_storage_local %}
+    local:
+        path: {{ authelia_storage_local_path }}
+{% endif %}
+
+notifier:
+    disable_startup_check: {{ authelia_notifier_disable_startup_check }}
+{% if authelia_notifier_filesystem %}
+    filesystem:
+        filename: {{ authelia_notifier_filesystem_path }}
+{% endif %}
+{% if authelia_notifier_smtp %}
+    smtp:
+        username: "{{ authelia_notifier_smtp_username }}"
+{% if not authelia_notifier_smtp_password_external %}
+        password: "{{ authelia_config_smtp_password }}"
+{% endif %}
+        host: "{{ authelia_notifier_smtp_host }}"
+        port: "{{ authelia_notifier_smtp_port }}"
+        sender: "{{ authelia_notifier_smtp_sender }}"
+        subject: "{{ authelia_notifier_smtp_subject }}"
+        startup_check_address: "{{ authelia_notifier_smtp_startup_check_address }}"
+        disable_require_tls: {{ authelia_notifier_smtp_disable_require_tls }}
+        disable_html_emails: {{ authelia_notifier_smtp_disable_html_emails }}
+        tls:
+            skip_verify: "{{ authelia_notifier_smtp_tls_skip_verify }}"
+{% endif %}

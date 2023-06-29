@@ -1,0 +1,18 @@
+---
+# {{ ansible_managed }}
+
+users:
+{% for authelia_user in authelia_local_users %}
+  {{ authelia_user.username }}:
+    displayname: "{{ authelia_user.displayname }}"
+    password: "{{ authelia_user.password }}"
+    email: "{{ authelia_user.email }}"
+{% if authelia_user.groups | length > 0 %}
+    groups:
+{% for user_group in authelia_user.groups %}
+      - "{{ user_group }}"
+{% endfor %}
+{% else %}
+    groups: []
+{% endif %}
+{% endfor %}

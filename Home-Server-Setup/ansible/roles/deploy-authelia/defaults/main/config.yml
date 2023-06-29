@@ -1,0 +1,78 @@
+---
+authelia_config_host: "0.0.0.0"
+authelia_config_listen_port: "9091"
+authelia_config_log_level: "info"
+# Indicates secret provided via a file
+authelia_config_jwt_secret_external: true
+authelia_config_jwt_secret: ""
+authelia_config_log_default_redirection: "https://example.com"
+
+authelia_config_totp_issuer: "example.com"
+
+authelia_config_authentication_backend_file: true
+authelia_config_authentication_backend_disable_reset_password: "false"
+authelia_config_authentication_backend_file_path: /config/users_database.yml
+authelia_config_authentication_backend_file_password_algorithm: "argon2"
+authelia_config_authentication_backend_file_password_iterations: 1
+authelia_config_authentication_backend_file_password_key_length: 32
+authelia_config_authentication_backend_file_password_salt_length: 16
+authelia_config_authentication_backend_file_password_memory: 512
+authelia_config_authentication_backend_file_password_parallelism: 8
+
+authelia_config_access_control_default_policy: "deny"
+
+authelia_config_access_control_rules:
+  - domains:
+      - "example.com"
+      - "*.example.com"
+    policy: "bypass"
+    networks:
+      - "192.168.0.0/16"
+      - "172.16.0.0/12"
+      - "10.0.0.0/8"
+  - domains:
+      - "example.com"
+      - "*.example.com"
+    policy: "two_factor"
+    networks: []
+
+authelia_config_session_name: "authelia_session"
+# Indicates secret provided via a file
+authelia_config_session_secret_external: true
+authelia_config_session_secret: ""
+authelia_config_session_expiration: "1h"
+authelia_config_session_inactivity: "5m"
+authelia_config_session_remember_me_duration: "1M"
+authelia_config_session_domain: "example.com"
+authelia_config_session_max_retries: "3"
+authelia_config_session_find_time: "2m"
+authelia_config_session_ban_time: "5m"
+
+authelia_storage_encryption_key: ""
+authelia_storage_local: true
+authelia_storage_local_path: "/config/db.sqlite3"
+
+authelia_notifier_disable_startup_check: "false"
+authelia_notifier_filesystem: false
+authelia_notifier_filesystem_path: "/config/notifications.txt"
+
+authelia_notifier_smtp: true
+authelia_notifier_smtp_username: "me@example.com"
+authelia_notifier_smtp_password_external: true
+authelia_notifier_smtp_password: ""
+authelia_notifier_smtp_host: "smtp.gmail.com"
+authelia_notifier_smtp_port: 587
+authelia_notifier_smtp_sender: "authelia@example.com"
+authelia_notifier_smtp_subject: "[Authelia] {title}"
+authelia_notifier_smtp_startup_check_address: "test@authelia.com"
+authelia_notifier_smtp_disable_require_tls: "false"
+authelia_notifier_smtp_disable_html_emails: "false"
+authelia_notifier_smtp_tls_skip_verify: "false"
+
+authelia_use_local_users: true
+authelia_local_users:
+  - username: "USER1"
+    displayname: "USER1"
+    password: "$argon2id$v=19$m=524288,t=1,p=longrandompasswordhashgenerated"
+    email: "USER1@example.com"
+    groups: []

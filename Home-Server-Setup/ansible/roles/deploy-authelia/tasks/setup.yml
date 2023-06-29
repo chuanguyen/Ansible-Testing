@@ -12,28 +12,55 @@
   become: true
   file:
     path: "{{ authelia_container_data_dir }}/{{ item }}"
-    owner: "root"
-    group: "docker"
+    owner: "1000"
+    group: "1000"
     mode: 0775
     state: "directory"
   with_items: "{{ authelia_container_data_dir_sub_folders }}"
 
 - name: "Template files for building and running {{ authelia_container_name }}"
+  become: true
   template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
-    group: "docker"
+    owner: "1000"
+    group: "1000"
     mode: 0660
   with_items:
     - src: "docker-compose.yml.j2"
       dest: "{{ authelia_container_data_dir }}/docker-compose.yml"
     - src: "authelia.env.j2"
       dest: "{{ authelia_container_data_dir }}/authelia.env"
+    - src: "configuration.yml.j2"
+      dest: "{{ authelia_container_data_dir }}/authelia-config/configuration.yml"
+    - src: "users_database.yml.j2"
+      dest: "{{ authelia_container_data_dir }}/authelia-config/users_database.yml"
+    - src: "notifications.txt.j2"
+      dest: "{{ authelia_container_data_dir }}/authelia-config/notifications.txt"
   loop_control:
     label: "{{ item.src }}"
   register: "container_templated_files"
 
+- name: "Template secrets for building and running {{ authelia_container_name }}"
+  become: true
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "1000"
+    group: "1000"
+    mode: 0600
+  with_items:
+    - src: "secret_email.j2"
+      dest: "{{ authelia_container_data_dir }}/authelia-secrets/email"
+    - src: "secret_jwt.j2"
+      dest: "{{ authelia_container_data_dir }}/authelia-secrets/jwt"
+    - src: "secret_session.j2"
+      dest: "{{ authelia_container_data_dir }}/authelia-secrets/session"
+  loop_control:
+    label: "{{ item.src }}"
+  register: "container_templated_secrets_files"
+
 - name: "TASK: Set containers to restart when templated files change"
   set_fact:
     authelia_container_restart: "yes"
-  when: "container_templated_files.changed"
+  when: "container_templated_files.changed and container_templated_secrets_files.changed"

@@ -6,15 +6,12 @@ version: "3"
 
 services:
   authelia:
-    build:
-      context: build/
     container_name: "{{ authelia_container_name }}"
     image: "{{ authelia_image_base }}:{{ authelia_image_base_tag }}"
     env_file: authelia.env
-    ports:
-      - ""
+    user: "1000:1000"
     networks:
-      - ""
+      - {{ docker_networks.proxy.name }}
     # Volumes store your data between container upgrades
     volumes:
 {% for volume in authelia_container_volumes.binds %}
@@ -23,10 +20,14 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network={{ docker_networks.proxy.name }}"
-      - "traefik.http.routers.authelia1.rule=Host(`authelia.{{ home_lan_domain }}`)"
+      - "traefik.http.routers.authelia1.rule=Host(`login.{{ home_lan_domain }}`)"
       - "traefik.http.routers.authelia1.entrypoints=websecure"
-      - "traefik.http.routers.authelia1.middlewares=lanWhitelist@file,secureHeaders@file"
+      - "traefik.http.routers.authelia1.middlewares=secureHeaders@file"
+      - "traefik.http.routers.authelia1.service=authelia-svc"
+      - "traefik.http.services.authelia-svc.loadbalancer.server.port=9091"
       - "traefik.http.routers.authelia1.tls=true"
       - "traefik.http.routers.authelia1.tls.certresolver=letsEncrypt"
     restart: "always"
 networks:
+  {{ docker_networks.proxy.name }}:
+    external: true

@@ -1,0 +1,37 @@
+---
+authelia_config_log_level: "debug"
+authelia_config_log_default_redirection: "https://{{ home_lan_domain }}"
+authelia_config_totp_issuer: "{{ home_lan_domain }}"
+
+# Indicates secret provided via a file
+authelia_config_jwt_secret_external: true
+authelia_config_jwt_secret: "{{ vault_authelia_config_jwt_secret }}"
+
+authelia_config_authentication_backend_file: true
+
+authelia_config_access_control_rules:
+  - domains:
+      - "*.{{ home_lan_domain }}"
+    policy: "two_factor"
+    networks: []
+
+# Indicates secret provided via a file
+authelia_config_session_secret_external: true
+authelia_config_session_secret: "{{ vault_authelia_config_session_secret }}"
+authelia_config_session_domain: "{{ home_lan_domain }}"
+
+authelia_notifier_disable_startup_check: "false"
+authelia_notifier_filesystem: false
+
+authelia_notifier_smtp: true
+authelia_notifier_smtp_username: "{{ home_smtp_relay_server_username }}"
+authelia_notifier_smtp_password_external: true
+authelia_notifier_smtp_password: "{{ vault_authelia_notifier_smtp_password }}"
+authelia_notifier_smtp_host: "{{ home_smtp_relay_server }}"
+authelia_notifier_smtp_port: 465
+authelia_notifier_smtp_sender: "authelia@{{ home_lan_domain_public }}"
+authelia_notifier_smtp_subject: "[Authelia] {title}"
+
+authelia_storage_encryption_key: "{{ vault_authelia_storage_encryption_key }}"
+
+authelia_local_users: "{{ vault_authelia_local_users }}"
