@@ -11,6 +11,15 @@ SERVICE__container_restart: no
 # Defines image ID for custom image
 SERVICE__image_custom: "{{ ansible_user }}/SERVICE_"
 
+SERVICE__container_traefik_labels:
+  - "traefik.enable=true"
+  - "traefik.docker.network={{ docker_networks.proxy.name }}"
+  - "traefik.http.routers.SERVICE_1.rule=Host(`SERVICE_.{{ home_lan_domain }}`)"
+  - "traefik.http.routers.SERVICE_1.entrypoints=websecure"
+  - "traefik.http.routers.SERVICE_1.middlewares=lanWhitelist@file,secureHeaders@file"
+  - "traefik.http.routers.SERVICE_1.tls=true"
+  - "traefik.http.routers.SERVICE_1.tls.certresolver=letsEncrypt"
+
 SERVICE__backup_directory: "/mnt/backup/"
 SERVICE__nfs_backup_directory: "/nfs/Container-Data/docker/SERVICE_/"
 # Defines in days age of backups to remove
