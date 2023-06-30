@@ -23,13 +23,9 @@ services:
       - "--{{ key }}={{ value }}"
 {% endfor %}
     labels:
-      - "traefik.enable=true"
-      - "traefik.docker.network={{ docker_networks.proxy.name }}"
-      - "traefik.http.routers.alertmanager.rule=Host(`alertmanager.{{ home_lan_domain }}`)"
-      - "traefik.http.routers.alertmanager.entrypoints=websecure"
-      - "traefik.http.routers.alertmanager.middlewares=lanWhitelist@file,secureHeaders@file"
-      - "traefik.http.routers.alertmanager.tls=true"
-      - "traefik.http.routers.alertmanager.tls.certresolver=letsEncrypt"
+{% for traefik_label in alertmanager_container_traefik_labels %}
+      - "{{ traefik_label }}"
+{% endfor %}
     restart: "always"
 networks:
   {{ docker_networks.monitoring.name }}:
