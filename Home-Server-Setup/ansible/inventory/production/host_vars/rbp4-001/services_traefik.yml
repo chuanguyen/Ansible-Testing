@@ -1,0 +1,17 @@
+---
+traefik_container_dns_externally_used: true
+traefik_container_dns_servers: "{{ home_lan_dns_servers }}"
+
+# Ensures traffic forwarded in from external systems (Traefik)
+# are trusted based on IP and the forwarded headers are recognized
+traefik_entrypoint_websecure_proxyProtocol_trustedIPs:
+  - "{{ home_lan_cidr }}"
+  - "172.17.0.0/16"
+traefik_entrypoint_websecure_forwardedHeaders_trustedIPs:
+  - "{{ home_lan_cidr }}"
+  - "172.17.0.0/16"
+
+traefik_label_configurations:
+  - "traefik.http.middlewares.authelia.forwardAuth.address=https://login.{{ home_lan_domain }}/api/verify?rd=https%3A%2F%2Flogin.{{ home_lan_domain }}%2F"
+  - "traefik.http.middlewares.authelia.forwardAuth.trustForwardHeader=true"
+  - "traefik.http.middlewares.authelia.forwardAuth.authResponseHeaders=Remote-User,Remote-Groups,Remote-Name,Remote-Email"

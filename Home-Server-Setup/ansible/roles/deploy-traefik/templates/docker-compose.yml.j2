@@ -11,6 +11,12 @@ services:
     env_file: traefik.env
     security_opt:
       - no-new-privileges:true
+{% if traefik_container_dns_externally_used %}
+    dns:
+{% for dns_server in traefik_container_dns_servers %}
+      - "{{ dns_server }}"
+{% endfor %}
+{% endif %}
     ports:
       - 80:80
       - 443:443
