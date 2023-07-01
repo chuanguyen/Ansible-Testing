@@ -1,11 +1,14 @@
 ---
 authelia_config_host: "0.0.0.0"
 authelia_config_listen_port: "9091"
+authelia_config_headers_csp_template: ""
 authelia_config_log_level: "info"
 # Indicates secret provided via a file
 authelia_config_jwt_secret_external: true
 authelia_config_jwt_secret: ""
 authelia_config_log_default_redirection: "https://example.com"
+
+authelia_config_default_2fa_method: "totp"
 
 authelia_config_totp_issuer: "example.com"
 
@@ -21,6 +24,13 @@ authelia_config_authentication_backend_file_password_parallelism: 8
 
 authelia_config_access_control_default_policy: "deny"
 
+authelia_config_access_control_networks:
+  - name: "rfc-1918"
+    networks:
+      - "10.0.0.0/8"
+      - "172.16.0.0/12"
+      - "192.168.0.0/18"
+
 authelia_config_access_control_rules:
   - domains:
       - "example.com"
@@ -35,6 +45,16 @@ authelia_config_access_control_rules:
       - "*.example.com"
     policy: "two_factor"
     networks: []
+
+authelia_config_password_policy_standard_enabled: "false"
+authelia_config_password_policy_standard_min_length: 8
+authelia_config_password_policy_standard_max_length: 0
+authelia_config_password_policy_standard_require_uppercase: "false"
+authelia_config_password_policy_standard_require_lowercase: "false"
+authelia_config_password_policy_standard_require_number: "false"
+authelia_config_password_policy_standard_require_special: "false"
+authelia_config_password_policy_zxcvbn_enabled: "false"
+authelia_config_password_policy_zxcvbn_min_score: 3
 
 authelia_config_session_name: "authelia_session"
 # Indicates secret provided via a file
@@ -76,3 +96,10 @@ authelia_local_users:
     password: "$argon2id$v=19$m=524288,t=1,p=longrandompasswordhashgenerated"
     email: "USER1@example.com"
     groups: []
+
+authelia_config_ntp_enabled: false
+authelia_config_ntp_address: "0.pool.ntp.org:123"
+authelia_config_ntp_version: 3
+authelia_config_ntp_max_desync: 3s
+authelia_config_ntp_disable_startup_check: "false"
+authelia_config_ntp_disable_failure: "false"

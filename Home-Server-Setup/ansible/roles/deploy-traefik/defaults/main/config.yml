@@ -1,0 +1,27 @@
+---
+traefik_config_http_middlewares:
+  http:
+    middlewares:
+      secureHeaders:
+        headers:
+          sslRedirect: true
+          forceSTSHeader: true
+          stsIncludeSubdomains: true
+          stsPreload: true
+          stsSeconds: 31536000
+      lanWhitelist:
+        ipWhiteList:
+          sourceRange:
+            - "{{ home_lan_cidr }}"
+
+traefik_entrypoint_websecure_proxyProtocol_trustedIPs:
+  []
+  # - "192.168.0.0/16"
+  # - "172.16.0.0/12"
+  # - "10.0.0.0/8"
+
+traefik_entrypoint_websecure_forwardedHeaders_trustedIPs:
+  []
+  # - "192.168.0.0/16"
+  # - "172.16.0.0/12"
+  # - "10.0.0.0/8"

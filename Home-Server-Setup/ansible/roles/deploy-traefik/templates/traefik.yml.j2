@@ -24,15 +24,19 @@ entryPoints:
   websecure:
     address: :443
     proxyProtocol:
+{% if traefik_entrypoint_websecure_proxyProtocol_trustedIPs | length > 0 %}
       trustedIPs:
 {% for trusted_ip in traefik_entrypoint_websecure_proxyProtocol_trustedIPs %}
         - "{{ trusted_ip }}"
 {% endfor %}
+{% endif %}
+{% if traefik_entrypoint_websecure_forwardedHeaders_trustedIPs | length > 0 %}
     forwardedHeaders:
       trustedIPs:
 {% for trusted_ip in traefik_entrypoint_websecure_forwardedHeaders_trustedIPs %}
         - "{{ trusted_ip }}"
 {% endfor %}
+{% endif %}
     http:
       middlewares:
         - secureHeaders@file

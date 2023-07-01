@@ -18,15 +18,9 @@ services:
       - {{ volume.source }}:{{ volume.target }}
 {% endfor %}
     labels:
-      - "traefik.enable=true"
-      - "traefik.docker.network={{ docker_networks.proxy.name }}"
-      - "traefik.http.routers.authelia1.rule=Host(`login.{{ home_lan_domain }}`)"
-      - "traefik.http.routers.authelia1.entrypoints=websecure"
-      - "traefik.http.routers.authelia1.middlewares=secureHeaders@file"
-      - "traefik.http.routers.authelia1.service=authelia-svc"
-      - "traefik.http.services.authelia-svc.loadbalancer.server.port=9091"
-      - "traefik.http.routers.authelia1.tls=true"
-      - "traefik.http.routers.authelia1.tls.certresolver=letsEncrypt"
+{% for traefik_label in authelia_container_traefik_labels %}
+      - "{{ traefik_label }}"
+{% endfor %}
     restart: "always"
 networks:
   {{ docker_networks.proxy.name }}:

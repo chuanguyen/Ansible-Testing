@@ -1,19 +1,7 @@
 # {{ ansible_managed }}
 
 # General
-http:
- middlewares:
-   secureHeaders:
-     headers:
-       sslRedirect: true
-       forceSTSHeader: true
-       stsIncludeSubdomains: true
-       stsPreload: true
-       stsSeconds: 31536000
-   lanWhitelist:
-     ipWhiteList:
-       sourceRange:
-         - "{{ home_lan_cidr }}"
+{{ traefik_config_http_middlewares | to_nice_yaml(indent=4) }}
 
 tls:
  options:

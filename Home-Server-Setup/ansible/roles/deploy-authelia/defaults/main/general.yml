@@ -11,6 +11,17 @@ authelia_container_restart: no
 # Defines image ID for custom image
 authelia_image_custom: "{{ ansible_user }}/authelia"
 
+authelia_container_traefik_labels:
+  - "traefik.enable=true"
+  - "traefik.docker.network={{ docker_networks.proxy.name }}"
+  - "traefik.http.routers.authelia1.rule=Host(`login.{{ home_lan_domain }}`)"
+  - "traefik.http.routers.authelia1.entrypoints=websecure"
+  - "traefik.http.routers.authelia1.middlewares=secureHeaders@file"
+  - "traefik.http.routers.authelia1.service=authelia-svc"
+  - "traefik.http.services.authelia-svc.loadbalancer.server.port=9091"
+  - "traefik.http.routers.authelia1.tls=true"
+  - "traefik.http.routers.authelia1.tls.certresolver=letsEncrypt"
+
 authelia_backup_directory: "/mnt/backup/"
 authelia_nfs_backup_directory: "/nfs/Container-Data/docker/authelia/"
 # Defines in days age of backups to remove

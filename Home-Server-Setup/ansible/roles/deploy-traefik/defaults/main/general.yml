@@ -20,13 +20,3 @@ traefik_container_envs:
 
 traefik_http_rule_hostname: "traefik"
 traefik_label_configurations: []
-
-traefik_entrypoint_websecure_proxyProtocol_trustedIPs:
-  - "192.168.0.0/16"
-  - "172.16.0.0/12"
-  - "10.0.0.0/8"
-
-traefik_entrypoint_websecure_forwardedHeaders_trustedIPs:
-  - "192.168.0.0/16"
-  - "172.16.0.0/12"
-  - "10.0.0.0/8"

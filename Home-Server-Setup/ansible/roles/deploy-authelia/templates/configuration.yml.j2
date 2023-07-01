@@ -6,12 +6,18 @@
 server:
     host: {{ authelia_config_host }}
     port: {{ authelia_config_listen_port }}
+{% if authelia_config_headers_csp_template != "" %}
+    headers:
+        csp_template: "{{ authelia_config_headers_csp_template }}"
+{% endif %}
 log:
     level: {{ authelia_config_log_level }}
 {% if not authelia_config_jwt_secret_external %}
 jwt_secret: {{ authelia_config_jwt_secret }}
 {% endif %}
 default_redirection_url: {{ authelia_config_log_default_redirection }}
+
+default_2fa_method: {{ authelia_config_default_2fa_method }}
 
 # TOTP
 
@@ -41,6 +47,16 @@ authentication_backend:
 # Access Control
 access_control:
     default_policy: {{ authelia_config_access_control_default_policy }}
+{% if authelia_config_access_control_networks | length > 0 %}
+    networks:
+{% for authelia_network in authelia_config_access_control_networks %}
+      - name: "{{ authelia_network.name }}"
+        networks:
+{% for cidr_network in authelia_network.networks %}
+            - "{{ cidr_network }}"
+{% endfor %}
+{% endfor %}
+{% endif %}
     rules:
 {% for access_control_rule in authelia_config_access_control_rules %}
       - domain:
@@ -55,6 +71,20 @@ access_control:
 {% endfor %}
 {% endif %}
 {% endfor %}
+
+# Password Policy
+password_policy:
+  standard:
+    enabled: {{ authelia_config_password_policy_standard_enabled }}
+    min_length: {{ authelia_config_password_policy_standard_min_length }}
+    max_length: {{ authelia_config_password_policy_standard_max_length }}
+    require_uppercase: {{ authelia_config_password_policy_standard_require_uppercase }}
+    require_lowercase: {{ authelia_config_password_policy_standard_require_lowercase }}
+    require_number: {{ authelia_config_password_policy_standard_require_number }}
+    require_special: {{ authelia_config_password_policy_standard_require_special }}
+  zxcvbn:
+    enabled: {{ authelia_config_password_policy_zxcvbn_enabled }}
+    min_score: {{ authelia_config_password_policy_zxcvbn_min_score }}
 
 # Session
 session:
@@ -100,4 +130,13 @@ notifier:
         disable_html_emails: {{ authelia_notifier_smtp_disable_html_emails }}
         tls:
             skip_verify: "{{ authelia_notifier_smtp_tls_skip_verify }}"
+{% endif %}
+
+{% if authelia_config_ntp_enabled %}
+ntp:
+  address: "{{ authelia_config_ntp_address }}"
+  version: {{ authelia_config_ntp_version }}
+  max_desync: {{ authelia_config_ntp_max_desync }}
+  disable_startup_check: {{ authelia_config_ntp_disable_startup_check }}
+  disable_failure: {{ authelia_config_ntp_disable_failure }}
 {% endif %}

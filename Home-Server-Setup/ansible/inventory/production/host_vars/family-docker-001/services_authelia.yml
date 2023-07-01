@@ -1,6 +1,18 @@
 ---
+authelia_container_traefik_labels:
+  - "traefik.enable=true"
+  - "traefik.docker.network={{ docker_networks.proxy.name }}"
+  - "traefik.http.routers.authelia1.rule=Host(`login.{{ home_lan_domain }}`)"
+  - "traefik.http.routers.authelia1.entrypoints=websecure"
+  - "traefik.http.routers.authelia1.middlewares=authelia_secureHeaders@file"
+  - "traefik.http.routers.authelia1.service=authelia-svc"
+  - "traefik.http.services.authelia-svc.loadbalancer.server.port=9091"
+  - "traefik.http.routers.authelia1.tls=true"
+  - "traefik.http.routers.authelia1.tls.certresolver=letsEncrypt"
+
 authelia_config_listen_port: 9091
-authelia_config_log_level: "debug"
+authelia_config_log_level: "info"
+
 authelia_config_log_default_redirection: "https://login.{{ home_lan_domain }}"
 authelia_config_totp_issuer: "{{ home_lan_domain }}"
 
@@ -10,11 +22,29 @@ authelia_config_jwt_secret: "{{ vault_authelia_config_jwt_secret }}"
 
 authelia_config_authentication_backend_file: true
 
+authelia_config_access_control_default_policy: "deny"
+
+authelia_config_access_control_networks:
+  - name: "home_internal"
+    networks:
+      - "{{ home_lan_cidr }}"
+      - "{{ home_vpn_cidr }}"
+
 authelia_config_access_control_rules:
+  - domains:
+      - "frigate-001.{{ home_lan_domain }}"
+    policy: "bypass"
+    networks:
+      - "{{ lookup('community.general.dig', 'home-assistant-001.'+home_lan_domain) }}"
   - domains:
       - "*.{{ home_lan_domain }}"
     policy: "two_factor"
-    networks: []
+    networks:
+      - "home_internal"
+
+authelia_config_password_policy_standard_enabled: "false"
+authelia_config_password_policy_zxcvbn_enabled: "true"
+authelia_config_password_policy_zxcvbn_min_score: 3
 
 # Indicates secret provided via a file
 authelia_config_session_secret_external: true
@@ -36,3 +66,10 @@ authelia_notifier_smtp_subject: "[Authelia] {title}"
 authelia_storage_encryption_key: "{{ vault_authelia_storage_encryption_key }}"
 
 authelia_local_users: "{{ vault_authelia_local_users }}"
+
+authelia_config_ntp_enabled: false
+authelia_config_ntp_address: "0.pool.ntp.org:123"
+authelia_config_ntp_version: 3
+authelia_config_ntp_max_desync: 3s
+authelia_config_ntp_disable_startup_check: "false"
+authelia_config_ntp_disable_failure: "false"

@@ -1,5 +1,69 @@
 ---
+traefik_config_http_middlewares:
+  http:
+    middlewares:
+      secureHeaders:
+        headers:
+          sslRedirect: true
+          forceSTSHeader: true
+          stsIncludeSubdomains: true
+          stsPreload: true
+          stsSeconds: 31536000
+      authelia_secureHeaders:
+        headers:
+          sslRedirect: true
+          forceSTSHeader: true
+          stsIncludeSubdomains: true
+          stsPreload: true
+          stsSeconds: 31536000
+          # frame-ancestor defined to allow iframe loading in Home Assistant
+          # Authelia hashes had to be added for login page to load properly
+          contentSecurityPolicy: "default-src 'self'; frame-src 'none'; object-src 'self'; style-src-elem {{ authelia_content_security_policy_hashes | join(' ') }}; style-src {{ authelia_content_security_policy_hashes | join(' ') }}; script-src 'self' https://login.hq1.chuanguyen.ca; base-uri 'self'; frame-ancestors https://home-assistant-001.{{ home_lan_domain }};"
+      lanWhitelist:
+        ipWhiteList:
+          sourceRange:
+            - "{{ home_lan_cidr }}"
+
 traefik_label_configurations:
   - "traefik.http.middlewares.authelia.forwardAuth.address=http://authelia:{{ authelia_config_listen_port }}/api/verify?rd=https%3A%2F%2Flogin.{{ home_lan_domain }}%2F"
   - "traefik.http.middlewares.authelia.forwardAuth.trustForwardHeader=true"
   - "traefik.http.middlewares.authelia.forwardAuth.authResponseHeaders=Remote-User,Remote-Groups,Remote-Name,Remote-Email"
+
+# Ensures traffic forwarded in from external systems (Traefik)
+# are trusted based on IP and the forwarded headers are recognized
+traefik_entrypoint_websecure_proxyProtocol_trustedIPs:
+  - "{{ home_lan_cidr }}"
+  - "172.17.0.0/16"
+traefik_entrypoint_websecure_forwardedHeaders_trustedIPs:
+  - "{{ home_lan_cidr }}"
+  - "172.17.0.0/16"
+
+# Added to content security policy to ensure browser loads content properly
+authelia_content_security_policy_hashes:
+  - "'sha256-AbpHGcgLb+kRsJGnwFEktk7uzpZOCcBY74+YBdrKVGs='"
+  - "'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU='"
+  - "'sha256-capJe0jKWuTMvdxiBgc5OHPbBDUivA++1SvWHuLmqAI='"
+  - "'sha256-n3o/awFs0RpiLwbH/kLNFXBoq6Q9p/jWe/ws1HpKkiQ='"
+  - "'sha256-aw4tqR4n9S5czn/unzRVJRjM0MfU1lidbjsi8lBbimI='"
+  - "'sha256-XkKQPxHcK6z4SdG2VZ/7LAlEZnv9PwRBSbPXcGo/0BY='"
+  - "'sha256-HHt+G2Kl9hMHsouZ0YgIHrweiLEDF/M8Ch9s4DEFsSM='"
+  - "'sha256-CqzPwUEFyAcy9iUZ7S78cV2KJpG+5vzT2Bwl/JIKY7w='"
+  - "'sha256-8qZHxPnBPZSUlhbk08GV6llw6yrCvk/qDJo228JLz9Y='"
+  - "'sha256-DADR3NJZ6AbCx+0l8JfiUi1QVWCnXlfdvsNpPU6HSms='"
+  - "'sha256-Zq//AEckv05MbXSehi7ndQFDq8qiIRIOe5JjCs3+PIE='"
+  - "'sha256-W3fiR/+BmG8UUIiv67H2IRV6NTrax1vRnf4uKPU1Cxo='"
+  - "'sha256-DBmloQR65eJ1Jpjwj4nMz+fyemR18opBQgzsGSwmgv4='"
+  - "'sha256-QLuF8yUrEn1pa1PBdXofqdRK7iXJCD5uWcukNNKWXMw='"
+  - "'sha256-nOFM47KNkk0zDIQYVTz9yJkkDahOxs1Z65au5RTdkRY='"
+  - "'sha256-q9MqXV+++KVFSOzlsytMBjswewmFJ4XQf0gYBOy97JM='"
+  - "'sha256-1qbeEHgrJKtjP4cngmZVWFG29gY9BmvAxuMUgvLaJa8='"
+  - "'sha256-beBPyZIZEjyR9Av7QwtKcq/JKFzQJcyb6k3FtPsjlME='"
+  - "'sha256-Lt2esW4fr4XM8E7v/MF4fu+c4ksxrfV2+cfjF6XzKAM='"
+  - "'sha256-F/nSA9f+hEJICDb87yULSWIGYusnvS2aErji1WA+udY='"
+  - "'sha256-4su+4TLZcPWRs7nLEWarUzrFLjr8Yuryy77UERw9DXA='"
+  - "'sha256-5MHFhkgmcCPDdBoTEEyYfUf1Ab5ox1xL1tNf8sLLlAg='"
+  - "'sha256-CbULu4ABbgf9xGTrHK1BTXqgTlbI3ASSWz1EfV0AdRM='"
+  - "'sha256-m8/HsCmmIUbqUC1miWzIVYFhNLYOZxmD61m2QOGOr6k='"
+  - "'sha256-O52ir6m5nJSRIgIamhVMqBrpjlk4EcH/l7/tYgK2f8s='"
+  - "'sha256-07UXSxi5Jl6GWWdI7TqnoayFhKmhEExOV4VEEQGN/c0='"
+  - "https://login.{{ home_lan_domain }}"
