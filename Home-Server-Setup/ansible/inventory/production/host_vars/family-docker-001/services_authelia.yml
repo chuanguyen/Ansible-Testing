@@ -31,13 +31,31 @@ authelia_config_access_control_networks:
       - "{{ home_vpn_cidr }}"
 
 authelia_config_access_control_rules:
+  # Ensures any communication directly from HA to Frigate is bypassed
   - domains:
       - "frigate-001.{{ home_lan_domain }}"
+    resources: []
     policy: "bypass"
     networks:
       - "{{ lookup('community.general.dig', 'home-assistant-001.'+home_lan_domain) }}"
+  # Access to Home Assistant's API to Frigate shouldn't authenticate
+  # for ease of viewing (Discord, app notifications)
+  - domains:
+      - "home-assistant-001.{{ home_lan_domain }}"
+    resources: []
+    policy: "bypass"
+    networks: []
+  # Access to Frigate media isn't authenticated for ease of viewing (Discord, app notifications)
+  # URLs with the resource path starting as what's defined will be bypassed
+  - domains:
+      - "frigate-001.{{ home_lan_domain }}"
+    resources:
+      - "^/live/webrtc/"
+    policy: "bypass"
+    networks: []
   - domains:
       - "*.{{ home_lan_domain }}"
+    resources: []
     policy: "two_factor"
     networks:
       - "home_internal"

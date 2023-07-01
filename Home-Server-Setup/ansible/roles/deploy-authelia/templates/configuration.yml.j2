@@ -63,6 +63,12 @@ access_control:
 {% for access_control_domain in access_control_rule.domains %}
           - "{{ access_control_domain }}"
 {% endfor %}
+{% if access_control_rule.resources | length > 0 %}
+        resources:
+{% for access_rule_resource in access_control_rule.resources %}
+          - "{{ access_rule_resource }}"
+{% endfor %}
+{% endif %}
         policy: {{ access_control_rule.policy }}
 {% if access_control_rule.networks | length > 0 %}
         networks:

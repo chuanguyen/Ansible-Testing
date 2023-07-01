@@ -36,6 +36,7 @@ authelia_config_access_control_rules:
       - "example.com"
       - "*.example.com"
     policy: "bypass"
+    resources: []
     networks:
       - "192.168.0.0/16"
       - "172.16.0.0/12"
@@ -44,6 +45,7 @@ authelia_config_access_control_rules:
       - "example.com"
       - "*.example.com"
     policy: "two_factor"
+    resources: []
     networks: []
 
 authelia_config_password_policy_standard_enabled: "false"
