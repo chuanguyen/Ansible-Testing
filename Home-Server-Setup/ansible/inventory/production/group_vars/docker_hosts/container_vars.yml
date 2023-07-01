@@ -38,8 +38,8 @@ alertmanager_image_base_tag: "v0.23.0"
 alertmanager_image_base_tag_old: ""
 
 ### Home Internet monitoring
-home_internet_blackbox_exporter_image_base_tag: "v0.19.0"
-home_internet_speedtest_exporter_image_base_tag: "v3.3.4"
+home_internet_blackbox_exporter_image_base_tag: "v0.24.0"
+home_internet_speedtest_exporter_image_base_tag: "v3.5.4"
 
 portainer_image_base_tag: "2.16.2"
 portainer_image_base_tag_old: ""

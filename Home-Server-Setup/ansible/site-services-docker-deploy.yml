@@ -35,7 +35,14 @@
       tags: [services, monitoring, prometheus, prometheus-exporter]
 
     - role: "deploy-prometheus-home-internet-monitoring"
-      tags: [services, monitoring, prometheus, prometheus-exporter]
+      tags:
+        [
+          services,
+          monitoring,
+          prometheus,
+          prometheus-exporter,
+          home-internet-monitoring,
+        ]
 
 - name: "PLAY: Deploy home automation services"
   hosts: family-docker-001
