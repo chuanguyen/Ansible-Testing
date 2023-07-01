@@ -18,7 +18,8 @@ traefik_config_http_middlewares:
           stsSeconds: 31536000
           # frame-ancestor defined to allow iframe loading in Home Assistant
           # Authelia hashes had to be added for login page to load properly
-          contentSecurityPolicy: "default-src 'self'; frame-src 'none'; object-src 'self'; style-src-elem {{ authelia_content_security_policy_hashes | join(' ') }}; style-src {{ authelia_content_security_policy_hashes | join(' ') }}; script-src 'self' https://login.hq1.chuanguyen.ca; base-uri 'self'; frame-ancestors https://home-assistant-001.{{ home_lan_domain }};"
+          contentSecurityPolicy: "default-src 'self'; frame-src https://digikam.{{ home_lan_domain }}; manifest-src 'self' https://login.{{ home_lan_domain }}; object-src 'self'; style-src-elem {{ authelia_content_security_policy_hashes | join(' ') }}; style-src {{ authelia_content_security_policy_hashes | join(' ') }}; script-src 'self' https://login.hq1.chuanguyen.ca; base-uri 'self'; frame-ancestors https://home-assistant-001.{{ home_lan_domain }};"
+          accessControlAllowOriginListRegex: "https:\\/\\/.*.{{ home_lan_domain | regex_escape }}"
       lanWhitelist:
         ipWhiteList:
           sourceRange:
