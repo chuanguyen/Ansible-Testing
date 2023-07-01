@@ -22,15 +22,9 @@ services:
     devices:
       - /dev/serial/by-id/{{ zigbee2mqtt_zigbee_host_usb_device_id }}:{{ zigbee2mqtt_zigbee_container_usb_device_id }}
     labels:
-      - "traefik.enable=true"
-      - "traefik.docker.network={{ docker_networks.proxy.name }}"
-      - "traefik.http.routers.zigbee2mqtt1.rule=Host(`zigbee2mqtt.{{ home_lan_domain }}`)"
-      - "traefik.http.routers.zigbee2mqtt1.entrypoints=websecure"
-      - "traefik.http.routers.zigbee2mqtt1.middlewares=secureHeaders@file"
-      - "traefik.http.routers.zigbee2mqtt1.tls=true"
-      - "traefik.http.routers.zigbee2mqtt1.tls.certresolver=letsEncrypt"
-      - "traefik.http.routers.zigbee2mqtt1.service=zigbee2mqtt-svc"
-      - "traefik.http.services.zigbee2mqtt-svc.loadbalancer.server.port=8080"
+{% for traefik_label in zigbee2mqtt_container_traefik_labels %}
+      - "{{ traefik_label }}"
+{% endfor %}
     restart: "always"
 networks:
   {{ docker_networks.proxy.name }}:

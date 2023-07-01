@@ -34,6 +34,7 @@ authelia_config_access_control_rules:
   # Ensures any communication directly from HA to Frigate is bypassed
   - domains:
       - "frigate-001.{{ home_lan_domain }}"
+      - "zwave.{{ home_lan_domain }}"
     resources: []
     policy: "bypass"
     networks:

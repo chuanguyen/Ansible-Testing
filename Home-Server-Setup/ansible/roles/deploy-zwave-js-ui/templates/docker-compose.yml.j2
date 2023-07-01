@@ -22,15 +22,9 @@ services:
     devices:
       - /dev/serial/by-id/{{ zwave_js_ui_host_usb_device_id }}:{{ zwave_js_ui_container_usb_device_id }}
     labels:
-      - "traefik.enable=true"
-      - "traefik.docker.network={{ docker_networks.proxy.name }}"
-      - "traefik.http.routers.zwave_js_ui1.rule=Host(`zwave.{{ home_lan_domain }}`)"
-      - "traefik.http.routers.zwave_js_ui1.entrypoints=websecure"
-      - "traefik.http.routers.zwave_js_ui1.middlewares=secureHeaders@file"
-      - "traefik.http.routers.zwave_js_ui1.tls=true"
-      - "traefik.http.routers.zwave_js_ui1.tls.certresolver=letsEncrypt"
-      - "traefik.http.routers.zwave_js_ui1.service=zwave_js_ui-svc"
-      - "traefik.http.services.zwave_js_ui-svc.loadbalancer.server.port={{ zwave_js_ui_web_port }}"
+{% for traefik_label in zwave_js_ui_container_traefik_labels %}
+      - "{{ traefik_label }}"
+{% endfor %}
     restart: "always"
 networks:
   {{ docker_networks.proxy.name }}:

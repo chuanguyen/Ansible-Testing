@@ -1,4 +1,15 @@
 ---
+zwave_js_ui_container_traefik_labels:
+  - "traefik.enable=true"
+  - "traefik.docker.network={{ docker_networks.proxy.name }}"
+  - "traefik.http.routers.zwave_js_ui1.rule=Host(`zwave.{{ home_lan_domain }}`)"
+  - "traefik.http.routers.zwave_js_ui1.entrypoints=websecure"
+  - "traefik.http.routers.zwave_js_ui1.middlewares=secureHeaders@file,authelia"
+  - "traefik.http.routers.zwave_js_ui1.tls=true"
+  - "traefik.http.routers.zwave_js_ui1.tls.certresolver=letsEncrypt"
+  - "traefik.http.routers.zwave_js_ui1.service=zwave_js_ui-svc"
+  - "traefik.http.services.zwave_js_ui-svc.loadbalancer.server.port={{ zwave_js_ui_web_port }}"
+
 zwave_js_ui_host_usb_device_id: "usb-Zooz_800_Z-Wave_Stick_533D004242-if00"
 
 zwave_js_ui_container_envs:
