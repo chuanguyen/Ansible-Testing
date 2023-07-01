@@ -4,6 +4,6 @@ alertmanager_container_traefik_labels:
   - "traefik.docker.network={{ docker_networks.proxy.name }}"
   - "traefik.http.routers.alertmanager1.rule=Host(`alertmanager.{{ home_lan_domain }}`)"
   - "traefik.http.routers.alertmanager1.entrypoints=websecure"
-  - "traefik.http.routers.alertmanager1.middlewares=lanWhitelist@file,secureHeaders@file,authelia"
+  - "traefik.http.routers.alertmanager1.middlewares=secureHeaders@file,authelia"
   - "traefik.http.routers.alertmanager1.tls=true"
   - "traefik.http.routers.alertmanager1.tls.certresolver=letsEncrypt"
