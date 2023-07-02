@@ -7,7 +7,9 @@ version: "3"
 services:
   digikam:
     container_name: "{{ digikam_container_name }}"
-    image: "{{ digikam_image_base }}:{{ digikam_image_base_tag }}"
+    build:
+      context: build/
+    image: "{{ digikam_image_custom }}:{{ digikam_image_base_tag }}"
     env_file: digikam.env
     networks:
       - {{ docker_networks.proxy.name }}

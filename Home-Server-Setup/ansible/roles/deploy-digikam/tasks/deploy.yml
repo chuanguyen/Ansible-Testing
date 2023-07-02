@@ -35,6 +35,7 @@
 - name: "TASK: Deploy {{ digikam_container_name }}"
   community.docker.docker_compose:
     project_src: "{{ digikam_container_data_dir }}"
+    build: "{{ 'yes' if image_base_pull.changed else 'no' }}"
     nocache: "no"
     state: "present"
     restarted: "{{ digikam_container_restart }}"
