@@ -10,3 +10,10 @@ digikam_media_volumes:
       type: "cifs"
       device: "//nas1.{{ home_lan_domain }}/download/Pending-Pictures"
       o: "addr=nas1.{{ home_lan_domain }},username={{ media_management_user_username }},password={{ media_management_user_password }},vers=3.0,uid={{ digikam_UID }},gid={{ digikam_GID }}"
+  - name: "nas1_share_2"
+    container_dest: "{{ digikam_media_location }}/Nas1-Pictures"
+    driver: "local"
+    driver_opts:
+      type: "cifs"
+      device: "//nas1.{{ home_lan_domain }}/multimedia/Pictures"
+      o: "addr=nas1.{{ home_lan_domain }},username={{ media_management_user_username }},password={{ media_management_user_password }},vers=3.0,uid={{ digikam_UID }},gid={{ digikam_GID }}"
