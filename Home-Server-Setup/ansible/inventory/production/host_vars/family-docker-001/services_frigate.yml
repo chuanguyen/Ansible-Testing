@@ -176,6 +176,10 @@ frigate_cameras:
         - cat
         - dog
         - car
+      filters:
+        person:
+          mask:
+            - 561,720,531,610,492,577,435,560,367,567,310,622,245,720
     zones:
       driveway_entrance:
         coordinates: 681,83,765,152,849,87,1001,75,995,0,847,0,848,37,650,39,575,75,622,72
