@@ -1,0 +1,6 @@
+---
+# Exposed to permit Wallpanel app to talk to MQTT
+# With Traefik handling SSL, this isn't built into Mosquitto.
+# which is what Wallpanel is expecting, leading to protocol errors
+# as it tries to communicate over ssl://
+mqtt_mosquitto_port_tcp_expose: true
