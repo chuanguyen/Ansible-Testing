@@ -225,6 +225,7 @@ frigate_cameras:
         filters:
           # Add filters due to small coverage area to increase detection
           person:
+            min_area: 400
             min_score: 0.4
             threshold: 0.6
           cat:
