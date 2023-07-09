@@ -75,34 +75,34 @@ prometheus_alerting_groups:
   - group_name: "QNAP-Alerts"
     rules:
       - alert_name: "SystemTemperatureHigh_Warning"
-        expr: "systemTemperatureEX{{ '{' }}job='snmp_nas_qnap'{{ '}' }} >= 42"
+        expr: "systemTemperatureEX{{ '{' }}job='snmp_nas_qnap'{{ '}' }} >= 45"
         for: "1m"
         labels:
           severity: "warning"
           maintenance: "false"
         annotations:
-          summary: "System temperature on Instance {{ '{{ $labels.instance }}' }} over 42 Celsius"
-          description: "System temperature on Instance {{ '{{ $labels.instance }}' }} at more than 42 Celsius for longer than 1 minutes."
+          summary: "System temperature on Instance {{ '{{ $labels.instance }}' }} over 45 Celsius"
+          description: "System temperature on Instance {{ '{{ $labels.instance }}' }} at more than 45 Celsius for longer than 1 minutes."
           dashboard: "https://grafana.hq1.chuanguyen.ca/d/pwwviueMz/qnap-snmp-monitor?orgId=1"
       - alert_name: "DiskTemperatureHigh_Warning"
-        expr: "diskTemperture{{ '{' }}job='snmp_nas_qnap'{{ '}' }} >= 40"
+        expr: "diskTemperture{{ '{' }}job='snmp_nas_qnap'{{ '}' }} >= 45"
         for: "1m"
         labels:
           severity: "warning"
           maintenance: "false"
         annotations:
-          summary: "Disk {{ '{{ $labels.diskIndex }}' }} temperature on Instance {{ '{{ $labels.instance }}' }} over 40 Celsius"
-          description: "Disk {{ '{{ $labels.diskIndex }}' }} temperature on Instance {{ '{{ $labels.instance }}' }} at more than 40 Celsius for longer than 1 minutes."
+          summary: "Disk {{ '{{ $labels.diskIndex }}' }} temperature on Instance {{ '{{ $labels.instance }}' }} over 45 Celsius"
+          description: "Disk {{ '{{ $labels.diskIndex }}' }} temperature on Instance {{ '{{ $labels.instance }}' }} at more than 45 Celsius for longer than 1 minutes."
           dashboard: "https://grafana.hq1.chuanguyen.ca/d/pwwviueMz/qnap-snmp-monitor?orgId=1"
       - alert_name: "DiskTemperatureHigh_Critical"
-        expr: "diskTemperture{{ '{' }}job='snmp_nas_qnap'{{ '}' }} >= 45"
+        expr: "diskTemperture{{ '{' }}job='snmp_nas_qnap'{{ '}' }} >= 50"
         for: "1m"
         labels:
           severity: "critical"
           maintenance: "false"
         annotations:
-          summary: "Disk {{ '{{ $labels.diskIndex }}' }} temperature on Instance {{ '{{ $labels.instance }}' }} over 45 Celsius"
-          description: "Disk {{ '{{ $labels.diskIndex }}' }} temperature on Instance {{ '{{ $labels.instance }}' }} at more than 45 Celsius for longer than 1 minutes."
+          summary: "Disk {{ '{{ $labels.diskIndex }}' }} temperature on Instance {{ '{{ $labels.instance }}' }} over 50 Celsius"
+          description: "Disk {{ '{{ $labels.diskIndex }}' }} temperature on Instance {{ '{{ $labels.instance }}' }} at more than 50 Celsius for longer than 1 minutes."
           dashboard: "https://grafana.hq1.chuanguyen.ca/d/pwwviueMz/qnap-snmp-monitor?orgId=1"
       - alert_name: "DiskHealthInfo"
         expr: "diskSmartInfo{{ '{' }}job='snmp_nas_qnap'{{ '}' }} != 0"
