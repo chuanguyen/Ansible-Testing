@@ -227,8 +227,9 @@ frigate_cameras:
           - dog
         filters:
           person:
-            min_score: 0.5
-            threshold: 0.7
+            min_score: 0.55
+            threshold: 0.75
+            max_area: 47500
           cat:
             min_score: 0.4
             threshold: 0.6
