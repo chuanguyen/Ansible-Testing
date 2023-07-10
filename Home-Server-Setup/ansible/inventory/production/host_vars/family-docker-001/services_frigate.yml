@@ -229,7 +229,7 @@ frigate_cameras:
           person:
             min_score: 0.55
             threshold: 0.75
-            max_area: 47500
+            max_area: 45000
           cat:
             min_score: 0.4
             threshold: 0.6
