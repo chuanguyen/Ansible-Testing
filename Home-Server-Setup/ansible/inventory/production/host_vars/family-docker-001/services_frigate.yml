@@ -89,6 +89,7 @@ frigate_cameras:
         person:
           mask:
             - 526,720,503,618,476,515,435,560,397,518,319,588,270,652,174,720
+            - 625,144,636,101,610,77,564,76,531,75,542,137
     zones:
       front_yard:
         coordinates: 1280,720,1280,300,1280,0,1213,0,1212,182,931,140,730,120,611,117,395,133,175,175,0,220,0,720
@@ -218,6 +219,8 @@ frigate_cameras:
         filters:
           car:
             min_score: 0.4
+            min_area: 0
+            max_area: 27000
             threshold: 0.6
       driveway:
         coordinates: 351,181,505,82,587,73,573,0,647,139,848,141,859,0,961,22,1079,50,1280,140,1280,720,0,720,0,408
@@ -227,9 +230,9 @@ frigate_cameras:
           - dog
         filters:
           person:
-            min_score: 0.55
-            threshold: 0.75
-            max_area: 45000
+            min_score: 0.5
+            max_ratio: 0.8
+            threshold: 0.7
           cat:
             min_score: 0.4
             threshold: 0.6
