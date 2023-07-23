@@ -219,8 +219,7 @@ frigate_cameras:
         filters:
           car:
             min_score: 0.4
-            min_area: 0
-            max_area: 27000
+            max_area: 30000
             threshold: 0.6
       driveway:
         coordinates: 351,181,505,82,587,73,573,0,647,139,848,141,859,0,961,22,1079,50,1280,140,1280,720,0,720,0,408
@@ -230,9 +229,10 @@ frigate_cameras:
           - dog
         filters:
           person:
-            min_score: 0.5
-            max_ratio: 0.8
-            threshold: 0.7
+            min_score: 0.4
+            min_area: 2500
+            min_ratio: 0.375
+            threshold: 0.6
           cat:
             min_score: 0.4
             threshold: 0.6
@@ -248,7 +248,7 @@ frigate_cameras:
         filters:
           # Add filters due to small coverage area to increase detection
           person:
-            min_area: 400
+            min_area: 600
             min_score: 0.4
             threshold: 0.6
           cat:
