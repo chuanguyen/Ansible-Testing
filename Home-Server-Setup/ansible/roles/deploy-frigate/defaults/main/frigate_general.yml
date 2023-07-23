@@ -28,10 +28,13 @@ frigate_port_web: 5000
 frigate_port_rtsp: 8554
 frigate_port_webrtc: 8555
 
+frigate_plus_api_key: ""
+
 frigate_container_envs:
   kv:
     # Used for RTSP connections to cameras
     FRIGATE_RTSP_PASSWORD: "{{ frigate_rtsp_password }}"
+    PLUS_API_KEY: "{{ frigate_plus_api_key }}"
 
 traefik_http_rule_hostname: "frigate"
 

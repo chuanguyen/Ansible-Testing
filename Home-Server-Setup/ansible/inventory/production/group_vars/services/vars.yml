@@ -16,6 +16,7 @@ mqtt_mosquitto_auth_credentials: "{{ vault_mqtt_mosquitto_auth_credentials }}"
 
 # Frigate
 frigate_rtsp_password: "{{ vault_frigate_rtsp_password }}"
+frigate_plus_api_key: "{{ vault_frigate_plus_api_key }}"
 
 # Z-Wave JS Server
 zwave_js_ui_websocket_server_port: "3001"
