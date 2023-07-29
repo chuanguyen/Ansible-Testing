@@ -38,7 +38,7 @@ immich_microservices_container_name: "immich_microservices"
 immich_machine_learning_container_name: "immich_machine_learning"
 immich_web_container_name: "immich_web"
 immich_proxy_container_name: "immich_proxy"
-immich_typesense_container_name: "immich_typesense"
+immich_typesense_container_name: "typesense"
 immich_redis_container_name: "immich_redis"
 immich_postgres_container_name: "immich_postgres"
 
@@ -47,29 +47,43 @@ immich_container_restart: no
 # Defines image ID for custom image
 immich_image_custom: "{{ ansible_user }}/immich"
 
-immich_container_traefik_labels:
+immich_proxy_container_traefik_labels:
   - "traefik.enable=true"
   - "traefik.docker.network={{ docker_networks.proxy.name }}"
   - "traefik.http.routers.immich1.rule=Host(`immich.{{ home_lan_domain }}`)"
   - "traefik.http.routers.immich1.entrypoints=websecure"
   - "traefik.http.routers.immich1.middlewares=secureHeaders@file"
+  - "traefik.http.routers.immich1.service=immich-svc"
+  - "traefik.http.services.immich-svc.loadbalancer.server.port=8080"
   - "traefik.http.routers.immich1.tls=true"
   - "traefik.http.routers.immich1.tls.certresolver=letsEncrypt"
 
 # Defines upload location on host
 immich_upload_location: "{{ immich_container_data_dir }}/Photos/Uploads"
 
+immich_web_url: "http://immich-web:3000"
+immich_server_url: "http://immich-server:3001"
+
+immich_typesense_api_key: "test_test_test"
+immich_typsense_url: "{{ immich_typesense_container_name }}"
+
+immich_db_hostname: "{{ immich_postgres_container_name }}"
+immich_db_username: "postgres"
+immich_db_password: "postgres"
+immich_db_database_name: "immich"
+
 immich_container_envs:
   kv:
-    DB_HOSTNAME: "immich_postgres"
-    DB_USERNAME: "postgres"
-    DB_PASSWORD: "postgres"
-    DB_DATABASE_NAME: "immich"
+    DB_HOSTNAME: "{{ immich_db_hostname }}"
+    DB_USERNAME: "{{ immich_db_username }}"
+    DB_PASSWORD: "{{ immich_db_password }}"
+    DB_DATABASE_NAME: "{{ immich_db_database_name }}"
     DB_PORT: 5432
-    REDIS_HOSTNAME: "immich_redis"
+    REDIS_HOSTNAME: "{{ immich_redis_container_name }}"
     UPLOAD_LOCATION: "{{ immich_upload_location }}"
-    TYPESENSE_API_KEY: "some-random-text"
+    TYPESENSE_API_KEY: "{{ immich_typesense_api_key }}"
+    TYPESENSE_URL: "{{ immich_typsense_url }}"
     PUBLIC_LOGIN_PAGE_MESSAGE: ""
-    IMMICH_WEB_URL: "http://immich-web:3000"
-    IMMICH_SERVER_URL: "http://immich-server:3001"
+    IMMICH_WEB_URL: "{{ immich_web_url }}"
+    IMMICH_SERVER_URL: "{{ immich_server_url }}"
     IMMICH_MACHINE_LEARNING_URL: "http://immich-machine-learning:3003"

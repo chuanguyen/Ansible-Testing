@@ -5,13 +5,14 @@
 version: "3.8"
 
 services:
-  {{ immich_server_container_name }}:
+  immich-server:
     container_name: "{{ immich_server_container_name }}"
     image: "{{ immich_server_image_base }}:{{ immich_image_base_tag }}"
     command: ["start.sh", "immich"]
     env_file: immich.env
     ports: []
-    networks: []
+    networks:
+      - immich
     # Volumes store your data between container upgrades
     volumes:
 {% for volume in immich_container_volumes.binds %}
@@ -30,7 +31,8 @@ services:
     command: ["start.sh", "immich"]
     env_file: immich.env
     ports: []
-    networks: []
+    networks:
+      - immich
     # Volumes store your data between container upgrades
     volumes:
 {% for volume in immich_container_volumes.binds %}
@@ -43,24 +45,27 @@ services:
       - {{ immich_typesense_container_name }}
     restart: "always"
 
-  {{ immich_machine_learning_container_name }}:
+  immich-machine-learning:
     container_name: "{{ immich_machine_learning_container_name }}"
     image: "{{ immich_machine_learning_image_base }}:{{ immich_image_base_tag }}"
     env_file: immich.env
     ports: []
-    networks: []
+    networks:
+      - {{ docker_networks.proxy.name }}
+      - immich
     # Volumes store your data between container upgrades
     volumes:
       - model-cache:/cache
     labels: []
     restart: "always"
 
-  {{ immich_web_container_name }}:
+  immich-web:
     container_name: "{{ immich_web_container_name }}"
     image: "{{ immich_web_image_base }}:{{ immich_image_base_tag }}"
     env_file: immich.env
     ports: []
-    networks: []
+    networks:
+      - immich
     # Volumes store your data between container upgrades
     volumes: []
     labels: []
@@ -70,10 +75,11 @@ services:
     container_name: "{{ immich_typesense_container_name }}"
     image: "{{ immich_typesense_image_base }}:{{ immich_typesense_image_base_tag }}"
     environment:
-      - TYPESENSE_API_KEY=${TYPESENSE_API_KEY}
+      - TYPESENSE_API_KEY={{ immich_typesense_api_key }}
       - TYPESENSE_DATA_DIR=/data
     ports: []
-    networks: []
+    networks:
+      - immich
     # Volumes store your data between container upgrades
     volumes:
       - tsdata:/data
@@ -86,7 +92,8 @@ services:
     container_name: "{{ immich_redis_container_name }}"
     image: "{{ immich_redis_image_base }}:{{ immich_redis_image_base_tag }}"
     ports: []
-    networks: []
+    networks:
+      - immich
     # Volumes store your data between container upgrades
     volumes: []
     labels: []
@@ -97,12 +104,13 @@ services:
     image: "{{ immich_postgres_image_base }}:{{ immich_postgres_image_base_tag }}"
     env_file: immich.env
     environment:
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_USER: ${DB_USERNAME}
-      POSTGRES_DB: ${DB_DATABASE_NAME}
+      POSTGRES_USER: "{{ immich_db_username }}"
+      POSTGRES_PASSWORD: "{{ immich_db_password }}"
+      POSTGRES_DB: "{{ immich_db_database_name }}"
       PG_DATA: /var/lib/postgresql/data
     ports: []
-    networks: []
+    networks:
+      - immich
     # Volumes store your data between container upgrades
     volumes:
       - pgdata:/var/lib/postgresql/data
@@ -113,25 +121,28 @@ services:
     container_name: "{{ immich_proxy_container_name }}"
     image: "{{ immich_proxy_image_base }}:{{ immich_image_base_tag }}"
     environment:
-      - IMMICH_SERVER_URL
-      - IMMICH_WEB_URL
+      IMMICH_SERVER_URL: {{ immich_web_url }}
+      IMMICH_WEB_URL: {{ immich_server_url }}
     ports: []
     networks:
       - {{ docker_networks.proxy.name }}
+      - immich
     # Volumes store your data between container upgrades
     volumes: []
     labels:
-{% for traefik_label in immich_container_traefik_labels %}
+{% for traefik_label in immich_proxy_container_traefik_labels %}
       - "{{ traefik_label }}"
 {% endfor %}
     depends_on:
-      - {{ immich_server_container_name }}
-      - {{ immich_web_container_name }}
+      - immich-server
+      - immich-web
     restart: "always"
 
 networks:
   {{ docker_networks.proxy.name }}:
     external: true
+  immich:
+    external: false
 volumes:
   pgdata:
   model-cache:
