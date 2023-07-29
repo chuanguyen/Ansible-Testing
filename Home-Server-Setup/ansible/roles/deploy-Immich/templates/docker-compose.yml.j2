@@ -1,0 +1,26 @@
+---
+
+# {{ ansible_managed }}
+
+version: "3"
+
+services:
+  immich:
+    container_name: "{{ immich_container_name }}"
+    image: "{{ immich_image_base }}:{{ immich_image_base_tag }}"
+    env_file: immich.env
+    ports:
+      - ""
+    networks:
+      - ""
+    # Volumes store your data between container upgrades
+    volumes:
+{% for volume in immich_container_volumes.binds %}
+      - {{ volume.source }}:{{ volume.target }}
+{% endfor %}
+    labels:
+{% for traefik_label in immich_container_traefik_labels %}
+      - "{{ traefik_label }}"
+{% endfor %}
+    restart: "always"
+networks:
