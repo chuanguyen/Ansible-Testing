@@ -88,3 +88,6 @@
 
     - role: "deploy-authelia"
       tags: [services, authelia]
+
+    - role: "deploy-immich"
+      tags: [services, immich]

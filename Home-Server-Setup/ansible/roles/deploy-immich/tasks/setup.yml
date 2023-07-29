@@ -29,8 +29,6 @@
       dest: "{{ immich_container_data_dir }}/docker-compose.yml"
     - src: "immich.env.j2"
       dest: "{{ immich_container_data_dir }}/immich.env"
-    - src: "Dockerfile.j2"
-      dest: "{{ immich_container_data_dir }}/build/Dockerfile"
   loop_control:
     label: "{{ item.src }}"
   register: "container_templated_files"

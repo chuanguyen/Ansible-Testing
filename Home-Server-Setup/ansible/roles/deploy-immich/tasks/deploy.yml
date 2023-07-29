@@ -30,7 +30,7 @@
         container_default_behavior: "no_defaults"
         state: "absent"
       when: container_exists and image_base_pull.changed
-      with_item:
+      with_items:
         - "{{ immich_server_container_name }}"
         - "{{ immich_microservices_container_name }}"
         - "{{ immich_machine_learning_container_name }}"
