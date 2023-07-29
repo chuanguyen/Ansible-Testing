@@ -1,11 +1,7 @@
 immich_container_data_dir_sub_folders:
-  - "etc-immich/"
-  - "mnt-backup/"
-  - "scripts"
+  - "Photos/Uploads"
 
 immich_container_volumes:
   binds:
-    - source: "./etc-immich/"
-      target: "/etc/immich/"
-    - source: "./mnt-backup/"
-      target: "/mnt/backup/"
+    - source: "{{ immich_upload_location }}"
+      target: "/usr/src/app/upload"
