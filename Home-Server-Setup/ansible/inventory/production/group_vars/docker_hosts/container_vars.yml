@@ -67,3 +67,16 @@ digikam_image_base_tag_old: ""
 
 authelia_image_base_tag: "4.37"
 authelia_image_base_tag_old: ""
+
+### Immich
+immich_image_base_tag: "v1.70.0"
+immich_image_base_tag_old: ""
+
+immich_typesense_image_base_tag: "0.24.1@sha256:9bcff2b829f12074426ca044b56160ca9d777a0c488303469143dd9f8259d4dd"
+immich_typesense_image_base_tag_old: ""
+
+immich_redis_image_base_tag: "6.2-alpine@sha256:70a7a5b641117670beae0d80658430853896b5ef269ccf00d1827427e3263fa3"
+immich_redis_image_base_tag_old: ""
+
+immich_postgres_image_base_tag: "14-alpine@sha256:28407a9961e76f2d285dc6991e8e48893503cc3836a4755bbc2d40bcc272a441"
+immich_postgres_image_base_tag_old: ""

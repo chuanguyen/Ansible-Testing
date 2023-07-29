@@ -1,0 +1,59 @@
+immich_container_data_dir: "{{ docker_container_root_dir }}/immich"
+
+immich_repo_base: "ghcr.io/immich-app"
+immich_image_base_tag: ""
+# Ensures previous version of working
+# immich image is available for failback
+immich_image_base_tag_old: ""
+
+### Dependent containers
+
+immich_typesense_repo: "typesense/typesense"
+immich_typesense_image_base_tag: ""
+# Ensures previous version of working
+# immich image is available for failback
+immich_typesense_image_base_tag_old: ""
+
+immich_redis_repo: "redis"
+immich_redis_image_base_tag: ""
+# Ensures previous version of working
+# immich image is available for failback
+immich_redis_image_base_tag_old: ""
+
+immich_postgres_repo: "postgres"
+immich_postgres_image_base_tag: ""
+# Ensures previous version of working
+# immich image is available for failback
+immich_postgres_image_base_tag_old: ""
+
+# Container details
+immich_server_image_base: "{{ immich_repo_base }}/immich-server"
+immich_server_container_name: "immich_server"
+immich_microservices_server_image_base: "{{ immich_repo_base }}/immich-server"
+immich_microservices_container_name: "immich_microservices"
+immich_machine_learning_image_base: "{{ immich_repo_base }}/immich-machine-learning"
+immich_machine_learning_container_name: "immich_machine_learning"
+immich_web_image_base: "{{ immich_repo_base }}/immich-web"
+immich_web_container_name: "immich_web"
+immich_proxy_image_base: "{{ immich_repo_base }}/immich-proxy"
+immich_proxy_container_name: "immich_proxy"
+immich_typesense_container_name: "immich_typesense"
+immich_redis_container_name: "immich_redis"
+immich_postgres_container_name: "immich_postgres"
+
+# Controls whether docker-compose restarts Docker containers
+immich_container_restart: no
+# Defines image ID for custom image
+immich_image_custom: "{{ ansible_user }}/immich"
+
+immich_container_traefik_labels:
+  - "traefik.enable=true"
+  - "traefik.docker.network={{ docker_networks.proxy.name }}"
+  - "traefik.http.routers.immich1.rule=Host(`immich.{{ home_lan_domain }}`)"
+  - "traefik.http.routers.immich1.entrypoints=websecure"
+  - "traefik.http.routers.immich1.middlewares=secureHeaders@file"
+  - "traefik.http.routers.immich1.tls=true"
+  - "traefik.http.routers.immich1.tls.certresolver=letsEncrypt"
+
+immich_container_envs:
+  kv:
