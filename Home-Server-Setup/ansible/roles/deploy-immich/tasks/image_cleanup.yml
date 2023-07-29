@@ -1,23 +1,135 @@
 ---
-- name: "TASK: Grab all tags of a particular image"
-  shell: "docker images --filter=reference='{{ immich_image_base }}:*' | tr -s ' ' | cut -d ' ' -f 2 | tail -n +2"
+- name: "TASK: Grab all tags of immich-server images"
+  shell: "docker images --filter=reference='{{ immich_server_image_base }}:*' | tr -s ' ' | cut -d ' ' -f 2 | tail -n +2"
   register: docker_image_filter_output
 
 - set_fact:
     docker_image_filtered_tags: "{{ docker_image_filter_output.stdout_lines }}"
 
-- name: "TASK: Remove docker images filtered by tags"
+- name: "TASK: Remove immich-server images filtered by tags"
   community.docker.docker_image:
-    name: "{{ immich_image_base }}"
+    name: "{{ immich_server_image_base }}"
     tag: "{{ item }}"
     state: "absent"
   with_items: "{{ docker_image_filtered_tags }}"
   when: "item != immich_image_base_tag and item != immich_image_base_tag_old"
 
-- name: "TASK: Remove custom docker images filtered by tags"
+- name: "TASK: Grab all tags of immich_microservices images"
+  shell: "docker images --filter=reference='{{ immich_microservices_server_image_base }}:*' | tr -s ' ' | cut -d ' ' -f 2 | tail -n +2"
+  register: docker_image_filter_output
+
+- set_fact:
+    docker_image_filtered_tags: "{{ docker_image_filter_output.stdout_lines }}"
+
+- name: "TASK: Remove immich_microservices images filtered by tags"
   community.docker.docker_image:
-    name: "{{ immich_image_custom }}"
+    name: "{{ immich_microservices_server_image_base }}"
     tag: "{{ item }}"
     state: "absent"
   with_items: "{{ docker_image_filtered_tags }}"
   when: "item != immich_image_base_tag and item != immich_image_base_tag_old"
+
+- name: "TASK: Grab all tags of immich_machine_learning images"
+  shell: "docker images --filter=reference='{{ immich_machine_learning_image_base }}:*' | tr -s ' ' | cut -d ' ' -f 2 | tail -n +2"
+  register: docker_image_filter_output
+
+- set_fact:
+    docker_image_filtered_tags: "{{ docker_image_filter_output.stdout_lines }}"
+
+- name: "TASK: Remove immich_machine_learning images filtered by tags"
+  community.docker.docker_image:
+    name: "{{ immich_machine_learning_image_base }}"
+    tag: "{{ item }}"
+    state: "absent"
+  with_items: "{{ docker_image_filtered_tags }}"
+  when: "item != immich_image_base_tag and item != immich_image_base_tag_old"
+
+- name: "TASK: Grab all tags of immich_web images"
+  shell: "docker images --filter=reference='{{ immich_web_image_base }}:*' | tr -s ' ' | cut -d ' ' -f 2 | tail -n +2"
+  register: docker_image_filter_output
+
+- set_fact:
+    docker_image_filtered_tags: "{{ docker_image_filter_output.stdout_lines }}"
+
+- name: "TASK: Remove immich_web images filtered by tags"
+  community.docker.docker_image:
+    name: "{{ immich_web_image_base }}"
+    tag: "{{ item }}"
+    state: "absent"
+  with_items: "{{ docker_image_filtered_tags }}"
+  when: "item != immich_image_base_tag and item != immich_image_base_tag_old"
+
+- name: "TASK: Grab all tags of immich_proxy images"
+  shell: "docker images --filter=reference='{{ immich_proxy_image_base }}:*' | tr -s ' ' | cut -d ' ' -f 2 | tail -n +2"
+  register: docker_image_filter_output
+
+- set_fact:
+    docker_image_filtered_tags: "{{ docker_image_filter_output.stdout_lines }}"
+
+- name: "TASK: Remove immich_proxy images filtered by tags"
+  community.docker.docker_image:
+    name: "{{ immich_proxy_image_base }}"
+    tag: "{{ item }}"
+    state: "absent"
+  with_items: "{{ docker_image_filtered_tags }}"
+  when: "item != immich_image_base_tag and item != immich_image_base_tag_old"
+
+- name: "TASK: Grab all tags of immich_proxy images"
+  shell: "docker images --filter=reference='{{ immich_proxy_image_base }}:*' | tr -s ' ' | cut -d ' ' -f 2 | tail -n +2"
+  register: docker_image_filter_output
+
+- set_fact:
+    docker_image_filtered_tags: "{{ docker_image_filter_output.stdout_lines }}"
+
+- name: "TASK: Remove immich_proxy images filtered by tags"
+  community.docker.docker_image:
+    name: "{{ immich_proxy_image_base }}"
+    tag: "{{ item }}"
+    state: "absent"
+  with_items: "{{ docker_image_filtered_tags }}"
+  when: "item != immich_image_base_tag and item != immich_image_base_tag_old"
+
+- name: "TASK: Grab all tags of immich_typesense images"
+  shell: "docker images --filter=reference='{{ immich_typesense_image_base }}:*' | tr -s ' ' | cut -d ' ' -f 2 | tail -n +2"
+  register: docker_image_filter_output
+
+- set_fact:
+    docker_image_filtered_tags: "{{ docker_image_filter_output.stdout_lines }}"
+
+- name: "TASK: Remove immich_typesense images filtered by tags"
+  community.docker.docker_image:
+    name: "{{ immich_typesense_image_base }}"
+    tag: "{{ item }}"
+    state: "absent"
+  with_items: "{{ docker_image_filtered_tags }}"
+  when: "item != immich_typesense_image_base_tag and item != immich_typesense_image_base_tag_old"
+
+- name: "TASK: Grab all tags of immich_redis images"
+  shell: "docker images --filter=reference='{{ immich_redis_image_base }}:*' | tr -s ' ' | cut -d ' ' -f 2 | tail -n +2"
+  register: docker_image_filter_output
+
+- set_fact:
+    docker_image_filtered_tags: "{{ docker_image_filter_output.stdout_lines }}"
+
+- name: "TASK: Remove immich_redis images filtered by tags"
+  community.docker.docker_image:
+    name: "{{ immich_redis_image_base }}"
+    tag: "{{ item }}"
+    state: "absent"
+  with_items: "{{ docker_image_filtered_tags }}"
+  when: "item != immich_redis_image_base_tag and item != immich_redis_image_base_tag_old"
+
+- name: "TASK: Grab all tags of immich_postgres images"
+  shell: "docker images --filter=reference='{{ immich_postgres_image_base }}:*' | tr -s ' ' | cut -d ' ' -f 2 | tail -n +2"
+  register: docker_image_filter_output
+
+- set_fact:
+    docker_image_filtered_tags: "{{ docker_image_filter_output.stdout_lines }}"
+
+- name: "TASK: Remove immich_postgres images filtered by tags"
+  community.docker.docker_image:
+    name: "{{ immich_postgres_image_base }}"
+    tag: "{{ item }}"
+    state: "absent"
+  with_items: "{{ docker_image_filtered_tags }}"
+  when: "item != immich_postgres_image_base_tag and item != immich_postgres_image_base_tag_old"
