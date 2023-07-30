@@ -23,25 +23,17 @@
         source: "pull"
         state: "present"
       register: "image_base_pull"
-
-    - name: "TASK: Remove container for updates"
-      community.docker.docker_container:
-        name: "{{ immich_container_name }}"
-        container_default_behavior: "no_defaults"
-        state: "absent"
-      when: container_exists and image_base_pull.changed
-      with_items:
-        - "{{ immich_server_container_name }}"
-        - "{{ immich_microservices_container_name }}"
-        - "{{ immich_machine_learning_container_name }}"
-        - "{{ immich_web_container_name }}"
-        - "{{ immich_proxy_container_name }}"
-        - "{{ immich_typesense_container_name }}"
-        - "{{ immich_redis_container_name }}"
-        - "{{ immich_postgres_container_name }}"
   when: container_image_tag[1] != immich_image_base_tag
 
-- name: "TASK: Deploy {{ immich_container_name }}"
+- name: "TASK: Delete Immich"
+  community.docker.docker_compose:
+    project_src: "{{ immich_container_data_dir }}"
+    nocache: "no"
+    state: "absent"
+    restarted: "{{ immich_container_restart }}"
+  when: image_base_pull.changed or container_templated_files.changed
+
+- name: "TASK: Deploy Immich"
   community.docker.docker_compose:
     project_src: "{{ immich_container_data_dir }}"
     nocache: "no"

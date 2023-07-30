@@ -6,137 +6,110 @@ version: "3.8"
 
 services:
   immich-server:
-    container_name: "{{ immich_server_container_name }}"
-    image: "{{ immich_server_image_base }}:{{ immich_image_base_tag }}"
-    command: ["start.sh", "immich"]
-    env_file: immich.env
-    ports: []
+    container_name: {{ immich_server_container_name }}
+    image: {{ immich_server_image_base }}:{{ immich_image_base_tag }}
     networks:
       - immich
+    command: ["start.sh", "immich"]
     # Volumes store your data between container upgrades
     volumes:
 {% for volume in immich_container_volumes.binds %}
       - {{ volume.source }}:{{ volume.target }}
 {% endfor %}
-    labels: []
+    env_file:
+      - immich.env
     depends_on:
-      - {{ immich_redis_container_name }}
-      - {{ immich_postgres_container_name }}
-      - {{ immich_typesense_container_name }}
-    restart: "always"
+      - redis
+      - database
+      - typesense
+    restart: always
 
-  {{ immich_microservices_container_name }}:
-    container_name: "{{ immich_microservices_container_name }}"
-    image: "{{ immich_microservices_server_image_base }}:{{ immich_image_base_tag }}"
-    command: ["start.sh", "immich"]
-    env_file: immich.env
-    ports: []
+  immich-microservices:
+    container_name: {{ immich_microservices_container_name }}
+    image: {{ immich_microservices_server_image_base }}:{{ immich_image_base_tag }}
     networks:
       - immich
+    command: ["start.sh", "microservices"]
     # Volumes store your data between container upgrades
     volumes:
 {% for volume in immich_container_volumes.binds %}
       - {{ volume.source }}:{{ volume.target }}
 {% endfor %}
-    labels: []
+    env_file:
+      - immich.env
     depends_on:
-      - {{ immich_redis_container_name }}
-      - {{ immich_postgres_container_name }}
-      - {{ immich_typesense_container_name }}
-    restart: "always"
+      - redis
+      - database
+      - typesense
+    restart: always
 
   immich-machine-learning:
-    container_name: "{{ immich_machine_learning_container_name }}"
-    image: "{{ immich_machine_learning_image_base }}:{{ immich_image_base_tag }}"
-    env_file: immich.env
-    ports: []
+    container_name: {{ immich_machine_learning_container_name }}
+    image: {{ immich_machine_learning_image_base }}:{{ immich_image_base_tag }}
     networks:
       - {{ docker_networks.proxy.name }}
       - immich
-    # Volumes store your data between container upgrades
     volumes:
       - model-cache:/cache
-    labels: []
-    restart: "always"
+    env_file:
+      - immich.env
+    restart: always
 
   immich-web:
-    container_name: "{{ immich_web_container_name }}"
-    image: "{{ immich_web_image_base }}:{{ immich_image_base_tag }}"
-    env_file: immich.env
-    ports: []
+    container_name: {{ immich_web_container_name }}
+    image: {{ immich_web_image_base }}:{{ immich_image_base_tag }}
     networks:
       - immich
-    # Volumes store your data between container upgrades
-    volumes: []
-    labels: []
-    restart: "always"
+    env_file:
+      - immich.env
+    restart: always
 
-  {{ immich_typesense_container_name }}:
-    container_name: "{{ immich_typesense_container_name }}"
-    image: "{{ immich_typesense_image_base }}:{{ immich_typesense_image_base_tag }}"
+  typesense:
+    container_name: {{ immich_typesense_container_name }}
+    image: {{ immich_typesense_image_base }}:{{ immich_typesense_image_base_tag }}
+    networks:
+      - immich
     environment:
       - TYPESENSE_API_KEY={{ immich_typesense_api_key }}
       - TYPESENSE_DATA_DIR=/data
-    ports: []
-    networks:
-      - immich
-    # Volumes store your data between container upgrades
-    volumes:
-      - tsdata:/data
-    labels: []
     logging:
       driver: none
-    restart: "always"
+    volumes:
+      - tsdata:/data
+    restart: always
 
-  {{ immich_redis_container_name }}:
-    container_name: "{{ immich_redis_container_name }}"
-    image: "{{ immich_redis_image_base }}:{{ immich_redis_image_base_tag }}"
-    ports: []
+  redis:
+    container_name: {{ immich_redis_container_name }}
+    image: {{ immich_redis_image_base }}:{{ immich_redis_image_base_tag }}
     networks:
       - immich
-    # Volumes store your data between container upgrades
-    volumes: []
-    labels: []
-    restart: "always"
+    restart: always
 
-  {{ immich_postgres_container_name }}:
-    container_name: "{{ immich_postgres_container_name }}"
-    image: "{{ immich_postgres_image_base }}:{{ immich_postgres_image_base_tag }}"
-    env_file: immich.env
-    environment:
-      POSTGRES_USER: "{{ immich_db_username }}"
-      POSTGRES_PASSWORD: "{{ immich_db_password }}"
-      POSTGRES_DB: "{{ immich_db_database_name }}"
-      PG_DATA: /var/lib/postgresql/data
-    ports: []
+  database:
+    container_name: {{ immich_postgres_container_name }}
+    image: {{ immich_postgres_image_base }}:{{ immich_postgres_image_base_tag }}
     networks:
       - immich
-    # Volumes store your data between container upgrades
+    env_file:
+      - immich.env
     volumes:
       - pgdata:/var/lib/postgresql/data
-    labels: []
-    restart: "always"
+    restart: always
 
-  {{ immich_proxy_container_name }}:
-    container_name: "{{ immich_proxy_container_name }}"
-    image: "{{ immich_proxy_image_base }}:{{ immich_image_base_tag }}"
-    environment:
-      IMMICH_SERVER_URL: {{ immich_web_url }}
-      IMMICH_WEB_URL: {{ immich_server_url }}
-    ports: []
+  immich-proxy:
+    container_name: {{ immich_proxy_container_name }}
+    image: {{ immich_proxy_image_base }}:{{ immich_image_base_tag }}
     networks:
-      - {{ docker_networks.proxy.name }}
       - immich
-    # Volumes store your data between container upgrades
-    volumes: []
-    labels:
-{% for traefik_label in immich_proxy_container_traefik_labels %}
-      - "{{ traefik_label }}"
-{% endfor %}
+      - {{ docker_networks.proxy.name }}
+    env_file:
+      - immich.env
+    ports:
+      - 2283:8080
     depends_on:
       - immich-server
       - immich-web
-    restart: "always"
+    restart: always
 
 networks:
   {{ docker_networks.proxy.name }}:
