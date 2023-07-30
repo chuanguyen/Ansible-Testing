@@ -104,8 +104,10 @@ services:
       - {{ docker_networks.proxy.name }}
     env_file:
       - immich.env
-    ports:
-      - 2283:8080
+    labels:
+{% for traefik_label in immich_proxy_container_traefik_labels %}
+      - "{{ traefik_label }}"
+{% endfor %}
     depends_on:
       - immich-server
       - immich-web
