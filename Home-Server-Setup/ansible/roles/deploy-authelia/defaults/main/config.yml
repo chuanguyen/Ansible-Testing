@@ -58,6 +58,25 @@ authelia_config_password_policy_standard_require_special: "false"
 authelia_config_password_policy_zxcvbn_enabled: "false"
 authelia_config_password_policy_zxcvbn_min_score: 3
 
+### Identity Providers
+
+authelia_config_identity_providers_enabled: false
+
+# OIDC
+
+authelia_config_oidc_enabled: false
+authelia_config_oidc_settings:
+  issuer_private_key: ""
+
+authelia_config_oidc_clients: []
+# - id: "AUTHELIA_ID"
+#   description: "DESCRIPTION"
+#   secret: ""
+#   redirect_uris:
+#     - ""
+#   scopes:
+#     -
+
 authelia_config_session_name: "authelia_session"
 # Indicates secret provided via a file
 authelia_config_session_secret_external: true

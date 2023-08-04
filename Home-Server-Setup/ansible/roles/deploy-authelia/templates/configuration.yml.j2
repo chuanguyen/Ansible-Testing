@@ -44,6 +44,31 @@ authentication_backend:
         parallelism: {{ authelia_config_authentication_backend_file_password_parallelism }}
 {% endif %}
 
+{% if authelia_config_identity_providers_enabled %}
+identity_providers:
+{% if authelia_config_oidc_enabled %}
+    oidc:
+        issuer_private_key: |
+            {{ authelia_config_oidc_settings.issuer_private_key | indent(width=12) }}
+        clients:
+{% if authelia_config_oidc_clients | length > 0 %}
+{% for authelia_client in authelia_config_oidc_clients %}
+          - id: {{ authelia_client.id }}
+            description: {{ authelia_client.description }}
+            secret: '{{ authelia_client.secret }}'
+            redirect_uris:
+{% for authelia_redirect_uri in authelia_client.redirect_uris %}
+                - {{ authelia_redirect_uri }}
+{% endfor %}
+            scopes:
+{% for authelia_scope in authelia_client.scopes %}
+                - {{ authelia_scope }}
+{% endfor %}
+{% endfor %}
+{% endif %}
+{% endif %}
+{% endif %}
+
 # Access Control
 access_control:
     default_policy: {{ authelia_config_access_control_default_policy }}
