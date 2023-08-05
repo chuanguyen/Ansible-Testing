@@ -23,7 +23,7 @@ alertmanager_receivers:
   - name: "default-receiver"
     email_configs:
       send_resolved: "true"
-      to: "monitoring.notifications@m.{{ home_lan_domain_public}}"
+      to: "services+monitoring@{{ home_lan_domain_public}}"
       from: "monitoring.notifications@m.{{ home_lan_domain_public }}"
       smarthost: "{{ smtp_monitoring_server_url }}"
       hello: ""
