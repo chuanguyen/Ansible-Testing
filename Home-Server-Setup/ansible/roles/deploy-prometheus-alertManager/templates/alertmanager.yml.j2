@@ -111,6 +111,12 @@ receivers:
 {% endif %}
 {% endfor %}
 {% endif %}
+{% if alertmanager_receiver.discord_configs[0] != "" %}
+    discord_configs:
+{% for discord_webhook_url in alertmanager_receiver.discord_configs %}
+      - webhook_url: {{ discord_webhook_url }}
+{% endfor %}
+{% endif %}
 {% endfor %}
 {% endif %}
 

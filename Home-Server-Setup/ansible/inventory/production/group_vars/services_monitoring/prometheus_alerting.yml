@@ -32,6 +32,8 @@ alertmanager_receivers:
       auth_secret: ""
       auth_identity: ""
       require_tls: "false"
+    discord_configs:
+      - "{{ vault_alertmanager_discord_webhook }}"
 
 ### Alerting rules
 

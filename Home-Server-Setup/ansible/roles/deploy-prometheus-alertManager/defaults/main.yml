@@ -74,6 +74,8 @@ alertmanager_receivers:
       auth_secret: ""
       auth_identity: ""
       require_tls: ""
+    discord_configs:
+      - "" # Discord Webhook URL
 
 # List of inhibition rules
 alertmanager_inhibit_rules:
