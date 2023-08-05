@@ -1,5 +1,4 @@
 ---
-
 ### Issue #675
 # One of the MIBS aren't being downloaded
 # Fixed in Commit 4307bba
@@ -10,8 +9,8 @@
     repo: "https://github.com/prometheus/snmp_exporter.git"
     dest: "{{ snmp_exporter_container_data_dir }}/temp"
     single_branch: yes
-    # version: "{{ snmp_exporter_image_base_tag }}"
-    version: "main"
+    version: "{{ snmp_exporter_image_base_tag }}"
+    # version: "main"
     force: yes
 
 - name: "TASK: Make SNMP Generator MIBS"
@@ -34,7 +33,7 @@
   shell:
     cmd: "go build"
   args:
-      chdir: "{{ snmp_exporter_container_data_dir }}/temp/generator"
+    chdir: "{{ snmp_exporter_container_data_dir }}/temp/generator"
 
 - name: "TASK: Add generator.yml entries"
   blockinfile:
@@ -48,7 +47,7 @@
   shell:
     cmd: "./generator generate"
   args:
-      chdir: "{{ snmp_exporter_container_data_dir }}/temp/generator"
+    chdir: "{{ snmp_exporter_container_data_dir }}/temp/generator"
   environment:
     MIBDIRS: "mibs"
 
