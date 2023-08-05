@@ -1,7 +1,6 @@
 ---
-
 ### Node_Exporter
-prometheus_node_exporter_version: "1.2.2"
+prometheus_node_exporter_version: "1.6.1"
 
 ### SNMP
 snmp_exporter_prometheus_mib_modules:
