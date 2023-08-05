@@ -19,8 +19,8 @@ grafana_image_base_tag_old: "9.3.1-ubuntu"
 grafana_nfs_backup_cleanup_period: "60"
 grafana_nfs_backup_frequency: "0 1 */15 * *"
 
-prometheus_image_base_tag: "v2.40.6"
-prometheus_image_base_tag_old: "v2.29.2"
+prometheus_image_base_tag: "v2.45.0"
+prometheus_image_base_tag_old: "v2.40.6"
 
 prometheus_docker_cli_commands:
   "config.file": "/etc/prometheus/prometheus.yml"
@@ -31,11 +31,11 @@ prometheus_docker_cli_commands:
   "storage.tsdb.retention.time": "1y"
   "storage.tsdb.retention.size": "50GB"
 
-snmp_exporter_image_base_tag: "v0.20.0"
-snmp_exporter_image_base_tag_old: ""
+snmp_exporter_image_base_tag: "v0.22.0"
+snmp_exporter_image_base_tag_old: "v0.20.0"
 
-alertmanager_image_base_tag: "v0.23.0"
-alertmanager_image_base_tag_old: ""
+alertmanager_image_base_tag: "v0.25.0"
+alertmanager_image_base_tag_old: "v0.23.0"
 
 ### Home Internet monitoring
 home_internet_blackbox_exporter_image_base_tag: "v0.24.0"
