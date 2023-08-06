@@ -75,7 +75,7 @@ prometheus_alerting_groups:
   - group_name: "QNAP-Alerts"
     rules:
       - alert_name: "SystemTemperatureHigh_Warning"
-        expr: "systemTemperatureEX{{ '{' }}job='snmp_nas_qnap'{{ '}' }} >= 45"
+        expr: "systemTemperatureEX{{ '{' }}job='snmp_nas_qnap'{{ '}' }} >= 47"
         for: "1m"
         labels:
           severity: "warning"
@@ -85,7 +85,7 @@ prometheus_alerting_groups:
           description: "System temperature on Instance {{ '{{ $labels.instance }}' }} at more than 45 Celsius for longer than 1 minutes."
           dashboard: "https://grafana.hq1.chuanguyen.ca/d/pwwviueMz/qnap-snmp-monitor?orgId=1"
       - alert_name: "DiskTemperatureHigh_Warning"
-        expr: "diskTemperture{{ '{' }}job='snmp_nas_qnap'{{ '}' }} >= 45"
+        expr: "diskTemperture{{ '{' }}job='snmp_nas_qnap'{{ '}' }} >= 47"
         for: "1m"
         labels:
           severity: "warning"
