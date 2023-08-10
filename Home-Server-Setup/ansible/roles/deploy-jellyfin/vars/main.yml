@@ -1,0 +1,13 @@
+jellyfin_container_data_dir_sub_folders:
+  - "jellyfin-config/"
+  - "jellyfin-cache"
+  - "media"
+
+jellyfin_container_volumes:
+  binds:
+    - source: "./jellyfin-config"
+      target: "/config"
+    - source: "./jellyfin-cache"
+      target: "/cache"
+    - source: "./media"
+      target: "/media:ro"

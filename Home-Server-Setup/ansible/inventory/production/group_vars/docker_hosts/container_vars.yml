@@ -80,3 +80,6 @@ immich_redis_image_base_tag_old: ""
 
 immich_postgres_image_base_tag: "14-alpine@sha256:28407a9961e76f2d285dc6991e8e48893503cc3836a4755bbc2d40bcc272a441"
 immich_postgres_image_base_tag_old: ""
+
+jellyfin_image_base_tag: "unstable"
+jellyfin_image_base_tag_old: ""

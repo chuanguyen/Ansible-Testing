@@ -1,7 +1,10 @@
 immich_container_data_dir_sub_folders:
   - "Photos/Uploads"
+  - "External-Photo-Libraries/Family"
 
 immich_container_volumes:
   binds:
     - source: "{{ immich_upload_location }}"
       target: "/usr/src/app/upload"
+    - source: "{{ immich_container_data_dir }}/External-Photo-Libraries/Family"
+      target: "/mnt/media/Family:ro"

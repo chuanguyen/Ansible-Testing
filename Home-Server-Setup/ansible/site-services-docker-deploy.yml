@@ -91,3 +91,6 @@
 
     - role: "deploy-immich"
       tags: [services, immich]
+
+    - role: "deploy-jellyfin"
+      tags: [services, jellyfin]

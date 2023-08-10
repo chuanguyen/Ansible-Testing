@@ -1,0 +1,25 @@
+jellyfin_container_data_dir: "{{ docker_container_root_dir }}/jellyfin"
+
+jellyfin_image_base: "jellyfin/jellyfin"
+jellyfin_image_base_tag: ""
+# Ensures previous version of working
+# jellyfin image is available for failback
+jellyfin_image_base_tag_old: ""
+jellyfin_container_name: "jellyfin"
+# Controls whether docker-compose restarts Docker containers
+jellyfin_container_restart: no
+# Defines image ID for custom image
+jellyfin_image_custom: "{{ ansible_user }}/jellyfin"
+jellyfin_container_uid: 1000
+
+jellyfin_container_traefik_labels:
+  - "traefik.enable=true"
+  - "traefik.docker.network={{ docker_networks.proxy.name }}"
+  - "traefik.http.routers.jellyfin1.rule=Host(`jellyfin.{{ home_lan_domain }}`)"
+  - "traefik.http.routers.jellyfin1.entrypoints=websecure"
+  - "traefik.http.routers.jellyfin1.middlewares=lanWhitelist@file,secureHeaders@file"
+  - "traefik.http.routers.jellyfin1.tls=true"
+  - "traefik.http.routers.jellyfin1.tls.certresolver=letsEncrypt"
+
+jellyfin_container_envs:
+  kv:
