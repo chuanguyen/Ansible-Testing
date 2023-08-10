@@ -3,7 +3,7 @@
   become: true
   file:
     path: "{{ jellyfin_container_data_dir }}"
-    owner: "root"
+    owner: "{{ jellyfin_container_uid }}"
     group: "docker"
     mode: 0775
     state: "directory"
@@ -12,7 +12,7 @@
   become: true
   file:
     path: "{{ jellyfin_container_data_dir }}/{{ item }}"
-    owner: "root"
+    owner: "{{ jellyfin_container_uid }}"
     group: "docker"
     mode: 0775
     state: "directory"
@@ -22,6 +22,7 @@
   template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
+    owner: "{{ jellyfin_container_uid }}"
     group: "docker"
     mode: 0660
   with_items:
