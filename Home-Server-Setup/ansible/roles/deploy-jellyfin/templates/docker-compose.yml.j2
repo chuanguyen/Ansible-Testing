@@ -17,6 +17,12 @@ services:
 {% for volume in jellyfin_container_volumes.binds %}
       - {{ volume.source }}:{{ volume.target }}
 {% endfor %}
+{% for media_volume in jellyfin_media_volumes %}
+      - type: {{ media_volume.type }}
+        source: {{ media_volume.name }}
+        target: {{ media_volume.container_dest }}
+        read_only: {{ media_volume.read_only }}
+{% endfor %}
     labels:
 {% for traefik_label in jellyfin_container_traefik_labels %}
       - "{{ traefik_label }}"
@@ -25,3 +31,12 @@ services:
 networks:
   {{ docker_networks.proxy.name }}:
     external: true
+volumes:
+{% for media_volume in jellyfin_media_volumes %}
+  {{ media_volume.name }}:
+    driver: {{ media_volume.driver }}
+    driver_opts:
+      type: {{ media_volume.driver_opts.type }}
+      device: "{{ media_volume.driver_opts.device }}"
+      o: "{{ media_volume.driver_opts.o }}"
+{% endfor %}

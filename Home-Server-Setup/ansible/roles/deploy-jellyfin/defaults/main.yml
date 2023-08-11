@@ -21,5 +21,20 @@ jellyfin_container_traefik_labels:
   - "traefik.http.routers.jellyfin1.tls=true"
   - "traefik.http.routers.jellyfin1.tls.certresolver=letsEncrypt"
 
+# Defines where in container media is located
+jellyfin_remote_media_location: "/mnt"
+
+jellyfin_media_volumes:
+  []
+  # - name: "VOLUME_NAME"
+  #   type: volume
+  #   container_dest: "{{ jellyfin_remote_media_location }}/PATH"
+  #   driver: "local"
+  #   driver_opts:
+  #     type: "cifs"
+  #     device: "//SERVER/SHARE"
+  #     o: "addr=SERVER_FQDN,username=USER,password=PASSWORD,vers=3.0,uid=UID,gid=GID"
+  #   read_only: "true"
+
 jellyfin_container_envs:
   kv:

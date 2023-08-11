@@ -1,0 +1,12 @@
+---
+# Jellyfin media volumes
+jellyfin_media_volumes:
+  - name: "nas1_share_jellyfin_movies"
+    type: "volume"
+    container_dest: "{{ jellyfin_remote_media_location }}/Nas1-Movies"
+    driver: "local"
+    driver_opts:
+      type: "cifs"
+      device: "//nas1.{{ home_lan_domain }}/multimedia/Video/Movies"
+      o: "addr=nas1.{{ home_lan_domain }},username={{ media_management_user_username }},password={{ media_management_user_password }},vers=3.0,uid={{ jellyfin_container_uid }},gid={{ jellyfin_container_uid }},ro"
+    read_only: "true"
