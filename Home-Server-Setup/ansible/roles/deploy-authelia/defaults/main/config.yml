@@ -69,8 +69,11 @@ authelia_config_oidc_settings:
   issuer_private_key: ""
 
 authelia_config_oidc_clients: []
+### For generating the ID, optionally run this:
+### tr -cd '[:alnum:]' < /dev/urandom | fold -w "64" | head -n 1
 # - id: "AUTHELIA_ID"
 #   description: "DESCRIPTION"
+### https://www.authelia.com/reference/cli/authelia/authelia_crypto_hash_generate_pbkdf2/
 #   secret: ""
 #   redirect_uris:
 #     - ""
