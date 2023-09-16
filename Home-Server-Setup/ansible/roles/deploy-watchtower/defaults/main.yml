@@ -29,3 +29,8 @@ watchtower_container_envs:
     WATCHTOWER_CLEANUP: "false"
     WATCHTOWER_POLL_INTERVAL: "86400"
     WATCHTOWER_LABEL_ENABLE: "false"
+    # Monitoring
+    WATCHTOWER_NOTIFICATIONS_LEVEL: "info"
+    ### NOTIFICATIONS - shoutrrr
+    # UNCOMMENT TO ENABLE
+    # WATCHTOWER_NOTIFICATION_URL: ""
