@@ -21,6 +21,9 @@ services:
       - {{ volume.source }}:{{ volume.target }}
 {% endfor %}
     labels:
+{% for container_label in SERVICE__container_labels %}
+      - "{{ container_label }}"
+{% endfor %}
 {% for traefik_label in SERVICE__container_traefik_labels %}
       - "{{ traefik_label }}"
 {% endfor %}
