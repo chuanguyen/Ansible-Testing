@@ -11,6 +11,8 @@ zwave_js_ui_container_restart: no
 # Defines image ID for custom image
 zwave_js_ui_image_custom: "{{ ansible_user }}/zwave_js_ui"
 
+zwave_js_ui_container_labels: []
+
 zwave_js_ui_container_traefik_labels:
   - "traefik.enable=true"
   - "traefik.docker.network={{ docker_networks.proxy.name }}"
