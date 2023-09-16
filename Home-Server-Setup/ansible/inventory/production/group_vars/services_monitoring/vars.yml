@@ -6,3 +6,6 @@ snmp_community_strings: "{{ vault_snmp_community_strings }}"
 smtp_monitoring_server_url: "{{ vault_smtp_monitoring_server_url }}"
 # API key monitoring services to use SendGrid
 smtp_monitoring_api_key: "{{ vault_smtp_monitoring_api_key }}"
+
+### Watchtower
+watchtower_shoutrrr_services: "{{ vault_watchtower_shoutrrr_services }}"
