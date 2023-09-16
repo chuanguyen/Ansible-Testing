@@ -22,3 +22,4 @@ all:
         services_monitoring:
           hosts:
             "rbp4-001":
+            "family-docker-001":
