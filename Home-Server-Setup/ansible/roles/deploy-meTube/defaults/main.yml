@@ -11,6 +11,8 @@ meTube_container_restart: no
 # Defines image ID for custom image
 meTube_image_custom: "{{ ansible_user }}/meTube"
 
+meTube_container_labels: []
+
 meTube_container_envs:
   kv:
     UID: 1000

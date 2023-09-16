@@ -1,4 +1,7 @@
 ---
+meTube_container_labels:
+  - "com.centurylinklabs.watchtower.enable=true"
+
 meTube_container_envs:
   kv:
     UID: 1000

@@ -14,6 +14,9 @@ services:
       - {{ docker_networks.proxy.name }}
     # Volumes store your data between container upgrades
     labels:
+{% for container_label in meTube_container_labels %}
+      - "{{ container_label }}"
+{% endfor %}
       - "traefik.enable=true"
       - "traefik.docker.network={{ docker_networks.proxy.name }}"
       - "traefik.http.routers.meTube1.rule=Host(`meTube.{{ home_lan_domain }}`)"
