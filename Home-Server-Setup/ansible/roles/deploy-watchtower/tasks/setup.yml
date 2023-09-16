@@ -29,8 +29,6 @@
       dest: "{{ watchtower_container_data_dir }}/docker-compose.yml"
     - src: "watchtower.env.j2"
       dest: "{{ watchtower_container_data_dir }}/watchtower.env"
-    - src: "Dockerfile.j2"
-      dest: "{{ watchtower_container_data_dir }}/build/Dockerfile"
   loop_control:
     label: "{{ item.src }}"
   register: "container_templated_files"

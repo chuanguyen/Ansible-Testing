@@ -1,11 +1,4 @@
-watchtower_container_data_dir_sub_folders:
-  - "etc-watchtower/"
-  - "mnt-backup/"
-  - "scripts"
+watchtower_container_data_dir_sub_folders: []
 
 watchtower_container_volumes:
-  binds:
-    - source: "./etc-watchtower/"
-      target: "/etc/watchtower/"
-    - source: "./mnt-backup/"
-      target: "/mnt/backup/"
+  binds: []

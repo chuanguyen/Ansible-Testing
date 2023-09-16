@@ -83,3 +83,6 @@ immich_postgres_image_base_tag_old: ""
 
 jellyfin_image_base_tag: "10.8.10"
 jellyfin_image_base_tag_old: ""
+
+watchtower_image_base_tag: "1.5.3"
+watchtower_image_base_tag_old: ""
