@@ -1,0 +1,31 @@
+watchtower_container_data_dir: "{{ docker_container_root_dir }}/watchtower"
+
+watchtower_image_base: "REPO/watchtower"
+watchtower_image_base_tag: ""
+# Ensures previous version of working
+# watchtower image is available for failback
+watchtower_image_base_tag_old: ""
+watchtower_container_name: "watchtower"
+# Controls whether docker-compose restarts Docker containers
+watchtower_container_restart: no
+# Defines image ID for custom image
+watchtower_image_custom: "{{ ansible_user }}/watchtower"
+
+watchtower_container_traefik_labels:
+  - "traefik.enable=true"
+  - "traefik.docker.network={{ docker_networks.proxy.name }}"
+  - "traefik.http.routers.watchtower1.rule=Host(`watchtower.{{ home_lan_domain }}`)"
+  - "traefik.http.routers.watchtower1.entrypoints=websecure"
+  - "traefik.http.routers.watchtower1.middlewares=lanWhitelist@file,secureHeaders@file"
+  - "traefik.http.routers.watchtower1.tls=true"
+  - "traefik.http.routers.watchtower1.tls.certresolver=letsEncrypt"
+
+watchtower_backup_directory: "/mnt/backup/"
+watchtower_nfs_backup_directory: "/nfs/Container-Data/docker/watchtower/"
+# Defines in days age of backups to remove
+watchtower_nfs_backup_cleanup_period: "60"
+# Defines via cron syntax how often to run backup
+watchtower_nfs_backup_frequency: "0 1 */15 * *"
+
+watchtower_container_envs:
+  kv:

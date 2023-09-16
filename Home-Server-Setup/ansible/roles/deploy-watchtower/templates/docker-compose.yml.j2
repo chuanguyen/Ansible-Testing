@@ -1,0 +1,26 @@
+---
+
+# {{ ansible_managed }}
+
+version: "3"
+
+services:
+  watchtower:
+    container_name: "{{ watchtower_container_name }}"
+    image: "{{ watchtower_image_base }}:{{ watchtower_image_base_tag }}"
+    env_file: watchtower.env
+    ports:
+      - ""
+    networks:
+      - ""
+    # Volumes store your data between container upgrades
+    volumes:
+{% for volume in watchtower_container_volumes.binds %}
+      - {{ volume.source }}:{{ volume.target }}
+{% endfor %}
+    labels:
+{% for traefik_label in watchtower_container_traefik_labels %}
+      - "{{ traefik_label }}"
+{% endfor %}
+    restart: "always"
+networks:
