@@ -11,6 +11,8 @@ watchtower_container_restart: no
 # Defines image ID for custom image
 watchtower_image_custom: "{{ ansible_user }}/watchtower"
 
+watchtower_container_labels: []
+
 watchtower_container_traefik_labels:
   []
   # - "traefik.enable=true"
@@ -23,3 +25,7 @@ watchtower_container_traefik_labels:
 
 watchtower_container_envs:
   kv:
+    TZ: "UTC"
+    WATCHTOWER_CLEANUP: "false"
+    WATCHTOWER_POLL_INTERVAL: "86400"
+    WATCHTOWER_LABEL_ENABLE: "false"

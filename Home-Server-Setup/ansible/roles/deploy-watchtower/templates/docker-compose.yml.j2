@@ -15,6 +15,9 @@ services:
       - {{ volume.source }}:{{ volume.target }}
 {% endfor %}
     labels:
+{% for container_label in watchtower_container_labels %}
+      - "{{ container_label }}"
+{% endfor %}
 {% for traefik_label in watchtower_container_traefik_labels %}
       - "{{ traefik_label }}"
 {% endfor %}
