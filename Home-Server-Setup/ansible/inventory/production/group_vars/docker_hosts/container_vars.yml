@@ -69,8 +69,8 @@ authelia_image_base_tag: "4.37"
 authelia_image_base_tag_old: ""
 
 ### Immich
-immich_image_base_tag: "v1.73.0"
-immich_image_base_tag_old: "v1.71.0"
+immich_image_base_tag: "v1.75.2"
+immich_image_base_tag_old: "v1.73.0"
 
 immich_typesense_image_base_tag: "0.24.1@sha256:9bcff2b829f12074426ca044b56160ca9d777a0c488303469143dd9f8259d4dd"
 immich_typesense_image_base_tag_old: ""
