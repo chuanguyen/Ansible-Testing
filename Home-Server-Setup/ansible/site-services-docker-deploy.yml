@@ -94,3 +94,6 @@
 
     - role: "deploy-jellyfin"
       tags: [services, jellyfin]
+
+    - role: "deploy-watchtower"
+      tags: [services, watchtower]
