@@ -22,6 +22,9 @@ services:
     devices:
       - /dev/serial/by-id/{{ zigbee2mqtt_zigbee_host_usb_device_id }}:{{ zigbee2mqtt_zigbee_container_usb_device_id }}
     labels:
+{% for container_label in zigbee2mqtt_container_labels %}
+      - "{{ container_label }}"
+{% endfor %}
 {% for traefik_label in zigbee2mqtt_container_traefik_labels %}
       - "{{ traefik_label }}"
 {% endfor %}

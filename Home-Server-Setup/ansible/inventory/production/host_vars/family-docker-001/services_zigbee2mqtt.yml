@@ -1,4 +1,7 @@
 ---
+zigbee2mqtt_container_labels:
+  - "com.centurylinklabs.watchtower.enable=true"
+
 zigbee2mqtt_container_traefik_labels:
   - "traefik.enable=true"
   - "traefik.docker.network={{ docker_networks.proxy.name }}"
