@@ -7,6 +7,7 @@ version: "3"
 services:
   watchtower:
     container_name: "{{ watchtower_container_name }}"
+    hostname: "{{ watchtower_container_hostname }}"
     image: "{{ watchtower_image_base }}:{{ watchtower_image_base_tag }}"
     env_file: watchtower.env
     # Volumes store your data between container upgrades

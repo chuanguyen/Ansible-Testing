@@ -6,6 +6,9 @@ watchtower_image_base_tag: ""
 # watchtower image is available for failback
 watchtower_image_base_tag_old: ""
 watchtower_container_name: "watchtower"
+# Relevant to the notification that Watchtower sends out
+# Helps differentiate multiple instances
+watchtower_container_hostname: "watchtower_{{ inventory_hostname }}"
 # Controls whether docker-compose restarts Docker containers
 watchtower_container_restart: no
 # Defines image ID for custom image
