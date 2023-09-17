@@ -47,8 +47,8 @@ portainer_image_base_tag_old: ""
 frigate_image_base_tag: "0.12.1"
 frigate_image_base_tag_old: "0.12.0"
 
-mqtt_mosquitto_image_base_tag: "2.0.15"
-mqtt_mosquitto_image_base_tag_old: ""
+mqtt_mosquitto_image_base_tag: "2.0.17"
+mqtt_mosquitto_image_base_tag_old: "2.0.15"
 
 zigbee2mqtt_image_base_tag: "latest"
 zigbee2mqtt_image_base_tag_old: "1.32.2"
@@ -75,8 +75,8 @@ authelia_image_base_tag: "4.37"
 authelia_image_base_tag_old: ""
 
 ### Immich
-immich_image_base_tag: "v1.75.2"
-immich_image_base_tag_old: "v1.73.0"
+immich_image_base_tag: "v1.78.1"
+immich_image_base_tag_old: "v1.75.2"
 
 immich_typesense_image_base_tag: "0.24.1@sha256:9bcff2b829f12074426ca044b56160ca9d777a0c488303469143dd9f8259d4dd"
 immich_typesense_image_base_tag_old: ""
