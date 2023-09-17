@@ -44,6 +44,9 @@
           home-internet-monitoring,
         ]
 
+    - role: "deploy-watchtower"
+      tags: [services, watchtower]
+
 - name: "PLAY: Deploy home automation services"
   hosts: family-docker-001
   gather_facts: true

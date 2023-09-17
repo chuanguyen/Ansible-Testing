@@ -1,0 +1,11 @@
+---
+watchtower_container_envs:
+  kv:
+    TZ: "America/Vancouver"
+    WATCHTOWER_REMOVE_VOLUMES: "true"
+    WATCHTOWER_POLL_INTERVAL: "86400"
+    WATCHTOWER_LABEL_ENABLE: "true"
+    ### Monitoring
+    WATCHTOWER_NOTIFICATIONS_LEVEL: "info"
+    ### Notifications - shoutrrr
+    WATCHTOWER_NOTIFICATION_URL: "discord://{{ watchtower_shoutrrr_services.discord.token }}@{{ watchtower_shoutrrr_services.discord.webhookID }}"
