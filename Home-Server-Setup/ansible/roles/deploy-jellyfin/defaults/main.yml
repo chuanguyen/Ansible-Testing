@@ -12,6 +12,8 @@ jellyfin_container_restart: no
 jellyfin_image_custom: "{{ ansible_user }}/jellyfin"
 jellyfin_container_uid: 1000
 
+jellyfin_container_labels: []
+
 jellyfin_container_traefik_labels:
   - "traefik.enable=true"
   - "traefik.docker.network={{ docker_networks.proxy.name }}"

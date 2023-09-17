@@ -1,4 +1,7 @@
 ---
+jellyfin_container_labels:
+  - "com.centurylinklabs.watchtower.enable=true"
+
 # Jellyfin media volumes
 jellyfin_media_volumes:
   - name: "nas1_share_jellyfin_movies"

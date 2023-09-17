@@ -25,6 +25,10 @@ services:
 {% for volume in rtl_433_container_volumes.binds %}
       - {{ volume.source }}:{{ volume.target }}
 {% endfor %}
+    labels:
+{% for container_label in rtl_433_container_labels %}
+      - "{{ container_label }}"
+{% endfor %}
     restart: "always"
 networks:
   {{ docker_networks.proxy.name }}:

@@ -12,6 +12,8 @@ portainer_container_restart: no
 portainer_image_custom: "{{ ansible_user }}/portainer"
 portainer_container_web_port: "9000"
 
+portainer_container_labels: []
+
 portainer_container_envs:
   kv:
 

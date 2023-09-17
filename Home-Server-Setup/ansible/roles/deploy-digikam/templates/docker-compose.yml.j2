@@ -22,6 +22,9 @@ services:
       - {{ media_volume.name }}:{{ media_volume.container_dest }}
 {% endfor %}
     labels:
+{% for container_label in digikam_container_labels %}
+      - "{{ container_label }}"
+{% endfor %}
       - "traefik.enable=true"
       - "traefik.docker.network={{ docker_networks.proxy.name }}"
       - "traefik.http.routers.digikam1.rule=Host(`digikam.{{ home_lan_domain }}`)"

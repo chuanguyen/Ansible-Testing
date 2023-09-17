@@ -24,6 +24,9 @@ services:
         read_only: {{ media_volume.read_only }}
 {% endfor %}
     labels:
+{% for container_label in jellyfin_container_labels %}
+      - "{{ container_label }}"
+{% endfor %}
 {% for traefik_label in jellyfin_container_traefik_labels %}
       - "{{ traefik_label }}"
 {% endfor %}

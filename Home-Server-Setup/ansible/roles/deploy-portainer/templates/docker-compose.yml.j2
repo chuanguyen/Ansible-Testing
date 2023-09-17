@@ -18,6 +18,9 @@ services:
       - {{ volume.source }}:{{ volume.target }}
 {% endfor %}
     labels:
+{% for container_label in portainer_container_labels %}
+      - "{{ container_label }}"
+{% endfor %}
       - "traefik.enable=true"
       - "traefik.docker.network={{ docker_networks.proxy.name }}"
       - "traefik.http.routers.portainer1.rule=Host(`{{ traefik_http_rule_hostname }}.{{ home_lan_domain }}`)"

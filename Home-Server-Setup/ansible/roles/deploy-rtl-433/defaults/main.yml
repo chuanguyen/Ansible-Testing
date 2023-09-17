@@ -12,6 +12,8 @@ rtl_433_container_restart: no
 rtl_433_image_custom: "{{ ansible_user }}/rtl_433"
 rtl_433_host_dev_usb_device_path: ""
 
+rtl_433_container_labels: []
+
 rtl_433_container_envs:
   kv:
 

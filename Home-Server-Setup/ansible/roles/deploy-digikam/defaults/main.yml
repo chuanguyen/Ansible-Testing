@@ -22,6 +22,8 @@ digikam_traefik_additional_middlewares: ""
 digikam_UID: "1000"
 digikam_GID: "1000"
 
+digikam_container_labels: []
+
 # Defines where in container media is located
 digikam_media_location: "/config/Pictures"
 
