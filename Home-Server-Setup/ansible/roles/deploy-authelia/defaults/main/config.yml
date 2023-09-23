@@ -114,6 +114,8 @@ authelia_notifier_smtp_disable_html_emails: "false"
 authelia_notifier_smtp_tls_skip_verify: "false"
 
 authelia_use_local_users: true
+# Reference this for creating passwords
+# https://www.authelia.com/reference/guides/passwords/
 authelia_local_users:
   - username: "USER1"
     displayname: "USER1"

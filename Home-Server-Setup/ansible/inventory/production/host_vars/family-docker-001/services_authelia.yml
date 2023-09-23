@@ -84,6 +84,8 @@ authelia_notifier_smtp_subject: "[Authelia] {title}"
 
 authelia_storage_encryption_key: "{{ vault_authelia_storage_encryption_key }}"
 
+# Reference this for creating passwords
+# https://www.authelia.com/reference/guides/passwords/
 authelia_local_users: "{{ vault_authelia_local_users }}"
 
 authelia_config_ntp_enabled: false
