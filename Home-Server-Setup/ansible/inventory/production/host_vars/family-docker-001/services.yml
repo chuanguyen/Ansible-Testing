@@ -9,12 +9,12 @@ frigate_port_rtsp: 8554
 frigate_port_webrtc: 8555
 
 frigate_container_data_dir_sub_folders:
-  - "media-frigate"
+  - "frigate-config"
 
 frigate_container_volumes:
   binds:
-    - source: "./config.yml"
-      target: "/config/config.yml"
+    - source: "./frigate-config"
+      target: "/config/"
     - source: "/mnt/media-frigate"
       target: "/media/frigate"
     - source: "/etc/localtime"

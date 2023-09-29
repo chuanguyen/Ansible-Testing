@@ -30,7 +30,7 @@
     - src: "frigate.env.j2"
       dest: "{{ frigate_container_data_dir }}/frigate.env"
     - src: "frigate-config.yml.j2"
-      dest: "{{ frigate_container_data_dir }}/config.yml"
+      dest: "{{ frigate_container_data_dir }}/frigate-config/config.yml"
   loop_control:
     label: "{{ item.src }}"
   register: "container_templated_files"

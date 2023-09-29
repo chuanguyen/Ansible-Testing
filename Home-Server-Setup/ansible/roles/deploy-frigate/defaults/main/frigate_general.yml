@@ -39,12 +39,13 @@ frigate_container_envs:
 traefik_http_rule_hostname: "frigate"
 
 frigate_container_data_dir_sub_folders:
+  - "frigate-config"
   - "media-frigate"
 
 frigate_container_volumes:
   binds:
-    - source: "./config.yml"
-      target: "/config/config.yml"
+    - source: "./frigate-config"
+      target: "/config"
     - source: "./media-frigate"
       target: "/media/frigate"
     - source: "/etc/localtime"
