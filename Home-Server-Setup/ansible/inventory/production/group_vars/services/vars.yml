@@ -24,3 +24,7 @@ zwave_js_ui_websocket_server_port: "3001"
 # Media Management Credentials
 media_management_user_username: "{{ vault_media_management_user_username }}"
 media_management_user_password: "{{ vault_media_management_user_password }}"
+
+# Reolink cameras
+reolink_cameras_username: "{{ vault_reolink_cameras_username }}"
+reolink_cameras_password: "{{ vault_reolink_cameras_password }}"
