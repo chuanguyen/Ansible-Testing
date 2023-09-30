@@ -31,6 +31,7 @@ frigate_go2rtc:
       - "ffmpeg:front_door_substream#audio=opus"
     front_door_bell:
       # - "rtsp://{{ reolink_cameras_username }}:{{ reolink_cameras_password }}@doorbell-front.{{ home_lan_domain }}:554/h264Preview_01_main"
+      # - "ffmpeg:front_door_bell#audio=opus#audio=pcm"
       - "http://doorbell-front.{{ home_lan_domain }}/flv?port=1935&app=bcs&stream=channel0_main.bcs&user={{ reolink_cameras_username }}&password={{ reolink_cameras_password }}"
       - "ffmpeg:front_door_bell#audio=opus"
     front_door_bell_substream:
@@ -69,6 +70,17 @@ frigate_cameras:
       fps: 5
     record:
       enabled: True
+      events:
+        pre_capture: 10
+        post_capture: 10
+        objects:
+          - person
+        required_zones: []
+        retain:
+          default: 20
+          mode: motion
+          objects:
+            person: 30
     snapshots:
       enabled: True
       bounding_box: True
@@ -105,10 +117,10 @@ frigate_cameras:
           - front_yard
           - front_yard_street
         retain:
-          default: 10
+          default: 20
           mode: motion
           objects:
-            person: 15
+            person: 30
     snapshots:
       enabled: True
       bounding_box: True
@@ -215,10 +227,10 @@ frigate_cameras:
           - dog
           - car
         retain:
-          default: 10
+          default: 20
           mode: motion
           objects:
-            person: 15
+            person: 30
     snapshots:
       enabled: True
       bounding_box: True
