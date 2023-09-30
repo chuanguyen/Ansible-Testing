@@ -1,5 +1,6 @@
 mqtt_mosquitto_container_data_dir_sub_folders:
   - "config"
+  - "config/mosquitto.conf.d"
   - "data"
   - "log"
 

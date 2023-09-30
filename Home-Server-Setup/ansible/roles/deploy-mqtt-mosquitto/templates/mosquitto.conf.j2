@@ -29,3 +29,5 @@ password_file /mosquitto/config/{{ mqtt_mosquitto_auth_password_file }}
 {% else  %}
 allow_anonymous true
 {% endif %}
+
+include_dir {{ mqtt_mosquitto_conf_include_dir }}

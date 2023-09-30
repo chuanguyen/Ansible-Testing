@@ -37,6 +37,7 @@ mqtt_mosquitto_conf_log_destinations:
   - "stdout"
 mqtt_mosquitto_conf_user: "mosquitto"
 mqtt_mosquitto_conf_per_listener_settings: "true"
+mqtt_mosquitto_conf_include_dir: "/mosquitto/config/mosquitto.conf.d"
 
 ### MQTT Authentication
 # Defines whether new MQTT credential file is created
