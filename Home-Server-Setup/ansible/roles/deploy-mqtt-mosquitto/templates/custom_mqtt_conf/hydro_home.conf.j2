@@ -1,0 +1,8 @@
+# {{ ansible_managed }}
+# Subscribes Mosquitto to the remote MQTT broker on the Hydro Home energy bridge
+
+connection hydro_home
+address energy_bridge.{{ home_lan_domain }}:2883
+try_private false
+start_type automatic
+topic event/metering/# in 0 energy_metering/hydro_home/energy_bridge/

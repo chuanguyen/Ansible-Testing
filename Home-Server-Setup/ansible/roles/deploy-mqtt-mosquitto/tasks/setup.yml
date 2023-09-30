@@ -37,7 +37,21 @@
     label: "{{ item.src }}"
   register: "container_templated_files"
 
+- name: "Template custom mosquitto files for {{ mqtt_mosquitto_container_name }}"
+  become: true
+  template:
+    src: "{{ item }}"
+    dest: "{{ mqtt_mosquitto_container_data_dir }}/config/mosquitto.conf.d/{{ item | basename | regex_replace('\\.j2$', '') }}"
+    owner: 1883
+    group: "docker"
+    mode: 0660
+  with_fileglob:
+    - templates/custom_mqtt_conf/*.j2
+  loop_control:
+    label: "{{ item | basename | regex_replace('\\.j2$', '') }}"
+  register: "container_templated_files_custom"
+
 - name: "TASK: Set containers to restart when templated files change"
   set_fact:
     mqtt_mosquitto_container_restart: "yes"
-  when: "container_templated_files.changed"
+  when: "container_templated_files.changed or container_templated_files_custom.changed"
