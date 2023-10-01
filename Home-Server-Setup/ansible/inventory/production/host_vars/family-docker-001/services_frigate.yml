@@ -11,6 +11,9 @@ frigate_container_traefik_labels:
   - "traefik.http.routers.frigate1.tls=true"
   - "traefik.http.routers.frigate1.tls.certresolver=letsEncrypt"
 
+frigate_use_custom_go2rtc: true
+frigate_custom_go2rtc_version: "1.6.2"
+
 # Frigate configuration
 frigate_mqtt_enabled: True
 # Frigate MQTT Host is name of MQTT container running on the same host
