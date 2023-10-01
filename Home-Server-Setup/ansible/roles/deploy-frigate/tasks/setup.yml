@@ -35,7 +35,18 @@
     label: "{{ item.src }}"
   register: "container_templated_files"
 
+- name: "Deploy custom go2rtc version"
+  become: true
+  ansible.builtin.get_url:
+    url: "https://github.com/AlexxIT/go2rtc/releases/download/v{{ frigate_custom_go2rtc_version }}/go2rtc_{{ ansible_system | lower }}_{{ cpu_architecture_mappings[ansible_architecture] }}"
+    dest: "{{ frigate_container_data_dir }}/frigate-config/go2rtc"
+    mode: 0770
+    owner: "root"
+    group: "docker"
+  when: "frigate_use_custom_go2rtc"
+  register: "download_custom_go2rtc"
+
 - name: "TASK: Set containers to restart when templated files change"
   set_fact:
     frigate_container_restart: "yes"
-  when: "container_templated_files.changed"
+  when: "container_templated_files.changed or download_custom_go2rtc.changed"

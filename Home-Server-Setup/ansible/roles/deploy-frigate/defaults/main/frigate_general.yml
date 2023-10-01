@@ -36,6 +36,9 @@ frigate_container_envs:
     FRIGATE_RTSP_PASSWORD: "{{ frigate_rtsp_password }}"
     PLUS_API_KEY: "{{ frigate_plus_api_key }}"
 
+frigate_use_custom_go2rtc: false
+frigate_custom_go2rtc_version: ""
+
 traefik_http_rule_hostname: "frigate"
 
 frigate_container_data_dir_sub_folders:
