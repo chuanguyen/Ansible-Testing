@@ -31,10 +31,9 @@ frigate_go2rtc:
       - "ffmpeg:front_door#audio=opus"
     front_door_substream:
       - "rtsp://home-assistant-001.{{ home_lan_domain }}:8556/front-door-sub"
-      - "ffmpeg:front_door_substream#audio=opus"
     front_door_bell:
       # - "rtsp://{{ reolink_cameras_username }}:{{ reolink_cameras_password }}@doorbell-front.{{ home_lan_domain }}:554/h264Preview_01_main"
-      # - "ffmpeg:front_door_bell#audio=opus#audio=pcm"
+      # - "ffmpeg:front_door_bell#audio=pcm"
       - "http://doorbell-front.{{ home_lan_domain }}/flv?port=1935&app=bcs&stream=channel0_main.bcs&user={{ reolink_cameras_username }}&password={{ reolink_cameras_password }}"
       - "ffmpeg:front_door_bell#audio=opus"
     front_door_bell_substream:
@@ -45,7 +44,6 @@ frigate_go2rtc:
       - "ffmpeg:front_door#audio=opus"
     garage_substream:
       - "rtsp://home-assistant-001.{{ home_lan_domain }}:8556/rear-driveway-sub"
-      - "ffmpeg:front_door_substream#audio=opus"
   # Necessary for establishing webrtc connection via live view
   webrtc:
     candidates:
@@ -78,7 +76,12 @@ frigate_cameras:
         post_capture: 10
         objects:
           - person
-        required_zones: []
+          - cat
+          - dog
+        required_zones:
+          - front_yard_left
+          - front_yard_right
+          - front_yard_walkway
         retain:
           default: 20
           mode: motion
@@ -87,6 +90,36 @@ frigate_cameras:
     snapshots:
       enabled: True
       bounding_box: True
+    objects:
+      track:
+        - person
+        - cat
+        - dog
+      filters:
+        person:
+          mask: []
+    zones:
+      front_yard_left:
+        coordinates: 158,237,0,233,0,480,121,480,246,480
+        objects:
+          - person
+          - cat
+          - dog
+      front_yard_right:
+        coordinates: 371,227,382,195,411,189,513,200,510,253,503,303,345,377,205,236
+        objects:
+          - person
+          - cat
+          - dog
+      front_yard_walkway:
+        coordinates: 640,480,640,108,501,118,501,325,427,371,374,390,219,244,171,245,161,247,152,302,228,480
+        objects:
+          - person
+    motion:
+      improve_contrast: True
+      mask:
+        - 0,0,470,0,496,66,518,205,501,205,450,205,435,196,398,181,364,212,77,207,69,192,53,176,23,177,0,203
+        - 368,451,640,447,640,480,371,480
     live:
       stream_name: "front_door_bell"
   front_door: # <------ Name the camera
