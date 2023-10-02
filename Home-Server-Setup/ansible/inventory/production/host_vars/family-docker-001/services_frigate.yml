@@ -70,7 +70,7 @@ frigate_cameras:
       enabled: True # <---- disable detection until you have a working camera feed
       width: 640 # <---- update for your camera's resolution
       height: 480 # <---- update for your camera's resolution
-      fps: 5
+      fps: 7
     record:
       enabled: True
       events:
