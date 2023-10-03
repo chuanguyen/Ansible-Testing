@@ -90,6 +90,16 @@ frigate_cameras:
     snapshots:
       enabled: True
       bounding_box: True
+      retain:
+        # Required: Default retention days (default: shown below)
+        default: 20
+        # Optional: Per object retention days
+        objects:
+          person: 30
+      required_zones:
+        - front_yard_left
+        - front_yard_right
+        - front_yard_walkway
     objects:
       track:
         - person
@@ -112,7 +122,7 @@ frigate_cameras:
           - cat
           - dog
       front_yard_walkway:
-        coordinates: 640,480,640,108,501,118,501,325,427,371,374,390,219,244,171,245,161,247,152,302,228,480
+        coordinates: 640,480,640,108,501,118,501,325,427,371,348,382,222,266,168,267,222,407,0,412,0,480
         objects:
           - person
     motion:
@@ -160,6 +170,12 @@ frigate_cameras:
     snapshots:
       enabled: True
       bounding_box: True
+      retain:
+        # Required: Default retention days (default: shown below)
+        default: 20
+        # Optional: Per object retention days
+        objects:
+          person: 30
     objects:
       track:
         - person
@@ -274,6 +290,12 @@ frigate_cameras:
         - "driveway"
         - "driveway_entrance"
         - "backyard"
+      retain:
+        # Required: Default retention days (default: shown below)
+        default: 20
+        # Optional: Per object retention days
+        objects:
+          person: 30
     objects:
       track:
         - person
