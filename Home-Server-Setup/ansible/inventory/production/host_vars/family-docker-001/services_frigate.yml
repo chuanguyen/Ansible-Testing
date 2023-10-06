@@ -105,6 +105,8 @@ frigate_cameras:
         - person
         - cat
         - dog
+        - bird
+        - mouse
       filters:
         person:
           mask:
@@ -112,20 +114,10 @@ frigate_cameras:
     zones:
       front_yard_left:
         coordinates: 162,258,40,255,80,187,27,167,0,200,0,253,0,480,121,480,246,480
-        objects:
-          - person
-          - cat
-          - dog
       front_yard_right:
         coordinates: 217,255,378,247,382,198,411,189,513,200,510,253,503,303,487,373,427,389,354,392,301,341,232,279
-        objects:
-          - person
-          - cat
-          - dog
       front_yard_walkway:
         coordinates: 640,480,640,108,501,118,501,325,427,371,348,382,222,266,168,267,222,407,0,412,0,480
-        objects:
-          - person
     motion:
       improve_contrast: True
       mask:
@@ -150,7 +142,7 @@ frigate_cameras:
       enabled: True # <---- disable detection until you have a working camera feed
       width: 1280 # <---- update for your camera's resolution
       height: 720 # <---- update for your camera's resolution
-      fps: 5
+      fps: 10
     record:
       enabled: True
       events:
@@ -182,6 +174,8 @@ frigate_cameras:
         - person
         - cat
         - dog
+        - bird
+        - mouse
       filters:
         person:
           mask:
@@ -194,6 +188,8 @@ frigate_cameras:
           - person
           - cat
           - dog
+          - bird
+          - mouse
       front_yard_street:
         coordinates: 678,280,949,287,1176,292,1176,172,1280,153,1280,0,976,0,739,0,0,0,0,302,243,293
         objects:
@@ -252,7 +248,7 @@ frigate_cameras:
       enabled: True # <---- disable detection until you have a working camera feed
       width: 1280 # <---- update for your camera's resolution
       height: 720 # <---- update for your camera's resolution
-      fps: 5
+      fps: 10
       stationary:
         interval: 0
         threshold: 25
@@ -298,6 +294,8 @@ frigate_cameras:
         - cat
         - dog
         - car
+        - bird
+        - mouse
       filters:
         car:
           mask:
@@ -314,6 +312,8 @@ frigate_cameras:
           - car
           - cat
           - dog
+          - bird
+          - mouse
         filters:
           car:
             min_score: 0.4
@@ -325,6 +325,8 @@ frigate_cameras:
           - person
           - cat
           - dog
+          - bird
+          - mouse
         filters:
           person:
             min_score: 0.4
@@ -343,6 +345,8 @@ frigate_cameras:
           - person
           - cat
           - dog
+          - bird
+          - mouse
         filters:
           # Add filters due to small coverage area to increase detection
           person:
