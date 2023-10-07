@@ -1,0 +1,40 @@
+open_speedtest_container_data_dir: "{{ docker_container_root_dir }}/open_speedtest"
+
+open_speedtest_image_base: "openspeedtest/latest"
+open_speedtest_image_base_tag: ""
+# Ensures previous version of working
+# open_speedtest image is available for failback
+open_speedtest_image_base_tag_old: ""
+open_speedtest_container_name: "open_speedtest"
+# Controls whether docker-compose restarts Docker containers
+open_speedtest_container_restart: no
+# Defines image ID for custom image
+open_speedtest_image_custom: "{{ ansible_user }}/open_speedtest"
+
+open_speedtest_expose_http: true
+open_speedtest_expose_https: true
+open_speedtest_int_http_port: 3000
+open_speedtest_int_https_port: 3001
+open_speedtest_ext_http_port: 80
+open_speedtest_ext_https_port: 443
+
+open_speedtest_container_labels: []
+
+# Using a reverse proxy causes inaccurate speedtest results
+open_speedtest_container_traefik_labels:
+  []
+  # - "traefik.enable=true"
+  # - "traefik.docker.network={{ docker_networks.proxy.name }}"
+  # - "traefik.http.routers.open_speedtest1.rule=Host(`openspeedtest.{{ home_lan_domain }}`)"
+  # - "traefik.http.routers.open_speedtest1.entrypoints=websecure"
+  # - "traefik.http.routers.open_speedtest1.middlewares=lanWhitelist@file,secureHeaders@file"
+  # - "traefik.http.routers.open_speedtest1.service=open_speedtest-svc"
+  # - "traefik.http.services.open_speedtest-svc.loadbalancer.server.port={{ open_speedtest_int_http_port }}"
+  # - "traefik.http.routers.open_speedtest1.tls=true"
+  # - "traefik.http.routers.open_speedtest1.tls.certresolver=letsEncrypt"
+
+open_speedtest_container_envs:
+  kv:
+    CHANGE_CONTAINER_PORTS: "True"
+    HTTP_PORT: "{{ open_speedtest_int_http_port }}"
+    HTTPS_PORT: "{{ open_speedtest_int_https_port }}"

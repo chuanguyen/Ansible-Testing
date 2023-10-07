@@ -1,0 +1,34 @@
+---
+
+# {{ ansible_managed }}
+
+version: "3"
+
+services:
+  open_speedtest:
+    container_name: "{{ open_speedtest_container_name }}"
+    image: "{{ open_speedtest_image_base }}:{{ open_speedtest_image_base_tag }}"
+    env_file: open_speedtest.env
+    ports:
+{% if open_speedtest_expose_http %}
+      - "{{ open_speedtest_ext_http_port }}:{{ open_speedtest_int_http_port}}"
+{% endif %}
+{% if open_speedtest_expose_https %}
+      - "{{ open_speedtest_ext_https_port }}:{{ open_speedtest_int_https_port }}"
+{% else %}
+      []
+{% endif %}
+    networks:
+      - {{ docker_networks.proxy.name }}
+    # Volumes store your data between container upgrades
+    labels:
+{% for container_label in open_speedtest_container_labels %}
+      - "{{ container_label }}"
+{% endfor %}
+{% for traefik_label in open_speedtest_container_traefik_labels %}
+      - "{{ traefik_label }}"
+{% endfor %}
+    restart: "always"
+networks:
+  {{ docker_networks.proxy.name }}:
+    external: true

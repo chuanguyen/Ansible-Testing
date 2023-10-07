@@ -1,0 +1,4 @@
+open_speedtest_container_data_dir_sub_folders: []
+
+open_speedtest_container_volumes:
+  binds: []
