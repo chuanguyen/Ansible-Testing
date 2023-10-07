@@ -28,3 +28,9 @@ media_management_user_password: "{{ vault_media_management_user_password }}"
 # Reolink cameras
 reolink_cameras_username: "{{ vault_reolink_cameras_username }}"
 reolink_cameras_password: "{{ vault_reolink_cameras_password }}"
+
+# Open Speedtest
+open_speedtest_expose_http: false
+open_speedtest_expose_https: true
+open_speedtest_int_http_port: 3000
+open_speedtest_int_https_port: 3001

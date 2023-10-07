@@ -100,3 +100,6 @@
 
     - role: "deploy-watchtower"
       tags: [services, watchtower]
+
+    - role: "deploy-open-speedtest"
+      tags: [services, open-speedtest]

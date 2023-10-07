@@ -110,5 +110,13 @@ ufw_rules:
       from_port: null
       to_port: "{{ zwave_js_ui_websocket_server_port }}"
       proto: tcp
+    - comment: "Permits incoming connection to Open Speedtest"
+      rule: allow
+      delete: no
+      from_ip: "any"
+      to_ip: any
+      from_port: null
+      to_port: "{{ open_speedtest_ext_https_port }}"
+      proto: tcp
   remove:
     -
