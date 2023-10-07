@@ -78,6 +78,8 @@ frigate_cameras:
           - person
           - cat
           - dog
+          - bird
+          - mouse
         required_zones:
           - front_yard_left
           - front_yard_right
@@ -152,6 +154,8 @@ frigate_cameras:
           - person
           - cat
           - dog
+          - bird
+          - mouse
         required_zones:
           - front_yard
           - front_yard_street
@@ -270,6 +274,8 @@ frigate_cameras:
           - cat
           - dog
           - car
+          - bird
+          - mouse
         retain:
           default: 20
           mode: motion
