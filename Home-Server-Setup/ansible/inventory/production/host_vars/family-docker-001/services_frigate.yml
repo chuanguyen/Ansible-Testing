@@ -29,8 +29,8 @@ frigate_go2rtc:
     front_door:
       - "rtsp://home-assistant-001.{{ home_lan_domain }}:8556/front-door"
       - "ffmpeg:front_door#audio=opus"
-    front_door_substream:
-      - "rtsp://home-assistant-001.{{ home_lan_domain }}:8556/front-door-sub"
+    # front_door_substream:
+    #   - "rtsp://home-assistant-001.{{ home_lan_domain }}:8556/front-door-sub"
     front_door_bell:
       # - "rtsp://{{ reolink_cameras_username }}:{{ reolink_cameras_password }}@doorbell-front.{{ home_lan_domain }}:554/h264Preview_01_main"
       # - "ffmpeg:front_door_bell#audio=pcm"
@@ -42,8 +42,8 @@ frigate_go2rtc:
     garage:
       - "rtsp://home-assistant-001.{{ home_lan_domain }}:8556/rear-driveway"
       - "ffmpeg:front_door#audio=opus"
-    garage_substream:
-      - "rtsp://home-assistant-001.{{ home_lan_domain }}:8556/rear-driveway-sub"
+    # garage_substream:
+    #   - "rtsp://home-assistant-001.{{ home_lan_domain }}:8556/rear-driveway-sub"
   # Necessary for establishing webrtc connection via live view
   webrtc:
     candidates:
@@ -134,10 +134,11 @@ frigate_cameras:
           input_args: "preset-rtsp-restream"
           roles:
             - record
-        - path: "rtsp://127.0.0.1:8554/front_door_substream" # Restream connection
-          input_args: "preset-rtsp-restream"
-          roles:
             - detect
+        # - path: "rtsp://127.0.0.1:8554/front_door_substream" # Restream connection
+        #   input_args: "preset-rtsp-restream"
+        #   roles:
+        #     - detect
       output_args:
         record: preset-record-generic-audio-copy
     detect:
@@ -242,10 +243,11 @@ frigate_cameras:
           input_args: "preset-rtsp-restream"
           roles:
             - record
-        - path: "rtsp://127.0.0.1:8554/garage_substream" # Restream connection
-          input_args: "preset-rtsp-restream"
-          roles:
             - detect
+        # - path: "rtsp://127.0.0.1:8554/garage_substream" # Restream connection
+        #   input_args: "preset-rtsp-restream"
+        #   roles:
+        #     - detect
       output_args:
         record: preset-record-generic-audio-copy
     detect:
