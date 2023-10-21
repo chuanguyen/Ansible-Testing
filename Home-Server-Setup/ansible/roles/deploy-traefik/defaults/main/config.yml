@@ -4,13 +4,12 @@ traefik_config_http_middlewares:
     middlewares:
       secureHeaders:
         headers:
-          sslRedirect: true
           forceSTSHeader: true
           stsIncludeSubdomains: true
           stsPreload: true
           stsSeconds: 31536000
       lanWhitelist:
-        ipWhiteList:
+        IPAllowList:
           sourceRange:
             - "{{ home_lan_cidr }}"
 
