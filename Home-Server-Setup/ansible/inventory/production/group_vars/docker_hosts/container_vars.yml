@@ -1,6 +1,6 @@
 ---
-pihole_image_base_tag: "2023.05.2"
-pihole_image_base_tag_old: "2022.11.2"
+pihole_image_base_tag: "2023.10.0"
+pihole_image_base_tag_old: "2023.05.2"
 pihole_nfs_backup_cleanup_period: "60"
 pihole_nfs_backup_frequency: "0 1 */15 * *"
 
@@ -88,8 +88,8 @@ jellyfin_image_base_tag_old: "10.8.10"
 # jellyfin_image_base_tag: "10.8.10"
 # jellyfin_image_base_tag_old: ""
 
-watchtower_image_base_tag: "1.5.3"
-watchtower_image_base_tag_old: ""
+watchtower_image_base_tag: "1.6.0"
+watchtower_image_base_tag_old: "1.5.3"
 
 open_speedtest_image_base_tag: "latest"
 open_speedtest_image_base_tag_old: ""
