@@ -9,12 +9,17 @@ services:
     container_name: {{ immich_server_container_name }}
     image: {{ immich_server_image_base }}:{{ immich_image_base_tag }}
     networks:
+      - {{ docker_networks.proxy.name }}
       - immich
     command: ["start.sh", "immich"]
     # Volumes store your data between container upgrades
     volumes:
 {% for volume in immich_container_volumes.binds %}
       - {{ volume.source }}:{{ volume.target }}
+{% endfor %}
+    labels:
+{% for traefik_label in immich_proxy_container_traefik_labels %}
+      - "{{ traefik_label }}"
 {% endfor %}
     env_file:
       - immich.env
@@ -55,15 +60,6 @@ services:
       - immich.env
     restart: always
 
-  immich-web:
-    container_name: {{ immich_web_container_name }}
-    image: {{ immich_web_image_base }}:{{ immich_image_base_tag }}
-    networks:
-      - immich
-    env_file:
-      - immich.env
-    restart: always
-
   typesense:
     container_name: {{ immich_typesense_container_name }}
     image: {{ immich_typesense_image_base }}:{{ immich_typesense_image_base_tag }}
@@ -94,23 +90,6 @@ services:
       - immich.env
     volumes:
       - pgdata:/var/lib/postgresql/data
-    restart: always
-
-  immich-proxy:
-    container_name: {{ immich_proxy_container_name }}
-    image: {{ immich_proxy_image_base }}:{{ immich_image_base_tag }}
-    networks:
-      - immich
-      - {{ docker_networks.proxy.name }}
-    env_file:
-      - immich.env
-    labels:
-{% for traefik_label in immich_proxy_container_traefik_labels %}
-      - "{{ traefik_label }}"
-{% endfor %}
-    depends_on:
-      - immich-server
-      - immich-web
     restart: always
 
 networks:
