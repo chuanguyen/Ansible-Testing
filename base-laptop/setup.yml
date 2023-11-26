@@ -1,5 +1,4 @@
 ---
-
 - name: Baseline setup
   hosts: localhost
   connection: local
@@ -7,71 +6,10 @@
   ignore_errors: false
 
   roles:
-    ### System-related
-    - role: create-users
-      tags: [ system ]
-    - role: blacklist-kernel-modules
-      tags: [ system, refresh ]
-    - role: configure-kernel-parameters
-      tags: [ system, refresh ]
-    - role: install-system-packages
-      tags: [ system, packages ]
-    - role: configure-Archlinux-roles
-      tags: [ system, packages ]
-    - role: configure-grub
-      tags: [ system, refresh ]
-    - role: configure-virtualbox
-      tags: [ system ]
-    - role: configure-u2f
-      tags: [ system refresh ]
-    - role: configure-cups-printers
-      tags: [ system ]
-    ### Remove if pulse audio fixes detecting microphone
-    - role: configure-pulse-audio
-      tags: [ system, refresh ]
-    # Before running, should test manually the proper undervolt value for stability
-    - role: configure-undervolting
-      tags: [ never, undervolt ]
-    ### Services
-    - role: configure-systemd-services
-      tags: [ services, refresh ]
-    - role: configure-tlp
-      tags: [ services, refresh ]
-    - role: configure-ufw
-      tags: [ services, refresh ]
     ### User-related
-    - role: clone-my-repos
-      tags: [ users, refresh ]
-    - role: install-automation-pip-packages
-      tags: [ users, refresh ]
-    - role: create-home-links
-      tags: [ users, refresh ]
-    - role: update-homeConfig-files
-      tags: [ users, refresh ]
-    - role: configure-albert
-      tags: [ users, refresh ]
-    - role: configure-atom
-      tags: [ users, refresh ]
-    - role: configure-git
-      tags: [ users, refresh ]
-    - role: configure-latte-dock
-      tags: [ users, refresh ]
-    - role: configure-xmind
-      tags: [ users, refresh ]
-    - role: configure-smb4k
-      tags: [ users, refresh ]
-    - role: configure-SpeedCrunch
-      tags: [ users, refresh ]
-    - role: configure-signal-desktop
-      tags: [ users, refresh ]
-    - role: configure-otpclient
-      tags: [ users, refresh ]
-    - role: configure-joplin
-      tags: [ users, refresh ]
-    ### KDE-related
-    - role: configure-kde
-      tags: [ users, refresh, kde ]
-    - role: configure-konsole-yakuake
-      tags: [ users, refresh, kde ]
-    - role: configure-kvantum
-      tags: [ users, refresh, kde ]
+    - "clone-my-repos"
+    - "configure-docker"
+    - "configure-smb4k"
+    - "configure-wake-from-suspend"
+    - "create-home-links"
+    - "update-homeConfig-files"
