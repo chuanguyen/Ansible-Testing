@@ -1,4 +1,4 @@
 #!/usr/bin/env python
 
 import os
-print (os.environ['MY_VAULT_PASS'])
+print (os.environ['VAULT_PASS'])

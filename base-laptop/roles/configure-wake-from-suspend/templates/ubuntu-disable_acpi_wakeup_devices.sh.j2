@@ -1,0 +1,4 @@
+# {{ ansible_managed }}
+{% for acpi_device in acpi_devices_disable %}
+echo {{ acpi_device }} >/proc/acpi/wakeup
+{% endfor %}

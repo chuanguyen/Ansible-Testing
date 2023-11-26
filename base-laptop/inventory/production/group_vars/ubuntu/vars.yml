@@ -1,1 +1,9 @@
-system_packages: 
+system_packages:
+
+acpi_devices_disable:
+  - "XHC0"
+  - "XHC1"
+  - "XHC3"
+  - "XHC4"
+  - "NHI0"
+  - "NHI1"

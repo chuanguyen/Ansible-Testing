@@ -1,0 +1,2 @@
+# Collection of devices from /proc/acpi/wakeup that should be issued to disable
+acpi_devices_disable: []
