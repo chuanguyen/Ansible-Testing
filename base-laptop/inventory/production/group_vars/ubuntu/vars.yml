@@ -1,4 +1,25 @@
 system_packages:
+  # .deb
+  - "ca-certificates"
+  - "docker"
+  - "gnome-tweaks"
+  - "gnucash"
+  - "python3"
+  - "smb4k"
+  - "tilix"
+  - "veracrypt"
+  - "vivaldi-stable"
+  - "wireguard"
+
+snap_packages:
+  - "code"
+  - "darktable"
+  - "discord"
+  - "obsidian"
+  - "signal-desktop"
+  - "spotify"
+  - "sublime-text"
+  - "vlc"
 
 acpi_devices_disable:
   - "XHC0"
