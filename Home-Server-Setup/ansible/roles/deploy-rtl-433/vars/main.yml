@@ -3,4 +3,4 @@ rtl_433_container_data_dir_sub_folders: []
 rtl_433_container_volumes:
   binds:
     - source: "./rtl_433.conf"
-      target: "/etc/rtl_433/rtl_433.conf"
+      target: "/usr/local/etc/rtl_433/rtl_433.conf"
