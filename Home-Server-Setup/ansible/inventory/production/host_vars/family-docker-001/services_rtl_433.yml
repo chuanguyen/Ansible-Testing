@@ -2,7 +2,8 @@
 rtl_433_host_dev_usb_device_path: "/dev/bus/usb/009/004"
 
 rtl_433_container_labels:
-  - "com.centurylinklabs.watchtower.enable=true"
+  - ""
+#   - "com.centurylinklabs.watchtower.enable=true"
 
 rtl_433_outputs:
   - "kv"
