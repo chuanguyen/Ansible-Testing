@@ -4,6 +4,7 @@ system_packages:
   - "docker"
   - "gnome-tweaks"
   - "gnucash"
+  - "nemo" # Replaces Nautilus
   - "python3"
   - "smb4k"
   - "tilix"
