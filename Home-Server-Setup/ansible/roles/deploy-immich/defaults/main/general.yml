@@ -8,19 +8,13 @@ immich_image_base_tag_old: ""
 
 ### Dependent containers
 
-immich_typesense_image_base: "typesense/typesense"
-immich_typesense_image_base_tag: ""
-# Ensures previous version of working
-# immich image is available for failback
-immich_typesense_image_base_tag_old: ""
-
 immich_redis_image_base: "redis"
 immich_redis_image_base_tag: ""
 # Ensures previous version of working
 # immich image is available for failback
 immich_redis_image_base_tag_old: ""
 
-immich_postgres_image_base: "postgres"
+immich_postgres_image_base: "tensorchord/pgvecto-rs"
 immich_postgres_image_base_tag: ""
 # Ensures previous version of working
 # immich image is available for failback
@@ -38,7 +32,6 @@ immich_microservices_container_name: "immich_microservices"
 immich_machine_learning_container_name: "immich_machine_learning"
 immich_web_container_name: "immich_web"
 immich_proxy_container_name: "immich_proxy"
-immich_typesense_container_name: "immich_typesense"
 immich_redis_container_name: "immich_redis"
 immich_postgres_container_name: "immich_postgres"
 
