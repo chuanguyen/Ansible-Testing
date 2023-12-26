@@ -115,14 +115,14 @@ prometheus_alerting_groups:
           description: "Check the health on Disk {{ '{{ $labels.diskIndex }}' }} on Instance {{ '{{ $labels.instance }}' }}"
           dashboard: "https://grafana.hq1.chuanguyen.ca/d/pwwviueMz/qnap-snmp-monitor?orgId=1&viewPanel=30"
       - alert_name: "VolumeUse_Warning"
-        expr: "(100 - ((sysVolumeFreeSizeEX{{ '{' }}job='snmp_nas_qnap'{{ '}' }} /on(instance,sysVolumeIndexEX) sysVolumeTotalSizeEX{{ '{' }}job='snmp_nas_qnap_long'{{ '}' }}) * 100)) >= 75"
+        expr: "(100 - ((sysVolumeFreeSizeEX{{ '{' }}job='snmp_nas_qnap'{{ '}' }} /on(instance,sysVolumeIndexEX) sysVolumeTotalSizeEX{{ '{' }}job='snmp_nas_qnap_long'{{ '}' }}) * 100)) >= 90"
         for: "1m"
         labels:
           severity: "warning"
           maintenance: "false"
         annotations:
-          summary: "Disk {{ '{{ $labels.sysVolumeIndexEX }}' }} Instance {{ '{{ $labels.instance }}' }} 75% full"
-          description: "Disk {{ '{{ $labels.diskIndex }}' }} on Instance {{ '{{ $labels.instance }}' }} is 75% full"
+          summary: "Disk {{ '{{ $labels.sysVolumeIndexEX }}' }} Instance {{ '{{ $labels.instance }}' }} 90% full"
+          description: "Disk {{ '{{ $labels.diskIndex }}' }} on Instance {{ '{{ $labels.instance }}' }} is 90% full"
           dashboard: "https://grafana.hq1.chuanguyen.ca/d/pwwviueMz/qnap-snmp-monitor?orgId=1&viewPanel=30"
       - alert_name: "VolumeUse_Critical"
         expr: "(100 - ((sysVolumeFreeSizeEX{{ '{' }}job='snmp_nas_qnap'{{ '}' }} /on(instance,sysVolumeIndexEX) sysVolumeTotalSizeEX{{ '{' }}job='snmp_nas_qnap_long'{{ '}' }}) * 100)) >= 95"
