@@ -1,6 +1,6 @@
 ---
 jellyfin_container_labels:
-  - "com.centurylinklabs.watchtower.enable=true"
+  - "com.centurylinklabs.watchtower.enable=false"
 
 # Jellyfin media volumes
 jellyfin_media_volumes:
@@ -11,5 +11,14 @@ jellyfin_media_volumes:
     driver_opts:
       type: "cifs"
       device: "//nas1.{{ home_lan_domain }}/multimedia/Video/Movies"
+      o: "addr=nas1.{{ home_lan_domain }},username={{ media_management_user_username }},password={{ media_management_user_password }},vers=3.0,uid={{ jellyfin_container_uid }},gid={{ jellyfin_container_uid }},ro"
+    read_only: "true"
+  - name: "nas1_share_jellyfin_home_movies_videos"
+    type: "volume"
+    container_dest: "{{ jellyfin_remote_media_location }}/Nas1-Home-Movies-Videos"
+    driver: "local"
+    driver_opts:
+      type: "cifs"
+      device: "//nas1.{{ home_lan_domain }}/multimedia/Video/Home_Videos"
       o: "addr=nas1.{{ home_lan_domain }},username={{ media_management_user_username }},password={{ media_management_user_password }},vers=3.0,uid={{ jellyfin_container_uid }},gid={{ jellyfin_container_uid }},ro"
     read_only: "true"
