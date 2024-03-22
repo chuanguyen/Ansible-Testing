@@ -310,7 +310,8 @@ frigate_cameras:
             - 807,720,808,679,645,667,590,605,558,720
     zones:
       driveway_entrance:
-        coordinates: 609,147,978,155,1038,74,1047,0,847,0,579,0,575,75
+        coordinates: 467,230,1144,235,1038,74,1047,0,847,0,579,0,575,75
+        inertia: 1
         objects:
           - person
           - car
@@ -320,9 +321,8 @@ frigate_cameras:
           - mouse
         filters:
           car:
-            min_score: 0.40
-            max_area: 30000
-            threshold: 0.60
+            min_score: 0.2
+            threshold: 0.30
       driveway:
         coordinates: 351,181,505,82,587,73,573,0,647,139,848,141,859,0,961,22,1079,50,1280,140,1280,720,0,720,0,408
         objects:
