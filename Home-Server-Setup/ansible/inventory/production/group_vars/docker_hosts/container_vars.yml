@@ -80,7 +80,7 @@ immich_redis_image_base_tag_old: ""
 immich_postgres_image_base_tag: "pg14-v0.1.11"
 immich_postgres_image_base_tag_old: ""
 
-jellyfin_image_base_tag: "latest"
+jellyfin_image_base_tag: "20240214.1-unstable"
 jellyfin_image_base_tag_old: "10.8.10"
 # jellyfin_image_base_tag: "10.8.10"
 # jellyfin_image_base_tag_old: ""
