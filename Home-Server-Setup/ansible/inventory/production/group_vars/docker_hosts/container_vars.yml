@@ -71,14 +71,14 @@ authelia_image_base_tag: "4.38.6"
 authelia_image_base_tag_old: "4.37"
 
 ### Immich
-immich_image_base_tag: "v1.91.4"
-immich_image_base_tag_old: "v1.88.2"
+immich_image_base_tag: "v1.95.0"
+immich_image_base_tag_old: "v1.91.4"
 
 immich_redis_image_base_tag: "6.2-alpine@sha256:80cc8518800438c684a53ed829c621c94afd1087aaeb59b0d4343ed3e7bcf6c5"
 immich_redis_image_base_tag_old: ""
 
-immich_postgres_image_base_tag: "pg14-v0.1.11"
-immich_postgres_image_base_tag_old: ""
+immich_postgres_image_base_tag: "pg14-v0.2.0"
+immich_postgres_image_base_tag_old: "pg14-v0.1.11"
 
 jellyfin_image_base_tag: "20240214.1-unstable"
 jellyfin_image_base_tag_old: "10.8.10"
