@@ -71,8 +71,8 @@ authelia_image_base_tag: "4.38.6"
 authelia_image_base_tag_old: "4.37"
 
 ### Immich
-immich_image_base_tag: "v1.99.0"
-immich_image_base_tag_old: "v1.95.0"
+immich_image_base_tag: "v1.100.0"
+immich_image_base_tag_old: "v1.99.0"
 
 immich_redis_image_base_tag: "6.2-alpine@sha256:80cc8518800438c684a53ed829c621c94afd1087aaeb59b0d4343ed3e7bcf6c5"
 immich_redis_image_base_tag_old: ""
