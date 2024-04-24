@@ -27,6 +27,7 @@ frigate_container_traefik_labels:
 frigate_port_web: 5000
 frigate_port_rtsp: 8554
 frigate_port_webrtc: 8555
+frigate_port_go2rtc: 1984
 
 frigate_plus_api_key: ""
 

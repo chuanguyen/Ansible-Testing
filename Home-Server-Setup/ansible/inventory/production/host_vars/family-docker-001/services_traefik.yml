@@ -22,6 +22,10 @@ traefik_config_http_middlewares:
         IPAllowList:
           sourceRange:
             - "{{ home_lan_cidr }}"
+      frigate_go2rtc_strip_webrtc_prefix:
+        stripPrefix:
+          prefixes:
+            - "/live/webrtc"
 
 traefik_label_configurations:
   - "traefik.http.middlewares.authelia.forwardAuth.address=http://authelia:{{ authelia_config_listen_port }}/api/verify?rd=https%3A%2F%2Flogin.{{ home_lan_domain }}%2F"
