@@ -1,6 +1,6 @@
 ---
-pihole_image_base_tag: "2024.02.2"
-pihole_image_base_tag_old: "2023.11.0"
+pihole_image_base_tag: "2024.03.2"
+pihole_image_base_tag_old: "2024.02.2"
 pihole_nfs_backup_cleanup_period: "60"
 pihole_nfs_backup_frequency: "0 1 */15 * *"
 
