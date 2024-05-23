@@ -85,7 +85,7 @@ prometheus_alerting_groups:
           description: "System temperature on Instance {{ '{{ $labels.instance }}' }} at more than 45 Celsius for longer than 1 minutes."
           dashboard: "https://grafana.hq1.chuanguyen.ca/d/pwwviueMz/qnap-snmp-monitor?orgId=1"
       - alert_name: "DiskTemperatureHigh_Warning"
-        expr: "diskTemperture{{ '{' }}job='snmp_nas_qnap'{{ '}' }} >= 50"
+        expr: "diskTemperture{{ '{' }}job='snmp_nas_qnap'{{ '}' }} >= 60"
         for: "1m"
         labels:
           severity: "warning"
@@ -95,7 +95,7 @@ prometheus_alerting_groups:
           description: "Disk {{ '{{ $labels.diskIndex }}' }} temperature on Instance {{ '{{ $labels.instance }}' }} at more than 50 Celsius for longer than 1 minutes."
           dashboard: "https://grafana.hq1.chuanguyen.ca/d/pwwviueMz/qnap-snmp-monitor?orgId=1"
       - alert_name: "DiskTemperatureHigh_Critical"
-        expr: "diskTemperture{{ '{' }}job='snmp_nas_qnap'{{ '}' }} >= 55"
+        expr: "diskTemperture{{ '{' }}job='snmp_nas_qnap'{{ '}' }} >= 65"
         for: "1m"
         labels:
           severity: "critical"
