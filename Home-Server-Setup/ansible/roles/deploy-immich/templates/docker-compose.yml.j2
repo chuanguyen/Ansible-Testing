@@ -11,7 +11,6 @@ services:
     networks:
       - {{ docker_networks.proxy.name }}
       - immich
-    command: ["start.sh", "immich"]
     # Volumes store your data between container upgrades
     volumes:
 {% for volume in immich_container_volumes.binds %}
@@ -20,24 +19,6 @@ services:
     labels:
 {% for traefik_label in immich_proxy_container_traefik_labels %}
       - "{{ traefik_label }}"
-{% endfor %}
-    env_file:
-      - immich.env
-    depends_on:
-      - redis
-      - database
-    restart: always
-
-  immich-microservices:
-    container_name: {{ immich_microservices_container_name }}
-    image: {{ immich_microservices_server_image_base }}:{{ immich_image_base_tag }}
-    networks:
-      - immich
-    command: ["start.sh", "microservices"]
-    # Volumes store your data between container upgrades
-    volumes:
-{% for volume in immich_container_volumes.binds %}
-      - {{ volume.source }}:{{ volume.target }}
 {% endfor %}
     env_file:
       - immich.env
