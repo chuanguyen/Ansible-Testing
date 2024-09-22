@@ -34,3 +34,7 @@ open_speedtest_expose_http: false
 open_speedtest_expose_https: true
 open_speedtest_int_http_port: 3000
 open_speedtest_int_https_port: 3001
+
+# Docker Wyze Bridge
+docker_wyze_bridge_stream_username: "{{ vault_docker_wyze_bridge_stream_username }}"
+docker_wyze_bridge_stream_api_key: "{{ vault_docker_wyze_bridge_stream_api_key }}"
