@@ -1,0 +1,11 @@
+paperless_ngx_container_data_dir_sub_folders:
+  - "etc-paperless_ngx/"
+  - "mnt-backup/"
+  - "scripts"
+
+paperless_ngx_container_volumes:
+  binds:
+    - source: "./etc-paperless_ngx/"
+      target: "/etc/paperless_ngx/"
+    - source: "./mnt-backup/"
+      target: "/mnt/backup/"

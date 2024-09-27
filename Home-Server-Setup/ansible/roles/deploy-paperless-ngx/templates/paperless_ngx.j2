@@ -1,0 +1,7 @@
+# {{ ansible_managed }}
+# paperless_ngx backup cron job
+
+SHELL=/bin/bash
+PATH=/usr/bin
+
+{{ paperless_ngx_nfs_backup_frequency }}   root  {{ paperless_ngx_container_data_dir }}/scripts/paperless_ngx-backup.sh

@@ -1,0 +1,29 @@
+---
+
+# {{ ansible_managed }}
+
+version: "3"
+
+services:
+  paperless_ngx:
+    container_name: "{{ paperless_ngx_container_name }}"
+    image: "{{ paperless_ngx_image_base }}:{{ paperless_ngx_image_base_tag }}"
+    env_file: paperless_ngx.env
+    ports:
+      - ""
+    networks:
+      - ""
+    # Volumes store your data between container upgrades
+    volumes:
+{% for volume in paperless_ngx_container_volumes.binds %}
+      - {{ volume.source }}:{{ volume.target }}
+{% endfor %}
+    labels:
+{% for container_label in paperless_ngx_container_labels %}
+      - "{{ container_label }}"
+{% endfor %}
+{% for traefik_label in paperless_ngx_container_traefik_labels %}
+      - "{{ traefik_label }}"
+{% endfor %}
+    restart: "always"
+networks:
