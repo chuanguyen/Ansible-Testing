@@ -19,6 +19,9 @@ SERVICE__container_traefik_labels:
   - "traefik.http.routers.SERVICE_1.rule=Host(`SERVICE_.{{ home_lan_domain }}`)"
   - "traefik.http.routers.SERVICE_1.entrypoints=websecure"
   - "traefik.http.routers.SERVICE_1.middlewares=lanWhitelist@file,secureHeaders@file"
+  ### Uncomment if internal docker port can't be detected by traefik
+  # - "traefik.http.routers.SERVICE_1.service=SERVICE_1-svc"
+  # - "traefik.http.services.SERVICE_1-svc.loadbalancer.server.port=CUSTOM_INTERNAL_DOCKER_IMAGE_PORT"
   - "traefik.http.routers.SERVICE_1.tls=true"
   - "traefik.http.routers.SERVICE_1.tls.certresolver=letsEncrypt"
 
