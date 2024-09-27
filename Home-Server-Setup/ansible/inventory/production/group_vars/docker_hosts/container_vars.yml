@@ -90,3 +90,14 @@ watchtower_image_base_tag_old: "1.6.0"
 
 open_speedtest_image_base_tag: "latest"
 open_speedtest_image_base_tag_old: ""
+
+### Paperless-ngx
+
+paperless_ngx_image_base_tag: "2.12.1"
+paperless_ngx_image_base_tag_old: ""
+
+paperless_ngx_postgres_image_base_tag: "16.0-alpine"
+paperless_ngx_postgres_image_base_tag_old: ""
+
+paperless_ngx_redis_image_base_tag: "7.4-alpine"
+paperless_ngx_redis_image_base_tag_old: ""

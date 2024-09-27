@@ -1,0 +1,39 @@
+---
+# Postgres
+paperless_ngx_postgres_user: "postgres_user"
+paperless_ngx_postgres_password: "{{ vault_paperless_dbpass }}"
+
+paperless_ngx_container_envs:
+  kv:
+    USERMAP_UID: "{{ paperless_ngx_uid }}"
+    USERMAP_GID: "{{ paperless_ngx_gid }}"
+    PAPERLESS_PORT: "{{ paperless_ngx_port_web }}"
+    PAPERLESS_TIME_ZONE: "America/Vancouver"
+    PAPERLESS_OCR_LANGUAGE: "eng+fra"
+    PAPERLESS_OCR_OUTPUT_TYPE: "pdfa"
+    PAPERLESS_OCR_ROTATE_PAGES: "true"
+    PAPERLESS_OCR_ROTATE_PAGES_THRESHOLD: "12"
+    PAPERLESS_FILENAME_FORMAT: "{owner_username}/{created_year}/{document_type}/{correspondent}/{created_year}-{created_month}-{created_day}_{title}_{asn}"
+    # Enables recursive processing on the consumption folder
+    PAPERLESS_CONSUMER_RECURSIVE: "true"
+    PAPERLESS_EMPTY_TRASH_DELAY: "30"
+    PAPERLESS_REDIS: redis://{{ paperless_ngx_redis_container_name }}:6379
+    PAPERLESS_DBHOST: "{{ paperless_ngx_postgres_container_name }}"
+    PAPERLESS_DBNAME: "paperless_ngx"
+    PAPERLESS_DBUSER: "{{ paperless_ngx_postgres_user }}"
+    PAPERLESS_DBPASS: "{{ paperless_ngx_postgres_password }}"
+    PAPERLESS_SECRET_KEY: "{{ vault_paperless_secret_key }}"
+    PAPERLESS_URL: "https://paperless.{{ home_lan_domain }}"
+    # Set the following two for your first launch
+    # and change the admin password afterwards.
+    # Once setup, you can safely remove these variables.
+
+paperless_ngx_redis_container_envs:
+  kv:
+    REDIS_ARGS: "--save 60 10"
+
+paperless_ngx_postgres_container_envs:
+  kv:
+    POSTGRES_USER: "{{ paperless_ngx_postgres_user }}"
+    POSTGRES_DB: "paperless_ngx"
+    POSTGRES_PASSWORD: "{{ paperless_ngx_postgres_password }}"

@@ -1,24 +1,54 @@
 paperless_ngx_container_data_dir: "{{ docker_container_root_dir }}/paperless_ngx"
 
-paperless_ngx_image_base: "REPO/paperless_ngx"
+### Dependent containers
+
+paperless_ngx_image_base: "paperlessngx/paperless-ngx"
 paperless_ngx_image_base_tag: ""
 # Ensures previous version of working
 # paperless_ngx image is available for failback
 paperless_ngx_image_base_tag_old: ""
+
+paperless_ngx_postgres_image_base: "postgres"
+paperless_ngx_postgres_image_base_tag: ""
+# Ensures previous version of working
+# immich image is available for failback
+paperless_ngx_postgres_image_base_tag_old: ""
+
+paperless_ngx_redis_image_base: "redis"
+paperless_ngx_redis_image_base_tag: ""
+# Ensures previous version of working
+# immich image is available for failback
+paperless_ngx_redis_image_base_tag_old: ""
+
 paperless_ngx_container_name: "paperless_ngx"
+paperless_ngx_postgres_container_name: "paperless_ngx_postgres"
+paperless_ngx_redis_container_name: "paperless_ngx_redis"
+
 # Controls whether docker-compose restarts Docker containers
 paperless_ngx_container_restart: no
-# Defines image ID for custom image
-paperless_ngx_image_custom: "{{ ansible_user }}/paperless_ngx"
 
 paperless_ngx_container_labels: []
+
+#### Ports
+paperless_ngx_port_web: "8000"
+
+# UID and GID to run as in container
+# Should match UID / GID of user ID on host system
+paperless_ngx_uid: "1000"
+paperless_ngx_gid: "1000"
+
+# Postgres
+paperless_ngx_postgres_user: "postgres_user"
+paperless_ngx_postgres_password: "postgres_password"
 
 paperless_ngx_container_traefik_labels:
   - "traefik.enable=true"
   - "traefik.docker.network={{ docker_networks.proxy.name }}"
-  - "traefik.http.routers.paperless_ngx1.rule=Host(`paperless_ngx.{{ home_lan_domain }}`)"
+  - "traefik.http.routers.paperless_ngx1.rule=Host(`paperless.{{ home_lan_domain }}`)"
   - "traefik.http.routers.paperless_ngx1.entrypoints=websecure"
   - "traefik.http.routers.paperless_ngx1.middlewares=lanWhitelist@file,secureHeaders@file"
+  - "traefik.http.routers.paperless_ngx1.service=paperless_ngx1-svc"
+  - "traefik.http.services.paperless_ngx1-svc.loadbalancer.server.port={{ paperless_ngx_port_web }}"
   - "traefik.http.routers.paperless_ngx1.tls=true"
   - "traefik.http.routers.paperless_ngx1.tls.certresolver=letsEncrypt"
 
@@ -31,3 +61,35 @@ paperless_ngx_nfs_backup_frequency: "0 1 */15 * *"
 
 paperless_ngx_container_envs:
   kv:
+    USERMAP_UID: "{{ paperless_ngx_uid }}"
+    USERMAP_GID: "{{ paperless_ngx_gid }}"
+    PAPERLESS_PORT: "{{ paperless_ngx_port_web }}"
+    PAPERLESS_TIME_ZONE: "Etc/UTC"
+    PAPERLESS_OCR_LANGUAGE: "eng"
+    PAPERLESS_OCR_OUTPUT_TYPE: "pdfa"
+    PAPERLESS_OCR_ROTATE_PAGES: "true"
+    PAPERLESS_OCR_ROTATE_PAGES_THRESHOLD: "12"
+    # Enables recursive processing on the consumption folder
+    PAPERLESS_CONSUMER_RECURSIVE: "false"
+    PAPERLESS_EMPTY_TRASH_DELAY: "30"
+    PAPERLESS_REDIS: redis://{{ paperless_ngx_redis_container_name }}:6379
+    PAPERLESS_DBHOST: "{{ paperless_ngx_postgres_container_name }}"
+    PAPERLESS_DBNAME: "paperless_ngx"
+    PAPERLESS_DBUSER: "{{ paperless_ngx_postgres_user }}"
+    PAPERLESS_DBPASS: "{{ paperless_ngx_postgres_password }}"
+    PAPERLESS_SECRET_KEY: "PLEASE_CHANGE_SECRET_KEY"
+    # Set the following two for your first launch
+    # and change the admin password afterwards.
+    # Once setup, you can safely remove these variables.
+    PAPERLESS_ADMIN_USER: "paperless_admin"
+    PAPERLESS_ADMIN_PASSWORD: "paperless_password"
+
+paperless_ngx_redis_container_envs:
+  kv:
+    REDIS_ARGS: "--save 60 10"
+
+paperless_ngx_postgres_container_envs:
+  kv:
+    POSTGRES_USER: "{{ paperless_ngx_postgres_user }}"
+    POSTGRES_DB: "paperless_ngx"
+    POSTGRES_PASSWORD: "{{ paperless_ngx_postgres_password }}"

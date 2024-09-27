@@ -36,7 +36,5 @@
 - name: "TASK: Deploy {{ paperless_ngx_container_name }}"
   community.docker.docker_compose:
     project_src: "{{ paperless_ngx_container_data_dir }}"
-    build: "{{ 'yes' if image_base_pull.changed else 'no' }}"
-    nocache: "no"
     state: "present"
     restarted: "{{ paperless_ngx_container_restart }}"

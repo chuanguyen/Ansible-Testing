@@ -103,3 +103,6 @@
 
     - role: "deploy-open-speedtest"
       tags: [services, open-speedtest]
+
+    - role: "deploy-paperless-ngx"
+      tags: [services, paperless-ngx]

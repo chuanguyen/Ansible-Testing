@@ -9,10 +9,12 @@ services:
     container_name: "{{ paperless_ngx_container_name }}"
     image: "{{ paperless_ngx_image_base }}:{{ paperless_ngx_image_base_tag }}"
     env_file: paperless_ngx.env
-    ports:
-      - ""
+    ports: []
+    security_opt:
+      - no-new-privileges:true
     networks:
-      - ""
+      - {{ docker_networks.proxy.name }}
+      - "paperless_ngx"
     # Volumes store your data between container upgrades
     volumes:
 {% for volume in paperless_ngx_container_volumes.binds %}
@@ -25,5 +27,46 @@ services:
 {% for traefik_label in paperless_ngx_container_traefik_labels %}
       - "{{ traefik_label }}"
 {% endfor %}
-    restart: "always"
+    depends_on:
+      - paperless_ngx_redis
+      - paperless_ngx_postgres
+    restart: "unless-stopped"
+
+  paperless_ngx_redis:
+    container_name: "{{ paperless_ngx_redis_container_name }}"
+    image: "{{ paperless_ngx_redis_image_base }}:{{ paperless_ngx_redis_image_base_tag }}"
+    env_file: paperless_ngx_redis.env
+    ports: []
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - "paperless_ngx"
+    # Volumes store your data between container upgrades
+    volumes:
+{% for volume in paperless_ngx_redis_container_volumes.binds %}
+      - {{ volume.source }}:{{ volume.target }}
+{% endfor %}
+    restart: "unless-stopped"
+
+
+  paperless_ngx_postgres:
+    container_name: "{{ paperless_ngx_postgres_container_name }}"
+    image: "{{ paperless_ngx_postgres_image_base }}:{{ paperless_ngx_postgres_image_base_tag }}"
+    env_file: paperless_ngx_postgres.env
+    ports: []
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - "paperless_ngx"
+    # Volumes store your data between container upgrades
+    volumes:
+{% for volume in paperless_ngx_postgres_container_volumes.binds %}
+      - {{ volume.source }}:{{ volume.target }}
+{% endfor %}
+    restart: "unless-stopped"
+
 networks:
+  {{ docker_networks.proxy.name }}:
+    external: true
+  paperless_ngx:
+    external: false

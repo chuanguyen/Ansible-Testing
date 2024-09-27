@@ -1,11 +1,29 @@
 paperless_ngx_container_data_dir_sub_folders:
-  - "etc-paperless_ngx/"
-  - "mnt-backup/"
+  - "paperless_consume"
+  - "paperless_data"
+  - "paperless_export"
+  - "paperless_media"
+  - "paperless_postgres"
+  - "paperless_redis"
   - "scripts"
 
 paperless_ngx_container_volumes:
   binds:
-    - source: "./etc-paperless_ngx/"
-      target: "/etc/paperless_ngx/"
-    - source: "./mnt-backup/"
-      target: "/mnt/backup/"
+    - source: "./paperless_consume/"
+      target: "/usr/src/paperless/consume/"
+    - source: "./paperless_data/"
+      target: "/usr/src/paperless/data/"
+    - source: "./paperless_export/"
+      target: "/usr/src/paperless/export/"
+    - source: "./paperless_media/"
+      target: "/usr/src/paperless/media/"
+
+paperless_ngx_redis_container_volumes:
+  binds:
+    - source: "./paperless_redis/"
+      target: "/data/"
+
+paperless_ngx_postgres_container_volumes:
+  binds:
+    - source: "./paperless_postgres/"
+      target: "/var/lib/postgresql/data/"
