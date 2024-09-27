@@ -20,6 +20,11 @@ services:
 {% for volume in paperless_ngx_container_volumes.binds %}
       - {{ volume.source }}:{{ volume.target }}
 {% endfor %}
+{% if paperless_ngx_use_network_directories %}
+{% for media_volume in paperless_ngx_network_volumes %}
+      - {{ media_volume.name }}:{{ media_volume.container_dest }}
+{% endfor %}
+{% endif %}
     labels:
 {% for container_label in paperless_ngx_container_labels %}
       - "{{ container_label }}"
@@ -70,3 +75,14 @@ networks:
     external: true
   paperless_ngx:
     external: false
+{% if paperless_ngx_use_network_directories %}
+volumes:
+{% for media_volume in paperless_ngx_network_volumes %}
+  {{ media_volume.name }}:
+    driver: {{ media_volume.driver }}
+    driver_opts:
+      type: {{ media_volume.driver_opts.type }}
+      device: "{{ media_volume.driver_opts.device }}"
+      o: "{{ media_volume.driver_opts.o }}"
+{% endfor %}
+{% endif %}

@@ -38,3 +38,7 @@ open_speedtest_int_https_port: 3001
 # Docker Wyze Bridge
 docker_wyze_bridge_stream_username: "{{ vault_docker_wyze_bridge_stream_username }}"
 docker_wyze_bridge_stream_api_key: "{{ vault_docker_wyze_bridge_stream_api_key }}"
+
+# Credentials for Docker services accessing NAS
+nas_svc_docker_user: "{{ vault_nas_svc_docker_user }}"
+nas_svc_docker_password: "{{ vault_nas_svc_docker_password }}"

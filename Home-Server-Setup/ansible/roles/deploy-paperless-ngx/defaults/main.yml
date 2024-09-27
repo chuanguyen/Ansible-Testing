@@ -93,3 +93,38 @@ paperless_ngx_postgres_container_envs:
     POSTGRES_USER: "{{ paperless_ngx_postgres_user }}"
     POSTGRES_DB: "paperless_ngx"
     POSTGRES_PASSWORD: "{{ paperless_ngx_postgres_password }}"
+
+paperless_ngx_container_volumes:
+  binds:
+    - source: "./paperless_consume/"
+      target: "/usr/src/paperless/consume/"
+    - source: "./paperless_data/"
+      target: "/usr/src/paperless/data/"
+    - source: "./paperless_export/"
+      target: "/usr/src/paperless/export/"
+    - source: "./paperless_media/"
+      target: "/usr/src/paperless/media/"
+
+### Network mapping of paperless-ngx directories
+# If mapping in network locations into paperless-ngx container
+# toggle to true to add docker volume mappings to docker-compose file
+paperless_ngx_use_network_directories: false
+
+# Network locations where photos are located
+paperless_ngx_network_volumes:
+  # Location for paperless-ngx archived and original documents on network
+  - name: "media"
+    container_dest: "CONTAINER_LOCATION"
+    driver: "local"
+    driver_opts:
+      type: "cifs"
+      device: "//SERVER/SHARE"
+      o: "addr=SERVER_FQDN,username=USER,password=PASSWORD,vers=3.0,uid=UID,gid=GID"
+  # Location for paperless-ngx consumption folder on the network
+  - name: "consume"
+    container_dest: "CONTAINER_LOCATION"
+    driver: "local"
+    driver_opts:
+      type: "cifs"
+      device: "//SERVER/SHARE"
+      o: "addr=SERVER_FQDN,username=USER,password=PASSWORD,vers=3.0,uid=UID,gid=GID"

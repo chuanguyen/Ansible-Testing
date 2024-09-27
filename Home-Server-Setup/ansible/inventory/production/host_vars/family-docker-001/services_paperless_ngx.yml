@@ -16,6 +16,11 @@ paperless_ngx_container_envs:
     PAPERLESS_FILENAME_FORMAT: "{owner_username}/{created_year}/{document_type}/{correspondent}/{created_year}-{created_month}-{created_day}_{title}_{asn}"
     # Enables recursive processing on the consumption folder
     PAPERLESS_CONSUMER_RECURSIVE: "true"
+    # Polling enabled due to CIFS not supporting inotify
+    # for detecting file changes in the consume directory
+    PAPERLESS_CONSUMER_POLLING: "5"
+    PAPERLESS_CONSUMER_POLLING_RETRY_COUNT: "5"
+    PAPERLESS_CONSUMER_POLLING_DELAY: "5"
     PAPERLESS_EMPTY_TRASH_DELAY: "30"
     PAPERLESS_REDIS: redis://{{ paperless_ngx_redis_container_name }}:6379
     PAPERLESS_DBHOST: "{{ paperless_ngx_postgres_container_name }}"
@@ -27,6 +32,8 @@ paperless_ngx_container_envs:
     # Set the following two for your first launch
     # and change the admin password afterwards.
     # Once setup, you can safely remove these variables.
+    # PAPERLESS_ADMIN_USER: "paperless_user"
+    # PAPERLESS_ADMIN_PASSWORD: "paperless_password"
 
 paperless_ngx_redis_container_envs:
   kv:
@@ -37,3 +44,34 @@ paperless_ngx_postgres_container_envs:
     POSTGRES_USER: "{{ paperless_ngx_postgres_user }}"
     POSTGRES_DB: "paperless_ngx"
     POSTGRES_PASSWORD: "{{ paperless_ngx_postgres_password }}"
+
+### Network mapping of paperless-ngx directories
+# If mapping in network locations into paperless-ngx container
+# toggle to true to add docker volume mappings to docker-compose file
+paperless_ngx_use_network_directories: true
+
+# Network locations where photos are located
+paperless_ngx_network_volumes:
+  # Location for paperless-ngx archived and original documents on network
+  - name: "paperless_nas1_media"
+    container_dest: "/usr/src/paperless/media/"
+    driver: "local"
+    driver_opts:
+      type: "cifs"
+      device: "//nas1.{{ home_lan_domain }}/data_archive/Paperless-ngx/media"
+      o: "addr=nas1.{{ home_lan_domain }},username={{ nas_svc_docker_user }},password={{ nas_svc_docker_password }},vers=3.0,uid={{ paperless_ngx_uid }},gid={{ paperless_ngx_gid }}"
+  # Location for paperless-ngx consumption folder on the network
+  - name: "paperless_nas1_consume"
+    container_dest: "/usr/src/paperless/consume/"
+    driver: "local"
+    driver_opts:
+      type: "cifs"
+      device: "//nas1.{{ home_lan_domain }}/data_archive/Paperless-ngx/consume"
+      o: "addr=nas1.{{ home_lan_domain }},username={{ nas_svc_docker_user }},password={{ nas_svc_docker_password }},vers=3.0,uid={{ paperless_ngx_uid }},gid={{ paperless_ngx_gid }}"
+
+paperless_ngx_container_volumes:
+  binds:
+    - source: "./paperless_data/"
+      target: "/usr/src/paperless/data/"
+    - source: "./paperless_export/"
+      target: "/usr/src/paperless/export/"
