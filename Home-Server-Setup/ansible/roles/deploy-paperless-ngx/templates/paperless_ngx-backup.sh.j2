@@ -2,8 +2,8 @@
 
 ### {{ ansible_managed }}
 
-docker exec -d -w "{{ backup_directory }}" paperless_ngx
+docker exec -d {{ paperless_ngx_container_name }} document_exporter ../export -d -f -p -sm -z --no-progress-bar
 
-sleep 5s && rsync --remove-source-files -zv {{ paperless_ngx_container_data_dir }}/mnt-backup/* {{ paperless_ngx_nfs_backup_directory }}
+sleep 5s && rsync --remove-source-files -zv {{ paperless_ngx_backup_directory }}/* {{ paperless_ngx_nfs_backup_directory }}
 
 find {{ paperless_ngx_nfs_backup_directory }} -mtime +{{ paperless_ngx_nfs_backup_cleanup_period }} -exec rm {} \;
