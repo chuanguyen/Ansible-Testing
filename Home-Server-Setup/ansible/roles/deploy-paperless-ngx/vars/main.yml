@@ -1,22 +1,26 @@
 paperless_ngx_container_data_dir_sub_folders:
   - "paperless_consume"
-  - "paperless_data"
-  - "paperless_export"
   - "paperless_media"
-  - "paperless_postgres"
-  - "paperless_redis"
   - "scripts"
 
-paperless_ngx_container_volumes:
-  binds:
-    - source: "./paperless_consume/"
-      target: "/usr/src/paperless/consume/"
-    - source: "./paperless_data/"
-      target: "/usr/src/paperless/data/"
-    - source: "./paperless_export/"
-      target: "/usr/src/paperless/export/"
-    - source: "./paperless_media/"
-      target: "/usr/src/paperless/media/"
+# Directories of differing permissions
+paperless_ngx_custom_perms_container_data_dir_sub_folders:
+  paperless_data:
+    owner: "{{ paperless_ngx_uid }}"
+    group: "{{ paperless_ngx_uid }}"
+    mode: "0775"
+  paperless_export:
+    owner: "{{ paperless_ngx_uid }}"
+    group: "{{ paperless_ngx_uid }}"
+    mode: "0775"
+  paperless_postgres:
+    owner: "70"
+    group: "999"
+    mode: "0700"
+  paperless_redis:
+    owner: "999"
+    group: "999"
+    mode: "0775"
 
 paperless_ngx_redis_container_volumes:
   binds:

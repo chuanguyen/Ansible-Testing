@@ -18,6 +18,16 @@
     state: "directory"
   with_items: "{{ paperless_ngx_container_data_dir_sub_folders }}"
 
+- name: "Create directories with differing permissions from previous step"
+  become: true
+  file:
+    path: "{{ paperless_ngx_container_data_dir }}/{{ item.key }}"
+    owner: "{{ item.value['owner'] }}"
+    group: "{{ item.value['group'] }}"
+    mode: "{{ item.value['mode'] }}"
+    state: "directory"
+  with_dict: "{{ paperless_ngx_custom_perms_container_data_dir_sub_folders }}"
+
 - name: "Template files for building and running {{ paperless_ngx_container_name }}"
   template:
     src: "{{ item.src }}"
