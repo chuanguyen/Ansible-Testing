@@ -1,6 +1,6 @@
 stirling_pdf_container_data_dir: "{{ docker_container_root_dir }}/stirling_pdf"
 
-stirling_pdf_image_base: "REPO/stirling_pdf"
+stirling_pdf_image_base: "frooodle/s-pdf"
 stirling_pdf_image_base_tag: ""
 # Ensures previous version of working
 # stirling_pdf image is available for failback
@@ -8,15 +8,13 @@ stirling_pdf_image_base_tag_old: ""
 stirling_pdf_container_name: "stirling_pdf"
 # Controls whether docker-compose restarts Docker containers
 stirling_pdf_container_restart: no
-# Defines image ID for custom image
-stirling_pdf_image_custom: "{{ ansible_user }}/stirling_pdf"
 
 stirling_pdf_container_labels: []
 
 stirling_pdf_container_traefik_labels:
   - "traefik.enable=true"
   - "traefik.docker.network={{ docker_networks.proxy.name }}"
-  - "traefik.http.routers.stirling_pdf1.rule=Host(`stirling_pdf.{{ home_lan_domain }}`)"
+  - "traefik.http.routers.stirling_pdf1.rule=Host(`pdf-editor.{{ home_lan_domain }}`)"
   - "traefik.http.routers.stirling_pdf1.entrypoints=websecure"
   - "traefik.http.routers.stirling_pdf1.middlewares=lanWhitelist@file,secureHeaders@file"
   ### Uncomment if internal docker port can't be detected by traefik
@@ -25,12 +23,20 @@ stirling_pdf_container_traefik_labels:
   - "traefik.http.routers.stirling_pdf1.tls=true"
   - "traefik.http.routers.stirling_pdf1.tls.certresolver=letsEncrypt"
 
-stirling_pdf_backup_directory: "/mnt/backup/"
-stirling_pdf_nfs_backup_directory: "/nfs/Container-Data/docker/stirling_pdf/"
-# Defines in days age of backups to remove
-stirling_pdf_nfs_backup_cleanup_period: "60"
-# Defines via cron syntax how often to run backup
-stirling_pdf_nfs_backup_frequency: "0 1 */15 * *"
-
 stirling_pdf_container_envs:
   kv:
+    DOCKER_ENABLE_SECURITY: "false"
+    INSTALL_BOOK_AND_ADVANCED_HTML_OPS: "false"
+    LANGS: "en_US"
+    SECURITY_ENABLELOGIN: "false" # set to 'true' to enable login
+    SECURITY_LOGINRESETTIMEMINUTES: "120" # lock account for 2 hours after x attempts
+    SECURITY_INITIALLOGIN_USERNAME: "admin" # Initial username for the first login
+    SECURITY_INITIALLOGIN_PASSWORD: "stirling" # Initial password for the first login
+    SYSTEM_DEFAULTLOCALE: "en-US" # Set the default language (e.g. 'de-DE', 'fr-FR', etc)
+    SYSTEM_GOOGLEVISIBILITY: "false" # 'true' to allow Google visibility (via robots.txt), 'false' to disallow
+    UI_APPNAME: "" # Application's visible name
+    UI_HOMEDESCRIPTION: "" # Short description or tagline shown on homepage.
+    UI_APPNAMENAVBAR: "" # Name displayed on the navigation bar
+    ENDPOINTS_TO_REMOVE: "" # List endpoints to disable (e.g. ['img-to-pdf', 'remove-pages'])
+    ENDPOINTS_GROUPS_TO_REMOVE: "" # List groups to disable (e.g. ['LibreOffice'])
+    METRICS_ENABLED: "true" # 'true' to enable Info APIs (`/api/*`) endpoints, 'false' to disable

@@ -6,15 +6,12 @@ version: "3"
 
 services:
   stirling_pdf:
-    build:
-      context: build/
     container_name: "{{ stirling_pdf_container_name }}"
     image: "{{ stirling_pdf_image_base }}:{{ stirling_pdf_image_base_tag }}"
     env_file: stirling_pdf.env
-    ports:
-      - ""
+    ports: []
     networks:
-      - ""
+      - {{ docker_networks.proxy.name }}
     # Volumes store your data between container upgrades
     volumes:
 {% for volume in stirling_pdf_container_volumes.binds %}
@@ -29,3 +26,5 @@ services:
 {% endfor %}
     restart: "always"
 networks:
+  {{ docker_networks.proxy.name }}:
+    external: true

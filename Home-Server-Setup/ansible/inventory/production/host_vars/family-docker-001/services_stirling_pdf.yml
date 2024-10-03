@@ -1,0 +1,18 @@
+---
+stirling_pdf_container_envs:
+  kv:
+    DOCKER_ENABLE_SECURITY: "true"
+    INSTALL_BOOK_AND_ADVANCED_HTML_OPS: "false"
+    LANGS: "en_US"
+    SECURITY_ENABLELOGIN: "true" # set to 'true' to enable login
+    SECURITY_LOGINRESETTIMEMINUTES: "120" # lock account for 2 hours after x attempts
+    # SECURITY_INITIALLOGIN_USERNAME: "admin" # Initial username for the first login
+    # SECURITY_INITIALLOGIN_PASSWORD: "stirling" # Initial password for the first login
+    SYSTEM_DEFAULTLOCALE: "en-US" # Set the default language (e.g. 'de-DE', 'fr-FR', etc)
+    SYSTEM_GOOGLEVISIBILITY: "false" # 'true' to allow Google visibility (via robots.txt), 'false' to disallow
+    UI_APPNAME: "" # Application's visible name
+    UI_HOMEDESCRIPTION: "" # Short description or tagline shown on homepage.
+    UI_APPNAMENAVBAR: "" # Name displayed on the navigation bar
+    ENDPOINTS_TO_REMOVE: "" # List endpoints to disable (e.g. ['img-to-pdf', 'remove-pages'])
+    ENDPOINTS_GROUPS_TO_REMOVE: "" # List groups to disable (e.g. ['LibreOffice'])
+    METRICS_ENABLED: "true" # 'true' to enable Info APIs (`/api/*`) endpoints, 'false' to disable

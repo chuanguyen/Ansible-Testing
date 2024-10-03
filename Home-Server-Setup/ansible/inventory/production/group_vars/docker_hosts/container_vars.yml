@@ -101,3 +101,6 @@ paperless_ngx_postgres_image_base_tag_old: ""
 
 paperless_ngx_redis_image_base_tag: "7.4-alpine"
 paperless_ngx_redis_image_base_tag_old: ""
+
+stirling_pdf_image_base_tag: "0.29.0"
+stirling_pdf_image_base_tag_old: ""

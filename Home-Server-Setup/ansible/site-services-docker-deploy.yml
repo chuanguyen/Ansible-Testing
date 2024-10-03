@@ -106,3 +106,6 @@
 
     - role: "deploy-paperless-ngx"
       tags: [services, paperless-ngx]
+
+    - role: "deploy-stirling-pdf"
+      tags: [services, stirling-pdf]
