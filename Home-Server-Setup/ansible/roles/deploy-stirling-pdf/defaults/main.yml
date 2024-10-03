@@ -1,0 +1,36 @@
+stirling_pdf_container_data_dir: "{{ docker_container_root_dir }}/stirling_pdf"
+
+stirling_pdf_image_base: "REPO/stirling_pdf"
+stirling_pdf_image_base_tag: ""
+# Ensures previous version of working
+# stirling_pdf image is available for failback
+stirling_pdf_image_base_tag_old: ""
+stirling_pdf_container_name: "stirling_pdf"
+# Controls whether docker-compose restarts Docker containers
+stirling_pdf_container_restart: no
+# Defines image ID for custom image
+stirling_pdf_image_custom: "{{ ansible_user }}/stirling_pdf"
+
+stirling_pdf_container_labels: []
+
+stirling_pdf_container_traefik_labels:
+  - "traefik.enable=true"
+  - "traefik.docker.network={{ docker_networks.proxy.name }}"
+  - "traefik.http.routers.stirling_pdf1.rule=Host(`stirling_pdf.{{ home_lan_domain }}`)"
+  - "traefik.http.routers.stirling_pdf1.entrypoints=websecure"
+  - "traefik.http.routers.stirling_pdf1.middlewares=lanWhitelist@file,secureHeaders@file"
+  ### Uncomment if internal docker port can't be detected by traefik
+  # - "traefik.http.routers.stirling_pdf1.service=stirling_pdf1-svc"
+  # - "traefik.http.services.stirling_pdf1-svc.loadbalancer.server.port=CUSTOM_INTERNAL_DOCKER_IMAGE_PORT"
+  - "traefik.http.routers.stirling_pdf1.tls=true"
+  - "traefik.http.routers.stirling_pdf1.tls.certresolver=letsEncrypt"
+
+stirling_pdf_backup_directory: "/mnt/backup/"
+stirling_pdf_nfs_backup_directory: "/nfs/Container-Data/docker/stirling_pdf/"
+# Defines in days age of backups to remove
+stirling_pdf_nfs_backup_cleanup_period: "60"
+# Defines via cron syntax how often to run backup
+stirling_pdf_nfs_backup_frequency: "0 1 */15 * *"
+
+stirling_pdf_container_envs:
+  kv:

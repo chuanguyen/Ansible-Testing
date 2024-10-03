@@ -1,0 +1,31 @@
+---
+
+# {{ ansible_managed }}
+
+version: "3"
+
+services:
+  stirling_pdf:
+    build:
+      context: build/
+    container_name: "{{ stirling_pdf_container_name }}"
+    image: "{{ stirling_pdf_image_base }}:{{ stirling_pdf_image_base_tag }}"
+    env_file: stirling_pdf.env
+    ports:
+      - ""
+    networks:
+      - ""
+    # Volumes store your data between container upgrades
+    volumes:
+{% for volume in stirling_pdf_container_volumes.binds %}
+      - {{ volume.source }}:{{ volume.target }}
+{% endfor %}
+    labels:
+{% for container_label in stirling_pdf_container_labels %}
+      - "{{ container_label }}"
+{% endfor %}
+{% for traefik_label in stirling_pdf_container_traefik_labels %}
+      - "{{ traefik_label }}"
+{% endfor %}
+    restart: "always"
+networks:

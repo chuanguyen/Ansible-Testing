@@ -1,0 +1,11 @@
+stirling_pdf_container_data_dir_sub_folders:
+  - "etc-stirling_pdf/"
+  - "mnt-backup/"
+  - "scripts"
+
+stirling_pdf_container_volumes:
+  binds:
+    - source: "./etc-stirling_pdf/"
+      target: "/etc/stirling_pdf/"
+    - source: "./mnt-backup/"
+      target: "/mnt/backup/"

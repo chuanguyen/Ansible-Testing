@@ -1,0 +1,42 @@
+---
+- name: "TASK: Retrieve container info"
+  community.docker.docker_container_info:
+    name: "{{ stirling_pdf_container_name }}"
+  register: container_state
+
+- name: "TASK: Set container facts"
+  set_fact:
+    container_exists: "{{ container_state.exists }}"
+    container_image: "{{ container_state.container.Config.Image | default('tag:n/a') }}"
+
+- name: "TASK: Set container image tag"
+  set_fact:
+    container_image_tag: "{{ container_image.split(':') }}"
+
+- block:
+    - include_tasks: "image_cleanup.yml"
+
+    - name: "TASK: Pull base image"
+      community.docker.docker_image:
+        name: "{{ stirling_pdf_image_base }}"
+        tag: "{{ stirling_pdf_image_base_tag }}"
+        source: "pull"
+        state: "present"
+      register: "image_base_pull"
+  when: container_image_tag[1] != stirling_pdf_image_base_tag
+
+- name: "TASK: Delete stirling_pdf"
+  community.docker.docker_compose:
+    project_src: "{{ stirling_pdf_container_data_dir }}"
+    nocache: "no"
+    state: "absent"
+    restarted: "{{ stirling_pdf_container_restart }}"
+  when: image_base_pull.changed or container_templated_files.changed
+
+- name: "TASK: Deploy {{ stirling_pdf_container_name }}"
+  community.docker.docker_compose:
+    project_src: "{{ stirling_pdf_container_data_dir }}"
+    build: "{{ 'yes' if image_base_pull.changed else 'no' }}"
+    nocache: "no"
+    state: "present"
+    restarted: "{{ stirling_pdf_container_restart }}"
