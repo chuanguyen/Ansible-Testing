@@ -17,7 +17,7 @@ homepage_dashboard_settings:
   title: "Home"
   background:
     image: "/images/backgrounds/background7.jpg"
-    opacity: 65 # 0-100
+    opacity: 55 # 0-100
   cardBlur: xl # sm, "", md, etc... see https://tailwindcss.com/docs/backdrop-blur
   favicon: "/images/psyduck-1.png"
   headerStyle: "underlined"
