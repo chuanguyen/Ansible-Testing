@@ -8,3 +8,5 @@ homepage_dashboard_container_volumes:
       target: "/app/config"
     - source: "./images"
       target: "/app/public/images"
+    - source: "/var/run/docker.sock"
+      target: "/var/run/docker.sock:ro"

@@ -1,0 +1,202 @@
+---
+homepage_dashboard_container_traefik_labels:
+  - "traefik.enable=true"
+  - "traefik.docker.network={{ docker_networks.proxy.name }}"
+  - "traefik.http.routers.homepage_dashboard1.rule=Host(`homepage.{{ home_lan_domain }}`)"
+  - "traefik.http.routers.homepage_dashboard1.entrypoints=websecure"
+  - "traefik.http.routers.homepage_dashboard1.middlewares=lanWhitelist@file,secureHeaders@file"
+  ### Uncomment if internal docker port can't be detected by traefik
+  # - "traefik.http.routers.homepage_dashboard1.service=homepage_dashboard1-svc"
+  # - "traefik.http.services.homepage_dashboard1-svc.loadbalancer.server.port=CUSTOM_INTERNAL_DOCKER_IMAGE_PORT"
+  - "traefik.http.routers.homepage_dashboard1.tls=true"
+  - "traefik.http.routers.homepage_dashboard1.tls.certresolver=letsEncrypt"
+
+homepage_dashboard_container_pgid: "999"
+
+homepage_dashboard_settings:
+  title: "Home"
+  background:
+    image: "/images/backgrounds/background5.jpg"
+    opacity: 35 # 0-100
+  cardBlur: md # sm, "", md, etc... see https://tailwindcss.com/docs/backdrop-blur
+  favicon: "/images/psyduck-1.png"
+
+homepage_dashboard_bookmarks:
+  - Developer:
+      - Github:
+          - abbr: "GH"
+            href: "https://github.com/"
+  - Social:
+      - Reddit:
+          - icon: "reddit.png"
+            href: "https://reddit.com/"
+            description: "The front page of the internet"
+  - Entertainment:
+      - YouTube:
+          - abbr: "YT"
+            href: "https://youtube.com/"
+
+homepage_dashboard_services:
+  - "Admin & Tools":
+      - "Pihole":
+          href: "https://pihole.{{ home_lan_domain }}/admin"
+          description: "Home AdBlocker"
+          icon: "/images/pihole.png"
+          siteMonitor: "https://pihole.{{ home_lan_domain }}/admin"
+          widget:
+            type: "pihole"
+            url: "https://pihole.{{ home_lan_domain }}"
+            version: 5 # required if running v6 or higher, defaults to 5
+            key: "{{ pihole_api_token }}" # optional
+      - "Frigate":
+          href: "https://frigate.{{ home_lan_domain }}"
+          description: "Security Cameras"
+          icon: "sh-frigate"
+          server: "docker-local"
+          container: "{{ frigate_container_name }}"
+      - "Home Speed Test":
+          href: "https://openspeedtest.{{ home_lan_domain }}:{{ open_speedtest_ext_https_port }}"
+          description: "Security Cameras"
+          icon: "sh-openspeedtest"
+          siteMonitor: "https://openspeedtest.{{ home_lan_domain }}:{{ open_speedtest_ext_https_port }}"
+          server: "docker-local"
+          container: "{{ open_speedtest_container_name }}"
+      - "Home Assistant":
+          href: "https://home-assistant-001.{{ home_lan_domain }}"
+          description: "Home Automation Server"
+          icon: "sh-home-assistant"
+          siteMonitor: "https://home-assistant-001.{{ home_lan_domain }}"
+      - "Family NAS":
+          href: "https://nas1.{{ home_lan_domain }}"
+          description: "Family File Server"
+          icon: "/images/nas.png"
+          siteMonitor: "https://nas1.{{ home_lan_domain }}"
+  - Monitoring:
+      - "AlertManager":
+          href: "https://alertmanager.{{ home_lan_domain }}"
+          description: "Prometheus Alerting"
+          icon: "sh-prometheus"
+          siteMonitor: "https://alertmanager.{{ home_lan_domain }}"
+      - "Grafana":
+          href: "https://grafana.{{ home_lan_domain }}"
+          description: "Monitoring Visualizations & Dashboards"
+          icon: "sh-grafana"
+          siteMonitor: "https://grafana.{{ home_lan_domain }}"
+      - "Prometheus":
+          href: "https://prometheus.{{ home_lan_domain }}"
+          description: "Metrics monitoring"
+          icon: "sh-prometheus"
+          siteMonitor: "https://prometheus.{{ home_lan_domain }}"
+      - "Traefik (RBP4)":
+          href: "https://traefik.{{ home_lan_domain }}"
+          description: "Proxy"
+          icon: "/images/traefik.png"
+          siteMonitor: "https://traefik.{{ home_lan_domain }}"
+      - "Traefik (Family-Docker-001)":
+          href: "https://traefik-001.{{ home_lan_domain }}"
+          description: "Proxy"
+          icon: "/images/traefik.png"
+          siteMonitor: "https://traefik-001.{{ home_lan_domain }}"
+      - "Portainer (RBP4)":
+          href: "https://portainer.{{ home_lan_domain }}"
+          description: "Docker management"
+          icon: "sh-portainer"
+          siteMonitor: "https://portainer.{{ home_lan_domain }}"
+      - "Portainer (Family-Docker-001)":
+          href: "https://portainer-001.{{ home_lan_domain }}"
+          description: "Docker management"
+          icon: "sh-portainer"
+          siteMonitor: "https://portainer-001.{{ home_lan_domain }}"
+      - "Zigbee2MQTT":
+          href: "https://zigbee2mqtt.{{ home_lan_domain }}"
+          description: "Server for Zigbee IOT devices"
+          icon: "sh-zigbee2mqtt"
+          siteMonitor: "https://zigbee2mqtt.{{ home_lan_domain }}"
+          server: "docker-local"
+          container: "{{ zigbee2mqtt_container_name }}"
+      - "zwave-js-ui":
+          href: "https://zwave.{{ home_lan_domain }}"
+          description: "Server for zwave IOT devices"
+          icon: "/images/zwave-js-ui.png"
+          siteMonitor: "https://zwave.{{ home_lan_domain }}"
+          server: "docker-local"
+          container: "{{ zwave_js_ui_container_name }}"
+  - Media:
+      - "Digikam":
+          href: "https://digikam.{{ home_lan_domain }}"
+          description: "Photo Management"
+          icon: "/images/digikam.png"
+          siteMonitor: "https://digikam.{{ home_lan_domain }}"
+          server: "docker-local"
+          container: "{{ digikam_container_name }}"
+      - "QuMagie":
+          href: "https://nas1.{{ home_lan_domain }}/qumagie"
+          description: "Photos"
+          icon: "sh-immich"
+          siteMonitor: "https://nas1.{{ home_lan_domain }}"
+      #   - "Immich":
+      #       href: "https://immich.{{ home_lan_domain }}"
+      #       description: "Photos"
+      #       icon: "sh-immich"
+      #       siteMonitor: "https://immich.{{ home_lan_domain }}"
+      - "Jellyfin":
+          href: "https://jellyfin.{{ home_lan_domain }}"
+          description: "Movies & Videos"
+          icon: "sh-jellyfin"
+          siteMonitor: "https://jellyfin.{{ home_lan_domain }}"
+          server: "docker-local"
+          container: "{{ jellyfin_container_name }}"
+          widget:
+            type: jellyfin
+            url: "https://jellyfin.{{ home_lan_domain }}"
+            key: "{{ jellyfin_homepage_dashboard_api_key }}"
+            enableBlocks: true # optional, defaults to false
+            enableNowPlaying: true # optional, defaults to true
+            enableUser: true # optional, defaults to false
+            showEpisodeNumber: true # optional, defaults to false
+            expandOneStreamToTwoRows: false # optional, defaults to true
+      - "Paperless-ngx":
+          href: "https://paperless.{{ home_lan_domain }}"
+          description: "Document Library"
+          icon: "sh-paperless-ngx"
+          siteMonitor: "https://paperless.{{ home_lan_domain }}"
+          server: "docker-local"
+          container: "{{ paperless_ngx_container_name }}"
+          widget:
+            type: paperlessngx
+            url: https://paperless.{{ home_lan_domain }}
+            key: "{{ paperless_ngx_admin_api_token }}"
+      - "MeTube":
+          href: "https://metube.{{ home_lan_domain }}"
+          description: "Youtube Video / Audio Downloader"
+          icon: "sh-metube"
+          siteMonitor: "https://metube.{{ home_lan_domain }}"
+          server: "docker-local"
+          container: "{{ meTube_container_name }}"
+      - "PDF Editor":
+          href: "https://pdf-editor.{{ home_lan_domain }}"
+          description: "Tool for managing and editting PDFs"
+          icon: "sh-stirling-pdf"
+          siteMonitor: "https://pdf-editor.{{ home_lan_domain }}"
+          server: "docker-local"
+          container: "{{ stirling_pdf_container_name }}"
+
+homepage_dashboard_info_widgets:
+  - logo:
+      icon: "/images/psyduck-2.png"
+  - greeting:
+      text_size: "4x1"
+      text: "Welcome to the home dashboard"
+  - openmeteo:
+      label: Burnaby # optional
+      latitude: "{{  homepage_dashboard_info_widgets_openmeteo_latitude }}"
+      longitude: "{{ homepage_dashboard_info_widgets_openmeteo_longitude }}"
+      timezone: America/Vancouver # optional
+      units: metric # or imperial
+      cache: 5 # Time in minutes to cache API responses, to stay within limits
+      format: # optional, Intl.NumberFormat options
+        maximumFractionDigits: 1
+
+homepage_dashboard_docker:
+  docker-local:
+    socket: "/var/run/docker.sock"

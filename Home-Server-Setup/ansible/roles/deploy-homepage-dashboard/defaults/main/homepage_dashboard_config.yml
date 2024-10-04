@@ -47,3 +47,7 @@ homepage_dashboard_info_widgets:
   - search:
       provider: duckduckgo
       target: _blank
+
+homepage_dashboard_docker:
+  my-docker:
+    socket: "/var/run/docker.sock"

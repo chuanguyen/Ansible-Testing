@@ -38,6 +38,8 @@
       dest: "{{ homepage_dashboard_container_data_dir }}/config/services.yaml"
     - src: "widgets.yaml.j2"
       dest: "{{ homepage_dashboard_container_data_dir }}/config/widgets.yaml"
+    - src: "docker.yaml.j2"
+      dest: "{{ homepage_dashboard_container_data_dir }}/config/docker.yaml"
   loop_control:
     label: "{{ item.src }}"
   register: "container_templated_files"
