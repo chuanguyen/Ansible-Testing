@@ -1,4 +1,13 @@
 ---
+jellyfin_container_traefik_labels:
+  - "traefik.enable=true"
+  - "traefik.docker.network={{ docker_networks.proxy.name }}"
+  - "traefik.http.routers.jellyfin1.rule=Host(`jellyfin.{{ home_lan_domain }}`)"
+  - "traefik.http.routers.jellyfin1.entrypoints=websecure"
+  - "traefik.http.routers.jellyfin1.middlewares=secureHeaders@file"
+  - "traefik.http.routers.jellyfin1.tls=true"
+  - "traefik.http.routers.jellyfin1.tls.certresolver=letsEncrypt"
+
 jellyfin_container_labels:
   - "com.centurylinklabs.watchtower.enable=false"
 

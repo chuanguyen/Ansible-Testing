@@ -48,3 +48,10 @@ pihole_api_token: "{{ vault_pihole_api_token }}"
 
 # Paperless-ngx
 paperless_ngx_admin_api_token: "{{ vault_paperless_ngx_admin_api_token }}"
+
+# Homepage (Ben Phelps)
+homepage_dashboard_info_widgets_openmeteo_latitude: "{{ vault_homepage_dashboard_info_widgets_openmeteo_latitude }}"
+homepage_dashboard_info_widgets_openmeteo_longitude: "{{ vault_homepage_dashboard_info_widgets_openmeteo_longitude }}"
+
+# Jellyfin
+jellyfin_homepage_dashboard_api_key: "{{ vault_jellyfin_homepage_dashboard_api_key }}"
