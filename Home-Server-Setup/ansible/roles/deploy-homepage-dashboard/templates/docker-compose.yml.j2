@@ -1,0 +1,29 @@
+---
+
+# {{ ansible_managed }}
+
+version: "3"
+
+services:
+  homepage_dashboard:
+    container_name: "{{ homepage_dashboard_container_name }}"
+    image: "{{ homepage_dashboard_image_base }}:{{ homepage_dashboard_image_base_tag }}"
+    env_file: homepage_dashboard.env
+    ports:
+      - ""
+    networks:
+      - ""
+    # Volumes store your data between container upgrades
+    volumes:
+{% for volume in homepage_dashboard_container_volumes.binds %}
+      - {{ volume.source }}:{{ volume.target }}
+{% endfor %}
+    labels:
+{% for container_label in homepage_dashboard_container_labels %}
+      - "{{ container_label }}"
+{% endfor %}
+{% for traefik_label in homepage_dashboard_container_traefik_labels %}
+      - "{{ traefik_label }}"
+{% endfor %}
+    restart: "always"
+networks:

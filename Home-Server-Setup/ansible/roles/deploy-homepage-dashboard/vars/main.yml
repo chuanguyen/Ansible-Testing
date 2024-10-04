@@ -1,0 +1,11 @@
+homepage_dashboard_container_data_dir_sub_folders:
+  - "etc-homepage_dashboard/"
+  - "mnt-backup/"
+  - "scripts"
+
+homepage_dashboard_container_volumes:
+  binds:
+    - source: "./etc-homepage_dashboard/"
+      target: "/etc/homepage_dashboard/"
+    - source: "./mnt-backup/"
+      target: "/mnt/backup/"
