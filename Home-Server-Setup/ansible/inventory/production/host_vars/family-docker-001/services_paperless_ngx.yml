@@ -1,4 +1,15 @@
 ---
+paperless_ngx_container_traefik_labels:
+  - "traefik.enable=true"
+  - "traefik.docker.network={{ docker_networks.proxy.name }}"
+  - "traefik.http.routers.paperless_ngx1.rule=Host(`paperless.{{ home_lan_domain }}`)"
+  - "traefik.http.routers.paperless_ngx1.entrypoints=websecure"
+  - "traefik.http.routers.paperless_ngx1.middlewares=secureHeaders@file"
+  - "traefik.http.routers.paperless_ngx1.service=paperless_ngx1-svc"
+  - "traefik.http.services.paperless_ngx1-svc.loadbalancer.server.port={{ paperless_ngx_port_web }}"
+  - "traefik.http.routers.paperless_ngx1.tls=true"
+  - "traefik.http.routers.paperless_ngx1.tls.certresolver=letsEncrypt"
+
 # Postgres
 paperless_ngx_postgres_user: "postgres_user"
 paperless_ngx_postgres_password: "{{ vault_paperless_dbpass }}"
