@@ -1,0 +1,49 @@
+---
+### Modify the following as necessary to configure homepage
+# Structure should follow the syntax defined in the homepage configuration
+
+homepage_dashboard_settings:
+  title: "Test Site"
+  startUrl: ""
+  background:
+    image: ""
+
+homepage_dashboard_bookmarks:
+  - Developer:
+      - Github:
+          - abbr: "GH"
+            href: "https://github.com/"
+  - Social:
+      - Reddit:
+          - icon: "reddit.png"
+            href: "https://reddit.com/"
+            description: "The front page of the internet"
+  - Entertainment:
+      - YouTube:
+          - abbr: "YT"
+            href: "https://youtube.com/"
+
+homepage_dashboard_services:
+  - My First Group:
+      - My First Service:
+          href: "http://localhost/"
+          description: "Homepage is awesome"
+
+  - My Second Group:
+      - My Second Service:
+          href: "http://localhost/"
+          description: "Homepage is the best"
+
+  - My Third Group:
+      - My Third Service:
+          href: "http://localhost/"
+          description: "Homepage is 😎"
+
+homepage_dashboard_info_widgets:
+  - resources:
+      cpu: true
+      memory: true
+      disk: /
+  - search:
+      provider: duckduckgo
+      target: _blank

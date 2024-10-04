@@ -109,3 +109,6 @@
 
     - role: "deploy-stirling-pdf"
       tags: [services, stirling-pdf]
+
+    - role: "deploy-homepage-dashboard"
+      tags: [services, homepage-dashboard]

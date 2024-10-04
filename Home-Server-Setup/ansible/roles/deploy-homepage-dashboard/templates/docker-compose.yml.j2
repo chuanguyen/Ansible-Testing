@@ -9,10 +9,9 @@ services:
     container_name: "{{ homepage_dashboard_container_name }}"
     image: "{{ homepage_dashboard_image_base }}:{{ homepage_dashboard_image_base_tag }}"
     env_file: homepage_dashboard.env
-    ports:
-      - ""
+    ports: []
     networks:
-      - ""
+      - {{ docker_networks.proxy.name }}
     # Volumes store your data between container upgrades
     volumes:
 {% for volume in homepage_dashboard_container_volumes.binds %}
@@ -27,3 +26,5 @@ services:
 {% endfor %}
     restart: "always"
 networks:
+  {{ docker_networks.proxy.name }}:
+    external: true

@@ -3,7 +3,7 @@
   become: true
   file:
     path: "{{ homepage_dashboard_container_data_dir }}"
-    owner: "root"
+    owner: "{{ homepage_dashboard_container_puid }}"
     group: "docker"
     mode: 0775
     state: "directory"
@@ -12,8 +12,8 @@
   become: true
   file:
     path: "{{ homepage_dashboard_container_data_dir }}/{{ item }}"
-    owner: "root"
-    group: "docker"
+    owner: "{{ homepage_dashboard_container_puid }}"
+    group: "{{ homepage_dashboard_container_pgid }}"
     mode: 0775
     state: "directory"
   with_items: "{{ homepage_dashboard_container_data_dir_sub_folders }}"
@@ -22,13 +22,22 @@
   template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
-    group: "docker"
+    owner: "{{ homepage_dashboard_container_puid }}"
+    group: "{{ homepage_dashboard_container_pgid }}"
     mode: 0660
   with_items:
     - src: "docker-compose.yml.j2"
       dest: "{{ homepage_dashboard_container_data_dir }}/docker-compose.yml"
     - src: "homepage_dashboard.env.j2"
       dest: "{{ homepage_dashboard_container_data_dir }}/homepage_dashboard.env"
+    - src: "settings.yaml.j2"
+      dest: "{{ homepage_dashboard_container_data_dir }}/config/settings.yaml"
+    - src: "bookmarks.yaml.j2"
+      dest: "{{ homepage_dashboard_container_data_dir }}/config/bookmarks.yaml"
+    - src: "services.yaml.j2"
+      dest: "{{ homepage_dashboard_container_data_dir }}/config/services.yaml"
+    - src: "widgets.yaml.j2"
+      dest: "{{ homepage_dashboard_container_data_dir }}/config/widgets.yaml"
   loop_control:
     label: "{{ item.src }}"
   register: "container_templated_files"

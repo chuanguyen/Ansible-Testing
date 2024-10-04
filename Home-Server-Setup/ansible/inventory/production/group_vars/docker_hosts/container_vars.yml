@@ -104,3 +104,6 @@ paperless_ngx_redis_image_base_tag_old: ""
 
 stirling_pdf_image_base_tag: "0.29.0"
 stirling_pdf_image_base_tag_old: ""
+
+homepage_dashboard_image_base_tag: "v0.9.10"
+homepage_dashboard_image_base_tag_old: ""

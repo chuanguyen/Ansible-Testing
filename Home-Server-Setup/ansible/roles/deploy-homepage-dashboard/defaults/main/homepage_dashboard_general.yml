@@ -1,6 +1,6 @@
 homepage_dashboard_container_data_dir: "{{ docker_container_root_dir }}/homepage_dashboard"
 
-homepage_dashboard_image_base: "REPO/homepage_dashboard"
+homepage_dashboard_image_base: "ghcr.io/gethomepage/homepage"
 homepage_dashboard_image_base_tag: ""
 # Ensures previous version of working
 # homepage_dashboard image is available for failback
@@ -8,15 +8,16 @@ homepage_dashboard_image_base_tag_old: ""
 homepage_dashboard_container_name: "homepage_dashboard"
 # Controls whether docker-compose restarts Docker containers
 homepage_dashboard_container_restart: no
-# Defines image ID for custom image
-homepage_dashboard_image_custom: "{{ ansible_user }}/homepage_dashboard"
+
+homepage_dashboard_container_puid: "1000"
+homepage_dashboard_container_pgid: "1000"
 
 homepage_dashboard_container_labels: []
 
 homepage_dashboard_container_traefik_labels:
   - "traefik.enable=true"
   - "traefik.docker.network={{ docker_networks.proxy.name }}"
-  - "traefik.http.routers.homepage_dashboard1.rule=Host(`homepage_dashboard.{{ home_lan_domain }}`)"
+  - "traefik.http.routers.homepage_dashboard1.rule=Host(`homepage.{{ home_lan_domain }}`)"
   - "traefik.http.routers.homepage_dashboard1.entrypoints=websecure"
   - "traefik.http.routers.homepage_dashboard1.middlewares=lanWhitelist@file,secureHeaders@file"
   ### Uncomment if internal docker port can't be detected by traefik
@@ -25,12 +26,7 @@ homepage_dashboard_container_traefik_labels:
   - "traefik.http.routers.homepage_dashboard1.tls=true"
   - "traefik.http.routers.homepage_dashboard1.tls.certresolver=letsEncrypt"
 
-homepage_dashboard_backup_directory: "/mnt/backup/"
-homepage_dashboard_nfs_backup_directory: "/nfs/Container-Data/docker/homepage_dashboard/"
-# Defines in days age of backups to remove
-homepage_dashboard_nfs_backup_cleanup_period: "60"
-# Defines via cron syntax how often to run backup
-homepage_dashboard_nfs_backup_frequency: "0 1 */15 * *"
-
 homepage_dashboard_container_envs:
   kv:
+    PUID: "{{ homepage_dashboard_container_puid }}"
+    PGID: "{{ homepage_dashboard_container_pgid }}"
