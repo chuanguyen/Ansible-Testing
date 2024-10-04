@@ -16,28 +16,61 @@ homepage_dashboard_container_pgid: "999"
 homepage_dashboard_settings:
   title: "Home"
   background:
-    image: "/images/backgrounds/background5.jpg"
-    opacity: 35 # 0-100
-  cardBlur: md # sm, "", md, etc... see https://tailwindcss.com/docs/backdrop-blur
+    image: "/images/backgrounds/background7.jpg"
+    opacity: 65 # 0-100
+  cardBlur: xl # sm, "", md, etc... see https://tailwindcss.com/docs/backdrop-blur
   favicon: "/images/psyduck-1.png"
+  headerStyle: "underlined"
+  layout:
+    Media:
+      tab: "Family"
+      style: "row"
+      columns: 2
+      useEqualHeights: true
+    "Media Tools":
+      tab: "Family"
+      style: "row"
+      columns: 1
+    "Admin_header_hidden":
+      tab: "Admin"
+      style: row
+      header: false
+      columns: 1
+    "Home Automation":
+      tab: "Admin"
+      style: row
+      columns: 2
+    "Admin & Tools":
+      tab: "Admin"
+      style: "row"
+      columns: 1
+    Monitoring:
+      tab: "Admin"
+    Proxies:
+      tab: "Admin"
+  target: "_blank"
+  hideVersion: true
+  statusStyle: "basic"
 
 homepage_dashboard_bookmarks:
   - Developer:
       - Github:
           - abbr: "GH"
             href: "https://github.com/"
+            description: ""
   - Social:
       - Reddit:
-          - icon: "reddit.png"
+          - icon: "sh-reddit"
             href: "https://reddit.com/"
             description: "The front page of the internet"
   - Entertainment:
       - YouTube:
-          - abbr: "YT"
+          - icon: "sh-youtube"
             href: "https://youtube.com/"
+            description: ""
 
 homepage_dashboard_services:
-  - "Admin & Tools":
+  - "Admin_header_hidden":
       - "Pihole":
           href: "https://pihole.{{ home_lan_domain }}/admin"
           description: "Home AdBlocker"
@@ -48,12 +81,17 @@ homepage_dashboard_services:
             url: "https://pihole.{{ home_lan_domain }}"
             version: 5 # required if running v6 or higher, defaults to 5
             key: "{{ pihole_api_token }}" # optional
-      - "Frigate":
-          href: "https://frigate.{{ home_lan_domain }}"
-          description: "Security Cameras"
-          icon: "sh-frigate"
-          server: "docker-local"
-          container: "{{ frigate_container_name }}"
+  - "Admin & Tools":
+      - "Proxmox (Production)":
+          href: "https://proxmox-001.{{ home_lan_domain }}:8006"
+          description: "VM Hypervisor"
+          icon: "sh-proxmox"
+          ping: "https://proxmox-001.{{ home_lan_domain }}"
+      - "Proxmox (Dev)":
+          href: "https://proxmox-test.{{ home_lan_domain }}:8006"
+          description: "VM Hypervisor"
+          icon: "sh-proxmox"
+          ping: "https://proxmox-test.{{ home_lan_domain }}"
       - "Home Speed Test":
           href: "https://openspeedtest.{{ home_lan_domain }}:{{ open_speedtest_ext_https_port }}"
           description: "Security Cameras"
@@ -61,52 +99,18 @@ homepage_dashboard_services:
           siteMonitor: "https://openspeedtest.{{ home_lan_domain }}:{{ open_speedtest_ext_https_port }}"
           server: "docker-local"
           container: "{{ open_speedtest_container_name }}"
+  - "Home Automation":
       - "Home Assistant":
           href: "https://home-assistant-001.{{ home_lan_domain }}"
           description: "Home Automation Server"
           icon: "sh-home-assistant"
           siteMonitor: "https://home-assistant-001.{{ home_lan_domain }}"
-      - "Family NAS":
-          href: "https://nas1.{{ home_lan_domain }}"
-          description: "Family File Server"
-          icon: "/images/nas.png"
-          siteMonitor: "https://nas1.{{ home_lan_domain }}"
-  - Monitoring:
-      - "AlertManager":
-          href: "https://alertmanager.{{ home_lan_domain }}"
-          description: "Prometheus Alerting"
-          icon: "sh-prometheus"
-          siteMonitor: "https://alertmanager.{{ home_lan_domain }}"
-      - "Grafana":
-          href: "https://grafana.{{ home_lan_domain }}"
-          description: "Monitoring Visualizations & Dashboards"
-          icon: "sh-grafana"
-          siteMonitor: "https://grafana.{{ home_lan_domain }}"
-      - "Prometheus":
-          href: "https://prometheus.{{ home_lan_domain }}"
-          description: "Metrics monitoring"
-          icon: "sh-prometheus"
-          siteMonitor: "https://prometheus.{{ home_lan_domain }}"
-      - "Traefik (RBP4)":
-          href: "https://traefik.{{ home_lan_domain }}"
-          description: "Proxy"
-          icon: "/images/traefik.png"
-          siteMonitor: "https://traefik.{{ home_lan_domain }}"
-      - "Traefik (Family-Docker-001)":
-          href: "https://traefik-001.{{ home_lan_domain }}"
-          description: "Proxy"
-          icon: "/images/traefik.png"
-          siteMonitor: "https://traefik-001.{{ home_lan_domain }}"
-      - "Portainer (RBP4)":
-          href: "https://portainer.{{ home_lan_domain }}"
-          description: "Docker management"
-          icon: "sh-portainer"
-          siteMonitor: "https://portainer.{{ home_lan_domain }}"
-      - "Portainer (Family-Docker-001)":
-          href: "https://portainer-001.{{ home_lan_domain }}"
-          description: "Docker management"
-          icon: "sh-portainer"
-          siteMonitor: "https://portainer-001.{{ home_lan_domain }}"
+      - "Frigate":
+          href: "https://frigate-001.{{ home_lan_domain }}"
+          description: "Security Cameras"
+          icon: "sh-frigate"
+          server: "docker-local"
+          container: "{{ frigate_container_name }}"
       - "Zigbee2MQTT":
           href: "https://zigbee2mqtt.{{ home_lan_domain }}"
           description: "Server for Zigbee IOT devices"
@@ -121,24 +125,44 @@ homepage_dashboard_services:
           siteMonitor: "https://zwave.{{ home_lan_domain }}"
           server: "docker-local"
           container: "{{ zwave_js_ui_container_name }}"
+  - Proxies:
+      - "Traefik (RBP4)":
+          href: "https://traefik.{{ home_lan_domain }}"
+          description: "Proxy"
+          icon: "/images/traefik.png"
+          siteMonitor: "https://traefik.{{ home_lan_domain }}"
+      - "Traefik (Family-Docker-001)":
+          href: "https://traefik-001.{{ home_lan_domain }}"
+          description: "Proxy"
+          icon: "/images/traefik.png"
+          siteMonitor: "https://traefik-001.{{ home_lan_domain }}"
+  - Monitoring:
+      - "Portainer (RBP4)":
+          href: "https://portainer.{{ home_lan_domain }}"
+          description: "Docker management"
+          icon: "sh-portainer"
+          siteMonitor: "https://portainer.{{ home_lan_domain }}"
+      - "Portainer (Family-Docker-001)":
+          href: "https://portainer-001.{{ home_lan_domain }}"
+          description: "Docker management"
+          icon: "sh-portainer"
+          siteMonitor: "https://portainer-001.{{ home_lan_domain }}"
+      - "Grafana":
+          href: "https://grafana.{{ home_lan_domain }}"
+          description: "Monitoring Visualizations & Dashboards"
+          icon: "sh-grafana"
+          siteMonitor: "https://grafana.{{ home_lan_domain }}"
+      - "Prometheus":
+          href: "https://prometheus.{{ home_lan_domain }}"
+          description: "Metrics monitoring"
+          icon: "sh-prometheus"
+          siteMonitor: "https://prometheus.{{ home_lan_domain }}"
+      - "AlertManager":
+          href: "https://alertmanager.{{ home_lan_domain }}"
+          description: "Prometheus Alerting"
+          icon: "sh-prometheus"
+          siteMonitor: "https://alertmanager.{{ home_lan_domain }}"
   - Media:
-      - "Digikam":
-          href: "https://digikam.{{ home_lan_domain }}"
-          description: "Photo Management"
-          icon: "/images/digikam.png"
-          siteMonitor: "https://digikam.{{ home_lan_domain }}"
-          server: "docker-local"
-          container: "{{ digikam_container_name }}"
-      - "QuMagie":
-          href: "https://nas1.{{ home_lan_domain }}/qumagie"
-          description: "Photos"
-          icon: "sh-immich"
-          siteMonitor: "https://nas1.{{ home_lan_domain }}"
-      #   - "Immich":
-      #       href: "https://immich.{{ home_lan_domain }}"
-      #       description: "Photos"
-      #       icon: "sh-immich"
-      #       siteMonitor: "https://immich.{{ home_lan_domain }}"
       - "Jellyfin":
           href: "https://jellyfin.{{ home_lan_domain }}"
           description: "Movies & Videos"
@@ -166,13 +190,29 @@ homepage_dashboard_services:
             type: paperlessngx
             url: https://paperless.{{ home_lan_domain }}
             key: "{{ paperless_ngx_admin_api_token }}"
-      - "MeTube":
-          href: "https://metube.{{ home_lan_domain }}"
-          description: "Youtube Video / Audio Downloader"
-          icon: "sh-metube"
-          siteMonitor: "https://metube.{{ home_lan_domain }}"
+      - "QuMagie":
+          href: "https://nas1.{{ home_lan_domain }}/qumagie"
+          description: "Photos"
+          icon: "sh-immich"
+          siteMonitor: "https://nas1.{{ home_lan_domain }}"
+      #   - "Immich":
+      #       href: "https://immich.{{ home_lan_domain }}"
+      #       description: "Photos"
+      #       icon: "sh-immich"
+      #       siteMonitor: "https://immich.{{ home_lan_domain }}"
+      - "Family NAS":
+          href: "https://nas1.{{ home_lan_domain }}"
+          description: "Family File Server"
+          icon: "/images/nas.png"
+          siteMonitor: "https://nas1.{{ home_lan_domain }}"
+  - "Media Tools":
+      - "Digikam":
+          href: "https://digikam.{{ home_lan_domain }}"
+          description: "Photo Management"
+          icon: "/images/digikam.png"
+          siteMonitor: "https://digikam.{{ home_lan_domain }}"
           server: "docker-local"
-          container: "{{ meTube_container_name }}"
+          container: "{{ digikam_container_name }}"
       - "PDF Editor":
           href: "https://pdf-editor.{{ home_lan_domain }}"
           description: "Tool for managing and editting PDFs"
@@ -180,6 +220,13 @@ homepage_dashboard_services:
           siteMonitor: "https://pdf-editor.{{ home_lan_domain }}"
           server: "docker-local"
           container: "{{ stirling_pdf_container_name }}"
+      - "MeTube":
+          href: "https://metube.{{ home_lan_domain }}"
+          description: "Youtube Video / Audio Downloader"
+          icon: "sh-metube"
+          siteMonitor: "https://metube.{{ home_lan_domain }}"
+          server: "docker-local"
+          container: "{{ meTube_container_name }}"
 
 homepage_dashboard_info_widgets:
   - logo:
