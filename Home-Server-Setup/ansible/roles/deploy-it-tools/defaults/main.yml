@@ -1,0 +1,27 @@
+it_tools_container_data_dir: "{{ docker_container_root_dir }}/it_tools"
+
+it_tools_image_base: "corentinth/it-tools"
+it_tools_image_base_tag: ""
+# Ensures previous version of working
+# it_tools image is available for failback
+it_tools_image_base_tag_old: ""
+it_tools_container_name: "it_tools"
+# Controls whether docker-compose restarts Docker containers
+it_tools_container_restart: no
+
+it_tools_container_labels: []
+
+it_tools_container_traefik_labels:
+  - "traefik.enable=true"
+  - "traefik.docker.network={{ docker_networks.proxy.name }}"
+  - "traefik.http.routers.it_tools1.rule=Host(`it_tools.{{ home_lan_domain }}`)"
+  - "traefik.http.routers.it_tools1.entrypoints=websecure"
+  - "traefik.http.routers.it_tools1.middlewares=lanWhitelist@file,secureHeaders@file"
+  ### Uncomment if internal docker port can't be detected by traefik
+  # - "traefik.http.routers.it_tools1.service=it_tools1-svc"
+  # - "traefik.http.services.it_tools1-svc.loadbalancer.server.port=CUSTOM_INTERNAL_DOCKER_IMAGE_PORT"
+  - "traefik.http.routers.it_tools1.tls=true"
+  - "traefik.http.routers.it_tools1.tls.certresolver=letsEncrypt"
+
+it_tools_container_envs:
+  kv:

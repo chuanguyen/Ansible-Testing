@@ -107,3 +107,6 @@ stirling_pdf_image_base_tag_old: ""
 
 homepage_dashboard_image_base_tag: "v0.9.10"
 homepage_dashboard_image_base_tag_old: ""
+
+it_tools_image_base_tag: "latest"
+it_tools_image_base_tag_old: ""

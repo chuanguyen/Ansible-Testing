@@ -112,3 +112,6 @@
 
     - role: "deploy-homepage-dashboard"
       tags: [services, homepage-dashboard]
+
+    - role: "deploy-it-tools"
+      tags: [services, it-tools]

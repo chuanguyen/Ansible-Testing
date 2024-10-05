@@ -1,0 +1,25 @@
+---
+
+# {{ ansible_managed }}
+
+version: "3"
+
+services:
+  it_tools:
+    container_name: "{{ it_tools_container_name }}"
+    image: "{{ it_tools_image_base }}:{{ it_tools_image_base_tag }}"
+    env_file: it_tools.env
+    ports: []
+    networks:
+      - {{ docker_networks.proxy.name }}
+    labels:
+{% for container_label in it_tools_container_labels %}
+      - "{{ container_label }}"
+{% endfor %}
+{% for traefik_label in it_tools_container_traefik_labels %}
+      - "{{ traefik_label }}"
+{% endfor %}
+    restart: "always"
+networks:
+  {{ docker_networks.proxy.name }}:
+      external: true
