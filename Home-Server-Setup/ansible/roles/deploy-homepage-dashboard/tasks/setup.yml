@@ -30,6 +30,18 @@
       dest: "{{ homepage_dashboard_container_data_dir }}/docker-compose.yml"
     - src: "homepage_dashboard.env.j2"
       dest: "{{ homepage_dashboard_container_data_dir }}/homepage_dashboard.env"
+  loop_control:
+    label: "{{ item.src }}"
+  register: "container_templated_files"
+
+- name: "Template files for customizing {{ homepage_dashboard_container_name }} that don't need a container restart"
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ homepage_dashboard_container_puid }}"
+    group: "{{ homepage_dashboard_container_pgid }}"
+    mode: 0660
+  with_items:
     - src: "settings.yaml.j2"
       dest: "{{ homepage_dashboard_container_data_dir }}/config/settings.yaml"
     - src: "bookmarks.yaml.j2"
@@ -42,7 +54,6 @@
       dest: "{{ homepage_dashboard_container_data_dir }}/config/docker.yaml"
   loop_control:
     label: "{{ item.src }}"
-  register: "container_templated_files"
 
 - name: "TASK: Set containers to restart when templated files change"
   set_fact:
