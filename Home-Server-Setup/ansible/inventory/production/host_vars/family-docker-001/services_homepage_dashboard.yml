@@ -46,8 +46,12 @@ homepage_dashboard_settings:
       columns: 1
     Monitoring:
       tab: "Admin"
+      style: "row"
+      columns: 3
     Proxies:
       tab: "Admin"
+      style: "row"
+      columns: 1
     "Admin Management Panels":
       tab: "Admin"
       style: "row"
