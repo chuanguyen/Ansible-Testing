@@ -40,7 +40,7 @@ homepage_dashboard_settings:
       tab: "Admin"
       style: row
       columns: 2
-    "Admin & Tools":
+    "IT Tools":
       tab: "Admin"
       style: "row"
       columns: 1
@@ -48,6 +48,10 @@ homepage_dashboard_settings:
       tab: "Admin"
     Proxies:
       tab: "Admin"
+    "Admin Management Panels":
+      tab: "Admin"
+      style: "row"
+      columns: 1
   target: "_blank"
   hideVersion: true
   statusStyle: "basic"
@@ -81,17 +85,17 @@ homepage_dashboard_services:
             url: "https://pihole.{{ home_lan_domain }}"
             version: 5 # required if running v6 or higher, defaults to 5
             key: "{{ pihole_api_token }}" # optional
-  - "Admin & Tools":
+  - "IT Tools":
       - "Proxmox (Production)":
           href: "https://proxmox-001.{{ home_lan_domain }}:8006"
           description: "VM Hypervisor"
           icon: "sh-proxmox"
-          ping: "https://proxmox-001.{{ home_lan_domain }}"
+          ping: "proxmox-001.{{ home_lan_domain }}"
       - "Proxmox (Dev)":
-          href: "https://proxmox-test.{{ home_lan_domain }}:8006"
+          href: "proxmox-test.{{ home_lan_domain }}:8006"
           description: "VM Hypervisor"
           icon: "sh-proxmox"
-          ping: "https://proxmox-test.{{ home_lan_domain }}"
+          ping: "proxmox-test.{{ home_lan_domain }}"
       - "Home Speed Test":
           href: "https://openspeedtest.{{ home_lan_domain }}:{{ open_speedtest_ext_https_port }}"
           description: "Security Cameras"
@@ -99,6 +103,15 @@ homepage_dashboard_services:
           siteMonitor: "https://openspeedtest.{{ home_lan_domain }}:{{ open_speedtest_ext_https_port }}"
           server: "docker-local"
           container: "{{ open_speedtest_container_name }}"
+  - "Admin Management Panels":
+      - "Lexmark Printer":
+          href: "http://printer.{{ home_lan_domain }}"
+          icon: "/images/printer-big.png"
+          ping: "printer.{{ home_lan_domain }}"
+      - "HP Printer":
+          href: "http://printer3.{{ home_lan_domain }}"
+          icon: "/images/printer.png"
+          ping: "printer3.{{ home_lan_domain }}"
   - "Home Automation":
       - "Home Assistant":
           href: "https://home-assistant-001.{{ home_lan_domain }}"
