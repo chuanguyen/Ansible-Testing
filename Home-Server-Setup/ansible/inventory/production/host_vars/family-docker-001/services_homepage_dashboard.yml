@@ -16,9 +16,9 @@ homepage_dashboard_container_pgid: "999"
 homepage_dashboard_settings:
   title: "Home"
   background:
-    image: "/images/backgrounds/background7.jpg"
-    opacity: 55 # 0-100
-  cardBlur: xl # sm, "", md, etc... see https://tailwindcss.com/docs/backdrop-blur
+    image: "/images/backgrounds/background9.jpg"
+    opacity: 50 # 0-100
+  cardBlur: "md" # sm, "", md, etc... see https://tailwindcss.com/docs/backdrop-blur
   favicon: "/images/psyduck-1.png"
   headerStyle: "underlined"
   layout:
