@@ -101,10 +101,10 @@ homepage_dashboard_services:
           icon: "sh-proxmox"
           ping: "proxmox-test.{{ home_lan_domain }}"
       - "IT-Tools":
-          href: "https://it_tools.{{ home_lan_domain }}"
+          href: "https://it-tools.{{ home_lan_domain }}"
           description: "Collection of common tools for IT and developers, "
           icon: "sh-it-tools"
-          siteMonitor: "https://it_tools.{{ home_lan_domain }}"
+          siteMonitor: "https://it-tools.{{ home_lan_domain }}"
           server: "docker-local"
           container: "{{ it_tools_container_name }}"
       - "Home Speed Test":

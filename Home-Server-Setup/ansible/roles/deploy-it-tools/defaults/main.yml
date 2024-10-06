@@ -14,7 +14,7 @@ it_tools_container_labels: []
 it_tools_container_traefik_labels:
   - "traefik.enable=true"
   - "traefik.docker.network={{ docker_networks.proxy.name }}"
-  - "traefik.http.routers.it_tools1.rule=Host(`it_tools.{{ home_lan_domain }}`)"
+  - "traefik.http.routers.it_tools1.rule=Host(`it-tools.{{ home_lan_domain }}`)"
   - "traefik.http.routers.it_tools1.entrypoints=websecure"
   - "traefik.http.routers.it_tools1.middlewares=lanWhitelist@file,secureHeaders@file"
   ### Uncomment if internal docker port can't be detected by traefik
