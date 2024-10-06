@@ -13,6 +13,8 @@ traefik_container_dns_externally_used: false
 traefik_container_dns_servers: []
 
 traefik_logging_directory: "/var/log/traefik"
+traefik_logging_format: "common"
+traefik_logging_level: "ERROR"
 
 traefik_container_envs:
   kv:

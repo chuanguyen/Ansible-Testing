@@ -1,4 +1,7 @@
 ---
+traefik_logging_format: "common"
+traefik_logging_level: "ERROR"
+
 traefik_config_http_middlewares:
   http:
     middlewares:

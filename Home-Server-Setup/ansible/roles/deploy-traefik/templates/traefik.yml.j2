@@ -5,8 +5,8 @@ api:
 
 log:
   filePath: "{{ traefik_logging_directory }}/traefik.log"
-  # format: "common"
-  # level: "DEBUG"
+  format: "{{ traefik_logging_format }}"
+  # level: "{{ traefik_logging_level }}"
 
 accessLog:
   filePath: "{{ traefik_logging_directory }}/access.log"
