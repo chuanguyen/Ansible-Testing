@@ -78,12 +78,9 @@ frigate_cameras:
       width: 640 # <---- update for your camera's resolution
       height: 480 # <---- update for your camera's resolution
       fps: 10
-    record:
-      enabled: True
-      events:
-        pre_capture: 10
-        post_capture: 10
-        objects:
+    review:
+      alerts:
+        labels:
           - person
           - cat
           - dog
@@ -93,6 +90,11 @@ frigate_cameras:
           - front_yard_left
           - front_yard_right
           - front_yard_walkway
+    record:
+      enabled: True
+      events:
+        pre_capture: 10
+        post_capture: 10
         retain:
           default: 20
           mode: motion
@@ -158,12 +160,9 @@ frigate_cameras:
       width: 1280 # <---- update for your camera's resolution
       height: 720 # <---- update for your camera's resolution
       fps: 10
-    record:
-      enabled: True
-      events:
-        pre_capture: 10
-        post_capture: 10
-        objects:
+    review:
+      alerts:
+        labels:
           - person
           - cat
           - dog
@@ -172,6 +171,11 @@ frigate_cameras:
         required_zones:
           - front_yard
           - front_yard_street
+    record:
+      enabled: True
+      events:
+        pre_capture: 10
+        post_capture: 10
         retain:
           default: 20
           mode: motion
@@ -268,22 +272,23 @@ frigate_cameras:
       width: 1280 # <---- update for your camera's resolution
       height: 720 # <---- update for your camera's resolution
       fps: 10
+    review:
+      alerts:
+        labels:
+          - person
+          - cat
+          - dog
+          - bird
+          - mouse
+        required_zones:
+          - "driveway"
+          - "driveway_entrance"
+          - "backyard"
     record:
       enabled: True
       events:
         pre_capture: 10
         post_capture: 10
-        required_zones:
-          - "driveway"
-          - "driveway_entrance"
-          - "backyard"
-        objects:
-          - person
-          - cat
-          - dog
-          - car
-          - bird
-          - mouse
         retain:
           default: 20
           mode: motion
@@ -389,8 +394,6 @@ frigate_detect:
   # Optional: Configuration for stationary object tracking
 
 frigate_ui:
-  live_mode: "mse"
-  use_experimental: False
   time_format: "24hour"
   date_style: "short"
   time_style: "medium"

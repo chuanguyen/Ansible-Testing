@@ -62,7 +62,6 @@ frigate_record:
     post_capture: 5
     objects:
       - person
-    required_zones: []
     retain:
       default: 10
       mode: motion

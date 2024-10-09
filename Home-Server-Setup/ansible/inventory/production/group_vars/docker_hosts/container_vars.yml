@@ -46,8 +46,8 @@ portainer_image_base_tag_old: "2.16.2"
 # portainer_image_base_tag: "2.16.2"
 # portainer_image_base_tag_old: ""
 
-frigate_image_base_tag: "0.13.2"
-frigate_image_base_tag_old: "0.13.1"
+frigate_image_base_tag: "0.14.1"
+frigate_image_base_tag_old: "0.13.2"
 
 mqtt_mosquitto_image_base_tag: "2.0.18"
 mqtt_mosquitto_image_base_tag_old: "2.0.17"
