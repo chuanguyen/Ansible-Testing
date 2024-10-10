@@ -1,0 +1,17 @@
+---
+ryot_media_container_traefik_labels:
+  - "traefik.enable=true"
+  - "traefik.docker.network={{ docker_networks.proxy.name }}"
+  - "traefik.http.routers.ryot_media1.rule=Host(`media-tracker.{{ home_lan_domain }}`)"
+  - "traefik.http.routers.ryot_media1.entrypoints=websecure"
+  - "traefik.http.routers.ryot_media1.middlewares=lanWhitelist@file,secureHeaders@file"
+  ### Uncomment if internal docker port can't be detected by traefik
+  - "traefik.http.routers.ryot_media1.service=ryot_media1-svc"
+  - "traefik.http.services.ryot_media1-svc.loadbalancer.server.port={{ ryot_media_web_port }}"
+  - "traefik.http.routers.ryot_media1.tls=true"
+  - "traefik.http.routers.ryot_media1.tls.certresolver=letsEncrypt"
+
+ryot_media_web_port: 8000
+ryot_media_db_name: "ryot_db"
+ryot_media_db_user: "{{ vault_ryot_media_db_user }}"
+ryot_media_db_password: "{{ vault_ryot_media_db_password }}"

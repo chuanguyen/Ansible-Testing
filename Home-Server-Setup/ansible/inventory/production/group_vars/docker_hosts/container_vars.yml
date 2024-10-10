@@ -110,3 +110,10 @@ homepage_dashboard_image_base_tag_old: ""
 
 it_tools_image_base_tag: "latest"
 it_tools_image_base_tag_old: ""
+
+# RYOT
+
+ryot_media_image_base_tag: "v7.5"
+ryot_media_image_base_tag_old: ""
+ryot_media_db_image_base_tag: "16-alpine"
+ryot_media_db_image_base_tag_old: ""
