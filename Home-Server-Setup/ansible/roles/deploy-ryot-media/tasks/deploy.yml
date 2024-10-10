@@ -1,0 +1,42 @@
+---
+- name: "TASK: Retrieve container info"
+  community.docker.docker_container_info:
+    name: "{{ ryot_media_container_name }}"
+  register: container_state
+
+- name: "TASK: Set container facts"
+  set_fact:
+    container_exists: "{{ container_state.exists }}"
+    container_image: "{{ container_state.container.Config.Image | default('tag:n/a') }}"
+
+- name: "TASK: Set container image tag"
+  set_fact:
+    container_image_tag: "{{ container_image.split(':') }}"
+
+- block:
+    - include_tasks: "image_cleanup.yml"
+
+    - name: "TASK: Pull base image"
+      community.docker.docker_image:
+        name: "{{ ryot_media_image_base }}"
+        tag: "{{ ryot_media_image_base_tag }}"
+        source: "pull"
+        state: "present"
+      register: "image_base_pull"
+  when: container_image_tag[1] != ryot_media_image_base_tag
+
+- name: "TASK: Delete ryot_media"
+  community.docker.docker_compose:
+    project_src: "{{ ryot_media_container_data_dir }}"
+    nocache: "no"
+    state: "absent"
+    restarted: "{{ ryot_media_container_restart }}"
+  when: image_base_pull.changed or container_templated_files.changed
+
+- name: "TASK: Deploy {{ ryot_media_container_name }}"
+  community.docker.docker_compose:
+    project_src: "{{ ryot_media_container_data_dir }}"
+    build: "{{ 'yes' if image_base_pull.changed else 'no' }}"
+    nocache: "no"
+    state: "present"
+    restarted: "{{ ryot_media_container_restart }}"

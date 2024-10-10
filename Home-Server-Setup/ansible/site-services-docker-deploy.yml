@@ -115,3 +115,6 @@
 
     - role: "deploy-it-tools"
       tags: [services, it-tools]
+
+    - role: "deploy-ryot-media"
+      tags: [services, ryot-media]

@@ -1,0 +1,48 @@
+---
+
+# {{ ansible_managed }}
+
+version: "3"
+
+services:
+  ryot_media:
+    container_name: "{{ ryot_media_container_name }}"
+    image: "{{ ryot_media_image_base }}:{{ ryot_media_image_base_tag }}"
+    env_file: ryot_media.env
+    ports: []
+    networks:
+      - {{ docker_networks.proxy.name }}
+      - "ryot_media"
+    # Volumes store your data between container upgrades
+    volumes:
+{% for volume in ryot_media_container_volumes.binds %}
+      - {{ volume.source }}:{{ volume.target }}
+{% endfor %}
+    labels:
+{% for container_label in ryot_media_container_labels %}
+      - "{{ container_label }}"
+{% endfor %}
+{% for traefik_label in ryot_media_container_traefik_labels %}
+      - "{{ traefik_label }}"
+{% endfor %}
+    restart: "always"
+
+  ryot_media_db:
+    container_name: "{{ ryot_media_db_container_name }}"
+    image: "{{ ryot_media_db_image_base }}:{{ ryot_media_db_image_base_tag }}"
+    env_file: ryot_media_db.env
+    ports: []
+    networks:
+      - "ryot_media"
+    # Volumes store your data between container upgrades
+    volumes:
+{% for volume in ryot_media_db_container_volumes.binds %}
+      - {{ volume.source }}:{{ volume.target }}
+{% endfor %}
+    restart: "always"
+
+networks:
+  {{ docker_networks.proxy.name }}:
+    external: true
+  ryot_media:
+    external: false

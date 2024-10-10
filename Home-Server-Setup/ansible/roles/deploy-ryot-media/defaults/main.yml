@@ -1,0 +1,54 @@
+ryot_media_container_data_dir: "{{ docker_container_root_dir }}/ryot_media"
+
+ryot_media_image_base: "ignisda/ryot"
+ryot_media_image_base_tag: ""
+# Ensures previous version of working
+# ryot_media image is available for failback
+ryot_media_image_base_tag_old: ""
+
+ryot_media_db_image_base: "postgres"
+ryot_media_db_image_base_tag: ""
+# Ensures previous version of working
+# ryot_media image is available for failback
+ryot_media_db_image_base_tag_old: ""
+
+ryot_media_container_name: "ryot_media"
+ryot_media_db_container_name: "ryot_db"
+
+# Controls whether docker-compose restarts Docker containers
+ryot_media_container_restart: no
+
+ryot_media_container_labels: []
+
+ryot_media_container_traefik_labels:
+  - "traefik.enable=true"
+  - "traefik.docker.network={{ docker_networks.proxy.name }}"
+  - "traefik.http.routers.ryot_media1.rule=Host(`ryot-media.{{ home_lan_domain }}`)"
+  - "traefik.http.routers.ryot_media1.entrypoints=websecure"
+  - "traefik.http.routers.ryot_media1.middlewares=lanWhitelist@file,secureHeaders@file"
+  ### Uncomment if internal docker port can't be detected by traefik
+  - "traefik.http.routers.ryot_media1.service=ryot_media1-svc"
+  - "traefik.http.services.ryot_media1-svc.loadbalancer.server.port={{ ryot_media_web_port }}"
+  - "traefik.http.routers.ryot_media1.tls=true"
+  - "traefik.http.routers.ryot_media1.tls.certresolver=letsEncrypt"
+
+ryot_media_web_port: 8000
+
+ryot_media_db_name: "ryot_db"
+ryot_media_db_port: 5432
+ryot_media_db_user: "postgres"
+ryot_media_db_password: "postgres"
+
+ryot_media_container_envs:
+  kv:
+    PORT: "{{ ryot_media_web_port }}"
+    DATABASE_URL: "postgres://{{ ryot_media_db_user }}:{{ ryot_media_db_password }}@{{ ryot_media_db_container_name }}:{{ ryot_media_db_port }}/{{ ryot_media_db_name }}"
+    TZ: "America/Vancouver"
+    DISABLE_TELEMETRY: "false"
+
+ryot_media_db_container_envs:
+  kv:
+    POSTGRES_USER: "{{ ryot_media_db_user }}"
+    POSTGRES_PASSWORD: "{{ ryot_media_db_password }}"
+    POSTGRES_DB: "{{ ryot_media_db_name }}"
+    TZ: "America/Vancouver"
