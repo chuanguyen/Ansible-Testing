@@ -82,7 +82,7 @@ ryot_media_configuration:
     # @envvar FILE_STORAGE_S3_URL
     # Retrieve S3 endpoint URLs per-region from here: https://docs.aws.amazon.com/general/latest/gr/s3.html
     # Protocol is needed. Example: https://s3-accesspoint.us-east-1.amazonaws.com (us-east-1)
-    s3_url: "https://s3-accesspoint.us-east-1.amazonaws.com"
+    s3_url: ""
 
   # Settings related to frontend storage.
   frontend:
@@ -105,10 +105,10 @@ ryot_media_configuration:
 
       # For example: https://umami.is/script.js.
       # @envvar FRONTEND_UMAMI_SCRIPT_URL
-      script_url: ""
+      script_url: "https://umami.diptesh.me/script.js"
 
       # @envvar FRONTEND_UMAMI_WEBSITE_ID
-      website_id: ""
+      website_id: "5ecd6915-d542-4fda-aa5f-70f09f04e2e0"
 
     # Used as the base URL when generating item links for the frontend.
     # @envvar FRONTEND_URL
@@ -131,6 +131,7 @@ ryot_media_configuration:
     # Settings related to TMDB.
     tmdb:
       # The access token for the TMDB API.
+      # Must use the Read-only key, not the RW key
       # @envvar MOVIES_AND_SHOWS_TMDB_ACCESS_TOKEN
       access_token: ""
 
