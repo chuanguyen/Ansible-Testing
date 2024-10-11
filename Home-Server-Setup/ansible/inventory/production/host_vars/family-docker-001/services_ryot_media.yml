@@ -36,7 +36,7 @@ ryot_media_configuration:
     mal:
       # The client ID to be used for the MAL API.
       # @envvar ANIME_AND_MANGA_MAL_CLIENT_ID
-      client_id: ""
+      client_id: "{{ ryot_media_configuration_mal_client_id }}"
 
     # Settings related to MangaUpdates.
     manga_updates: {}
@@ -55,7 +55,7 @@ ryot_media_configuration:
     google_books:
       # The API key to be used for the Google Books API.
       # @envvar BOOKS_GOOGLE_BOOKS_API_KEY
-      api_key: ""
+      api_key: "{{ ryot_media_configuration_google_books_api_key }}"
 
       # Whether to pass the raw query string to the search API.
       # @envvar BOOKS_GOOGLE_BOOKS_PASS_RAW_QUERY
@@ -154,9 +154,10 @@ ryot_media_configuration:
   movies_and_shows:
     # Settings related to TMDB.
     tmdb:
-      # The access token for the TMDB API.
+      # The access token for the TMDB API
+      # Must use the Read-only key, not the RW key
       # @envvar MOVIES_AND_SHOWS_TMDB_ACCESS_TOKEN
-      access_token: ""
+      access_token: "{{ ryot_media_configuration_tmdb_access_token }}"
 
       # The locale to use for making requests to TMDB API.
       # @envvar MOVIES_AND_SHOWS_TMDB_LOCALE
@@ -275,12 +276,12 @@ ryot_media_configuration:
       # The client ID issues by Twitch. **Required** to enable video games
       # tracking. [More information](/docs/guides/video-games.md).
       # @envvar VIDEO_GAMES_TWITCH_CLIENT_ID
-      client_id: ""
+      client_id: "{{ ryot_media_configuration_twitch_client_id }}"
 
       # The client secret issued by Twitch. **Required** to enable video games
       # tracking.
       # @envvar VIDEO_GAMES_TWITCH_CLIENT_SECRET
-      client_secret: ""
+      client_secret: "{{ ryot_media_configuration_twitch_client_secret }}"
 
   # Settings related to visual novels.
   visual_novels: {}

@@ -55,3 +55,10 @@ homepage_dashboard_info_widgets_openmeteo_longitude: "{{ vault_homepage_dashboar
 
 # Jellyfin
 jellyfin_homepage_dashboard_api_key: "{{ vault_jellyfin_homepage_dashboard_api_key }}"
+
+# RYOT
+ryot_media_configuration_mal_client_id: "{{ vault_ryot_media_configuration_mal_client_id }}"
+ryot_media_configuration_google_books_api_key: "{{ vault_ryot_media_configuration_google_books_api_key }}"
+ryot_media_configuration_tmdb_access_token: "{{ vault_ryot_media_configuration_tmdb_access_token }}"
+ryot_media_configuration_twitch_client_id: "{{ vault_ryot_media_configuration_twitch_client_id }}"
+ryot_media_configuration_twitch_client_secret: "{{ vault_ryot_media_configuration_twitch_client_secret }}"
