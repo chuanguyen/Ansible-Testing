@@ -1,4 +1,7 @@
 ---
+homepage_dashboard_container_labels:
+  - "com.centurylinklabs.watchtower.enable=true"
+
 homepage_dashboard_container_traefik_labels:
   - "traefik.enable=true"
   - "traefik.docker.network={{ docker_networks.proxy.name }}"
