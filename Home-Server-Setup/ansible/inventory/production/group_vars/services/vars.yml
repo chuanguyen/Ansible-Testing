@@ -62,3 +62,9 @@ ryot_media_configuration_google_books_api_key: "{{ vault_ryot_media_configuratio
 ryot_media_configuration_tmdb_access_token: "{{ vault_ryot_media_configuration_tmdb_access_token }}"
 ryot_media_configuration_twitch_client_id: "{{ vault_ryot_media_configuration_twitch_client_id }}"
 ryot_media_configuration_twitch_client_secret: "{{ vault_ryot_media_configuration_twitch_client_secret }}"
+
+ryot_media_configuration_s3_access_key_id: "{{ vault_ryot_media_configuration_s3_access_key_id }}"
+ryot_media_configuration_s3_bucket_name: "{{ vault_ryot_media_configuration_s3_bucket_name }}"
+ryot_media_configuration_s3_region: "{{ vault_ryot_media_configuration_s3_region }}"
+ryot_media_configuration_s3_secret_access_key: "{{ vault_ryot_media_configuration_s3_secret_access_key }}"
+ryot_media_configuration_s3_url: "{{ vault_ryot_media_configuration_s3_url }}"
