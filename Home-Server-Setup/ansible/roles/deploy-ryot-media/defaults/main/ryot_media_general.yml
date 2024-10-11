@@ -32,6 +32,13 @@ ryot_media_container_traefik_labels:
   - "traefik.http.routers.ryot_media1.tls=true"
   - "traefik.http.routers.ryot_media1.tls.certresolver=letsEncrypt"
 
+ryot_media_backup_directory: "{{ ryot_media_container_data_dir }}/ryot_backup_export"
+ryot_media_nfs_backup_directory: "/nfs/Container-Data/docker/ryot_media/"
+# Defines in days age of backups to remove
+ryot_media_nfs_backup_cleanup_period: "60"
+# Defines via cron syntax how often to run backup
+ryot_media_nfs_backup_frequency: "0 1 */15 * *"
+
 ryot_media_pid: 1001
 ryot_media_gid: 999
 ryot_media_db_pid: 70
