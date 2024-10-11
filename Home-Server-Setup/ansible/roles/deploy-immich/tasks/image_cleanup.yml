@@ -89,21 +89,6 @@
   with_items: "{{ docker_image_filtered_tags }}"
   when: "item != immich_image_base_tag and item != immich_image_base_tag_old"
 
-- name: "TASK: Grab all tags of immich_redis images"
-  shell: "docker images --filter=reference='{{ immich_redis_image_base }}:*' | tr -s ' ' | cut -d ' ' -f 2 | tail -n +2"
-  register: docker_image_filter_output
-
-- set_fact:
-    docker_image_filtered_tags: "{{ docker_image_filter_output.stdout_lines }}"
-
-- name: "TASK: Remove immich_redis images filtered by tags"
-  community.docker.docker_image:
-    name: "{{ immich_redis_image_base }}"
-    tag: "{{ item }}"
-    state: "absent"
-  with_items: "{{ docker_image_filtered_tags }}"
-  when: "item != immich_redis_image_base_tag and item != immich_redis_image_base_tag_old"
-
 - name: "TASK: Grab all tags of immich_postgres images"
   shell: "docker images --filter=reference='{{ immich_postgres_image_base }}:*' | tr -s ' ' | cut -d ' ' -f 2 | tail -n +2"
   register: docker_image_filter_output
