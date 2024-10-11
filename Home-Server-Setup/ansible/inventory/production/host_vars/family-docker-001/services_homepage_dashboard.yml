@@ -230,6 +230,13 @@ homepage_dashboard_services:
           icon: "/images/nas.png"
           siteMonitor: "https://nas1.{{ home_lan_domain }}"
   - "Media Tools":
+      - "Ryot":
+          href: "https://media-tracker.{{ home_lan_domain }}"
+          description: "Tracks movies, shows, and other media"
+          icon: "sh-ryot"
+          siteMonitor: "https://media-tracker.{{ home_lan_domain }}"
+          server: "docker-local"
+          container: "{{ ryot_media_container_name }}"
       - "Digikam":
           href: "https://digikam.{{ home_lan_domain }}"
           description: "Photo Management"
