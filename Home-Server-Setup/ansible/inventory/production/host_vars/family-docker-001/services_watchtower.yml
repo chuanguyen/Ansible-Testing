@@ -5,6 +5,7 @@ watchtower_container_envs:
     WATCHTOWER_REMOVE_VOLUMES: "true"
     WATCHTOWER_POLL_INTERVAL: "86400"
     WATCHTOWER_LABEL_ENABLE: "true"
+    WATCHTOWER_SCHEDULE: "0 0 7 * * *"
     ### Monitoring
     WATCHTOWER_NOTIFICATIONS_LEVEL: "info"
     ### Notifications - shoutrrr
