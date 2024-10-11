@@ -1,28 +1,4 @@
 ---
-ryot_media_container_traefik_labels:
-  - "traefik.enable=true"
-  - "traefik.docker.network={{ docker_networks.proxy.name }}"
-  - "traefik.http.routers.ryot_media1.rule=Host(`media-tracker.{{ home_lan_domain }}`)"
-  - "traefik.http.routers.ryot_media1.entrypoints=websecure"
-  - "traefik.http.routers.ryot_media1.middlewares=lanWhitelist@file,secureHeaders@file"
-  ### Uncomment if internal docker port can't be detected by traefik
-  - "traefik.http.routers.ryot_media1.service=ryot_media1-svc"
-  - "traefik.http.services.ryot_media1-svc.loadbalancer.server.port={{ ryot_media_web_port }}"
-  - "traefik.http.routers.ryot_media1.tls=true"
-  - "traefik.http.routers.ryot_media1.tls.certresolver=letsEncrypt"
-
-ryot_media_pid: 1001
-ryot_media_gid: 999
-ryot_media_db_pid: 70
-ryot_media_db_gid: 999
-
-ryot_media_web_port: 8000
-ryot_media_db_name: "ryot_db"
-ryot_media_db_user: "{{ vault_ryot_media_db_user }}"
-ryot_media_db_password: "{{ vault_ryot_media_db_password }}"
-
-### Configuration of isntance
-
 ryot_media_configuration:
   # Settings related to anime and manga.
   anime_and_manga:
@@ -87,26 +63,26 @@ ryot_media_configuration:
     # The access key ID for the S3 compatible file storage. **Required** to
     # enable file storage.
     # @envvar FILE_STORAGE_S3_ACCESS_KEY_ID
-    s3_access_key_id: "{{ vault_ryot_media_s3_access_key_id }}"
+    s3_access_key_id: ""
 
     # The name of the S3 compatible bucket. **Required** to enable file storage.
     # @envvar FILE_STORAGE_S3_BUCKET_NAME
-    s3_bucket_name: "{{ vault_ryot_media_s3_bucket_name }}"
+    s3_bucket_name: ""
 
     # The region for the S3 compatible file storage.
     # @envvar FILE_STORAGE_S3_REGION
-    s3_region: "ca-central-1"
+    s3_region: "us-east-1"
 
     # The secret access key for the S3 compatible file storage. **Required**
     # to enable file storage.
     # @envvar FILE_STORAGE_S3_SECRET_ACCESS_KEY
-    s3_secret_access_key: "{{ vault_ryot_media_s3_secret_access_key }}"
+    s3_secret_access_key: ""
 
     # The URL for the S3 compatible file storage.
     # @envvar FILE_STORAGE_S3_URL
     # Retrieve S3 endpoint URLs per-region from here: https://docs.aws.amazon.com/general/latest/gr/s3.html
     # Protocol is needed. Example: https://s3-accesspoint.us-east-1.amazonaws.com (us-east-1)
-    s3_url: "https://s3.ca-central-1.amazonaws.com"
+    s3_url: "https://s3-accesspoint.us-east-1.amazonaws.com"
 
   # Settings related to frontend storage.
   frontend:
@@ -248,7 +224,7 @@ ryot_media_configuration:
   users:
     # Whether new users will be allowed to sign up to this instance.
     # @envvar USERS_ALLOW_REGISTRATION
-    allow_registration: true
+    allow_registration: false
 
     # Whether to disable local user authentication completely.
     # @envvar USERS_DISABLE_LOCAL_AUTH
