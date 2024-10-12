@@ -64,8 +64,8 @@ rtl_433_image_base_tag_old: ""
 meTube_image_base_tag: "latest"
 meTube_image_base_tag_old: "2023-07-27"
 
-digikam_image_base_tag: "version-2024-07-12"
-digikam_image_base_tag_old: "version-2023-12-12"
+digikam_image_base_tag: "version-2024-09-29"
+digikam_image_base_tag_old: "version-2024-07-12"
 
 authelia_image_base_tag: "4.38.16"
 authelia_image_base_tag_old: "4.38.9"
