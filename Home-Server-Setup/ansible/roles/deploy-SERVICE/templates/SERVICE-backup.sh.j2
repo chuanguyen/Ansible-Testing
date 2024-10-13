@@ -26,5 +26,6 @@ while [ ! -f "$FULL_PATH_BACKUP" ]; do
 done
 
 echo "$FULL_PATH_BACKUP exists! Continuing with the script..."
-sleep 5s && rsync --remove-source-files -zv {{ SERVICE__backup_directory }}/* {{ SERVICE__nfs_backup_directory }}
+# Add a delay before copying backup file in case changes are pending post-operation
+sleep {{ SERVICE__nfs_backup_script_backup_copy_delay }}s && rsync --remove-source-files -zv {{ SERVICE__backup_directory }}/* {{ SERVICE__nfs_backup_directory }}
 find {{ SERVICE__nfs_backup_directory }} -mtime +{{ SERVICE__nfs_backup_cleanup_period }} -exec rm {} \;
