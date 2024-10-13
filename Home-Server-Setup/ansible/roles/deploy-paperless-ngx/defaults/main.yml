@@ -58,6 +58,9 @@ paperless_ngx_nfs_backup_directory: "/nfs/Container-Data/docker/paperless_ngx/"
 paperless_ngx_nfs_backup_cleanup_period: "35"
 # Defines via cron syntax how often to run backup
 paperless_ngx_nfs_backup_frequency: "0 1 * * 0"
+paperless_ngx_nfs_backup_script_paperless_export_filename: "export-$(date +%F).zip"
+paperless_ngx_nfs_backup_script_max_attempts: "10"
+paperless_ngx_nfs_backup_script_backup_check_interval: "30"
 
 paperless_ngx_container_envs:
   kv:
