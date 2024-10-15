@@ -93,6 +93,11 @@ homepage_dashboard_services:
             version: 5 # required if running v6 or higher, defaults to 5
             key: "{{ pihole_api_token }}" # optional
   - "IT Tools":
+      - "Ente Auth":
+          href: "https://auth.ente.io/"
+          description: "2FA service with E2EE"
+          icon: "sh-ente-auth"
+          siteMonitor: "https://auth.ente.io"
       - "Proxmox (Production)":
           href: "https://proxmox-001.{{ home_lan_domain }}:8006"
           description: "VM Hypervisor"
