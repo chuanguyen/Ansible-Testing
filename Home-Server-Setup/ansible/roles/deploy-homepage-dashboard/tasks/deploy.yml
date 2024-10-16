@@ -26,17 +26,13 @@
   when: container_image_tag[1] != homepage_dashboard_image_base_tag
 
 - name: "TASK: Delete homepage_dashboard"
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: "{{ homepage_dashboard_container_data_dir }}"
-    nocache: "no"
     state: "absent"
-    restarted: "{{ homepage_dashboard_container_restart }}"
   when: image_base_pull.changed or container_templated_files.changed
 
 - name: "TASK: Deploy {{ homepage_dashboard_container_name }}"
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: "{{ homepage_dashboard_container_data_dir }}"
-    build: "{{ 'yes' if image_base_pull.changed else 'no' }}"
-    nocache: "no"
-    state: "present"
-    restarted: "{{ homepage_dashboard_container_restart }}"
+    build: "{{ 'always' if image_base_pull.changed else 'never' }}"
+    state: "{{ 'restarted' if homepage_dashboard_container_restart else 'present' }}"
