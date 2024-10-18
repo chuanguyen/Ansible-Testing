@@ -8,7 +8,6 @@
   git:
     repo: "https://github.com/prometheus/snmp_exporter.git"
     dest: "{{ snmp_exporter_container_data_dir }}/temp"
-    single_branch: yes
     version: "{{ snmp_exporter_image_base_tag }}"
     # version: "main"
     force: yes
@@ -35,10 +34,18 @@
   args:
     chdir: "{{ snmp_exporter_container_data_dir }}/temp/generator"
 
-- name: "TASK: Add generator.yml entries"
+- name: "TASK: Add generator.yml auth entries"
   blockinfile:
     path: "{{ snmp_exporter_container_data_dir }}/temp/generator/generator.yml"
-    block: "{{ lookup('template', 'generator.yml.j2')}}"
+    block: "{{ lookup('template', 'generator_auths.yml.j2')}}"
+    insertafter: "auths:"
+    mode: 0664
+    state: "present"
+
+- name: "TASK: Add generator.yml entries for custom mibs"
+  blockinfile:
+    path: "{{ snmp_exporter_container_data_dir }}/temp/generator/generator.yml"
+    block: "{{ lookup('template', 'generator_custom_mibs.yml.j2')}}"
     insertafter: "EOF"
     mode: 0664
     state: "present"

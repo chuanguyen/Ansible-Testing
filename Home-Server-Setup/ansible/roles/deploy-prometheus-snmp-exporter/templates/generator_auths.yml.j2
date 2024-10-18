@@ -1,0 +1,5 @@
+{% for auth_name, auth_config in snmp_community_strings.items() %}
+  {{ auth_name }}:
+    community: {{ auth_config.community }}
+    version: {{ auth_config.version }}
+{% endfor %}

@@ -31,8 +31,8 @@ prometheus_docker_cli_commands:
   "storage.tsdb.retention.time": "1y"
   "storage.tsdb.retention.size": "50GB"
 
-snmp_exporter_image_base_tag: "v0.22.0"
-snmp_exporter_image_base_tag_old: "v0.20.0"
+snmp_exporter_image_base_tag: "v0.26.0"
+snmp_exporter_image_base_tag_old: "v0.22.0"
 
 alertmanager_image_base_tag: "v0.25.0"
 alertmanager_image_base_tag_old: "v0.23.0"

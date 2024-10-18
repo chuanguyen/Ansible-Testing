@@ -4,14 +4,9 @@
 {% for oid in module.walk %}
       - "{{ oid }}"
 {% endfor %}
-    version: {{ module.version }}
     max_repetitions: {{ module.max_repetitions }}
     retries: {{ module.retries }}
     timeout: {{ module.timeout }}
-    auth:
-{% for key,value in module.auth.items() %}
-      {{ key }}: "{{ value }}"
-{% endfor %}
     lookups:
 {% if module.lookups is not none %}
 {% for lookup_entry in module.lookups %}
