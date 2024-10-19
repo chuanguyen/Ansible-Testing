@@ -56,7 +56,6 @@ aur_packages:
   - google-chrome
   - jexiftoolgui
   - kazam
-  - otpclient
   - postman # May error out due to problems w/ package
   - spotify
   - visual-studio-code-bin
