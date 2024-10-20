@@ -26,17 +26,13 @@
   when: container_image_tag[1] != it_tools_image_base_tag
 
 - name: "TASK: Delete it_tools"
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: "{{ it_tools_container_data_dir }}"
-    nocache: "no"
     state: "absent"
-    restarted: "{{ it_tools_container_restart }}"
   when: image_base_pull.changed or container_templated_files.changed
 
 - name: "TASK: Deploy {{ it_tools_container_name }}"
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: "{{ it_tools_container_data_dir }}"
-    build: "{{ 'yes' if image_base_pull.changed else 'no' }}"
-    nocache: "no"
-    state: "present"
-    restarted: "{{ it_tools_container_restart }}"
+    build: "{{ 'always' if image_base_pull.changed else 'never' }}"
+    state: "{{ 'restarted' if it_tools_container_restart else 'present' }}"

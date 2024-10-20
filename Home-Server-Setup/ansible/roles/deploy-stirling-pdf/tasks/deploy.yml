@@ -26,17 +26,13 @@
   when: container_image_tag[1] != stirling_pdf_image_base_tag
 
 - name: "TASK: Delete stirling_pdf"
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: "{{ stirling_pdf_container_data_dir }}"
-    nocache: "no"
     state: "absent"
-    restarted: "{{ stirling_pdf_container_restart }}"
   when: image_base_pull.changed or container_templated_files.changed
 
 - name: "TASK: Deploy {{ stirling_pdf_container_name }}"
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: "{{ stirling_pdf_container_data_dir }}"
-    build: "{{ 'yes' if image_base_pull.changed else 'no' }}"
-    nocache: "no"
-    state: "present"
-    restarted: "{{ stirling_pdf_container_restart }}"
+    build: "{{ 'always' if image_base_pull.changed else 'never' }}"
+    state: "{{ 'restarted' if stirling_pdf_container_restart else 'present' }}"
