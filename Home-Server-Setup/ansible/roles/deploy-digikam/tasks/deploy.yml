@@ -33,9 +33,7 @@
   when: container_image_tag[1] != digikam_image_base_tag
 
 - name: "TASK: Deploy {{ digikam_container_name }}"
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: "{{ digikam_container_data_dir }}"
-    build: "{{ 'yes' if image_base_pull.changed else 'no' }}"
-    nocache: "no"
-    state: "present"
-    restarted: "{{ digikam_container_restart }}"
+    build: "{{ 'always' if image_base_pull.changed else 'never' }}"
+    state: "{{ 'restarted' if digikam_container_restart else 'present' }}"
