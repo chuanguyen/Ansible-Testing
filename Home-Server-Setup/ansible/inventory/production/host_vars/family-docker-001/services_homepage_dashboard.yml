@@ -104,7 +104,7 @@ homepage_dashboard_services:
           icon: "sh-proxmox"
           ping: "proxmox-001.{{ home_lan_domain }}"
       - "Proxmox (Dev)":
-          href: "proxmox-test.{{ home_lan_domain }}:8006"
+          href: "https://proxmox-test.{{ home_lan_domain }}:8006"
           description: "VM Hypervisor"
           icon: "sh-proxmox"
           ping: "proxmox-test.{{ home_lan_domain }}"
