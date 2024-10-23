@@ -33,9 +33,6 @@
   when: container_image_tag[1] != rtl_433_image_base_tag
 
 - name: "TASK: Deploy {{ rtl_433_container_name }}"
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: "{{ rtl_433_container_data_dir }}"
-    build: "{{ 'yes' if image_base_pull.changed else 'no' }}"
-    nocache: "no"
-    state: "present"
-    restarted: "{{ rtl_433_container_restart }}"
+    state: "{{ 'restarted' if rtl_433_container_restart else 'present' }}"

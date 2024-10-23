@@ -33,8 +33,6 @@
   when: container_image_tag[1] != authelia_image_base_tag
 
 - name: "TASK: Deploy {{ authelia_container_name }}"
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: "{{ authelia_container_data_dir }}"
-    nocache: "no"
-    state: "present"
-    restarted: "{{ authelia_container_restart }}"
+    state: "{{ 'restarted' if authelia_container_restart else 'present' }}"
