@@ -1,7 +1,0 @@
-# {{ ansible_managed }}
-# portainer backup cron job
-
-SHELL=/bin/bash
-PATH=/usr/bin
-
-{{ portainer_nfs_backup_frequency }}   root  {{ portainer_container_data_dir }}/scripts/SERVICE-backup.sh

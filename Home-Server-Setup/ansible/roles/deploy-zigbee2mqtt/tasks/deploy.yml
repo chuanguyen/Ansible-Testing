@@ -33,8 +33,6 @@
   when: container_image_tag[1] != zigbee2mqtt_image_base_tag
 
 - name: "TASK: Deploy {{ zigbee2mqtt_container_name }}"
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: "{{ zigbee2mqtt_container_data_dir }}"
-    nocache: "no"
-    state: "present"
-    restarted: "{{ zigbee2mqtt_container_restart }}"
+    state: "{{ 'restarted' if zigbee2mqtt_container_restart else 'present' }}"

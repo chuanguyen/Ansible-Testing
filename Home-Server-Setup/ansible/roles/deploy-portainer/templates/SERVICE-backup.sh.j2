@@ -1,9 +1,0 @@
-#!/bin/bash
-
-### {{ ansible_managed }}
-
-docker exec -d -w "{{ backup_directory }}" portainer
-
-sleep 5s && rsync --remove-source-files -zv {{ portainer_container_data_dir }}/mnt-backup/* {{ portainer_nfs_backup_directory }}
-
-find {{ portainer_nfs_backup_directory }} -mtime +{{ portainer_nfs_backup_cleanup_period }} -exec rm {} \;

@@ -26,15 +26,12 @@
   when: container_image_tag[1] != paperless_ngx_image_base_tag
 
 - name: "TASK: Delete paperless_ngx"
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: "{{ paperless_ngx_container_data_dir }}"
-    nocache: "no"
     state: "absent"
-    restarted: "{{ paperless_ngx_container_restart }}"
   when: image_base_pull.changed or container_templated_files.changed
 
 - name: "TASK: Deploy {{ paperless_ngx_container_name }}"
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: "{{ paperless_ngx_container_data_dir }}"
-    state: "present"
-    restarted: "{{ paperless_ngx_container_restart }}"
+    state: "{{ 'restarted' if paperless_ngx_container_restart else 'present' }}"

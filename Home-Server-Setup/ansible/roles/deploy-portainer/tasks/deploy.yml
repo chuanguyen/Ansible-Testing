@@ -33,8 +33,6 @@
   when: container_image_tag[1] != portainer_image_base_tag
 
 - name: "TASK: Deploy {{ portainer_container_name }}"
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: "{{ portainer_container_data_dir }}"
-    nocache: "no"
-    state: "present"
-    restarted: "{{ portainer_container_restart }}"
+    state: "{{ 'restarted' if portainer_container_restart else 'present' }}"

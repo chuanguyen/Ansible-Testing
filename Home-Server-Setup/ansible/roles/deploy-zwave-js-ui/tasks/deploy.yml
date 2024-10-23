@@ -33,8 +33,6 @@
   when: container_image_tag[1] != zwave_js_ui_image_base_tag
 
 - name: "TASK: Deploy {{ zwave_js_ui_container_name }}"
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: "{{ zwave_js_ui_container_data_dir }}"
-    nocache: "no"
-    state: "present"
-    restarted: "{{ zwave_js_ui_container_restart }}"
+    state: "{{ 'restarted' if zwave_js_ui_container_restart else 'present' }}"
