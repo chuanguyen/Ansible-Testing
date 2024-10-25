@@ -44,8 +44,6 @@
   when: "mqtt_mosquitto_auth_enable == 'true'"
 
 - name: "TASK: Deploy {{ mqtt_mosquitto_container_name }}"
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: "{{ mqtt_mosquitto_container_data_dir }}"
-    nocache: "no"
-    state: "present"
-    restarted: "{{ mqtt_mosquitto_container_restart }}"
+    state: "{{ 'restarted' if mqtt_mosquitto_container_restart else 'present' }}"

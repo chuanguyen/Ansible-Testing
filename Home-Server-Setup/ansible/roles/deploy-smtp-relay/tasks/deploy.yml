@@ -33,8 +33,6 @@
   when: smtp_relay_container_image_tag[1] != smtp_relay_image_base_tag
 
 - name: "TASK: Deploy {{ smtp_relay_container_name }}"
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: "{{ smtp_relay_container_data_dir }}"
-    nocache: "no"
-    state: "present"
-    restarted: "{{ smtp_relay_container_restart }}"
+    state: "{{ 'restarted' if smtp_relay_container_restart else 'present' }}"
