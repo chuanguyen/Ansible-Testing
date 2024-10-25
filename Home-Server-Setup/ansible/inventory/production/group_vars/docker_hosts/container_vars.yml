@@ -4,8 +4,8 @@ pihole_image_base_tag_old: "2024.05.0"
 pihole_nfs_backup_cleanup_period: "60"
 pihole_nfs_backup_frequency: "0 1 */15 * *"
 
-wireguard_image_base_tag: "arm64v8-1.0.20210914-r4-ls48"
-wireguard_image_base_tag_old: "arm64v8-1.0.20210914-r4-ls37"
+wireguard_image_base_tag: "arm64v8-1.0.20210914-r4-ls55"
+wireguard_image_base_tag_old: "arm64v8-1.0.20210914-r4-ls48"
 wireguard_nfs_backup_frequency: "0 1 */30 * *"
 
 traefik_image_base_tag: "3.1.6"
