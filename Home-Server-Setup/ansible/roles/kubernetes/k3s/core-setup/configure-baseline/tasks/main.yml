@@ -1,0 +1,26 @@
+---
+- name: "TASK: Enable IPv4 forwarding"
+  sysctl:
+    name: net.ipv4.ip_forward
+    value: "1"
+    state: present
+    reload: true
+
+- name: "TASK: Enable IPv6 forwarding"
+  sysctl:
+    name: net.ipv6.conf.all.forwarding
+    value: "1"
+    state: present
+    reload: true
+
+- name: "TASK: Fix dns servers in resolv.conf"
+  template:
+    src: resolv.conf.j2
+    dest: /etc/resolv.conf
+  when:
+    - k3s_dns_servers | length() > 0
+
+- name: "TASK: Install nfs-common on the servers"
+  package:
+    name: nfs-common
+    state: present

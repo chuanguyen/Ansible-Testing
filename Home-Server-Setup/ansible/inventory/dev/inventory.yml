@@ -1,0 +1,19 @@
+all:
+  children:
+    hypervisors:
+      children:
+        proxmox_servers:
+          hosts:
+            "proxmox-test":
+    k3s_nodes:
+      children:
+        k3s_cluster:
+          children:
+            k3s_masters:
+              hosts:
+                "k3s-master-0":
+
+            k3s_workers:
+              hosts:
+                "k3s-worker-0":
+                "k3s-worker-1":

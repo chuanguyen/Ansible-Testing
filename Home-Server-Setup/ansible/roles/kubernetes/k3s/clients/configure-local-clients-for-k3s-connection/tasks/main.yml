@@ -1,0 +1,17 @@
+---
+- name: "TASK: Verify kube config path"
+  stat:
+    path: ~/.kube/config
+  register: kubeconfig_path
+
+- name: "TASK: Replace master node ip address in the kubeconfig"
+  replace:
+    path: ~/.kube/config
+    regexp: "https://127.0.0.1:6443"
+    replace: "https://{{ hostvars[groups['k3s_masters'][0]]['k3s_master_node_ip'] }}:6443"
+  when: kubeconfig_path
+
+- name: "TASK: Lock down permissions on kube config"
+  file:
+    path: ~/.kube/config
+    mode: "600"
