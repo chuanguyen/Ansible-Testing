@@ -56,8 +56,6 @@
   when: (blackbox_container_image_tag[1] != home_internet_blackbox_exporter_image_base_tag) or (speedtest_container_image_tag[1] != home_internet_speedtest_exporter_image_base_tag)
 
 - name: "TASK: Deploy home internet monitoring"
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: "{{ home_internet_monitoring_container_data_dir }}"
-    nocache: "no"
-    state: "present"
-    restarted: "{{ container_restart }}"
+    state: "{{ 'restarted' if home_internet_speedtest_exporter_container_restart else 'present' }}"

@@ -36,8 +36,6 @@
   meta: flush_handlers
 
 - name: "TASK: Deploy {{ snmp_exporter_container_name }}"
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: "{{ snmp_exporter_container_data_dir }}"
-    nocache: "no"
-    state: "present"
-    restarted: "{{ snmp_exporter_container_restart }}"
+    state: "{{ 'restarted' if snmp_exporter_container_restart else 'present' }}"

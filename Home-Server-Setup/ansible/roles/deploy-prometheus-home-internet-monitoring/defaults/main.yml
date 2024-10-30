@@ -12,7 +12,7 @@ home_internet_speedtest_exporter_container_name: "home_internet_speedtest_export
 home_internet_speedtest_exporter_container_port: "9798"
 
 # Controls whether docker-compose restarts Docker containers
-container_restart: no
+home_internet_speedtest_exporter_container_restart: no
 
 home_internet_blackbox_exporter_docker_cli_commands:
   "config.file": "/config/blackbox.yml"

@@ -33,9 +33,6 @@
   when: container_image_tag[1] != alertmanager_image_base_tag
 
 - name: "TASK: Deploy {{ alertmanager_container_name }}"
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: "{{ alertmanager_container_data_dir }}"
-    build: "{{ 'yes' if image_base_pull.changed else 'no' }}"
-    nocache: "no"
-    state: "present"
-    restarted: "{{ alertmanager_container_restart }}"
+    state: "{{ 'restarted' if alertmanager_container_restart else 'present' }}"
