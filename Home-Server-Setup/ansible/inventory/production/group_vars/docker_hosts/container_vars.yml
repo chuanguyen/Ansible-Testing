@@ -113,7 +113,7 @@ it_tools_image_base_tag_old: ""
 
 # RYOT
 
-ryot_media_image_base_tag: "v7.6.1"
-ryot_media_image_base_tag_old: "v7.5"
+ryot_media_image_base_tag: "v7.9.0"
+ryot_media_image_base_tag_old: "v7.6.1"
 ryot_media_db_image_base_tag: "16-alpine"
 ryot_media_db_image_base_tag_old: ""
