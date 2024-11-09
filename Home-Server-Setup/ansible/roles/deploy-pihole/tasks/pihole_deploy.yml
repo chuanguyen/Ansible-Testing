@@ -33,9 +33,7 @@
   when: pihole_container_image_tag[1] != pihole_image_base_tag
 
 - name: "TASK: Deploy {{ pihole_container_name }}"
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: "{{ pihole_container_data_dir }}"
     build: "{{ 'yes' if pihole_image_base_pull.changed else 'no' }}"
-    nocache: "no"
-    state: "present"
-    restarted: "{{ pihole_container_restart }}"
+    state: "{{ 'restarted' if pihole_container_restart else 'present' }}"
