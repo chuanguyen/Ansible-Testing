@@ -93,8 +93,8 @@ open_speedtest_image_base_tag_old: ""
 
 ### Paperless-ngx
 
-paperless_ngx_image_base_tag: "2.12.1"
-paperless_ngx_image_base_tag_old: ""
+paperless_ngx_image_base_tag: "2.13.5"
+paperless_ngx_image_base_tag_old: "2.12.1"
 
 paperless_ngx_postgres_image_base_tag: "16.0-alpine"
 paperless_ngx_postgres_image_base_tag_old: ""
