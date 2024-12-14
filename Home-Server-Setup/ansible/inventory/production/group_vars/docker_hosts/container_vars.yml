@@ -49,8 +49,8 @@ portainer_image_base_tag_old: "2.16.2"
 frigate_image_base_tag: "0.13.2"
 frigate_image_base_tag_old: "0.13.1"
 
-mqtt_mosquitto_image_base_tag: "2.0.18"
-mqtt_mosquitto_image_base_tag_old: "2.0.17"
+mqtt_mosquitto_image_base_tag: "2.0.20"
+mqtt_mosquitto_image_base_tag_old: "2.0.18"
 
 zigbee2mqtt_image_base_tag: "latest"
 zigbee2mqtt_image_base_tag_old: "1.32.2"
@@ -67,8 +67,8 @@ meTube_image_base_tag_old: "2023-07-27"
 digikam_image_base_tag: "version-2024-09-29"
 digikam_image_base_tag_old: "version-2024-07-12"
 
-authelia_image_base_tag: "4.38.16"
-authelia_image_base_tag_old: "4.38.9"
+authelia_image_base_tag: "4.38.17"
+authelia_image_base_tag_old: "4.38.16"
 
 ### Immich
 immich_image_base_tag: "v1.122.3"
