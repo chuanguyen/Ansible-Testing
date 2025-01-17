@@ -52,11 +52,11 @@ frigate_image_base_tag_old: "0.13.1"
 mqtt_mosquitto_image_base_tag: "2.0.20"
 mqtt_mosquitto_image_base_tag_old: "2.0.18"
 
-zigbee2mqtt_image_base_tag: "latest"
-zigbee2mqtt_image_base_tag_old: "1.32.2"
+zigbee2mqtt_image_base_tag: "2.0.0"
+zigbee2mqtt_image_base_tag_old: "latest"
 
-zwave_js_ui_image_base_tag: "latest"
-zwave_js_ui_image_base_tag_old: "8.25.1"
+zwave_js_ui_image_base_tag: "9.29.0"
+zwave_js_ui_image_base_tag_old: "latest1"
 
 rtl_433_image_base_tag: "22.11-alpine-3.18.2"
 rtl_433_image_base_tag_old: ""
