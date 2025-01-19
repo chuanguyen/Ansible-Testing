@@ -67,8 +67,8 @@ meTube_image_base_tag_old: "2023-07-27"
 digikam_image_base_tag: "version-2024-09-29"
 digikam_image_base_tag_old: ""
 
-authelia_image_base_tag: "4.38.17"
-authelia_image_base_tag_old: "4.38.16"
+authelia_image_base_tag: "4.38.18"
+authelia_image_base_tag_old: "4.38.17"
 
 ### Immich
 immich_image_base_tag: "v1.124.2"
