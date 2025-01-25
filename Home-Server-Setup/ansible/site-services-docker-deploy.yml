@@ -117,4 +117,4 @@
       tags: [services, it-tools]
 
     - role: "deploy-ryot-media"
-      tags: [services, ryot-media]
+      tags: [services, ryot-media, ryot]

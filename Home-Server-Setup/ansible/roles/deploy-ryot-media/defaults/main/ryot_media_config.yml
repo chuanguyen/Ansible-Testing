@@ -149,13 +149,6 @@ ryot_media_configuration:
       # @envvar PODCASTS_LISTENNOTES_API_TOKEN
       api_token: ""
 
-  # Settings related to scheduler.
-  scheduler:
-    # The number of jobs to process every 5 seconds when updating metadata in
-    # the background.
-    # @envvar SCHEDULER_RATE_LIMIT_NUM
-    rate_limit_num: 5
-
   # Settings related to server.
   server:
     # An access token that can be used for admin operations.
@@ -173,10 +166,6 @@ ryot_media_configuration:
     # Whether the graphql playground will be enabled.
     # @envvar SERVER_GRAPHQL_PLAYGROUND_ENABLED
     graphql_playground_enabled: true
-
-    # The maximum file size in MB for user uploads.
-    # @envvar SERVER_MAX_FILE_SIZE
-    max_file_size: 70
 
     # The OIDC related settings.
     oidc:
