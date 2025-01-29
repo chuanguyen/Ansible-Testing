@@ -30,9 +30,10 @@
     project_src: "{{ SERVICE__container_data_dir }}"
     state: "absent"
   when: image_base_pull.changed or container_templated_files.changed
+  register: container_deleted
 
 - name: "TASK: Deploy {{ SERVICE__container_name }}"
   community.docker.docker_compose_v2:
     project_src: "{{ SERVICE__container_data_dir }}"
     build: "{{ 'always' if image_base_pull.changed else 'never' }}"
-    state: "{{ 'restarted' if SERVICE__container_restart else 'present' }}"
+    state: "{{ 'restarted' if SERVICE__container_restart and not container_deleted.changed else 'present' }}"
