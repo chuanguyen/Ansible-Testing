@@ -25,7 +25,7 @@
       register: "image_base_pull"
   when: container_image_tag[1] != SERVICE__image_base_tag
 
-- name: "TASK: Delete SERVICE_"
+- name: "TASK: Delete {{ SERVICE__container_name }}"
   community.docker.docker_compose_v2:
     project_src: "{{ SERVICE__container_data_dir }}"
     state: "absent"

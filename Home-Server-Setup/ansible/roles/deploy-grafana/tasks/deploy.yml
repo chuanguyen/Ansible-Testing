@@ -24,15 +24,16 @@
         state: "present"
       register: "grafana_image_base_pull"
 
-    - name: "TASK: Remove container for updates"
-      community.docker.docker_container:
-        name: "{{ grafana_container_name }}"
-        container_default_behavior: "no_defaults"
-        state: "absent"
-      when: grafana_container_state.exists and grafana_image_base_pull.changed
   when: grafana_container_image_tag[1] != grafana_image_base_tag
+
+- name: "TASK: Delete {{ grafana_container_name }}"
+  community.docker.docker_compose_v2:
+    project_src: "{{ grafana_container_data_dir }}"
+    state: "absent"
+  when: image_base_pull.changed or container_templated_files.changed
+  register: container_deleted
 
 - name: "TASK: Deploy {{ grafana_container_name }}"
   community.docker.docker_compose_v2:
     project_src: "{{ grafana_container_data_dir }}"
-    state: "{{ 'restarted' if grafana_container_restart else 'present' }}"
+    state: "{{ 'restarted' if grafana_container_restart and not container_deleted.changed else 'present' }}"

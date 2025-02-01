@@ -30,20 +30,20 @@
         source: "pull"
         state: "present"
       register: "image_base_pull"
-
-    - name: "TASK: Remove container for updates"
-      community.docker.docker_container:
-        name: "{{ mqtt_mosquitto_container_name }}"
-        container_default_behavior: "no_defaults"
-        state: "absent"
-      when: container_exists and image_base_pull.changed
   when: container_image_tag[1] != mqtt_mosquitto_image_base_tag
 
 - block:
     - include_tasks: "deploy_authentication.yml"
   when: "mqtt_mosquitto_auth_enable == 'true'"
 
+- name: "TASK: Delete {{ mqtt_mosquitto_container_name }}"
+  community.docker.docker_compose_v2:
+    project_src: "{{ mqtt_mosquitto_container_data_dir }}"
+    state: "absent"
+  when: image_base_pull.changed or container_templated_files.changed
+  register: container_deleted
+
 - name: "TASK: Deploy {{ mqtt_mosquitto_container_name }}"
   community.docker.docker_compose_v2:
     project_src: "{{ mqtt_mosquitto_container_data_dir }}"
-    state: "{{ 'restarted' if mqtt_mosquitto_container_restart else 'present' }}"
+    state: "{{ 'restarted' if mqtt_mosquitto_container_restart and not container_deleted.changed else 'present' }}"
