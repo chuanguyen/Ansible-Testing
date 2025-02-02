@@ -22,7 +22,7 @@
         tag: "{{ pihole_image_base_tag }}"
         source: "pull"
         state: "present"
-      register: "pihole_image_base_pull"
+      register: "image_base_pull"
   when: pihole_container_image_tag[1] != pihole_image_base_tag
 
 - name: "TASK: Delete {{ pihole_container_name }}"
@@ -35,5 +35,5 @@
 - name: "TASK: Deploy {{ pihole_container_name }}"
   community.docker.docker_compose_v2:
     project_src: "{{ pihole_container_data_dir }}"
-    build: "{{ 'yes' if pihole_image_base_pull.changed else 'no' }}"
+    build: "{{ 'always' if image_base_pull.changed else 'never' }}"
     state: "{{ 'restarted' if pihole_container_restart and not container_deleted.changed else 'present' }}"
