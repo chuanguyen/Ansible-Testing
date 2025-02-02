@@ -1,10 +1,12 @@
 ---
-pihole_external_ip_mapping: "{{ home_lan_dns_servers[0] }}"
+pihole_external_ip_mapping: "{{ home_lan_dns_servers[1] }}"
+
+pihole_backup_enabled: false
 
 pihole_container_traefik_labels:
   - "traefik.enable=true"
   - "traefik.docker.network={{ docker_networks.proxy.name }}"
-  - "traefik.http.routers.pihole1.rule=Host(`pihole.{{ home_lan_domain }}`)"
+  - "traefik.http.routers.pihole1.rule=Host(`pihole2.{{ home_lan_domain }}`)"
   - "traefik.http.routers.pihole1.entrypoints=websecure"
   - "traefik.http.routers.pihole1.middlewares=secureHeaders@file"
   ### Uncomment if internal docker port can't be detected by traefik
