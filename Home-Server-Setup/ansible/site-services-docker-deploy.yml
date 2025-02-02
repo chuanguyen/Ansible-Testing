@@ -10,6 +10,9 @@
     - role: "deploy-pihole"
       tags: [services, pihole]
 
+    - role: "deploy-pihole-orbital-sync"
+      tags: [services, pihole, pihole-orbital-sync]
+
     - role: "configure-ddclient"
       tags: [services, vpn, ddclient]
 
@@ -52,6 +55,9 @@
   gather_facts: true
 
   roles:
+    - role: "deploy-pihole"
+      tags: [services, pihole]
+
     - role: "deploy-traefik"
       tags: [services, proxy, traefik]
       vars:

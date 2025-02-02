@@ -1,0 +1,28 @@
+---
+
+# {{ ansible_managed }}
+
+services:
+  pihole_orbital_sync:
+    container_name: "{{ pihole_orbital_sync_container_name }}"
+    image: "{{ pihole_orbital_sync_image_base }}:{{ pihole_orbital_sync_image_base_tag }}"
+    env_file: pihole_orbital_sync.env
+    networks:
+      - {{ docker_networks.proxy.name }}
+{% if pihole_orbital_sync_use_custom_dns %}
+    dns:
+{% for dns_server in pihole_orbital_sync_custom_dns_servers %}
+      - "{{ lookup('community.general.dig', dns_server) }}"
+{% endfor %}
+{% endif %}
+    labels: []
+{% for container_label in pihole_orbital_sync_container_labels %}
+      - "{{ container_label }}"
+{% endfor %}
+{% for traefik_label in pihole_orbital_sync_container_traefik_labels %}
+      - "{{ traefik_label }}"
+{% endfor %}
+    restart: "always"
+networks:
+  {{ docker_networks.proxy.name }}:
+    external: true

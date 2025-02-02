@@ -2,3 +2,4 @@
 - include_tasks: "pihole_setup.yml"
 - include_tasks: "pihole_deploy.yml"
 - include_tasks: "pihole-host-cron-backup.yml"
+  when: pihole_backup_enabled

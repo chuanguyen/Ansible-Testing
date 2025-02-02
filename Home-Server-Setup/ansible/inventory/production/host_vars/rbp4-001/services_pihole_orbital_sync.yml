@@ -1,0 +1,12 @@
+---
+pihole_orbital_sync_use_custom_dns: true
+pihole_orbital_sync_custom_dns_servers:
+  - "pihole.{{ home_lan_domain }}"
+  - "pihole2.{{ home_lan_domain }}"
+
+pihole_orbital_sync_container_envs:
+  kv:
+    PRIMARY_HOST_BASE_URL: "https://pihole.{{ home_lan_domain }}"
+    PRIMARY_HOST_PASSWORD: "{{ docker_services_admin_password }}"
+    SECONDARY_HOSTS_1_BASE_URL: "https://pihole2.{{ home_lan_domain }}"
+    SECONDARY_HOSTS_1_PASSWORD: "{{ docker_services_admin_password }}"
