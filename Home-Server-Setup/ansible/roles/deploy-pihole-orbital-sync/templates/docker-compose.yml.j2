@@ -7,16 +7,15 @@ services:
     container_name: "{{ pihole_orbital_sync_container_name }}"
     image: "{{ pihole_orbital_sync_image_base }}:{{ pihole_orbital_sync_image_base_tag }}"
     env_file: pihole_orbital_sync.env
-    ports:
-      - ""
     networks:
-      - ""
-    # Volumes store your data between container upgrades
-    volumes:
-{% for volume in pihole_orbital_sync_container_volumes.binds %}
-      - {{ volume.source }}:{{ volume.target }}
+      - {{ docker_networks.proxy.name }}
+{% if pihole_orbital_sync_use_custom_dns %}
+    dns:
+{% for dns_server in pihole_orbital_sync_custom_dns_servers %}
+      - "{{ lookup('community.general.dig', dns_server) }}"
 {% endfor %}
-    labels:
+{% endif %}
+    labels: []
 {% for container_label in pihole_orbital_sync_container_labels %}
       - "{{ container_label }}"
 {% endfor %}
@@ -25,3 +24,5 @@ services:
 {% endfor %}
     restart: "always"
 networks:
+  {{ docker_networks.proxy.name }}:
+    external: true
