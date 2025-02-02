@@ -44,7 +44,7 @@ nas_svc_docker_user: "{{ vault_nas_svc_docker_user }}"
 nas_svc_docker_password: "{{ vault_nas_svc_docker_password }}"
 
 # PiHole
-pihole_api_token: "{{ vault_pihole_api_token }}"
+pihole_api_tokens: "{{ vault_pihole_api_tokens }}"
 
 # Paperless-ngx
 paperless_ngx_admin_api_token: "{{ vault_paperless_ngx_admin_api_token }}"

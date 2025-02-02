@@ -91,7 +91,17 @@ homepage_dashboard_services:
             type: "pihole"
             url: "https://pihole.{{ home_lan_domain }}"
             version: 5 # required if running v6 or higher, defaults to 5
-            key: "{{ pihole_api_token }}" # optional
+            key: "{{ pihole_api_tokens.pihole }}" # optional
+      - "Pihole2":
+          href: "https://pihole2.{{ home_lan_domain }}/admin"
+          description: "Home AdBlocker"
+          icon: "/images/pihole.png"
+          siteMonitor: "https://pihole2.{{ home_lan_domain }}/admin"
+          widget:
+            type: "pihole"
+            url: "https://pihole2.{{ home_lan_domain }}"
+            version: 5 # required if running v6 or higher, defaults to 5
+            key: "{{ pihole_api_tokens.pihole2 }}" # optional
   - "IT Tools":
       - "Ente Auth":
           href: "https://auth.ente.io/"

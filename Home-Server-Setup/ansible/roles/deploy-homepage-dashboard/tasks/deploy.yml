@@ -35,5 +35,4 @@
 - name: "TASK: Deploy {{ homepage_dashboard_container_name }}"
   community.docker.docker_compose_v2:
     project_src: "{{ homepage_dashboard_container_data_dir }}"
-    build: "{{ 'always' if image_base_pull.changed else 'never' }}"
     state: "{{ 'restarted' if homepage_dashboard_container_restart and not container_deleted.changed else 'present' }}"
