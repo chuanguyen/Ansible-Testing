@@ -20,6 +20,20 @@ pihole_nfs_backup_cleanup_period: "60"
 # Defines via cron syntax how often to run backup
 pihole_nfs_backup_frequency: "0 1 */15 * *"
 
+pihole_container_labels: []
+
+pihole_container_traefik_labels:
+  - "traefik.enable=true"
+  - "traefik.docker.network={{ docker_networks.proxy.name }}"
+  - "traefik.http.routers.pihole1.rule=Host(`pihole.{{ home_lan_domain }}`)"
+  - "traefik.http.routers.pihole1.entrypoints=websecure"
+  - "traefik.http.routers.pihole1.middlewares=secureHeaders@file"
+  ### Uncomment if internal docker port can't be detected by traefik
+  - "traefik.http.routers.pihole1.service=pihole-svc"
+  - "traefik.http.services.pihole-svc.loadbalancer.server.port=80"
+  - "traefik.http.routers.pihole1.tls=true"
+  - "traefik.http.routers.pihole1.tls.certresolver=letsEncrypt"
+
 pihole_container_envs:
   kv:
     TZ: "America/Vancouver"
