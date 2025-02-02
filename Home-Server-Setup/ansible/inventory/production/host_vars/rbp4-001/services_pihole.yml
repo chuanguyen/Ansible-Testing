@@ -1,0 +1,12 @@
+---
+pihole_container_traefik_labels:
+  - "traefik.enable=true"
+  - "traefik.docker.network={{ docker_networks.proxy.name }}"
+  - "traefik.http.routers.pihole1.rule=Host(`pihole.{{ home_lan_domain }}`)"
+  - "traefik.http.routers.pihole1.entrypoints=websecure"
+  - "traefik.http.routers.pihole1.middlewares=secureHeaders@file"
+  ### Uncomment if internal docker port can't be detected by traefik
+  - "traefik.http.routers.pihole1.service=pihole-svc"
+  - "traefik.http.services.pihole-svc.loadbalancer.server.port=80"
+  - "traefik.http.routers.pihole1.tls=true"
+  - "traefik.http.routers.pihole1.tls.certresolver=letsEncrypt"
