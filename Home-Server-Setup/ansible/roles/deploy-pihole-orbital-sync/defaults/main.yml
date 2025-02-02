@@ -1,0 +1,40 @@
+pihole_orbital_sync_container_data_dir: "{{ docker_container_root_dir }}/pihole_orbital_sync"
+
+pihole_orbital_sync_image_base: "REPO/pihole_orbital_sync"
+pihole_orbital_sync_image_base_tag: ""
+# Ensures previous version of working
+# pihole_orbital_sync image is available for failback
+pihole_orbital_sync_image_base_tag_old: ""
+pihole_orbital_sync_container_name: "pihole_orbital_sync"
+# Controls whether docker-compose restarts Docker containers
+pihole_orbital_sync_container_restart: no
+# Defines image ID for custom image
+pihole_orbital_sync_image_custom: "{{ ansible_user }}/pihole_orbital_sync"
+
+pihole_orbital_sync_container_labels: []
+
+pihole_orbital_sync_container_traefik_labels:
+  - "traefik.enable=true"
+  - "traefik.docker.network={{ docker_networks.proxy.name }}"
+  - "traefik.http.routers.pihole_orbital_sync1.rule=Host(`pihole_orbital_sync.{{ home_lan_domain }}`)"
+  - "traefik.http.routers.pihole_orbital_sync1.entrypoints=websecure"
+  - "traefik.http.routers.pihole_orbital_sync1.middlewares=lanWhitelist@file,secureHeaders@file"
+  ### Uncomment if internal docker port can't be detected by traefik
+  # - "traefik.http.routers.pihole_orbital_sync1.service=pihole_orbital_sync1-svc"
+  # - "traefik.http.services.pihole_orbital_sync1-svc.loadbalancer.server.port=CUSTOM_INTERNAL_DOCKER_IMAGE_PORT"
+  - "traefik.http.routers.pihole_orbital_sync1.tls=true"
+  - "traefik.http.routers.pihole_orbital_sync1.tls.certresolver=letsEncrypt"
+
+pihole_orbital_sync_backup_directory: "{{ pihole_orbital_sync_container_data_dir }}/mnt/backup"
+pihole_orbital_sync_nfs_backup_directory: "/nfs/Container-Data/docker/pihole_orbital_sync/"
+# Defines in days age of backups to remove
+pihole_orbital_sync_nfs_backup_cleanup_period: "60"
+# Defines via cron syntax how often to run backup
+pihole_orbital_sync_nfs_backup_frequency: "0 1 */15 * *"
+pihole_orbital_sync_nfs_backup_script_paperless_export_filename: ""
+pihole_orbital_sync_nfs_backup_script_max_attempts: "10"
+pihole_orbital_sync_nfs_backup_script_backup_check_interval: "30"
+pihole_orbital_sync_nfs_backup_script_backup_copy_delay: "5" # in seconds
+
+pihole_orbital_sync_container_envs:
+  kv:

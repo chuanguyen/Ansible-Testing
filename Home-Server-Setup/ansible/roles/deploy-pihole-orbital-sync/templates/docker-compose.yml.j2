@@ -1,0 +1,27 @@
+---
+
+# {{ ansible_managed }}
+
+services:
+  pihole_orbital_sync:
+    container_name: "{{ pihole_orbital_sync_container_name }}"
+    image: "{{ pihole_orbital_sync_image_base }}:{{ pihole_orbital_sync_image_base_tag }}"
+    env_file: pihole_orbital_sync.env
+    ports:
+      - ""
+    networks:
+      - ""
+    # Volumes store your data between container upgrades
+    volumes:
+{% for volume in pihole_orbital_sync_container_volumes.binds %}
+      - {{ volume.source }}:{{ volume.target }}
+{% endfor %}
+    labels:
+{% for container_label in pihole_orbital_sync_container_labels %}
+      - "{{ container_label }}"
+{% endfor %}
+{% for traefik_label in pihole_orbital_sync_container_traefik_labels %}
+      - "{{ traefik_label }}"
+{% endfor %}
+    restart: "always"
+networks:
