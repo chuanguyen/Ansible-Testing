@@ -25,7 +25,7 @@ alertmanager_receivers:
       send_resolved: "true"
       to: "services+monitoring@{{ home_lan_domain_public}}"
       from: "monitoring.notifications@m.{{ home_lan_domain_public }}"
-      smarthost: "{{ smtp_monitoring_server_url }}"
+      smarthost: "{{ smtp_monitoring_server_url }}:{{ smtp_monitoring_server_port }}"
       hello: ""
       auth_username: "apikey"
       auth_password: "{{ smtp_monitoring_api_key }}"
