@@ -1,0 +1,4 @@
+docker_wyze_bridge_container_data_dir_sub_folders: []
+
+docker_wyze_bridge_container_volumes:
+  binds: []

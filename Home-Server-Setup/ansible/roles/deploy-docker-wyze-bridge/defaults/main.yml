@@ -1,0 +1,42 @@
+docker_wyze_bridge_container_data_dir: "{{ docker_container_root_dir }}/docker_wyze_bridge"
+
+docker_wyze_bridge_image_base: "mrlt8/wyze-bridge"
+docker_wyze_bridge_image_base_tag: ""
+# Ensures previous version of working
+# docker_wyze_bridge image is available for failback
+docker_wyze_bridge_image_base_tag_old: ""
+docker_wyze_bridge_container_name: "docker_wyze_bridge"
+# Controls whether docker-compose restarts Docker containers
+docker_wyze_bridge_container_restart: no
+# Defines image ID for custom image
+docker_wyze_bridge_image_custom: "{{ ansible_user }}/docker_wyze_bridge"
+
+# docker_wyze_bridge_container_labels: []
+
+# docker_wyze_bridge_container_traefik_labels:
+#   - "traefik.enable=true"
+#   - "traefik.docker.network={{ docker_networks.proxy.name }}"
+#   - "traefik.http.routers.docker_wyze_bridge1.rule=Host(`docker_wyze_bridge.{{ home_lan_domain }}`)"
+#   - "traefik.http.routers.docker_wyze_bridge1.entrypoints=websecure"
+#   - "traefik.http.routers.docker_wyze_bridge1.middlewares=lanWhitelist@file,secureHeaders@file"
+#   ### Uncomment if internal docker port can't be detected by traefik
+#   - "traefik.http.routers.docker_wyze_bridge1.service=docker_wyze_bridge1-svc"
+#   - "traefik.http.services.docker_wyze_bridge1-svc.loadbalancer.server.port=5000"
+#   - "traefik.http.routers.docker_wyze_bridge1.tls=true"
+#   - "traefik.http.routers.docker_wyze_bridge1.tls.certresolver=letsEncrypt"
+
+docker_wyze_bridge_container_envs:
+  kv:
+    # [OPTIONAL] Credentials can be set in the WebUI
+    # API Key and ID can be obtained from the wyze dev portal:
+    # https://developer-api-console.wyze.com/#/apikey/view
+    WYZE_EMAIL: ""
+    WYZE_PASSWORD: ""
+    API_ID: ""
+    API_KEY: ""
+    # [OPTIONAL] IP Address of the host to enable WebRTC e.g.,:
+    # - WB_IP=192.168.1.122
+    # WebUI and Stream authentication:
+    WB_AUTH: "True" # Set to false to disable web and stream auth.
+    # WB_USERNAME: ""
+    # WB_PASSWORD: ""

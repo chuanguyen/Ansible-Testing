@@ -1,0 +1,29 @@
+---
+docker_wyze_bridge_container_envs:
+  kv:
+    # [OPTIONAL] Credentials can be set in the WebUI
+    # API Key and ID can be obtained from the wyze dev portal:
+    # https://developer-api-console.wyze.com/#/apikey/view
+    WYZE_EMAIL: "{{ docker_wyze_bridge_wyze_email }}"
+    WYZE_PASSWORD: "{{ docker_wyze_bridge_wyze_password }}"
+    API_ID: "{{ docker_wyze_bridge_wyze_api_id }}"
+    API_KEY: "{{ docker_wyze_bridge_wyze_api_key }}"
+    # [OPTIONAL] IP Address of the host to enable WebRTC e.g.,:
+    # - WB_IP=192.168.1.122
+    # WebUI and Stream authentication:
+    WB_AUTH: "True" # Set to false to disable web and stream auth.
+    WB_USERNAME: "{{ docker_wyze_bridge_stream_username }}"
+    WB_PASSWORD: "{{ docker_wyze_bridge_wyze_password }}"
+    ENABLE_AUDIO: true
+    ON_DEMAND: false
+    MOTION_API: false
+    MQTT: true
+    CAM_OPTIONS: []
+    NET_MODE: LAN
+    SNAPSHOT: Disable
+    MQTT_DTOPIC: homeassistant
+    SUBSTREAM: false
+    AUDIO_CODEC: AAC
+    IGNORE_OFFLINE: true
+    QUALITY: HD120
+    LOG_LEVEL: INFO

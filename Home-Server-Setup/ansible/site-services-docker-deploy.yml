@@ -124,3 +124,6 @@
 
     - role: "deploy-ryot-media"
       tags: [services, ryot-media, ryot]
+
+    - role: "deploy-docker-wyze-bridge"
+      tags: [services, docker-wyze-bridge]
