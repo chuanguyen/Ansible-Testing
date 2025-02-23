@@ -134,37 +134,5 @@ ufw_rules:
       from_port: null
       to_port: "{{ open_speedtest_ext_https_port }}"
       proto: tcp
-    - comment: "Permits incoming HTTPS connections to Docker Wyze Bridge - Web"
-      rule: allow
-      delete: no
-      from_ip: any
-      to_ip: any
-      from_port: null
-      to_port: "5000"
-      proto: tcp
-    - comment: "Permits incoming connections for Docker Wyze Bridge - RTSP"
-      rule: allow
-      delete: no
-      from_ip: "any"
-      to_ip: any
-      from_port: null
-      to_port: "8554"
-      proto: any
-    - comment: "Permits incoming connections for Docker Wyze Bridge - Wyze Camera Garge"
-      rule: allow
-      delete: no
-      from_ip: "{{ docker_wyze_bridge_cameras.garage }}"
-      to_ip: any
-      from_port: ""
-      to_port: ""
-      proto: "any"
-    - comment: "Permits incoming connections for Docker Wyze Bridge - Wyze Camera Front Door"
-      rule: allow
-      delete: no
-      from_ip: "{{ docker_wyze_bridge_cameras.frontDoor }}"
-      to_ip: any
-      from_port: ""
-      to_port: ""
-      proto: "any"
   remove:
     -

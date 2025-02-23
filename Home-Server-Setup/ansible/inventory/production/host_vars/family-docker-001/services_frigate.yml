@@ -1,8 +1,4 @@
 ---
-### Ports
-# Remap to avoid conflicts with Docker Wyze Bridge
-frigate_host_port_rtsp: "8556"
-
 # Container config
 frigate_container_traefik_labels:
   - "traefik.enable=true"
@@ -40,7 +36,7 @@ frigate_mqtt_password: "{{ mqtt_mosquitto_auth_credentials[0].password }}"
 frigate_go2rtc:
   streams:
     front_door:
-      - "rtsp://{{ docker_wyze_bridge_stream_username }}:{{ docker_wyze_bridge_stream_api_key }}@docker-wyze-bridge.{{ home_lan_domain }}:8554/front-door"
+      - "rtsp://{{ docker_wyze_bridge_stream_username }}:{{ docker_wyze_bridge_stream_api_key }}@home-assistant-001.{{ home_lan_domain }}:8554/front-door"
       - "ffmpeg:front_door#audio=opus"
     # front_door_substream:
     #   - "rtsp://home-assistant-001.{{ home_lan_domain }}:8556/front-door-sub"
@@ -53,7 +49,7 @@ frigate_go2rtc:
       # - "rtsp://{{ reolink_cameras_username }}:{{ reolink_cameras_password }}@doorbell-front.{{ home_lan_domain }}:554/h264Preview_01_sub"
       - "ffmpeg:http://doorbell-front.{{ home_lan_domain }}/flv?port=1935&app=bcs&stream=channel0_ext.bcs&user={{ reolink_cameras_username }}&password={{ reolink_cameras_password }}"
     garage:
-      - "rtsp://{{ docker_wyze_bridge_stream_username }}:{{ docker_wyze_bridge_stream_api_key }}@docker-wyze-bridge.{{ home_lan_domain }}:8554/rear-driveway"
+      - "rtsp://{{ docker_wyze_bridge_stream_username }}:{{ docker_wyze_bridge_stream_api_key }}@home-assistant-001.{{ home_lan_domain }}:8554/rear-driveway"
       - "ffmpeg:front_door#audio=opus"
     # garage_substream:
     #   - "rtsp://home-assistant-001.{{ home_lan_domain }}:8556/rear-driveway-sub"
