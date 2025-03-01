@@ -2,4 +2,4 @@
 
 FROM {{ digikam_image_base }}:{{ digikam_image_base_tag }}
 
-RUN pacman --noconfirm -Sy && pacman -S thunar --noconfirm
+RUN apt-get update -y && apt install -y thunar
