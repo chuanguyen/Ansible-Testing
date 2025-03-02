@@ -9,6 +9,6 @@ nebula_sync_container_envs:
     PRIMARY: "https://pihole.{{ home_lan_domain }}|{{ pihole_api_tokens.pihole }}"
     REPLICAS: "https://pihole2.{{ home_lan_domain }}|{{ pihole_api_tokens.pihole2 }}"
     FULL_SYNC: "true"
-    CRON: "0 * * * *"
+    CRON: "0 0 * * *"
     TZ: "America/Vancouver"
     CLIENT_SKIP_TLS_VERIFICATION: "false"
