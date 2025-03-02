@@ -5,10 +5,8 @@
 # More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
 services:
   pihole:
-    build:
-      context: build/
     container_name: "{{ pihole_container_name }}"
-    image: "{{ pihole_image_custom }}:{{ pihole_image_base_tag }}"
+    image: "{{ pihole_image_base }}:{{ pihole_image_base_tag }}"
     # Set to host mode as per documentation for Docker & PiHole DHCP
     # Disabled network definitions and port mappings as well
     # https://docs.pi-hole.net/docker/DHCP/

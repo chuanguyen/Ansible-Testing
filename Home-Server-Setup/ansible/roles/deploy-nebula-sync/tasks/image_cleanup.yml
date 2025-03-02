@@ -1,6 +1,6 @@
 ---
 - name: "TASK: Grab all tags of a particular image"
-  shell: "docker images --filter=reference='{{ pihole_image_base }}:*' | tr -s ' ' | cut -d ' ' -f 2 | tail -n +2"
+  shell: "docker images --filter=reference='{{ nebula_sync_image_base }}:*' | tr -s ' ' | cut -d ' ' -f 2 | tail -n +2"
   register: docker_image_filter_output
 
 - set_fact:
@@ -8,8 +8,8 @@
 
 - name: "TASK: Remove docker images filtered by tags"
   community.docker.docker_image:
-    name: "{{ pihole_image_base }}"
+    name: "{{ nebula_sync_image_base }}"
     tag: "{{ item }}"
     state: "absent"
   with_items: "{{ docker_image_filtered_tags }}"
-  when: "item != pihole_image_base_tag and item != pihole_image_base_tag_old"
+  when: "item != nebula_sync_image_base_tag and item != nebula_sync_image_base_tag_old"

@@ -1,5 +1,4 @@
 ---
-
 - name: "Create folders for build and container data"
   file:
     path: "{{ pihole_container_data_dir }}/{{ item }}"
@@ -17,8 +16,6 @@
       dest: "{{ pihole_container_data_dir }}/docker-compose.yml"
     - src: "pi-hole.env.j2"
       dest: "{{ pihole_container_data_dir }}/pi-hole.env"
-    - src: "Dockerfile.j2"
-      dest: "{{ pihole_container_data_dir }}/build/Dockerfile"
   loop_control:
     label: "{{ item.src }}"
   register: "container_templated_files"
@@ -27,12 +24,3 @@
   set_fact:
     pihole_container_restart: "yes"
   when: "container_templated_files.changed"
-
-- name: "TASK: Populate pihole_updatelists config"
-  become: true
-  copy:
-    src: "{{ item }}"
-    dest: "{{ pihole_container_data_dir }}/etc-pihole-updatelists"
-  with_fileglob: "files/pihole_updatelists_conf/*"
-  loop_control:
-    label: "{{ item | basename }}"

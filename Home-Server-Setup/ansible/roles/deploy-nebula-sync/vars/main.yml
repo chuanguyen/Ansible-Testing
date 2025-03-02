@@ -1,0 +1,4 @@
+nebula_sync_container_data_dir_sub_folders: []
+
+nebula_sync_container_volumes:
+  binds: []

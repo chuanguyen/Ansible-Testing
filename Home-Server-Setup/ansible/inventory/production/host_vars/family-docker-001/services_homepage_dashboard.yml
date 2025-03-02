@@ -90,7 +90,7 @@ homepage_dashboard_services:
           widget:
             type: "pihole"
             url: "https://pihole.{{ home_lan_domain }}"
-            version: 5 # required if running v6 or higher, defaults to 5
+            version: 6 # required if running v6 or higher, defaults to 5
             key: "{{ pihole_api_tokens.pihole }}" # optional
       - "Pihole2":
           href: "https://pihole2.{{ home_lan_domain }}/admin"
@@ -100,7 +100,7 @@ homepage_dashboard_services:
           widget:
             type: "pihole"
             url: "https://pihole2.{{ home_lan_domain }}"
-            version: 5 # required if running v6 or higher, defaults to 5
+            version: 6 # required if running v6 or higher, defaults to 5
             key: "{{ pihole_api_tokens.pihole2 }}" # optional
   - "IT Tools":
       - "Ente Auth":

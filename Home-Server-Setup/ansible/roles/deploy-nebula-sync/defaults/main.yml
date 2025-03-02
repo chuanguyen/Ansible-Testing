@@ -1,0 +1,23 @@
+nebula_sync_container_data_dir: "{{ docker_container_root_dir }}/nebula_sync"
+
+nebula_sync_image_base: "ghcr.io/lovelaze/nebula-sync"
+nebula_sync_image_base_tag: ""
+# Ensures previous version of working
+# nebula_sync image is available for failback
+nebula_sync_image_base_tag_old: ""
+nebula_sync_container_name: "nebula_sync"
+# Controls whether docker-compose restarts Docker containers
+nebula_sync_container_restart: no
+
+nebula_sync_use_custom_dns: false
+# FQDN of DNS servers to resolve to IP
+nebula_sync_custom_dns_servers: []
+
+nebula_sync_container_envs:
+  kv:
+    PRIMARY: "http://ph1.example.com|password"
+    REPLICAS: "http://ph2.example.com|password,http://ph3.example.com|password"
+    FULL_SYNC: "true"
+    CRON: "0 * * * *"
+    TZ: "America/Vancouver"
+    CLIENT_SKIP_TLS_VERIFICATION: "false"
