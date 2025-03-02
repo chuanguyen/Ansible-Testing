@@ -1,9 +1,8 @@
 ---
 dependencies:
-  []
-  # - role: configure-ufw
-  #   tags: [role_dependency]
-  # - role: configure-docker
-  #   tags: [role_dependency]
-  # - role: deploy-traefik
-  #   tags: [role_dependency]
+  - role: configure-ufw
+    tags: [role_dependency]
+  - role: configure-docker
+    tags: [role_dependency]
+  - role: deploy-traefik
+    tags: [role_dependency]

@@ -1,11 +1,10 @@
 ---
 dependencies:
-  []
-  # - role: "configure-docker"
-  #   tags: [role_dependency]
-  # - role: "configure-cron"
-  #   tags: [role_dependency]
-  # - role: "configure-autofs"
-  #   tags: [role_dependency]
-  # - role: "configure-ufw"
-  #   tags: [role_dependency]
+  - role: "configure-docker"
+    tags: [role_dependency]
+  - role: "configure-cron"
+    tags: [role_dependency]
+  - role: "configure-autofs"
+    tags: [role_dependency]
+  - role: "configure-ufw"
+    tags: [role_dependency]
