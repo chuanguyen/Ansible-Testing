@@ -1,7 +1,0 @@
-# {{ ansible_managed }}
-
-FROM {{ pihole_image_base }}:{{ pihole_image_base_tag }}
-
-RUN apt-get update && apt-get install -Vy php-cli php-sqlite3 php-intl php-curl
-
-RUN wget -O - https://raw.githubusercontent.com/jacklul/pihole-updatelists/master/install.sh | bash

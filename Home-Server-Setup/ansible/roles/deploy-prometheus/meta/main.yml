@@ -1,6 +1,7 @@
 ---
 dependencies:
-  - role: "configure-docker"
-    tags: [role_dependency]
-  - role: "configure-ufw"
-    tags: [role_dependency]
+  []
+  # - role: "configure-docker"
+  #   tags: [role_dependency]
+  # - role: "configure-ufw"
+  #   tags: [role_dependency]

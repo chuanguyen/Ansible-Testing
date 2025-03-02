@@ -10,9 +10,6 @@
     - role: "deploy-pihole"
       tags: [services, pihole]
 
-    - role: "deploy-pihole-orbital-sync"
-      tags: [services, pihole, pihole-orbital-sync]
-
     - role: "configure-ddclient"
       tags: [services, vpn, ddclient]
 

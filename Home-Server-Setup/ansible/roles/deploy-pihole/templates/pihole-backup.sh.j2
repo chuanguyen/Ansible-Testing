@@ -2,7 +2,7 @@
 
 ### {{ ansible_managed }}
 
-docker exec -d -w "{{ pihole_backup_directory }}" pihole pihole -a -t
+docker exec -d -w "{{ pihole_backup_directory }}" {{ pihole_container_name }} pihole-FTL --teleporter
 
 sleep 5s && rsync --remove-source-files -zv {{ pihole_container_data_dir }}/mnt-backup/* {{ pihole_nfs_backup_directory }}
 
