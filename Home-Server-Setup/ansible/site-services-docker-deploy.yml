@@ -10,6 +10,9 @@
     - role: "deploy-pihole"
       tags: [services, pihole]
 
+    - role: "deploy-nebula-sync"
+      tags: [services, pihole, nebula-sync]
+
     - role: "configure-ddclient"
       tags: [services, vpn, ddclient]
 
