@@ -7,9 +7,6 @@ snmp_exporter_container_web_port: "9116"
 home_internet_blackbox_exporter_container_port: "9115"
 home_internet_speedtest_exporter_container_port: "9798"
 
-# ddclient
-ddclient_version: "3.10.0"
-
 # MQTT
 mqtt_mosquitto_auth_credentials: "{{ vault_mqtt_mosquitto_auth_credentials }}"
 

@@ -8,73 +8,71 @@
       - ddclient
       - libdata-validate-ip-perl
 
-- name: "TASK: Retrieve latest version of ddclient"
+# - name: "TASK: Retrieve latest version of ddclient"
+#   become: true
+#   unarchive:
+#     src: "{{ ddclient_url }}"
+#     dest: "/tmp"
+#     owner: "root"
+#     group: "root"
+#     mode: "0755"
+#     remote_src: yes
+#   changed_when: false
+
+# - block:
+#     - name: "TASK: Make ddclient binary"
+#       become: true
+#       shell: |
+#         ./configure \
+#           --prefix=/usr \
+#           --localstatedir=/var
+
+#         make
+#         make VERBOSE=1 check
+#         make install
+#       args:
+#         chdir: "/tmp/ddclient-{{ ddclient_version }}/"
+#         executable: "/bin/bash"
+
+# Make command installs to /usr/bin/ddclient by default
+- name: "TASK: Copy ddclient binary to expected location"
   become: true
-  unarchive:
-    src: "{{ ddclient_url }}"
-    dest: "/tmp"
+  copy:
+    src: "/usr/bin/ddclient"
+    remote_src: true
+    dest: "/usr/sbin/ddclient"
     owner: "root"
     group: "root"
     mode: "0755"
-    remote_src: yes
-  changed_when: false
+  notify: "run ddclient"
 
-- block:
-    - name: "TASK: Make ddclient binary"
-      become: true
-      shell: |
-        ./autogen
+# - name: "TASK: Remove ddclient archive"
+#   become: true
+#   file:
+#     path: "/tmp/ddclient-{{ddclient_version }}"
+#     state: "absent"
+#   changed_when: false
 
-        ./configure \
-          --prefix=/usr \
-          --sysconfdir=/etc/ddclient \
-          --localstatedir=/var
+# - name: "TASK: Make ddclient config directory"
+#   become: true
+#   file:
+#     path: "/etc/ddclient"
+#     owner: "root"
+#     group: "root"
+#     mode: 0755
+#     state: "directory"
 
-        make
-        make install
-      args:
-        chdir: "/tmp/ddclient-{{ ddclient_version }}/"
-        executable: "/bin/bash"
-
-    # Make command installs to /usr/bin/ddclient by default
-    - name: "TASK: Copy ddclient binary to expected location"
-      become: true
-      copy:
-        src: "/usr/bin/ddclient"
-        remote_src: true
-        dest: "/usr/sbin/ddclient"
-        owner: "root"
-        group: "root"
-        mode: "0755"
-      notify: "run ddclient"
-
-- name: "TASK: Remove ddclient archive"
-  become: true
-  file:
-    path: "/tmp/ddclient-{{ddclient_version }}"
-    state: "absent"
-  changed_when: false
-
-- name: "TASK: Make ddclient config directory"
-  become: true
-  file:
-    path: "/etc/ddclient"
-    owner: "root"
-    group: "root"
-    mode: 0755
-    state: "directory"
-
-- name: "TASK: Remove default ddclient conf file"
-  become: true
-  file:
-    path: "/etc/ddclient.conf"
-    state: "absent"
+# - name: "TASK: Remove default ddclient conf file"
+#   become: true
+#   file:
+#     path: "/etc/ddclient.conf"
+#     state: "absent"
 
 - name: "TASK: Generate ddclient config file"
   become: true
   template:
     src: "ddclient.conf.j2"
-    dest: "/etc/ddclient/ddclient.conf"
+    dest: "/etc/ddclient.conf"
     owner: "root"
     group: "root"
     mode: 0600
