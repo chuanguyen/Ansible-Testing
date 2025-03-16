@@ -296,3 +296,9 @@ homepage_dashboard_info_widgets:
 homepage_dashboard_docker:
   docker-local:
     socket: "/var/run/docker.sock"
+
+homepage_dashboard_container_envs:
+  kv:
+    PUID: "{{ homepage_dashboard_container_puid }}"
+    PGID: "{{ homepage_dashboard_container_pgid }}"
+    HOMEPAGE_ALLOWED_HOSTS: "homepage.{{ home_lan_domain }}"
