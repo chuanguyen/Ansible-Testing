@@ -16,6 +16,9 @@ mqtt:
   # tls_insecure: {{ frigate_mqtt_tls_insecure }}
   stats_interval: {{ frigate_mqtt_stats_interval }}
 
+auth:
+  {{ frigate_auth }}
+
 detectors:
 {% for detector_name, detector_config in frigate_detectors.items() %}
   {{ detector_name }}:
@@ -29,7 +32,18 @@ audio:
   {{ frigate_audio }}
 
 go2rtc:
-  {{ frigate_go2rtc }}
+  streams:
+{% for go2rtc_stream_name, go2rtc_stream_configs in frigate_go2rtc.streams.items() %}
+    {{ go2rtc_stream_name }}:
+{% for gortc_stream_config in go2rtc_stream_configs %}
+      - {{ gortc_stream_config }}
+{% endfor %}
+{% endfor %}
+  webrtc:
+    candidates:
+{% for webrtc_candidate in frigate_go2rtc.webrtc.candidates %}
+      - {{ webrtc_candidate }}
+{% endfor %}
 
 cameras:
 {% for camera_name, camera_config in frigate_cameras.items() %}
