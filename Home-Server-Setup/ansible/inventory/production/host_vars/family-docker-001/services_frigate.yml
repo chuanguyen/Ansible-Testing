@@ -24,7 +24,7 @@ frigate_use_custom_go2rtc: false
 frigate_custom_go2rtc_version: ""
 
 # Frigate configuration
-frigate_mqtt_enabled: True
+frigate_mqtt_enabled: true
 # Frigate MQTT Host is name of MQTT container running on the same host
 # Only defined like this since communication through traefik doesn't
 # work over SSL
@@ -35,7 +35,7 @@ frigate_mqtt_password: "{{ mqtt_mosquitto_auth_credentials[0].password }}"
 
 frigate_auth:
   # Optional: Enable authentication
-  enabled: False
+  enabled: false
 
 frigate_go2rtc:
   streams:
@@ -60,18 +60,18 @@ frigate_cameras:
   front_door_bell: # <------ Name the camera
     ffmpeg:
       inputs:
-        - path: "rtsp://127.0.0.1:8554/front_door_bell?video=copy&audio=aac" # Restream connection
+        - path: "rtsp://127.0.0.1:8554/front_door_bell" # Restream connection
           input_args: "preset-rtsp-restream"
           roles:
             - record
-        - path: "rtsp://127.0.0.1:8554/front_door_bell_substream?video=copy" # Restream connection
+        - path: "rtsp://127.0.0.1:8554/front_door_bell_substream" # Restream connection
           input_args: "preset-rtsp-restream"
           roles:
             - detect
       output_args:
         record: preset-record-generic-audio-copy
     detect:
-      enabled: True # <---- disable detection until you have a working camera feed
+      enabled: true # <---- disable detection until you have a working camera feed
       width: 640 # <---- update for your camera's resolution
       height: 480 # <---- update for your camera's resolution
       fps: 10
@@ -94,7 +94,7 @@ frigate_cameras:
           - front_yard_right
           - front_yard_walkway
     record:
-      enabled: True
+      enabled: true
       alerts:
         pre_capture: 10
         post_capture: 10
@@ -108,8 +108,8 @@ frigate_cameras:
           days: 10
           mode: motion
     snapshots:
-      enabled: True
-      bounding_box: True
+      enabled: true
+      bounding_box: true
       retain:
         # Required: Default retention days (default: shown below)
         default: 20
@@ -159,7 +159,7 @@ frigate_cameras:
       output_args:
         record: preset-record-generic-audio-copy
     detect:
-      enabled: True # <---- disable detection until you have a working camera feed
+      enabled: true # <---- disable detection until you have a working camera feed
       width: 1280 # <---- update for your camera's resolution
       height: 720 # <---- update for your camera's resolution
       fps: 10
@@ -180,7 +180,7 @@ frigate_cameras:
           - front_yard
           - front_yard_street
     record:
-      enabled: True
+      enabled: true
       alerts:
         pre_capture: 10
         post_capture: 10
@@ -194,8 +194,8 @@ frigate_cameras:
           days: 10
           mode: motion
     snapshots:
-      enabled: True
-      bounding_box: True
+      enabled: true
+      bounding_box: true
       retain:
         # Required: Default retention days (default: shown below)
         default: 20
@@ -245,7 +245,7 @@ frigate_cameras:
       output_args:
         record: preset-record-generic-audio-copy
     detect:
-      enabled: True # <---- disable detection until you have a working camera feed
+      enabled: true # <---- disable detection until you have a working camera feed
       width: 1280 # <---- update for your camera's resolution
       height: 720 # <---- update for your camera's resolution
       fps: 10
@@ -269,7 +269,7 @@ frigate_cameras:
           - "driveway_entrance"
           - "backyard"
     record:
-      enabled: True
+      enabled: true
       alerts:
         pre_capture: 10
         post_capture: 10
@@ -283,8 +283,8 @@ frigate_cameras:
           days: 10
           mode: motion
     snapshots:
-      enabled: True
-      bounding_box: True
+      enabled: true
+      bounding_box: true
       required_zones:
         - "driveway"
         - "driveway_entrance"
@@ -345,7 +345,7 @@ frigate_cameras:
           - bird
           - mouse
     motion:
-      enabled: True
+      enabled: true
       mask:
         - 112,81,395,21,536,26,543,0,0,0,0,92
         - 884,0,1280,0,1280,138,1165,69,1158,107,1017,48,893,41,735,46,533,48,530,0
@@ -377,7 +377,7 @@ frigate_detect:
   width: 1280
   height: 720
   fps: 5
-  enabled: True
+  enabled: true
   # Optional: Number of frames without a detection before Frigate considers an object to be gone. (default: 5x the frame rate)
   max_disappeared: 25
   # Optional: Configuration for stationary object tracking
