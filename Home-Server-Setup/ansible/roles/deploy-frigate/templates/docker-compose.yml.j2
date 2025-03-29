@@ -2,8 +2,6 @@
 
 # {{ ansible_managed }}
 
-version: "3"
-
 # More info at https://docs.frigate.video/frigate/installation#docker
 services:
   frigate:
@@ -18,9 +16,9 @@ services:
     #  - /dev/apex_0:/dev/apex_0 # passes a PCIe Coral, follow driver instructions here https://coral.ai/docs/m2/get-started/#2a-on-linux
     #  - /dev/dri/renderD128 # for intel hwaccel, needs to be updated for your hardware
     ports:
-      - "{{ frigate_port_rtsp }}:{{ frigate_port_rtsp }}" # RTSP feeds
-      - "{{ frigate_port_webrtc }}:{{ frigate_port_webrtc }}/tcp" # WebRTC over tcp
-      - "{{ frigate_port_webrtc }}:{{ frigate_port_webrtc }}/udp" # WebRTC over udp
+      - "{{ frigate_host_port_rtsp }}:{{ frigate_port_rtsp }}" # RTSP feeds
+      - "{{ frigate_host_port_webrtc }}:{{ frigate_port_webrtc }}/tcp" # WebRTC over tcp
+      - "{{ frigate_host_port_webrtc }}:{{ frigate_port_webrtc }}/udp" # WebRTC over udp
     networks:
       - {{ docker_networks.proxy.name }}
     # Volumes store your data between container upgrades

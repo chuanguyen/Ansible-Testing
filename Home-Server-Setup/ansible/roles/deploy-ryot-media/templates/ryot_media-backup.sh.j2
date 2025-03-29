@@ -1,0 +1,9 @@
+#!/bin/bash
+
+### {{ ansible_managed }}
+
+docker exec -i {{ ryot_media_db_container_name }} pg_dump -Fc --no-acl --no-owner -U "{{ ryot_media_db_user }}" "{{ ryot_media_db_name }}" > "{{ ryot_media_backup_directory }}/$(date +%Y-%m-%d)_ryot-tag-{{ ryot_media_image_base_tag }}_postgres-tag-{{ ryot_media_db_image_base_tag }}.dump"
+
+sleep 5s && rsync --remove-source-files -zv {{ ryot_media_backup_directory }}/* {{ ryot_media_nfs_backup_directory }}
+
+find {{ ryot_media_nfs_backup_directory }} -mtime +{{ ryot_media_nfs_backup_cleanup_period }} -exec rm {} \;

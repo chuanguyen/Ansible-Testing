@@ -1,0 +1,38 @@
+pihole_orbital_sync_container_data_dir: "{{ docker_container_root_dir }}/pihole_orbital_sync"
+
+pihole_orbital_sync_image_base: "mattwebbio/orbital-sync"
+pihole_orbital_sync_image_base_tag: ""
+# Ensures previous version of working
+# pihole_orbital_sync image is available for failback
+pihole_orbital_sync_image_base_tag_old: ""
+pihole_orbital_sync_container_name: "pihole_orbital_sync"
+# Controls whether docker-compose restarts Docker containers
+pihole_orbital_sync_container_restart: no
+# Defines image ID for custom image
+pihole_orbital_sync_image_custom: "{{ ansible_user }}/pihole_orbital_sync"
+
+pihole_orbital_sync_container_labels: []
+
+pihole_orbital_sync_container_traefik_labels: []
+
+pihole_orbital_sync_use_custom_dns: false
+# FQDN of DNS servers to resolve to IP
+pihole_orbital_sync_custom_dns_servers: []
+
+pihole_orbital_sync_container_envs:
+  kv:
+    UPDATE_GRAVITY: "true"
+    PRIMARY_HOST_BASE_URL: "https://pihole1.example.com"
+    PRIMARY_HOST_PASSWORD: "your_password1"
+    SECONDARY_HOSTS_1_BASE_URL: "https://pihole2.example.com"
+    SECONDARY_HOSTS_1_PASSWORD: "your_password2"
+    NOTIFY_ON_SUCCESS: "false"
+    NOTIFY_ON_FAILURE: "true"
+    NOTIFY_SMTP_ENABLED: "false"
+    NOTIFY_SMTP_FROM: ""
+    NOTIFY_SMTP_HOST: ""
+    NOTIFY_SMTP_TO: ""
+    NOTIFY_SMTP_TLS: "false"
+    NOTIFY_SMTP_PORT: ""
+    NOTIFY_SMTP_PASSWORD: ""
+    NOTIFY_SMTP_USER: ""

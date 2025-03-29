@@ -2,8 +2,30 @@
 
 ### {{ ansible_managed }}
 
+EXPORT_DIRECTORY="{{ paperless_ngx_backup_directory }}"
+PAPERLESS_EXPORT_FILENAME="{{ paperless_ngx_nfs_backup_script_paperless_export_filename }}"
+FULL_PATH_BACKUP="$EXPORT_DIRECTORY/$PAPERLESS_EXPORT_FILENAME"
+COUNTER=0
+MAX_ATTEMPTS={{ paperless_ngx_nfs_backup_script_max_attempts }}
+BACKUP_CHECK_INTERVAL={{ paperless_ngx_nfs_backup_script_backup_check_interval }}
+
 docker exec -d -w "{{ backup_directory }}" SERVICE_
 
-sleep 5s && rsync --remove-source-files -zv {{ SERVICE__container_data_dir }}/mnt-backup/* {{ SERVICE__nfs_backup_directory }}
+### Remove the following if check for backup file existing isn't needed
+while [ ! -f "$FULL_PATH_BACKUP" ]; do
+    echo "Waiting for $FULL_PATH_BACKUP to be created..."
+    COUNTER=$((COUNTER + 1))  # Increment the counter
+    echo "Backup Attempt Number: $COUNTER"
+    sleep $BACKUP_CHECK_INTERVAL  # Wait for 5 seconds before checking again
 
+    # Exit if max attempts reached
+    if [ "$COUNTER" -ge "$MAX_ATTEMPTS" ]; then
+        echo "File $FULL_PATH_BACKUP not found after $MAX_ATTEMPTS attempts. Exiting."
+        exit 1  # Exit with an error code
+    fi
+done
+
+echo "$FULL_PATH_BACKUP exists! Continuing with the script..."
+# Add a delay before copying backup file in case changes are pending post-operation
+sleep {{ SERVICE__nfs_backup_script_backup_copy_delay }}s && rsync --remove-source-files -zv {{ SERVICE__backup_directory }}/* {{ SERVICE__nfs_backup_directory }}
 find {{ SERVICE__nfs_backup_directory }} -mtime +{{ SERVICE__nfs_backup_cleanup_period }} -exec rm {} \;

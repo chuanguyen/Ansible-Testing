@@ -1,15 +1,21 @@
 ---
-pihole_image_base_tag: "2024.07.0"
-pihole_image_base_tag_old: "2024.05.0"
+pihole_image_base_tag: "2025.02.7"
+pihole_image_base_tag_old: "2024.07.0"
 pihole_nfs_backup_cleanup_period: "60"
 pihole_nfs_backup_frequency: "0 1 */15 * *"
 
-wireguard_image_base_tag: "arm64v8-1.0.20210914-r4-ls48"
-wireguard_image_base_tag_old: "arm64v8-1.0.20210914-r4-ls37"
+pihole_orbital_sync_image_base_tag: "1.8.4"
+pihole_orbital_sync_image_base_tag_old: ""
+
+nebula_sync_image_base_tag: "v0.4.0"
+nebula_sync_image_base_tag_old: ""
+
+wireguard_image_base_tag: "arm64v8-1.0.20210914-r4-ls70"
+wireguard_image_base_tag_old: "arm64v8-1.0.20210914-r4-ls59"
 wireguard_nfs_backup_frequency: "0 1 */30 * *"
 
-traefik_image_base_tag: "3.1.2"
-traefik_image_base_tag_old: "3.0.2"
+traefik_image_base_tag: "v3.3.4"
+traefik_image_base_tag_old: "v3.2.2"
 
 smtp_relay_image_base_tag: "1.3.0"
 smtp_relay_image_base_tag_old: ""
@@ -31,8 +37,8 @@ prometheus_docker_cli_commands:
   "storage.tsdb.retention.time": "1y"
   "storage.tsdb.retention.size": "50GB"
 
-snmp_exporter_image_base_tag: "v0.22.0"
-snmp_exporter_image_base_tag_old: "v0.20.0"
+snmp_exporter_image_base_tag: "v0.26.0"
+snmp_exporter_image_base_tag_old: "v0.22.0"
 
 alertmanager_image_base_tag: "v0.25.0"
 alertmanager_image_base_tag_old: "v0.23.0"
@@ -49,14 +55,14 @@ portainer_image_base_tag_old: "2.16.2"
 frigate_image_base_tag: "0.14.1"
 frigate_image_base_tag_old: "0.13.2"
 
-mqtt_mosquitto_image_base_tag: "2.0.18"
-mqtt_mosquitto_image_base_tag_old: "2.0.17"
+mqtt_mosquitto_image_base_tag: "2.0.20"
+mqtt_mosquitto_image_base_tag_old: "2.0.18"
 
-zigbee2mqtt_image_base_tag: "latest"
-zigbee2mqtt_image_base_tag_old: "1.32.2"
+zigbee2mqtt_image_base_tag: "2.0.0"
+zigbee2mqtt_image_base_tag_old: "latest"
 
-zwave_js_ui_image_base_tag: "latest"
-zwave_js_ui_image_base_tag_old: "8.25.1"
+zwave_js_ui_image_base_tag: "9.29.0"
+zwave_js_ui_image_base_tag_old: "latest1"
 
 rtl_433_image_base_tag: "22.11-alpine-3.18.2"
 rtl_433_image_base_tag_old: ""
@@ -64,15 +70,15 @@ rtl_433_image_base_tag_old: ""
 meTube_image_base_tag: "latest"
 meTube_image_base_tag_old: "2023-07-27"
 
-digikam_image_base_tag: "version-2024-07-12"
-digikam_image_base_tag_old: "version-2023-12-12"
+digikam_image_base_tag: "8.5.0-ls234"
+digikam_image_base_tag_old: "version-2024-09-29"
 
-authelia_image_base_tag: "4.38.9"
-authelia_image_base_tag_old: "4.38.6"
+authelia_image_base_tag: "4.38.18"
+authelia_image_base_tag_old: "4.38.17"
 
 ### Immich
-immich_image_base_tag: "v1.112.1"
-immich_image_base_tag_old: "v1.109.2"
+immich_image_base_tag: "v1.127.0"
+immich_image_base_tag_old: "v1.125.6"
 
 immich_redis_image_base_tag: "6.2-alpine@sha256:80cc8518800438c684a53ed829c621c94afd1087aaeb59b0d4343ed3e7bcf6c5"
 immich_redis_image_base_tag_old: ""
@@ -93,8 +99,8 @@ open_speedtest_image_base_tag_old: ""
 
 ### Paperless-ngx
 
-paperless_ngx_image_base_tag: "2.12.1"
-paperless_ngx_image_base_tag_old: ""
+paperless_ngx_image_base_tag: "2.14.7"
+paperless_ngx_image_base_tag_old: "2.14.5"
 
 paperless_ngx_postgres_image_base_tag: "16.0-alpine"
 paperless_ngx_postgres_image_base_tag_old: ""
@@ -102,11 +108,18 @@ paperless_ngx_postgres_image_base_tag_old: ""
 paperless_ngx_redis_image_base_tag: "7.4-alpine"
 paperless_ngx_redis_image_base_tag_old: ""
 
-stirling_pdf_image_base_tag: "0.29.0"
-stirling_pdf_image_base_tag_old: ""
+stirling_pdf_image_base_tag: "latest"
+stirling_pdf_image_base_tag_old: "0.29.0"
 
-homepage_dashboard_image_base_tag: "v0.9.10"
-homepage_dashboard_image_base_tag_old: ""
+homepage_dashboard_image_base_tag: "latest"
+homepage_dashboard_image_base_tag_old: "v0.9.10"
 
 it_tools_image_base_tag: "latest"
 it_tools_image_base_tag_old: ""
+
+# RYOT
+
+ryot_media_image_base_tag: "v8.2.0"
+ryot_media_image_base_tag_old: "v8.0.0"
+ryot_media_db_image_base_tag: "16-alpine"
+ryot_media_db_image_base_tag_old: ""

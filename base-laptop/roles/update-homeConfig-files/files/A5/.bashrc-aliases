@@ -1,2 +1,5 @@
 alias darktable_backup='tar -czvf ~/smb4k/family-nas-001.local/home/Documents/Backups/DarkTable/darktable_config.tar.gz ~/.config/darktable/'
 alias make_ansible='make -f {{ ansible_env.HOME }}/automation/docker-base/ansible/Makefile'
+alias make_terraform='make -f {{ ansible_env.HOME }}/automation/docker-base/terraform/Makefile'
+alias make_packer='make -f {{ ansible_env.HOME }}/automation/docker-base/packer/Makefile'
+alias ssht='ssh'

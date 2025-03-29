@@ -1,4 +1,7 @@
 ---
+stirling_pdf_container_labels:
+  - "com.centurylinklabs.watchtower.enable=true"
+
 stirling_pdf_container_envs:
   kv:
     DOCKER_ENABLE_SECURITY: "true"

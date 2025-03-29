@@ -22,19 +22,17 @@
         tag: "{{ wireguard_image_base_tag }}"
         source: "pull"
         state: "present"
-      register: "wireguard_image_base_pull"
-
-    - name: "TASK: Remove container for updates"
-      community.docker.docker_container:
-        name: "{{ wireguard_container_name }}"
-        container_default_behavior: "no_defaults"
-        state: "absent"
-      when: wireguard_container_state.exists and wireguard_image_base_pull.changed
+      register: "image_base_pull"
   when: wireguard_container_image_tag[1] != wireguard_image_base_tag
+
+- name: "TASK: Delete {{ wireguard_container_name }}"
+  community.docker.docker_compose_v2:
+    project_src: "{{ wireguard_container_data_dir }}"
+    state: "absent"
+  when: image_base_pull.changed or container_templated_files.changed
+  register: container_deleted
 
 - name: "TASK: Deploy {{ wireguard_container_name }}"
   community.docker.docker_compose:
     project_src: "{{ wireguard_container_data_dir }}"
-    nocache: "no"
-    state: "present"
-    restarted: "{{ wireguard_container_restart }}"
+    state: "{{ 'restarted' if wireguard_container_restart and not container_deleted.changed else 'present' }}"

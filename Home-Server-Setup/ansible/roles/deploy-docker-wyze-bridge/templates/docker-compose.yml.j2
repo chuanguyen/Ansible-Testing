@@ -1,0 +1,18 @@
+---
+
+# {{ ansible_managed }}
+
+services:
+  docker_wyze_bridge:
+    container_name: "{{ docker_wyze_bridge_container_name }}"
+    image: "{{ docker_wyze_bridge_image_base }}:{{ docker_wyze_bridge_image_base_tag }}"
+    env_file: docker_wyze_bridge.env
+    #ports:
+    #    - 1935:1935 # RTMP
+    #    - 8554:8554 # RTSP
+    #    - 8888:8888 # HLS
+    #    - 8889:8889 #WebRTC
+    #    - 8189:8189/udp # WebRTC/ICE
+    #    - 5000:5000 # WEB-UI
+    network_mode: "host"
+    restart: "always"

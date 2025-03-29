@@ -23,21 +23,19 @@
         source: "pull"
         state: "present"
       register: "snmp_exporter_image_base_pull"
-
-    - name: "TASK: Remove container for updates"
-      community.docker.docker_container:
-        name: "{{ snmp_exporter_container_name }}"
-        container_default_behavior: "no_defaults"
-        state: "absent"
-      when: container_state.exists and snmp_exporter_image_base_pull.changed
   when: container_image_tag[1] != snmp_exporter_image_base_tag
 
 - name: "HANDLER: Flush handlers"
   meta: flush_handlers
 
-- name: "TASK: Deploy {{ snmp_exporter_container_name }}"
-  community.docker.docker_compose:
+- name: "TASK: Delete {{ snmp_exporter_container_name }}"
+  community.docker.docker_compose_v2:
     project_src: "{{ snmp_exporter_container_data_dir }}"
-    nocache: "no"
-    state: "present"
-    restarted: "{{ snmp_exporter_container_restart }}"
+    state: "absent"
+  when: image_base_pull.changed or container_templated_files.changed
+  register: container_deleted
+
+- name: "TASK: Deploy {{ snmp_exporter_container_name }}"
+  community.docker.docker_compose_v2:
+    project_src: "{{ snmp_exporter_container_data_dir }}"
+    state: "{{ 'restarted' if snmp_exporter_container_restart and not container_deleted.changed else 'present' }}"

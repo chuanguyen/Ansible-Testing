@@ -1,0 +1,25 @@
+{% for module in snmp_exporter_prometheus_mib_modules %}
+  {{ module.name }}:
+    walk:
+{% for oid in module.walk %}
+      - "{{ oid }}"
+{% endfor %}
+    max_repetitions: {{ module.max_repetitions }}
+    retries: {{ module.retries }}
+    timeout: {{ module.timeout }}
+    lookups:
+{% if module.lookups is not none %}
+{% for lookup_entry in module.lookups %}
+      - source_indexes: {{ lookup_entry.source_indexes }}
+        lookup: {{ lookup_entry.lookup }}
+        drop_source_indexes: {{ lookup_entry.drop_source_indexes }}
+{% endfor %}
+{% endif %}
+{% if module.overrides is not none %}
+    overrides:
+{% for override in module.overrides %}
+      {{ override.metric_name }}:
+        type: {{ override.type }}
+{% endfor %}
+{% endif %}
+{% endfor %}

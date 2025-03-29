@@ -1,5 +1,4 @@
 ---
-
 - name: "Create root folder for container"
   become: true
   file:
@@ -38,5 +37,5 @@
 
 - name: "TASK: Set containers to restart when templated files change"
   set_fact:
-    container_restart: "yes"
+    home_internet_speedtest_exporter_container_restart: "yes"
   when: "container_templated_files.changed"

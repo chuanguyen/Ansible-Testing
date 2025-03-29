@@ -24,6 +24,7 @@ system_packages:
   - libsnmp
   - net-tools
   - p7zip-full
+  - tmux
   - unzip
 
 fail2ban_ignoreip:

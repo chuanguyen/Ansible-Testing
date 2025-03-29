@@ -23,18 +23,16 @@
         source: "pull"
         state: "present"
       register: "image_base_pull"
-
-    - name: "TASK: Remove container for updates"
-      community.docker.docker_container:
-        name: "{{ authelia_container_name }}"
-        container_default_behavior: "no_defaults"
-        state: "absent"
-      when: container_exists and image_base_pull.changed
   when: container_image_tag[1] != authelia_image_base_tag
 
-- name: "TASK: Deploy {{ authelia_container_name }}"
-  community.docker.docker_compose:
+- name: "TASK: Delete {{ authelia_container_name }}"
+  community.docker.docker_compose_v2:
     project_src: "{{ authelia_container_data_dir }}"
-    nocache: "no"
-    state: "present"
-    restarted: "{{ authelia_container_restart }}"
+    state: "absent"
+  when: image_base_pull.changed or container_templated_files.changed
+  register: container_deleted
+
+- name: "TASK: Deploy {{ authelia_container_name }}"
+  community.docker.docker_compose_v2:
+    project_src: "{{ authelia_container_data_dir }}"
+    state: "{{ 'restarted' if authelia_container_restart and not container_deleted.changed else 'present' }}"

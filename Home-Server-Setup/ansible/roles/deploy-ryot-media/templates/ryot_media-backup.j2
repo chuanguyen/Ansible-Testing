@@ -1,0 +1,7 @@
+# {{ ansible_managed }}
+# ryot_media backup cron job
+
+SHELL=/bin/bash
+PATH=/usr/bin
+
+{{ ryot_media_nfs_backup_frequency }}   root  {{ ryot_media_container_data_dir }}/scripts/ryot_media-backup.sh

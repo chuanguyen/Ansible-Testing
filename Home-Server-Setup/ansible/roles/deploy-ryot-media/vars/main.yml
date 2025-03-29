@@ -1,0 +1,17 @@
+ryot_media_container_data_dir_sub_folders:
+  - "ryot_config"
+  - "ryot_backup_export"
+  - "scripts"
+
+ryot_media_db_container_data_dir_sub_folders:
+  - "ryot_db_data"
+
+ryot_media_container_volumes:
+  binds:
+    - source: "./ryot_config"
+      target: "/home/ryot/config/"
+
+ryot_media_db_container_volumes:
+  binds:
+    - source: "./ryot_db_data"
+      target: "/var/lib/postgresql/data"

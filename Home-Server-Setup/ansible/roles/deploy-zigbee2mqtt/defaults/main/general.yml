@@ -17,6 +17,7 @@ zigbee2mqtt_container_user_group: "dialout"
 zigbee2mqtt_zigbee_host_usb_device_id: ""
 # Defines device to map to in container
 zigbee2mqtt_zigbee_container_usb_device_id: "/dev/ttyACM0"
+zigbee2mqtt_zigbee_adapter_protocol: "ember"
 
 zigbee2mqtt_container_labels: []
 

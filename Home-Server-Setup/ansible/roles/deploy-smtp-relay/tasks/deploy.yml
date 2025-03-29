@@ -23,18 +23,16 @@
         source: "pull"
         state: "present"
       register: "smtp_relay_image_base_pull"
-
-    - name: "TASK: Remove container for updates"
-      community.docker.docker_container:
-        name: "{{ smtp_relay_container_name }}"
-        container_default_behavior: "no_defaults"
-        state: "absent"
-      when: smtp_relay_container_state.exists and smtp_relay_image_base_pull.changed
   when: smtp_relay_container_image_tag[1] != smtp_relay_image_base_tag
 
-- name: "TASK: Deploy {{ smtp_relay_container_name }}"
-  community.docker.docker_compose:
+- name: "TASK: Delete {{ smtp_relay_container_name }}"
+  community.docker.docker_compose_v2:
     project_src: "{{ smtp_relay_container_data_dir }}"
-    nocache: "no"
-    state: "present"
-    restarted: "{{ smtp_relay_container_restart }}"
+    state: "absent"
+  when: image_base_pull.changed or container_templated_files.changed
+  register: container_deleted
+
+- name: "TASK: Deploy {{ smtp_relay_container_name }}"
+  community.docker.docker_compose_v2:
+    project_src: "{{ smtp_relay_container_data_dir }}"
+    state: "{{ 'restarted' if smtp_relay_container_restart and not container_deleted.changed else 'present' }}"

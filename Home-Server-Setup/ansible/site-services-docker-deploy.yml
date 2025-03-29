@@ -10,6 +10,9 @@
     - role: "deploy-pihole"
       tags: [services, pihole]
 
+    - role: "deploy-nebula-sync"
+      tags: [services, pihole, nebula-sync]
+
     - role: "configure-ddclient"
       tags: [services, vpn, ddclient]
 
@@ -52,6 +55,9 @@
   gather_facts: true
 
   roles:
+    - role: "deploy-pihole"
+      tags: [services, pihole]
+
     - role: "deploy-traefik"
       tags: [services, proxy, traefik]
       vars:
@@ -115,3 +121,6 @@
 
     - role: "deploy-it-tools"
       tags: [services, it-tools]
+
+    - role: "deploy-ryot-media"
+      tags: [services, ryot-media, ryot]

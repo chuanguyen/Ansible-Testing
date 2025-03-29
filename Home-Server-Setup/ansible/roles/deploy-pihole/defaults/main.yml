@@ -6,12 +6,10 @@ pihole_image_base_tag: ""
 # pihole image is available for failback
 pihole_image_base_tag_old: ""
 pihole_container_name: "pihole"
-pihole_container_web_port: "80"
 # Controls whether docker-compose restarts Docker containers
 pihole_container_restart: no
-pihole_image_custom: "{{ ansible_user }}/pihole"
 
-pihole_external_ip_mapping: "{{ home_lan_dns_servers[0] }}"
+pihole_external_ip_mapping: ""
 
 pihole_backup_directory: "/mnt/backup/"
 pihole_nfs_backup_directory: "/nfs/Container-Data/docker/pihole/teleport"
@@ -19,12 +17,26 @@ pihole_nfs_backup_directory: "/nfs/Container-Data/docker/pihole/teleport"
 pihole_nfs_backup_cleanup_period: "60"
 # Defines via cron syntax how often to run backup
 pihole_nfs_backup_frequency: "0 1 */15 * *"
+pihole_backup_enabled: true
+
+pihole_container_labels: []
+
+pihole_container_traefik_labels:
+  - "traefik.enable=true"
+  - "traefik.docker.network={{ docker_networks.proxy.name }}"
+  - "traefik.http.routers.pihole1.rule=Host(`pihole.{{ home_lan_domain }}`)"
+  - "traefik.http.routers.pihole1.entrypoints=websecure"
+  - "traefik.http.routers.pihole1.middlewares=secureHeaders@file"
+  ### Uncomment if internal docker port can't be detected by traefik
+  - "traefik.http.routers.pihole1.service=pihole-svc"
+  - "traefik.http.services.pihole-svc.loadbalancer.server.port=80"
+  - "traefik.http.routers.pihole1.tls=true"
+  - "traefik.http.routers.pihole1.tls.certresolver=letsEncrypt"
 
 pihole_container_envs:
   kv:
     TZ: "America/Vancouver"
-    WEBPASSWORD: "{{ docker_services_admin_password }}"
-    WEB_PORT: "{{ pihole_container_web_port }}"
-  PIHOLE_DNS_:
+    FTLCONF_webserver_api_password: "{{ docker_services_admin_password }}"
+  FTLCONF_dns_upstreams:
     - 1.1.1.1
     - 8.8.8.8

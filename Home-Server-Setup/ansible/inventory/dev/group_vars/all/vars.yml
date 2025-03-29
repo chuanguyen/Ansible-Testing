@@ -1,0 +1,8 @@
+# Connection
+ansible_host: "{{ inventory_hostname }}.{{ home_lan_domain }}"
+ansible_user: "{{ vault_ansible_user }}"
+ansible_password: "{{ vault_ansible_password }}"
+ansible_become_password: "{{ vault_ansible_password }}"
+ansible_host_key_checking: false
+
+home_lan_domain: "{{ vault_home_lan_domain }}"

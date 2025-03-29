@@ -26,16 +26,13 @@
   when: container_image_tag[1] != jellyfin_image_base_tag
 
 - name: "TASK: Delete jellyfin"
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: "{{ jellyfin_container_data_dir }}"
-    nocache: "no"
     state: "absent"
-    restarted: "{{ jellyfin_container_restart }}"
   when: image_base_pull.changed or container_templated_files.changed
+  register: container_deleted
 
 - name: "TASK: Deploy {{ jellyfin_container_name }}"
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: "{{ jellyfin_container_data_dir }}"
-    nocache: "no"
-    state: "present"
-    restarted: "{{ jellyfin_container_restart }}"
+    state: "{{ 'restarted' if jellyfin_container_restart and not container_deleted.changed else 'present' }}"

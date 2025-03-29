@@ -47,7 +47,7 @@ immich_proxy_container_traefik_labels:
   - "traefik.http.routers.immich1.entrypoints=websecure"
   - "traefik.http.routers.immich1.middlewares=secureHeaders@file"
   - "traefik.http.routers.immich1.service=immich-svc"
-  - "traefik.http.services.immich-svc.loadbalancer.server.port=3001"
+  - "traefik.http.services.immich-svc.loadbalancer.server.port=2283"
   - "traefik.http.routers.immich1.tls=true"
   - "traefik.http.routers.immich1.tls.certresolver=letsEncrypt"
 

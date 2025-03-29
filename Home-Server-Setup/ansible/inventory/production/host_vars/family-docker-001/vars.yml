@@ -7,6 +7,7 @@ system_packages:
   - libdata-validate-ip-perl
   - net-tools
   - p7zip-full
+  - tmux
   - unzip
 
 fail2ban_ignoreip:
@@ -37,6 +38,22 @@ ufw_rules:
       to_ip: any
       from_port: null
       to_port: "443"
+      proto: tcp
+    - comment: "Permits incoming UDP DNS connections"
+      rule: allow
+      delete: no
+      from_ip: any
+      to_ip: any
+      from_port: null
+      to_port: "53"
+      proto: udp
+    - comment: "Permits incoming TCP DNS connections"
+      rule: allow
+      delete: no
+      from_ip: any
+      to_ip: any
+      from_port: null
+      to_port: "53"
       proto: tcp
     - comment: "Permits incoming TCP connections to iperf3"
       rule: allow

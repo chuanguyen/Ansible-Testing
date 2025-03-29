@@ -1,0 +1,14 @@
+---
+nebula_sync_use_custom_dns: true
+nebula_sync_custom_dns_servers:
+  - "pihole.{{ home_lan_domain }}"
+  - "pihole2.{{ home_lan_domain }}"
+
+nebula_sync_container_envs:
+  kv:
+    PRIMARY: "https://pihole.{{ home_lan_domain }}|{{ pihole_api_tokens.pihole }}"
+    REPLICAS: "https://pihole2.{{ home_lan_domain }}|{{ pihole_api_tokens.pihole2 }}"
+    FULL_SYNC: "true"
+    CRON: "0 0 * * *"
+    TZ: "America/Vancouver"
+    CLIENT_SKIP_TLS_VERIFICATION: "false"

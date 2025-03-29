@@ -17,6 +17,11 @@ snmp_exporter_docker_cli_commands:
   "config.file": "/etc/snmp_exporter/snmp.yml"
   "web.listen-address": ":{{ snmp_exporter_container_web_port }}"
 
+snmp_community_strings:
+  public_v2:
+    community: "public"
+    version: 2
+
 snmp_exporter_prometheus_mib_modules:
   - name: ""
     walk:

@@ -15,10 +15,6 @@ server={{ ddclient_server }}
 ssl=yes
 
 ### Cloudflare
-# Specifying both login and password requires using the global Cloudflare token
-# v3.9.1 doesn't yet include PR102 supporting granular Cloudflare API tokens
-# https://github.com/ddclient/ddclient/pull/102
-# https://github.com/ddclient/ddclient/issues/272
 {% for ddns_domains_to_update in dns_provider_ddns_domains_to_update %}
 password='{{ ddns_domains_to_update.dns_provider_token }}'
 zone={{ ddns_domains_to_update.zone }}

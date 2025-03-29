@@ -1,15 +1,11 @@
 ---
 # Port definitions for various services
-pihole_container_web_port: "80"
 grafana_container_web_port: "3000"
 snmp_exporter_container_web_port: "9116"
 
 # Home Internet Monitoring
 home_internet_blackbox_exporter_container_port: "9115"
 home_internet_speedtest_exporter_container_port: "9798"
-
-# ddclient
-ddclient_version: "3.10.0"
 
 # MQTT
 mqtt_mosquitto_auth_credentials: "{{ vault_mqtt_mosquitto_auth_credentials }}"
@@ -38,13 +34,18 @@ open_speedtest_int_https_port: 3001
 # Docker Wyze Bridge
 docker_wyze_bridge_stream_username: "{{ vault_docker_wyze_bridge_stream_username }}"
 docker_wyze_bridge_stream_api_key: "{{ vault_docker_wyze_bridge_stream_api_key }}"
+docker_wyze_bridge_cameras: "{{ vault_docker_wyze_bridge_cameras }}"
+docker_wyze_bridge_wyze_email: "{{ vault_docker_wyze_bridge_wyze_email }}"
+docker_wyze_bridge_wyze_password: "{{ vault_docker_wyze_bridge_wyze_password }}"
+docker_wyze_bridge_wyze_api_id: "{{ vault_docker_wyze_bridge_wyze_api_id }}"
+docker_wyze_bridge_wyze_api_key: "{{ vault_docker_wyze_bridge_wyze_api_key }}"
 
 # Credentials for Docker services accessing NAS
 nas_svc_docker_user: "{{ vault_nas_svc_docker_user }}"
 nas_svc_docker_password: "{{ vault_nas_svc_docker_password }}"
 
 # PiHole
-pihole_api_token: "{{ vault_pihole_api_token }}"
+pihole_api_tokens: "{{ vault_pihole_api_tokens }}"
 
 # Paperless-ngx
 paperless_ngx_admin_api_token: "{{ vault_paperless_ngx_admin_api_token }}"
@@ -55,3 +56,16 @@ homepage_dashboard_info_widgets_openmeteo_longitude: "{{ vault_homepage_dashboar
 
 # Jellyfin
 jellyfin_homepage_dashboard_api_key: "{{ vault_jellyfin_homepage_dashboard_api_key }}"
+
+# RYOT
+ryot_media_configuration_mal_client_id: "{{ vault_ryot_media_configuration_mal_client_id }}"
+ryot_media_configuration_google_books_api_key: "{{ vault_ryot_media_configuration_google_books_api_key }}"
+ryot_media_configuration_tmdb_access_token: "{{ vault_ryot_media_configuration_tmdb_access_token }}"
+ryot_media_configuration_twitch_client_id: "{{ vault_ryot_media_configuration_twitch_client_id }}"
+ryot_media_configuration_twitch_client_secret: "{{ vault_ryot_media_configuration_twitch_client_secret }}"
+
+ryot_media_configuration_s3_access_key_id: "{{ vault_ryot_media_configuration_s3_access_key_id }}"
+ryot_media_configuration_s3_bucket_name: "{{ vault_ryot_media_configuration_s3_bucket_name }}"
+ryot_media_configuration_s3_region: "{{ vault_ryot_media_configuration_s3_region }}"
+ryot_media_configuration_s3_secret_access_key: "{{ vault_ryot_media_configuration_s3_secret_access_key }}"
+ryot_media_configuration_s3_url: "{{ vault_ryot_media_configuration_s3_url }}"

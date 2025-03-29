@@ -1,0 +1,39 @@
+---
+- name: "TASK: Retrieve container info"
+  community.docker.docker_container_info:
+    name: "{{ docker_wyze_bridge_container_name }}"
+  register: container_state
+
+- name: "TASK: Set container facts"
+  set_fact:
+    container_exists: "{{ container_state.exists }}"
+    container_image: "{{ container_state.container.Config.Image | default('tag:n/a') }}"
+
+- name: "TASK: Set container image tag"
+  set_fact:
+    container_image_tag: "{{ container_image.split(':') }}"
+
+- block:
+    - include_tasks: "image_cleanup.yml"
+
+    - name: "TASK: Pull base image"
+      community.docker.docker_image:
+        name: "{{ docker_wyze_bridge_image_base }}"
+        tag: "{{ docker_wyze_bridge_image_base_tag }}"
+        source: "pull"
+        state: "present"
+      register: "image_base_pull"
+  when: container_image_tag[1] != docker_wyze_bridge_image_base_tag
+
+- name: "TASK: Delete {{ docker_wyze_bridge_container_name }}"
+  community.docker.docker_compose_v2:
+    project_src: "{{ docker_wyze_bridge_container_data_dir }}"
+    state: "absent"
+  when: image_base_pull.changed or container_templated_files.changed
+  register: container_deleted
+
+- name: "TASK: Deploy {{ docker_wyze_bridge_container_name }}"
+  community.docker.docker_compose_v2:
+    project_src: "{{ docker_wyze_bridge_container_data_dir }}"
+    build: "{{ 'always' if image_base_pull.changed else 'never' }}"
+    state: "{{ 'restarted' if docker_wyze_bridge_container_restart and not container_deleted.changed else 'present' }}"

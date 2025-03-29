@@ -1,5 +1,5 @@
 ddclient_version: ""
-ddclient_url: "https://github.com/ddclient/ddclient/archive/refs/tags/v{{ ddclient_version }}.tar.gz"
+ddclient_url: "https://github.com/ddclient/ddclient/releases/download/v{{ ddclient_version }}/ddclient-{{ ddclient_version }}.tar.gz"
 
 ddclient_daemon: "600"
 ddclient_protocol: "cloudflare"

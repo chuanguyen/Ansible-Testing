@@ -1,0 +1,21 @@
+---
+
+# {{ ansible_managed }}
+
+services:
+  nebula_sync:
+    container_name: "{{ nebula_sync_container_name }}"
+    image: "{{ nebula_sync_image_base }}:{{ nebula_sync_image_base_tag }}"
+    env_file: nebula_sync.env
+{% if nebula_sync_use_custom_dns %}
+    dns:
+{% for dns_server in nebula_sync_custom_dns_servers %}
+      - "{{ lookup('community.general.dig', dns_server) }}"
+{% endfor %}
+{% endif %}
+    networks:
+      - {{ docker_networks.proxy.name }}
+    restart: "always"
+networks:
+  {{ docker_networks.proxy.name }}:
+    external: true

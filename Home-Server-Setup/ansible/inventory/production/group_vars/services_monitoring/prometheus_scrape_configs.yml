@@ -61,6 +61,7 @@ prometheus_scrape_configs:
             device_type: "printer"
     metrics_path: "/snmp"
     params:
+      auth: "[public_v2_printer]"
       module: "[PRINTER-MIB]"
     scrape_interval: "1m"
     scrape_timeout: "5s"
@@ -85,6 +86,7 @@ prometheus_scrape_configs:
             vendor: "qnap"
     metrics_path: "/snmp"
     params:
+      auth: "[public_v2_nas]"
       module: "[QNAP-MIB]"
     scrape_interval: "90s"
     scrape_timeout: "60s"
@@ -109,6 +111,7 @@ prometheus_scrape_configs:
             vendor: "qnap"
     metrics_path: "/snmp"
     params:
+      auth: "[public_v2_nas]"
       module: "[QNAP-LONG-MIB]"
     scrape_interval: "5m"
     scrape_timeout: "60s"

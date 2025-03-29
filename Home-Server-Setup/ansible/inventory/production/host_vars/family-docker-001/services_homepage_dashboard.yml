@@ -1,4 +1,7 @@
 ---
+homepage_dashboard_container_labels:
+  - "com.centurylinklabs.watchtower.enable=true"
+
 homepage_dashboard_container_traefik_labels:
   - "traefik.enable=true"
   - "traefik.docker.network={{ docker_networks.proxy.name }}"
@@ -87,16 +90,31 @@ homepage_dashboard_services:
           widget:
             type: "pihole"
             url: "https://pihole.{{ home_lan_domain }}"
-            version: 5 # required if running v6 or higher, defaults to 5
-            key: "{{ pihole_api_token }}" # optional
+            version: 6 # required if running v6 or higher, defaults to 5
+            key: "{{ pihole_api_tokens.pihole }}" # optional
+      - "Pihole2":
+          href: "https://pihole2.{{ home_lan_domain }}/admin"
+          description: "Home AdBlocker"
+          icon: "/images/pihole.png"
+          siteMonitor: "https://pihole2.{{ home_lan_domain }}/admin"
+          widget:
+            type: "pihole"
+            url: "https://pihole2.{{ home_lan_domain }}"
+            version: 6 # required if running v6 or higher, defaults to 5
+            key: "{{ pihole_api_tokens.pihole2 }}" # optional
   - "IT Tools":
+      - "Ente Auth":
+          href: "https://auth.ente.io/"
+          description: "2FA service with E2EE"
+          icon: "sh-ente-auth"
+          siteMonitor: "https://auth.ente.io"
       - "Proxmox (Production)":
           href: "https://proxmox-001.{{ home_lan_domain }}:8006"
           description: "VM Hypervisor"
           icon: "sh-proxmox"
           ping: "proxmox-001.{{ home_lan_domain }}"
       - "Proxmox (Dev)":
-          href: "proxmox-test.{{ home_lan_domain }}:8006"
+          href: "https://proxmox-test.{{ home_lan_domain }}:8006"
           description: "VM Hypervisor"
           icon: "sh-proxmox"
           ping: "proxmox-test.{{ home_lan_domain }}"
@@ -230,6 +248,13 @@ homepage_dashboard_services:
           icon: "/images/nas.png"
           siteMonitor: "https://nas1.{{ home_lan_domain }}"
   - "Media Tools":
+      - "Ryot":
+          href: "https://media-tracker.{{ home_lan_domain }}"
+          description: "Tracks movies, shows, and other media"
+          icon: "sh-ryot"
+          siteMonitor: "https://media-tracker.{{ home_lan_domain }}"
+          server: "docker-local"
+          container: "{{ ryot_media_container_name }}"
       - "Digikam":
           href: "https://digikam.{{ home_lan_domain }}"
           description: "Photo Management"
@@ -271,3 +296,9 @@ homepage_dashboard_info_widgets:
 homepage_dashboard_docker:
   docker-local:
     socket: "/var/run/docker.sock"
+
+homepage_dashboard_container_envs:
+  kv:
+    PUID: "{{ homepage_dashboard_container_puid }}"
+    PGID: "{{ homepage_dashboard_container_pgid }}"
+    HOMEPAGE_ALLOWED_HOSTS: "homepage.{{ home_lan_domain }}"

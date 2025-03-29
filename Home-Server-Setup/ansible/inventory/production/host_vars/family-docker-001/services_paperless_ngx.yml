@@ -10,6 +10,8 @@ paperless_ngx_container_traefik_labels:
   - "traefik.http.routers.paperless_ngx1.tls=true"
   - "traefik.http.routers.paperless_ngx1.tls.certresolver=letsEncrypt"
 
+paperless_ngx_nfs_backup_frequency: "0 1 * * *"
+
 # Postgres
 paperless_ngx_postgres_user: "postgres_user"
 paperless_ngx_postgres_password: "{{ vault_paperless_dbpass }}"
