@@ -16,6 +16,18 @@ mqtt:
   # tls_insecure: {{ frigate_mqtt_tls_insecure }}
   stats_interval: {{ frigate_mqtt_stats_interval }}
 
+detectors:
+{% for detector_name, detector_config in frigate_detectors.items() %}
+  {{ detector_name }}:
+    {{ detector_config }}
+{% endfor %}
+
+database:
+  {{ frigate_database }}
+
+audio:
+  {{ frigate_audio }}
+
 go2rtc:
   {{ frigate_go2rtc }}
 
@@ -27,12 +39,6 @@ cameras:
 
 birdseye:
   {{ frigate_birdseye }}
-
-detectors:
-{% for detector_name, detector_config in frigate_detectors.items() %}
-  {{ detector_name }}:
-    {{ detector_config }}
-{% endfor %}
 
 model:
   {{ frigate_detectors_model }}
@@ -57,6 +63,9 @@ live:
 
 ui:
   {{ frigate_ui }}
+
+semantic_search:
+  {{ frigate_semantic_search }}
 
 logger:
   {{ frigate_logger }}
