@@ -33,26 +33,23 @@ frigate_mqtt_port: "{{ mqtt_mosquitto_port_tcp }}"
 frigate_mqtt_user: "{{ mqtt_mosquitto_auth_credentials[0].username }}"
 frigate_mqtt_password: "{{ mqtt_mosquitto_auth_credentials[0].password }}"
 
+frigate_auth:
+  # Optional: Enable authentication
+  enabled: False
+
 frigate_go2rtc:
   streams:
     front_door:
       - "rtsp://{{ docker_wyze_bridge_stream_username }}:{{ docker_wyze_bridge_stream_api_key }}@home-assistant-001.{{ home_lan_domain }}:8554/front-door"
       - "ffmpeg:front_door#audio=opus"
-    # front_door_substream:
-    #   - "rtsp://home-assistant-001.{{ home_lan_domain }}:8556/front-door-sub"
     front_door_bell:
-      # - "rtsp://{{ reolink_cameras_username }}:{{ reolink_cameras_password }}@doorbell-front.{{ home_lan_domain }}:554/h264Preview_01_main"
-      # - "ffmpeg:front_door_bell#audio=pcm"
       - "ffmpeg:http://doorbell-front.{{ home_lan_domain }}/flv?port=1935&app=bcs&stream=channel0_main.bcs&user={{ reolink_cameras_username }}&password={{ reolink_cameras_password }}#video=copy#audio=copy#audio=opus"
       # - "ffmpeg:front_door_bell#audio=opus"
     front_door_bell_substream:
-      # - "rtsp://{{ reolink_cameras_username }}:{{ reolink_cameras_password }}@doorbell-front.{{ home_lan_domain }}:554/h264Preview_01_sub"
       - "ffmpeg:http://doorbell-front.{{ home_lan_domain }}/flv?port=1935&app=bcs&stream=channel0_ext.bcs&user={{ reolink_cameras_username }}&password={{ reolink_cameras_password }}"
     garage:
       - "rtsp://{{ docker_wyze_bridge_stream_username }}:{{ docker_wyze_bridge_stream_api_key }}@home-assistant-001.{{ home_lan_domain }}:8554/rear-driveway"
-      - "ffmpeg:front_door#audio=opus"
-    # garage_substream:
-    #   - "rtsp://home-assistant-001.{{ home_lan_domain }}:8556/rear-driveway-sub"
+      - "ffmpeg:garage#audio=opus"
   # Necessary for establishing webrtc connection via live view
   webrtc:
     candidates:
@@ -82,6 +79,12 @@ frigate_cameras:
       alerts:
         labels:
           - person
+        required_zones:
+          - front_yard_left
+          - front_yard_right
+          - front_yard_walkway
+      detections:
+        labels:
           - cat
           - dog
           - bird
@@ -92,14 +95,18 @@ frigate_cameras:
           - front_yard_walkway
     record:
       enabled: True
-      events:
+      alerts:
         pre_capture: 10
         post_capture: 10
         retain:
-          default: 20
+          days: 20
           mode: motion
-          objects:
-            person: 30
+      detections:
+        pre_capture: 10
+        post_capture: 10
+        retain:
+          days: 10
+          mode: motion
     snapshots:
       enabled: True
       bounding_box: True
@@ -149,10 +156,6 @@ frigate_cameras:
           roles:
             - record
             - detect
-        # - path: "rtsp://127.0.0.1:8554/front_door_substream" # Restream connection
-        #   input_args: "preset-rtsp-restream"
-        #   roles:
-        #     - detect
       output_args:
         record: preset-record-generic-audio-copy
     detect:
@@ -164,6 +167,11 @@ frigate_cameras:
       alerts:
         labels:
           - person
+        required_zones:
+          - front_yard
+      detections:
+        labels:
+          - person
           - cat
           - dog
           - bird
@@ -173,14 +181,18 @@ frigate_cameras:
           - front_yard_street
     record:
       enabled: True
-      events:
+      alerts:
         pre_capture: 10
         post_capture: 10
         retain:
-          default: 20
+          days: 20
           mode: motion
-          objects:
-            person: 30
+      detections:
+        pre_capture: 10
+        post_capture: 10
+        retain:
+          days: 10
+          mode: motion
     snapshots:
       enabled: True
       bounding_box: True
@@ -220,37 +232,6 @@ frigate_cameras:
       mask:
         - 1280,720,1280,384,1237,370,1163,394,1120,457,1124,543,1125,665,1156,720
         - 608,0,1280,0,1280,140,1229,90,1131,111,825,87,260,79,90,201,0,163,0,0
-    ### Masks, filters for original camera orientation with street in view
-    # objects:
-    #   track:
-    #     - person
-    #     - cat
-    #     - dog
-    #   filters:
-    #     person:
-    #       mask:
-    #         - 561,720,531,610,492,577,435,560,367,567,310,622,245,720
-    # zones:
-    #   front_yard:
-    #     coordinates: 1280,720,1280,300,1280,90,1207,83,1194,220,997,209,755,194,633,200,374,216,0,242,0,720
-    #     objects:
-    #       - person
-    #       - cat
-    #       - dog
-    #   front_yard_street:
-    #     coordinates: 577,149,974,158,1139,171,1140,122,1154,61,976,0,739,0,238,0,190,37,80,94,90,197,226,174
-    #     objects:
-    #       - person
-    # motion:
-    #   mask:
-    #     - 1280,720,1280,304,1254,298,1215,296,1185,291,1160,304,1139,332,1124,376,1094,414,1061,455,1059,531,1057,622,1125,720
-    #     - 561,720,531,610,492,577,435,560,367,567,310,622,245,720
-    #     - 178,45,262,0,405,31,353,92,322,105,382,124,390,154,360,177,274,209,185,211,126,130
-    #     - 0,84,43,71,79,84,88,128,129,160,117,197,0,253
-    #     - 580,103,611,105,641,155,639,175,557,185,534,130
-    #     - 753,114,787,137,779,162,727,168,727,126
-    #     - 1133,0,1280,0,1280,87,1280,168,1280,223,1280,254,1208,241,1155,217,1109,211,1097,178,1090,102
-    #     - 1034,720,999,679,965,720
     live:
       stream_name: "front_door"
   garage:
@@ -261,10 +242,6 @@ frigate_cameras:
           roles:
             - record
             - detect
-        # - path: "rtsp://127.0.0.1:8554/garage_substream" # Restream connection
-        #   input_args: "preset-rtsp-restream"
-        #   roles:
-        #     - detect
       output_args:
         record: preset-record-generic-audio-copy
     detect:
@@ -276,6 +253,13 @@ frigate_cameras:
       alerts:
         labels:
           - person
+        required_zones:
+          - "driveway"
+          - "driveway_entrance"
+          - "backyard"
+      detections:
+        labels:
+          - car
           - cat
           - dog
           - bird
@@ -286,14 +270,18 @@ frigate_cameras:
           - "backyard"
     record:
       enabled: True
-      events:
+      alerts:
         pre_capture: 10
         post_capture: 10
         retain:
-          default: 20
+          days: 20
           mode: motion
-          objects:
-            person: 30
+      detections:
+        pre_capture: 10
+        post_capture: 10
+        retain:
+          days: 10
+          mode: motion
     snapshots:
       enabled: True
       bounding_box: True
@@ -327,6 +315,7 @@ frigate_cameras:
       driveway_entrance:
         coordinates: 408,184,888,191,892,0,515,0
         inertia: 1
+        loitering_time: 0
         objects:
           - person
           - car
@@ -356,6 +345,7 @@ frigate_cameras:
           - bird
           - mouse
     motion:
+      enabled: True
       mask:
         - 112,81,395,21,536,26,543,0,0,0,0,92
         - 884,0,1280,0,1280,138,1165,69,1158,107,1017,48,893,41,735,46,533,48,530,0
@@ -399,4 +389,4 @@ frigate_ui:
 
 ### Logger
 frigate_logger:
-  default: "info"
+  default: "debug"
