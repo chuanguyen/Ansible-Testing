@@ -41,6 +41,56 @@ frigate_detectors:
 
 frigate_detectors_model: {}
 
+frigate_detect:
+  # Optional: width of the frame for the input with the detect role (default: use native stream resolution)
+  width: 1280
+  # Optional: height of the frame for the input with the detect role (default: use native stream resolution)
+  height: 720
+  # Optional: desired fps for your camera for the input with the detect role (default: shown below)
+  # NOTE: Recommended value of 5. Ideally, try and reduce your FPS on the camera.
+  fps: 5
+  # Optional: enables detection for the camera (default: True)
+  enabled: True
+  # Optional: Number of consecutive detection hits required for an object to be initialized in the tracker. (default: 1/2 the frame rate)
+  min_initialized: 2
+  # Optional: Number of frames without a detection before Frigate considers an object to be gone. (default: 5x the frame rate)
+  max_disappeared: 25
+  # Optional: Configuration for stationary object tracking
+  stationary:
+    # Optional: Frequency for confirming stationary objects (default: same as threshold)
+    # When set to 1, object detection will run to confirm the object still exists on every frame.
+    # If set to 10, object detection will run to confirm the object still exists on every 10th frame.
+    interval: 50
+    # Optional: Number of frames without a position change for an object to be considered stationary (default: 10x the frame rate or 10s)
+    threshold: 50
+    # Optional: Define a maximum number of frames for tracking a stationary object (default: not set, track forever)
+    # This can help with false positives for objects that should only be stationary for a limited amount of time.
+    # It can also be used to disable stationary object tracking. For example, you may want to set a value for person, but leave
+    # car at the default.
+    # WARNING: Setting these values overrides default behavior and disables stationary object tracking.
+    #          There are very few situations where you would want it disabled. It is NOT recommended to
+    #          copy these values from the example config into your config unless you know they are needed.
+    max_frames:
+      # Optional: Default for all object types (default: not set, track forever)
+      default: 3000
+      # Optional: Object specific values
+      objects:
+        person: 1000
+  # Optional: Milliseconds to offset detect annotations by (default: shown below).
+  # There can often be latency between a recording and the detect process,
+  # especially when using separate streams for detect and record.
+  # Use this setting to make the timeline bounding boxes more closely align
+  # with the recording. The value can be positive or negative.
+  # TIP: Imagine there is an tracked object clip with a person walking from left to right.
+  #      If the tracked object lifecycle bounding box is consistently to the left of the person
+  #      then the value should be decreased. Similarly, if a person is walking from
+  #      left to right and the bounding box is consistently ahead of the person
+  #      then the value should be increased.
+  # TIP: This offset is dynamic so you can change the value and it will update existing
+  #      tracked objects, this makes it easy to tune.
+  # WARNING: Fast moving objects will likely not have the bounding box align.
+  annotation_offset: 0
+
 frigate_ffmpeg:
   # Optional: ffmpeg binry path (default: shown below)
   # can also be set to `7.0` or `5.0` to specify one of the included versions
