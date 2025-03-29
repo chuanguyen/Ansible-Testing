@@ -365,10 +365,8 @@ frigate_cameras:
 
 frigate_detectors:
   ov:
-    type: openvino
-    device: AUTO
-    model:
-      path: /openvino-model/ssdlite_mobilenet_v2.xml
+    type: "openvino"
+    device: "CPU"
   # # Recommended to have the same number of CPU detectors as available cameras
   # cpu1:
   #   type: "cpu"
@@ -382,6 +380,7 @@ frigate_detectors_model:
   height: 300
   input_tensor: nhwc
   input_pixel_format: bgr
+  path: /openvino-model/ssdlite_mobilenet_v2.xml
   labelmap_path: /openvino-model/coco_91cl_bkgr.txt
 
 frigate_detect:
