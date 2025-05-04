@@ -8,7 +8,7 @@ immich_image_base_tag_old: ""
 
 ### Dependent containers
 
-immich_redis_image_base: "redis"
+immich_redis_image_base: "docker.io/valkey/valkey"
 immich_redis_image_base_tag: ""
 # Ensures previous version of working
 # immich image is available for failback

@@ -64,6 +64,9 @@ identity_providers:
 {% for authelia_scope in authelia_client.scopes %}
                 - {{ authelia_scope }}
 {% endfor %}
+{% if authelia_client.token_endpoint_auth_method != "" %}
+            token_endpoint_auth_method: "{{ authelia_client.token_endpoint_auth_method }}"
+{% endif %}
 {% endfor %}
 {% endif %}
 {% endif %}

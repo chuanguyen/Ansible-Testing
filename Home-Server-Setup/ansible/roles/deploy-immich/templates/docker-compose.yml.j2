@@ -42,6 +42,8 @@ services:
     image: {{ immich_redis_image_base }}:{{ immich_redis_image_base_tag }}
     networks:
       - immich
+    healthcheck:
+      test: redis-cli ping || exit 1
     restart: always
 
   database:

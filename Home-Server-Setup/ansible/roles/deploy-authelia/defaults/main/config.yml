@@ -79,6 +79,7 @@ authelia_config_oidc_clients: []
 #     - ""
 #   scopes:
 #     -
+#   token_endpoint_auth_method: ""
 
 authelia_config_session_name: "authelia_session"
 # Indicates secret provided via a file
