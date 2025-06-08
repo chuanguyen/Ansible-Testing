@@ -14,7 +14,7 @@ immich_redis_image_base_tag: ""
 # immich image is available for failback
 immich_redis_image_base_tag_old: ""
 
-immich_postgres_image_base: "tensorchord/pgvecto-rs"
+immich_postgres_image_base: "ghcr.io/immich-app/postgres"
 immich_postgres_image_base_tag: ""
 # Ensures previous version of working
 # immich image is available for failback
