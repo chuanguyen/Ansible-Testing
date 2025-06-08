@@ -61,8 +61,8 @@ mqtt_mosquitto_image_base_tag_old: "2.0.20"
 zigbee2mqtt_image_base_tag: "2.0.0"
 zigbee2mqtt_image_base_tag_old: "latest"
 
-zwave_js_ui_image_base_tag: "9.29.0"
-zwave_js_ui_image_base_tag_old: "latest1"
+zwave_js_ui_image_base_tag: "10.6.1"
+zwave_js_ui_image_base_tag_old: "9.29.0"
 
 rtl_433_image_base_tag: "22.11-alpine-3.18.2"
 rtl_433_image_base_tag_old: ""
