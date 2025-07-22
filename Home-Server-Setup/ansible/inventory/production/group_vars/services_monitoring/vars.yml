@@ -6,8 +6,9 @@ snmp_community_strings: "{{ vault_snmp_community_strings }}"
 smtp_monitoring_server_url: "{{ vault_smtp_monitoring_server_url }}"
 # ORIGINAL: smtp.sendgrid.net:465
 smtp_monitoring_server_port: "{{ vault_smtp_monitoring_server_port }}"
-# API key monitoring services to use SendGrid
+# API key monitoring services
 # {{ smtp_monitoring_server_url }}:{{ smtp_monitoring_server_port }}
+smtp_monitoring_smtp_user: "{{ vault_smtp_monitoring_smtp_user }}"
 smtp_monitoring_api_key: "{{ vault_smtp_monitoring_api_key }}"
 
 ### Watchtower
