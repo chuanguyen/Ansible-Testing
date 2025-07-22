@@ -27,7 +27,7 @@ grafana_container_envs:
     GF_SERVER_ROOT_URL: "https://grafana.{{ home_lan_domain }}"
     GF_SMTP_ENABLED: "true"
     GF_SMTP_HOST: "{{ smtp_monitoring_server_url }}:{{ smtp_monitoring_server_port }}"
-    GF_SMTP_USER: "apikey"
+    GF_SMTP_USER: "{{ smtp_monitoring_smtp_user }}"
     GF_SMTP_PASSWORD: "{{ smtp_monitoring_api_key }}"
     GF_SMTP_FROM_ADDRESS: "monitoring.notifications@m.{{ home_lan_domain_public }}"
     GF_SMTP_FROM_NAME: "Grafana Alerts"

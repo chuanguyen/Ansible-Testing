@@ -22,7 +22,7 @@
         tag: "{{ smtp_relay_image_base_tag }}"
         source: "pull"
         state: "present"
-      register: "smtp_relay_image_base_pull"
+      register: "image_base_pull"
   when: smtp_relay_container_image_tag[1] != smtp_relay_image_base_tag
 
 - name: "TASK: Delete {{ smtp_relay_container_name }}"
