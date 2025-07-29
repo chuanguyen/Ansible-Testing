@@ -29,4 +29,16 @@ __complete_ssh_host() {
     return 0
 }
 
-complete -F __complete_ssh_host ssht
+# complete -F __complete_ssh_host ssht
+
+# fzf and SSH
+ssht () {
+	  local server
+	    server=$(grep -E '^Host ' ~/.ssh/config | awk '{print $2}' | fzf)
+	      if [[ -n $server ]]; then
+		          ssh $server
+			    fi
+		    }
+
+# Set up fzf key bindings and fuzzy completion
+eval "$(fzf --bash)"
