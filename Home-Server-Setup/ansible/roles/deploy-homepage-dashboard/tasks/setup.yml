@@ -19,6 +19,7 @@
   with_items: "{{ homepage_dashboard_container_data_dir_sub_folders }}"
 
 - name: "Template files for building and running {{ homepage_dashboard_container_name }}"
+  become: true
   template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
@@ -35,6 +36,7 @@
   register: "container_templated_files"
 
 - name: "Template files for customizing {{ homepage_dashboard_container_name }} that don't need a container restart"
+  become: true
   template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"

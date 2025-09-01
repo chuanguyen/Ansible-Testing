@@ -34,7 +34,7 @@
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
     owner: "{{ ryot_media_pid }}"
-    group: "{{ ryot_media_gid }}"
+    group: "docker"
     mode: 0660
   with_items:
     - src: "docker-compose.yml.j2"
@@ -43,6 +43,19 @@
       dest: "{{ ryot_media_container_data_dir }}/ryot_media.env"
     - src: "ryot_media_db.env.j2"
       dest: "{{ ryot_media_container_data_dir }}/ryot_media_db.env"
+  loop_control:
+    label: "{{ item.src }}"
+  register: "container_templated_files"
+
+- name: "Template files for building and running {{ ryot_media_container_name }}"
+  become: true
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ ryot_media_pid }}"
+    group: "{{ ryot_media_gid }}"
+    mode: 0660
+  with_items:
     - src: "ryot_config.yaml.j2"
       dest: "{{ ryot_media_container_data_dir }}/ryot_config/ryot.yaml"
   loop_control:

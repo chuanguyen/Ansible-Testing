@@ -16,6 +16,8 @@
       tags: [baseline, refresh, network]
     - role: configure-netplan
       tags: [baseline, refresh]
+    - role: configure-fstab-mounts
+      tags: [baseline, fstab]
     - role: configure-ssh-server
       tags: [baseline, refresh, security]
     - role: configure-ufw

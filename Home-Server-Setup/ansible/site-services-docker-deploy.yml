@@ -63,6 +63,9 @@
       vars:
         traefik_http_rule_hostname: "traefik-001"
 
+    - role: "deploy-authelia"
+      tags: [services, authelia]
+
     - role: "deploy-portainer"
       tags: [services, portainer]
       vars:
@@ -94,9 +97,6 @@
 
     - role: "deploy-digikam"
       tags: [services, digikam]
-
-    - role: "deploy-authelia"
-      tags: [services, authelia]
 
     - role: "deploy-immich"
       tags: [services, immich]

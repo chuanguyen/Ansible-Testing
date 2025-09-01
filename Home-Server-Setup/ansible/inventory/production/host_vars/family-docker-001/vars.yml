@@ -137,3 +137,15 @@ ufw_rules:
       proto: tcp
   remove:
     -
+
+fstab_entries:
+  - id: "/dev/sdb1"
+    mount_point:
+      path: "/media"
+      group: "root"
+      mask: "0755"
+    file_system: "ext4"
+    mount_options:
+      - "defaults"
+    dump: 0
+    fsck: 0

@@ -1,5 +1,5 @@
 ---
-rtl_433_host_dev_usb_device_path: "/dev/bus/usb/009/004"
+rtl_433_host_dev_usb_device_path: "/dev/bus/usb/002/005"
 
 rtl_433_container_labels:
   - ""
