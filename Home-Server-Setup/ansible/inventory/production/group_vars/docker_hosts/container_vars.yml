@@ -10,8 +10,8 @@ pihole_orbital_sync_image_base_tag_old: ""
 nebula_sync_image_base_tag: "v0.11.0"
 nebula_sync_image_base_tag_old: "v0.4.0"
 
-wireguard_image_base_tag: "arm64v8-1.0.20210914-r4-ls77"
-wireguard_image_base_tag_old: "arm64v8-1.0.20210914-r4-ls73"
+wireguard_image_base_tag: "arm64v8-1.0.20210914-r4-ls80"
+wireguard_image_base_tag_old: "arm64v8-1.0.20210914-r4-ls77"
 wireguard_nfs_backup_frequency: "0 1 */30 * *"
 
 traefik_image_base_tag: "v3.4.1"
