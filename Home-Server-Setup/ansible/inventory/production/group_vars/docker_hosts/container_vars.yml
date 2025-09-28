@@ -64,8 +64,8 @@ zigbee2mqtt_image_base_tag_old: "latest"
 zwave_js_ui_image_base_tag: "11.0.1"
 zwave_js_ui_image_base_tag_old: "10.6.1"
 
-rtl_433_image_base_tag: "22.11-alpine-3.18.2"
-rtl_433_image_base_tag_old: ""
+rtl_433_image_base_tag: "25.02-alpine-3.22"
+rtl_433_image_base_tag_old: "22.11-alpine-3.18.2"
 
 meTube_image_base_tag: "latest"
 meTube_image_base_tag_old: "2023-07-27"
