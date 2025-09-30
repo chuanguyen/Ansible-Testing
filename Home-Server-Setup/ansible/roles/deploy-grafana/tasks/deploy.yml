@@ -22,7 +22,7 @@
         tag: "{{ grafana_image_base_tag }}"
         source: "pull"
         state: "present"
-      register: "grafana_image_base_pull"
+      register: "image_base_pull"
 
   when: grafana_container_image_tag[1] != grafana_image_base_tag
 
