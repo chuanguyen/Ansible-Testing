@@ -86,8 +86,8 @@ immich_redis_image_base_tag_old: ""
 immich_postgres_image_base_tag: "14-vectorchord0.4.3-pgvectors0.2.0"
 immich_postgres_image_base_tag_old: "14-vectorchord0.3.0-pgvectors0.2.0"
 
-jellyfin_image_base_tag: "20240303.2-unstable"
-jellyfin_image_base_tag_old: "20240214.1-unstable"
+jellyfin_image_base_tag: "10.10.7"
+jellyfin_image_base_tag_old: "20240303.2-unstable"
 # jellyfin_image_base_tag: "10.8.10"
 # jellyfin_image_base_tag_old: ""
 
