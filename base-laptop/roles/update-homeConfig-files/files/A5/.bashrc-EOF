@@ -14,6 +14,7 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[0
 # Ensure caps-lock key acting as backspace key repeats
 # Use xev command to find the keycode
 xset r 22
+xset r 66
 
 __complete_ssh_host() {
     local KNOWN_FILE=~/.ssh/known_hosts
