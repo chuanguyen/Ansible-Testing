@@ -69,7 +69,7 @@ frigate_cameras:
           roles:
             - detect
       output_args:
-        record: preset-record-generic-audio-copy
+        record: preset-record-generic-audio-aac
     detect:
       enabled: true # <---- disable detection until you have a working camera feed
       width: 640 # <---- update for your camera's resolution
@@ -147,8 +147,6 @@ frigate_cameras:
       mask:
         - 0,0,0.734,0,0.775,0.138,0.809,0.427,0.783,0.427,0.703,0.427,0.68,0.408,0.622,0.377,0.569,0.442,0.12,0.431,0.108,0.4,0.083,0.367,0.036,0.369,0,0.423
         - 0.575,0.94,1,0.931,1,1,0.58,1
-    live:
-      stream_name: "front_door_bell"
   front_door: # <------ Name the camera
     ffmpeg:
       inputs:
@@ -158,7 +156,7 @@ frigate_cameras:
             - record
             - detect
       output_args:
-        record: preset-record-generic-audio-copy
+        record: preset-record-generic-audio-aac
     detect:
       enabled: true # <---- disable detection until you have a working camera feed
       width: 1280 # <---- update for your camera's resolution
@@ -233,8 +231,6 @@ frigate_cameras:
       mask:
         - 1,1,1,0.533,0.966,0.514,0.909,0.547,0.875,0.635,0.878,0.754,0.879,0.924,0.903,1
         - 0.475,0,1,0,1,0.194,0.96,0.125,0.884,0.154,0.645,0.121,0.203,0.11,0.07,0.279,0,0.226,0,0
-    live:
-      stream_name: "front_door"
   garage:
     ffmpeg:
       inputs:
@@ -244,7 +240,7 @@ frigate_cameras:
             - record
             - detect
       output_args:
-        record: preset-record-generic-audio-copy
+        record: preset-record-generic-audio-aac
     detect:
       enabled: true # <---- disable detection until you have a working camera feed
       width: 1280 # <---- update for your camera's resolution
@@ -352,8 +348,6 @@ frigate_cameras:
         - 0.087,0.113,0.309,0.029,0.419,0.036,0.424,0,0,0,0,0.128
         - 0.691,0,1,0,1,0.192,0.91,0.096,0.905,0.149,0.795,0.067,0.698,0.057,0.574,0.064,0.416,0.067,0.414,0
         - 0.716,1,1,1,1,0.94,0.722,0.925
-    live:
-      stream_name: "garage"
 
 frigate_detectors:
   ov:
