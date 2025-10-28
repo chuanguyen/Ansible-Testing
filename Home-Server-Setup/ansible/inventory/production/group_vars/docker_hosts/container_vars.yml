@@ -14,8 +14,8 @@ wireguard_image_base_tag: "arm64v8-1.0.20250521-r0-ls89"
 wireguard_image_base_tag_old: "arm64v8-1.0.20210914-r4-ls80"
 wireguard_nfs_backup_frequency: "0 1 */30 * *"
 
-traefik_image_base_tag: "v3.5.2"
-traefik_image_base_tag_old: "v3.4.1"
+traefik_image_base_tag: "v3.5.3"
+traefik_image_base_tag_old: "v3.5.2"
 
 smtp_relay_image_base_tag: "1.3.0"
 smtp_relay_image_base_tag_old: ""
@@ -52,8 +52,8 @@ portainer_image_base_tag_old: "2.16.2"
 # portainer_image_base_tag: "2.16.2"
 # portainer_image_base_tag_old: ""
 
-frigate_image_base_tag: "0.15.0"
-frigate_image_base_tag_old: "0.13.2"
+frigate_image_base_tag: "0.16.2"
+frigate_image_base_tag_old: "0.15.0"
 
 mqtt_mosquitto_image_base_tag: "2.0.21"
 mqtt_mosquitto_image_base_tag_old: "2.0.20"
