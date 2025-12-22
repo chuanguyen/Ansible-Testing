@@ -47,9 +47,6 @@
           home-internet-monitoring,
         ]
 
-    - role: "deploy-watchtower"
-      tags: [services, watchtower]
-
 - name: "PLAY: Deploy home automation services"
   hosts: family-docker-001
   gather_facts: true
@@ -103,9 +100,6 @@
 
     - role: "deploy-jellyfin"
       tags: [services, jellyfin]
-
-    - role: "deploy-watchtower"
-      tags: [services, watchtower]
 
     - role: "deploy-open-speedtest"
       tags: [services, open-speedtest]

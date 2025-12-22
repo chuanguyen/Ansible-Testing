@@ -91,9 +91,6 @@ jellyfin_image_base_tag_old: "20240303.2-unstable"
 # jellyfin_image_base_tag: "10.8.10"
 # jellyfin_image_base_tag_old: ""
 
-watchtower_image_base_tag: "1.7.1"
-watchtower_image_base_tag_old: "1.6.0"
-
 open_speedtest_image_base_tag: "latest"
 open_speedtest_image_base_tag_old: ""
 
