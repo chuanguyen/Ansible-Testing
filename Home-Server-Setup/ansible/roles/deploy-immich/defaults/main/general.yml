@@ -77,3 +77,16 @@ immich_container_envs:
     IMMICH_WEB_URL: "{{ immich_web_url }}"
     IMMICH_SERVER_URL: "{{ immich_server_url }}"
     IMMICH_MACHINE_LEARNING_URL: "http://immich-machine-learning:3003"
+
+# Defines where in container media is located
+immich_media_location: "/mnt/media"
+
+# Network locations where photos are located
+immich_media_volumes:
+  - name: "VOLUME_NAME"
+    container_dest: "CONTAINER_LOCATION"
+    driver: "local"
+    driver_opts:
+      type: "cifs"
+      device: "//SERVER/SHARE"
+      o: "addr=SERVER_FQDN,username=USER,password=PASSWORD,vers=3.0,uid=UID,gid=GID"

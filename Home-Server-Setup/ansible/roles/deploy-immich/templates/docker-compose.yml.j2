@@ -14,6 +14,9 @@ services:
 {% for volume in immich_container_volumes.binds %}
       - {{ volume.source }}:{{ volume.target }}
 {% endfor %}
+{% for media_volume in immich_media_volumes %}
+      - {{ media_volume.name }}:{{ media_volume.container_dest }}
+{% endfor %}
     labels:
 {% for traefik_label in immich_proxy_container_traefik_labels %}
       - "{{ traefik_label }}"
@@ -65,3 +68,11 @@ networks:
 volumes:
   pgdata:
   model-cache:
+{% for media_volume in immich_media_volumes %}
+  {{ media_volume.name }}:
+    driver: {{ media_volume.driver }}
+    driver_opts:
+      type: {{ media_volume.driver_opts.type }}
+      device: "{{ media_volume.driver_opts.device }}"
+      o: "{{ media_volume.driver_opts.o }}"
+{% endfor %}

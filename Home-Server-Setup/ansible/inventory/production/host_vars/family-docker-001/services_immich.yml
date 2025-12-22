@@ -1,0 +1,12 @@
+---
+# Defines where in container media is located
+immich_media_location: "/mnt/media"
+
+immich_media_volumes:
+  - name: "nas1_share_1"
+    container_dest: "{{ immich_media_location }}/Nas1-Pictures"
+    driver: "local"
+    driver_opts:
+      type: "cifs"
+      device: "//nas1.{{ home_lan_domain }}/multimedia/Pictures"
+      o: "addr=nas1.{{ home_lan_domain }},username={{ media_management_user_username }},password={{ media_management_user_password }},vers=3.0,ro"
