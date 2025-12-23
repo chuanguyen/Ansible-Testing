@@ -1,0 +1,6 @@
+#!/bin/bash
+
+### {{ ansible_managed }}
+
+rsync -tzv --ignore-existing {{ immich_backup_directory }}/*.gz {{ immich_nfs_backup_directory }}
+find {{ immich_nfs_backup_directory }} -mtime +{{ immich_nfs_backup_cleanup_period }} -exec rm {} \;

@@ -1,0 +1,7 @@
+# {{ ansible_managed }}
+# immich backup cron job
+
+SHELL=/bin/bash
+PATH=/usr/bin
+
+{{ immich_nfs_backup_frequency }}   root  {{ immich_container_data_dir }}/scripts/immich-backup.sh

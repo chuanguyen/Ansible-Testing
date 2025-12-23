@@ -1,6 +1,7 @@
 immich_container_data_dir_sub_folders:
   - "Photos/Uploads"
   - "External-Photo-Libraries/Family"
+  - "scripts"
 
 immich_container_volumes:
   binds:
