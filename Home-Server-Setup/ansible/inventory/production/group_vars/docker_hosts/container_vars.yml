@@ -70,11 +70,11 @@ rtl_433_image_base_tag_old: "22.11-alpine-3.18.2"
 meTube_image_base_tag: "latest"
 meTube_image_base_tag_old: "2023-07-27"
 
-digikam_image_base_tag: "8.6.0-ls253"
-digikam_image_base_tag_old: "8.5.0-ls234"
+digikam_image_base_tag: "8.8.0-ls287"
+digikam_image_base_tag_old: "8.6.0-ls253"
 
-authelia_image_base_tag: "4.39.13"
-authelia_image_base_tag_old: "4.39.4"
+authelia_image_base_tag: "4.39.15"
+authelia_image_base_tag_old: "4.39.13"
 
 ### Immich
 immich_image_base_tag: "v2.4.1"
@@ -86,8 +86,8 @@ immich_redis_image_base_tag_old: ""
 immich_postgres_image_base_tag: "14-vectorchord0.4.3-pgvectors0.2.0"
 immich_postgres_image_base_tag_old: "14-vectorchord0.3.0-pgvectors0.2.0"
 
-jellyfin_image_base_tag: "10.10.7"
-jellyfin_image_base_tag_old: "20240303.2-unstable"
+jellyfin_image_base_tag: "10.11.5"
+jellyfin_image_base_tag_old: "10.10.7"
 # jellyfin_image_base_tag: "10.8.10"
 # jellyfin_image_base_tag_old: ""
 
@@ -96,8 +96,8 @@ open_speedtest_image_base_tag_old: ""
 
 ### Paperless-ngx
 
-paperless_ngx_image_base_tag: "2.18.4"
-paperless_ngx_image_base_tag_old: "2.17.1"
+paperless_ngx_image_base_tag: "2.20.3"
+paperless_ngx_image_base_tag_old: "2.18.4"
 
 paperless_ngx_postgres_image_base_tag: "16.0-alpine"
 paperless_ngx_postgres_image_base_tag_old: ""
