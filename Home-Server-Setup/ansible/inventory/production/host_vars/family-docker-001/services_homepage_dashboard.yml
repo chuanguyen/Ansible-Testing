@@ -79,6 +79,10 @@ homepage_dashboard_bookmarks:
           - icon: "sh-youtube"
             href: "https://youtube.com/"
             description: ""
+      - KOInsights:
+          - icon: "/images/book.png"
+            href: "https://thepixelpro.de/KoStatsMulti/AMGTGN8Y/index.html"
+            description: ""
 
 homepage_dashboard_services:
   - "Admin_header_hidden":
