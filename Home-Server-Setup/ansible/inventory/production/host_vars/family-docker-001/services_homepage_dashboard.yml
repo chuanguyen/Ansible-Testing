@@ -1,6 +1,7 @@
 ---
 homepage_dashboard_container_labels:
-  - "com.centurylinklabs.watchtower.enable=true"
+  - "wud.watch=true"
+  - "wud.watch.digest=true"
 
 homepage_dashboard_container_traefik_labels:
   - "traefik.enable=true"

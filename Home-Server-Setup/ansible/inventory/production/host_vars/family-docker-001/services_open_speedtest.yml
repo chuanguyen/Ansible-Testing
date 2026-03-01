@@ -1,5 +1,6 @@
 ---
 open_speedtest_container_labels:
-  - "com.centurylinklabs.watchtower.enable=true"
+  - "wud.watch=true"
+  - "wud.watch.digest=true"
 
 open_speedtest_ext_https_port: 1443
