@@ -120,3 +120,6 @@ ryot_media_image_base_tag: "v8.2.0"
 ryot_media_image_base_tag_old: "v8.0.0"
 ryot_media_db_image_base_tag: "16-alpine"
 ryot_media_db_image_base_tag_old: ""
+
+wud_image_base: "getwud/wud"
+wud_image_base_tag: "8.2.2"

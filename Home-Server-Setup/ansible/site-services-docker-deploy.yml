@@ -118,3 +118,6 @@
 
     - role: "deploy-ryot-media"
       tags: [services, ryot-media, ryot]
+
+    - role: "deploy-wud"
+      tags: [services, wud]

@@ -1,0 +1,29 @@
+---
+
+# {{ ansible_managed }}
+
+services:
+  wud:
+    container_name: "{{ wud_container_name }}"
+    hostname: "{{ wud_container_hostname }}"
+    image: "{{ wud_image_base }}:{{ wud_image_base_tag }}"
+    env_file: wud.env
+    networks:
+      - {{ docker_networks.proxy.name }}
+    # Volumes store your data between container upgrades
+    volumes:
+{% for volume in wud_container_volumes.binds %}
+      - {{ volume.source }}:{{ volume.target }}
+{% endfor %}
+    labels:
+      - ""
+{% for container_label in wud_container_labels %}
+      - "{{ container_label }}"
+{% endfor %}
+{% for traefik_label in wud_container_traefik_labels %}
+      - "{{ traefik_label }}"
+{% endfor %}
+    restart: "always"
+networks:
+  {{ docker_networks.proxy.name }}:
+    external: true

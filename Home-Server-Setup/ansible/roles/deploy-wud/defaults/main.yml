@@ -1,0 +1,27 @@
+wud_container_data_dir: "{{ docker_container_root_dir }}/wud"
+
+wud_image_base: "getwud/wud"
+wud_image_base_tag: ""
+# Ensures previous version of working
+# wud image is available for failback
+wud_image_base_tag_old: ""
+wud_container_name: "wud"
+# Relevant to the notification that wud sends out
+# Helps differentiate multiple instances
+wud_container_hostname: "wud_{{ inventory_hostname }}"
+# Controls whether docker-compose restarts Docker containers
+wud_container_restart: no
+
+wud_container_labels: []
+
+wud_container_traefik_labels: []
+  # - "traefik.enable=true"
+  # - "traefik.docker.network={{ docker_networks.proxy.name }}"
+  # - "traefik.http.routers.wud1.rule=Host(`wud.{{ home_lan_domain }}`)"
+  # - "traefik.http.routers.wud1.entrypoints=websecure"
+  # - "traefik.http.routers.wud1.middlewares=lanWhitelist@file,secureHeaders@file"
+  # - "traefik.http.routers.wud1.tls=true"
+  # - "traefik.http.routers.wud1.tls.certresolver=letsEncrypt"
+
+wud_container_envs:
+  kv: {}
