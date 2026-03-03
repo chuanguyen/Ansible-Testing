@@ -1,4 +1,8 @@
 ---
+ryot_media_container_labels:
+  - "wud.watch=true"
+  - "wud.trigger.include=discord.1,docker.docker:minor"
+
 ryot_media_container_traefik_labels:
   - "traefik.enable=true"
   - "traefik.docker.network={{ docker_networks.proxy.name }}"
@@ -29,10 +33,10 @@ ryot_media_configuration:
   # Settings related to anime and manga.
   anime_and_manga:
     # Settings related to Anilist.
-    anilist:
+    anilist: {}
       # The preferred language for media from this source.
       # @envvar ANIME_AND_MANGA_ANILIST_PREFERRED_LANGUAGE
-      preferred_language: "native"
+      # preferred_language: "native"
 
     # Settings related to MAL.
     mal:
@@ -46,10 +50,10 @@ ryot_media_configuration:
   # Settings related to audio books.
   audio_books:
     # Settings related to Audible.
-    audible:
+    audible: {}
       # Settings related to locale for making requests Audible.
       # @envvar AUDIO_BOOKS_AUDIBLE_LOCALE
-      locale: "us"
+      # locale: "us"
 
   # Settings related to books.
   books:
@@ -61,7 +65,7 @@ ryot_media_configuration:
 
       # Whether to pass the raw query string to the search API.
       # @envvar BOOKS_GOOGLE_BOOKS_PASS_RAW_QUERY
-      pass_raw_query: false
+      # pass_raw_query: false
 
     # Settings related to Openlibrary.
     openlibrary:
@@ -123,7 +127,7 @@ ryot_media_configuration:
     # Settings related to Umami analytics.
     umami:
       # @envvar FRONTEND_UMAMI_DOMAINS
-      domains: ""
+      # domains: ""
 
       # For example: https://umami.is/script.js.
       # @envvar FRONTEND_UMAMI_SCRIPT_URL
@@ -137,16 +141,16 @@ ryot_media_configuration:
     url: "https://pro.ryot.io"
 
   # Settings related to external integrations.
-  integration:
-    # Sync data from push and yank based integrations every `n` minutes.
-    # @envvar INTEGRATION_SYNC_EVERY_MINUTES
-    sync_every_minutes: 5
+  # integration:
+  #   # Sync data from push and yank based integrations every `n` minutes.
+  #   # @envvar INTEGRATION_SYNC_EVERY_MINUTES
+  #   sync_every_minutes: 5
 
   # Settings related to media.
-  media:
-    # Number of days after which a media should be removed from the Monitoring collection.
-    # @envvar MEDIA_MONITORING_REMOVE_AFTER_DAYS
-    monitoring_remove_after_days: 365
+  # media:
+  # Number of days after which a media should be removed from the Monitoring collection.
+  # @envvar MEDIA_MONITORING_REMOVE_AFTER_DAYS
+  # monitoring_remove_after_days: 365
 
   # Settings related to movies and shows.
   movies_and_shows:
@@ -159,15 +163,15 @@ ryot_media_configuration:
 
       # The locale to use for making requests to TMDB API.
       # @envvar MOVIES_AND_SHOWS_TMDB_LOCALE
-      locale: "en"
+      # locale: "en"
 
   # Settings related to podcasts.
   podcasts:
     # Settings related to iTunes.
-    itunes:
+    itunes: {}
       # The locale to use for making requests to iTunes API.
       # @envvar PODCASTS_ITUNES_LOCALE
-      locale: "en_us"
+      # locale: "en_us"
 
     # Settings related to Listennotes.
     listennotes:
@@ -179,7 +183,7 @@ ryot_media_configuration:
   server:
     # An access token that can be used for admin operations.
     # @envvar SERVER_ADMIN_ACCESS_TOKEN
-    admin_access_token: ""
+    admin_access_token: "{{ ryot_media_configuration_server_admin_access_token }}"
 
     # An array of URLs for CORS.
     # @envvar SERVER_CORS_ORIGINS
@@ -244,7 +248,7 @@ ryot_media_configuration:
 
     # The secret used for generating JWT tokens.
     # @envvar USERS_JWT_SECRET
-    jwt_secret: ""
+    # jwt_secret: ""
 
     # The number of days till login authentication token is valid.
     # @envvar USERS_TOKEN_VALID_FOR_DAYS
