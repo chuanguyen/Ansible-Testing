@@ -47,6 +47,8 @@ immich_container_restart: no
 # Defines image ID for custom image
 immich_image_custom: "{{ ansible_user }}/immich"
 
+immich_container_labels: []
+
 immich_proxy_container_traefik_labels:
   - "traefik.enable=true"
   - "traefik.docker.network={{ docker_networks.proxy.name }}"

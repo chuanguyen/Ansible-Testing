@@ -18,6 +18,9 @@ services:
       - {{ media_volume.name }}:{{ media_volume.container_dest }}
 {% endfor %}
     labels:
+{% for container_label in immich_container_labels %}
+      - "{{ container_label }}"
+{% endfor %}
 {% for traefik_label in immich_proxy_container_traefik_labels %}
       - "{{ traefik_label }}"
 {% endfor %}
