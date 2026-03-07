@@ -1,4 +1,6 @@
 ---
+immich_container_data_dir: "/media/immich"
+
 immich_container_labels:
   - "wud.watch=true"
   - "wud.trigger.include=discord.1,docker.docker:patch"
