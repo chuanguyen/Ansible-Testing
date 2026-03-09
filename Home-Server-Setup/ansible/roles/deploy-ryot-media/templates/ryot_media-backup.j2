@@ -5,4 +5,4 @@ SHELL=/bin/bash
 PATH=/usr/bin
 
 {{ ryot_media_nfs_backup_frequency }}   root  {{ ryot_media_container_data_dir }}/scripts/ryot_media-backup.sh
-0 * * * *   root  /mnt/docker-data/container-data/ryot_media/scripts/ryot_media-restart.sh
+*/15 * * * *   root  /mnt/docker-data/container-data/ryot_media/scripts/ryot_media-restart.sh
