@@ -1,0 +1,26 @@
+---
+wud_container_traefik_labels:
+  - "traefik.enable=true"
+  - "traefik.docker.network={{ docker_networks.proxy.name }}"
+  - "traefik.http.routers.wud1.rule=Host(`wud-001.{{ home_lan_domain }}`)"
+  - "traefik.http.routers.wud1.entrypoints=websecure"
+  - "traefik.http.routers.wud1.middlewares=lanWhitelist@file,secureHeaders@file"
+  ### Uncomment if internal docker port can't be detected by traefik
+  - "traefik.http.routers.wud1.service=wud1-svc"
+  - "traefik.http.services.wud1-svc.loadbalancer.server.port=3000"
+  - "traefik.http.routers.wud1.tls=true"
+  - "traefik.http.routers.wud1.tls.certresolver=letsEncrypt"
+
+wud_container_envs:
+  kv:
+    # Watch docker host daily at 1am
+    WUD_WATCHER_local_CRON: "0 1 * * *"
+    WUD_WATCHER_local_WATCHBYDEFAULT: "false"
+    WUD_TRIGGER_DOCKER_DOCKER_AUTO: "true"
+    # Authentication
+    WUD_AUTH_BASIC_ADMIN_USER: "admin"
+    # Replacing $ with $$ to avoid issues with Docker compose variable substitution issues
+    WUD_AUTH_BASIC_ADMIN_HASH: "{{ WUD_AUTH_BASIC_ADMIN_PW | replace('$', '$$') }}"
+    # Discord Notifications
+    WUD_TRIGGER_DISCORD_1_URL: "{{ WUD_DISCORD_WEBHOOK_URL }}"
+    WUD_TRIGGER_DISCORD_1_CARDLABEL: "Server: {{ ansible_hostname }}"

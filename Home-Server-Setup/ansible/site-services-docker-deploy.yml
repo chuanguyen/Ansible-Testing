@@ -46,6 +46,8 @@
           prometheus-exporter,
           home-internet-monitoring,
         ]
+    - role: "deploy-wud"
+      tags: [services, wud]
 
 - name: "PLAY: Deploy home automation services"
   hosts: family-docker-001

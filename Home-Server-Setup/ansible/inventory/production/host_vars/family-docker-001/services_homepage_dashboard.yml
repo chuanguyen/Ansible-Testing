@@ -113,6 +113,16 @@ homepage_dashboard_services:
           description: "2FA service with E2EE"
           icon: "sh-ente-auth"
           siteMonitor: "https://auth.ente.io"
+      - "What's Up Docker 1 (WUD)":
+          href: "https://wud.{{ home_lan_domain }}"
+          description: "Docker container updater"
+          icon: "/images/wud.svg"
+          ping: "wud.{{ home_lan_domain }}"
+      - "What's Up Docker 2 (WUD)":
+          href: "https://wud-001.{{ home_lan_domain }}"
+          description: "Docker container updater"
+          icon: "/images/wud.svg"
+          ping: "wud-001.{{ home_lan_domain }}"
       - "Proxmox (Production)":
           href: "https://proxmox-001.{{ home_lan_domain }}:8006"
           description: "VM Hypervisor"

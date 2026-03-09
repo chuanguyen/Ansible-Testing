@@ -1,3 +1,4 @@
 ---
 portainer_container_labels:
-  - "com.centurylinklabs.watchtower.enable=true"
+  - "wud.watch=true"
+  - "wud.watch.digest=true"
