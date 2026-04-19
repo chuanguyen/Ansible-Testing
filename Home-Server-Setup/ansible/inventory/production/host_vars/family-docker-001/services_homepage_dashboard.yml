@@ -182,6 +182,11 @@ homepage_dashboard_services:
           siteMonitor: "https://zwave.{{ home_lan_domain }}"
           server: "docker-local"
           container: "{{ zwave_js_ui_container_name }}"
+      - "Zigbee-Coordinator":
+          href: "http://zigbee-slzb-06u.{{ home_lan_domain }}"
+          description: "Zigbee coordinator for devices"
+          icon: "/images/smlight-logo.png"
+          siteMonitor: "http://zigbee-slzb-06u.{{ home_lan_domain }}"
   - Proxies:
       - "Traefik (RBP4)":
           href: "https://traefik.{{ home_lan_domain }}"
