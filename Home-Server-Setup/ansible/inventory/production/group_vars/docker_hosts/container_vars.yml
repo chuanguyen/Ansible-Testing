@@ -61,17 +61,17 @@ mqtt_mosquitto_image_base_tag_old: "2.0.20"
 zigbee2mqtt_image_base_tag: "2.11.0"
 zigbee2mqtt_image_base_tag_old: "2.0.0"
 
-zwave_js_ui_image_base_tag: "11.0.1"
-zwave_js_ui_image_base_tag_old: "10.6.1"
+zwave_js_ui_image_base_tag: "11.19.1"
+zwave_js_ui_image_base_tag_old: "11.0.1"
 
-rtl_433_image_base_tag: "25.02-alpine-3.23.2"
-rtl_433_image_base_tag_old: "25.02-alpine-3.22"
+rtl_433_image_base_tag: "25.02-alpine-3.23.4"
+rtl_433_image_base_tag_old: "25.02-alpine-3.23.2"
 
 meTube_image_base_tag: "latest"
 meTube_image_base_tag_old: "2023-07-27"
 
-digikam_image_base_tag: "9.0.0-ls303"
-digikam_image_base_tag_old: "8.8.0-ls287"
+digikam_image_base_tag: "9.0.0-ls312"
+digikam_image_base_tag_old: "9.0.0-ls303"
 
 authelia_image_base_tag: "4.39.19"
 authelia_image_base_tag_old: "4.39.15"
@@ -86,8 +86,8 @@ immich_redis_image_base_tag_old: ""
 immich_postgres_image_base_tag: "14-vectorchord0.4.3-pgvectors0.2.0"
 immich_postgres_image_base_tag_old: "14-vectorchord0.3.0-pgvectors0.2.0"
 
-jellyfin_image_base_tag: "10.11.8"
-jellyfin_image_base_tag_old: "10.11.6"
+jellyfin_image_base_tag: "10.11.11"
+jellyfin_image_base_tag_old: "10.11.8"
 # jellyfin_image_base_tag: "10.8.10"
 # jellyfin_image_base_tag_old: ""
 
@@ -96,8 +96,8 @@ open_speedtest_image_base_tag_old: ""
 
 ### Paperless-ngx
 
-paperless_ngx_image_base_tag: "2.20.13"
-paperless_ngx_image_base_tag_old: "2.20.7"
+paperless_ngx_image_base_tag: "2.20.15"
+paperless_ngx_image_base_tag_old: "2.20.13"
 
 paperless_ngx_postgres_image_base_tag: "16.0-alpine"
 paperless_ngx_postgres_image_base_tag_old: ""
