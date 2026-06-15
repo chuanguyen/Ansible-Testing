@@ -43,6 +43,7 @@ zigbee2mqtt_serial:
   # Optional: RTS / CTS Hardware Flow Control for serial port (default: false)
   rtscts: false
 
+
 zigbee2mqtt_advanced:
   homeassistant_legacy_entity_attributes: false
   legacy_api: false
@@ -51,6 +52,7 @@ zigbee2mqtt_advanced:
   ### Generate network key and then store in secret file
   # network_key: "GENERATE"
   network_key: "!{{ zigbee2mqtt_secret_filename }} network_key"
+  transmit_power: 20
 
 zigbee2mqtt_availability:
   active:
