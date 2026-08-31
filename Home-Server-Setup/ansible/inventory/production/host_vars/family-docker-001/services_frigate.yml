@@ -48,7 +48,7 @@ frigate_go2rtc:
     front_door_bell_substream:
       - "ffmpeg:http://doorbell-front.{{ home_lan_domain }}/flv?port=1935&app=bcs&stream=channel0_ext.bcs&user={{ reolink_cameras_username }}&password={{ reolink_cameras_password }}"
     garage:
-      - "rtsp://{{ docker_wyze_bridge_stream_username }}:{{ docker_wyze_bridge_stream_api_key }}@home-assistant-001.{{ home_lan_domain }}:8554/rear-driveway"
+      - "rtsp://{{ thingino_rstp_username }}:{{ thingino_rstp_password }}@cam-garage.{{ home_lan_domain }}/ch0"
       - "ffmpeg:garage#audio=opus"
   # Necessary for establishing webrtc connection via live view
   webrtc:
@@ -347,8 +347,6 @@ frigate_cameras:
       mask:
         - 0.087,0.113,0.309,0.029,0.419,0.036,0.424,0,0,0,0,0.128
         - 0.691,0,1,0,1,0.192,0.91,0.096,0.905,0.149,0.795,0.067,0.698,0.057,0.574,0.064,0.416,0.067,0.414,0
-        - 0.716,1,1,1,1,0.94,0.722,0.925
-
 frigate_detectors:
   ov:
     type: "openvino"

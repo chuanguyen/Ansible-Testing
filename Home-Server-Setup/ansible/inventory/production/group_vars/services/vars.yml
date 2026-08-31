@@ -75,3 +75,7 @@ ryot_media_configuration_server_admin_access_token: "{{ vault_ryot_media_configu
 # WUD
 WUD_AUTH_BASIC_ADMIN_PW: "{{ VAULT_WUD_AUTH_BASIC_ADMIN_PW }}"
 WUD_DISCORD_WEBHOOK_URL: "{{ VAULT_WUD_DISCORD_WEBHOOK_URL }}"
+
+# Thingino cameras
+thingino_rstp_username: "{{ vault_thingino_rstp_username }}"
+thingino_rstp_password:  "{{ vault_thingino_rstp_password }}"
