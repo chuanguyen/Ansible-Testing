@@ -70,15 +70,15 @@ rtl_433_image_base_tag_old: "25.02-alpine-3.23.4"
 meTube_image_base_tag: "latest"
 meTube_image_base_tag_old: "2023-07-27"
 
-digikam_image_base_tag: "9.1.0-ls318"
-digikam_image_base_tag_old: "9.0.0-ls312"
+digikam_image_base_tag: "9.1.0-ls325"
+digikam_image_base_tag_old: "9.1.0-ls318"
 
-authelia_image_base_tag: "4.39.20"
-authelia_image_base_tag_old: "4.39.19"
+authelia_image_base_tag: "4.39.28"
+authelia_image_base_tag_old: "4.39.20"
 
 ### Immich
-immich_image_base_tag: "v3.1.0"
-immich_image_base_tag_old: "v2.7.5"
+immich_image_base_tag: "v3.2.2"
+immich_image_base_tag_old: "v3.1.0"
 
 immich_redis_image_base_tag: "8-bookworm@sha256:42cba146593a5ea9a622002c1b7cba5da7be248650cbb64ecb9c6c33d29794b1"
 immich_redis_image_base_tag_old: ""
@@ -96,8 +96,8 @@ open_speedtest_image_base_tag_old: ""
 
 ### Paperless-ngx
 
-paperless_ngx_image_base_tag: "3.0.5"
-paperless_ngx_image_base_tag_old: "2.20.15"
+paperless_ngx_image_base_tag: "3.1.3"
+paperless_ngx_image_base_tag_old: "3.0.5"
 
 paperless_ngx_postgres_image_base_tag: "16.0-alpine"
 paperless_ngx_postgres_image_base_tag_old: ""
