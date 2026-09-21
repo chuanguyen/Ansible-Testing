@@ -86,8 +86,8 @@ immich_redis_image_base_tag_old: ""
 immich_postgres_image_base_tag: "14-vectorchord0.4.3-pgvectors0.2.0"
 immich_postgres_image_base_tag_old: "14-vectorchord0.3.0-pgvectors0.2.0"
 
-jellyfin_image_base_tag: "10.11.11"
-jellyfin_image_base_tag_old: "10.11.8"
+jellyfin_image_base_tag: "12.1"
+jellyfin_image_base_tag_old: "10.11.11"
 # jellyfin_image_base_tag: "10.8.10"
 # jellyfin_image_base_tag_old: ""
 
@@ -116,10 +116,10 @@ it_tools_image_base_tag_old: ""
 
 # RYOT
 
-ryot_media_image_base_tag: "v10.4.0"
-ryot_media_image_base_tag_old: "v10.3.7"
+ryot_media_image_base_tag: "v10.5.0"
+ryot_media_image_base_tag_old: "v10.4.0"
 ryot_media_db_image_base_tag: "16-alpine"
 ryot_media_db_image_base_tag_old: ""
 
-wud_image_base_tag: "8.3.1"
-wud_image_base_tag_old: "8.2.2"
+wud_image_base_tag: "9.1.0"
+wud_image_base_tag_old: "8.3.1"
