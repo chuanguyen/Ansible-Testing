@@ -40,7 +40,7 @@ frigate_auth:
 frigate_go2rtc:
   streams:
     front_door:
-      - "rtsp://{{ docker_wyze_bridge_stream_username }}:{{ docker_wyze_bridge_stream_api_key }}@home-assistant-001.{{ home_lan_domain }}:8554/front-door"
+      - "rtsp://{{ thingino_rstp_username }}:{{ thingino_rstp_password }}@cam-front-door.{{ home_lan_domain }}/ch0"
       - "ffmpeg:front_door#audio=opus"
     front_door_bell:
       - "ffmpeg:http://doorbell-front.{{ home_lan_domain }}/flv?port=1935&app=bcs&stream=channel0_main.bcs&user={{ reolink_cameras_username }}&password={{ reolink_cameras_password }}#video=copy#audio=copy#audio=opus"
