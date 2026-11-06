@@ -1,21 +1,21 @@
 ---
-pihole_image_base_tag: "2026.07.2"
-pihole_image_base_tag_old: "2026.06.0"
+pihole_image_base_tag: "2026.10.1"
+pihole_image_base_tag_old: "2026.10.0"
 pihole_nfs_backup_cleanup_period: "60"
 pihole_nfs_backup_frequency: "0 1 */15 * *"
 
 pihole_orbital_sync_image_base_tag: "1.8.4"
 pihole_orbital_sync_image_base_tag_old: ""
 
-nebula_sync_image_base_tag: "v0.11.2"
-nebula_sync_image_base_tag_old: "v0.11.1"
+nebula_sync_image_base_tag: "v0.11.3"
+nebula_sync_image_base_tag_old: "v0.11.2"
 
-wireguard_image_base_tag: "arm64v8-1.0.20260223-r0-ls122"
-wireguard_image_base_tag_old: "arm64v8-1.0.20260223-r0-ls120"
+wireguard_image_base_tag: "arm64v8-1.0.20260223-r0-ls129"
+wireguard_image_base_tag_old: "arm64v8-1.0.20260223-r0-ls122"
 wireguard_nfs_backup_frequency: "0 1 */30 * *"
 
-traefik_image_base_tag: "v3.7.13"
-traefik_image_base_tag_old: "v3.7.10"
+traefik_image_base_tag: "v3.7.17"
+traefik_image_base_tag_old: "v3.7.13"
 
 smtp_relay_image_base_tag: "1.3.0"
 smtp_relay_image_base_tag_old: ""
@@ -70,15 +70,15 @@ rtl_433_image_base_tag_old: "25.02-alpine-3.23.4"
 meTube_image_base_tag: "latest"
 meTube_image_base_tag_old: "2023-07-27"
 
-digikam_image_base_tag: "9.1.0-ls325"
-digikam_image_base_tag_old: "9.1.0-ls318"
+digikam_image_base_tag: "9.1.0-ls333"
+digikam_image_base_tag_old: "9.1.0-ls325"
 
 authelia_image_base_tag: "4.39.28"
 authelia_image_base_tag_old: "4.39.20"
 
 ### Immich
-immich_image_base_tag: "v3.2.2"
-immich_image_base_tag_old: "v3.1.0"
+immich_image_base_tag: "v3.3.6"
+immich_image_base_tag_old: "v3.2.2"
 
 immich_redis_image_base_tag: "8-bookworm@sha256:42cba146593a5ea9a622002c1b7cba5da7be248650cbb64ecb9c6c33d29794b1"
 immich_redis_image_base_tag_old: ""
@@ -86,8 +86,8 @@ immich_redis_image_base_tag_old: ""
 immich_postgres_image_base_tag: "14-vectorchord0.4.3-pgvectors0.2.0"
 immich_postgres_image_base_tag_old: "14-vectorchord0.3.0-pgvectors0.2.0"
 
-jellyfin_image_base_tag: "12.1"
-jellyfin_image_base_tag_old: "10.11.11"
+jellyfin_image_base_tag: "12.4"
+jellyfin_image_base_tag_old: "12.1"
 # jellyfin_image_base_tag: "10.8.10"
 # jellyfin_image_base_tag_old: ""
 
@@ -96,8 +96,8 @@ open_speedtest_image_base_tag_old: ""
 
 ### Paperless-ngx
 
-paperless_ngx_image_base_tag: "3.1.3"
-paperless_ngx_image_base_tag_old: "3.0.5"
+paperless_ngx_image_base_tag: "3.4.2"
+paperless_ngx_image_base_tag_old: "3.1.3"
 
 paperless_ngx_postgres_image_base_tag: "16.0-alpine"
 paperless_ngx_postgres_image_base_tag_old: ""
@@ -121,5 +121,5 @@ ryot_media_image_base_tag_old: "v10.4.0"
 ryot_media_db_image_base_tag: "16-alpine"
 ryot_media_db_image_base_tag_old: ""
 
-wud_image_base_tag: "9.1.0"
-wud_image_base_tag_old: "8.3.1"
+wud_image_base_tag: "9.7.0"
+wud_image_base_tag_old: "9.1.0"
